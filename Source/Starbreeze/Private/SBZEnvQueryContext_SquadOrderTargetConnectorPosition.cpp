@@ -1,0 +1,5 @@
+#include "SBZEnvQueryContext_SquadOrderTargetConnectorPosition.h"
+
+USBZEnvQueryContext_SquadOrderTargetConnectorPosition::USBZEnvQueryContext_SquadOrderTargetConnectorPosition() {
+}
+

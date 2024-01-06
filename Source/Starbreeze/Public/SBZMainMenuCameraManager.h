@@ -1,0 +1,34 @@
+#pragma once
+#include "CoreMinimal.h"
+//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "SBZMainMenuCameraManager.generated.h"
+
+class ACameraActor;
+class ASBZMainMenuCameraManager;
+class UObject;
+
+UCLASS(Blueprintable)
+class STARBREEZE_API ASBZMainMenuCameraManager : public AActor {
+    GENERATED_BODY()
+public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName DefaultCamera;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<FName, ACameraActor*> Cameras;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName LobbyCameraName;
+    
+    ASBZMainMenuCameraManager();
+    UFUNCTION(BlueprintCallable)
+    void SwitchToDefaultCamera();
+    
+    UFUNCTION(BlueprintCallable)
+    void SwitchToCamera(const FName& CameraName);
+    
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    static ASBZMainMenuCameraManager* GetMainMenuCameraManager(const UObject* WorldContextObject);
+    
+};
+

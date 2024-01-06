@@ -1,0 +1,28 @@
+#pragma once
+#include "CoreMinimal.h"
+//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=PlayerController -FallbackName=PlayerController
+#include "PD3PlayerLoadout.h"
+#include "SBZPlayerControllerBase.generated.h"
+
+class ASBZPlayerState;
+
+UCLASS(Blueprintable)
+class STARBREEZE_API ASBZPlayerControllerBase : public APlayerController {
+    GENERATED_BODY()
+public:
+protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    ASBZPlayerState* SBZPlayerState;
+    
+public:
+    ASBZPlayerControllerBase();
+protected:
+    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    void Server_SetLoadout(const FPD3PlayerLoadout& Loadout);
+    
+public:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_SetAccelByteSessionInformation(const FString& InAccelByteUserId, const FString& InSessionId);
+    
+};
+

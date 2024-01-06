@@ -1,0 +1,23 @@
+#pragma once
+#include "CoreMinimal.h"
+//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "PD3SecurityCompanyDataAsset.generated.h"
+
+class UPaperSprite;
+
+UCLASS(Blueprintable)
+class UPD3SecurityCompanyDataAsset : public UDataAsset {
+    GENERATED_BODY()
+public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FText SecurityCompanyName;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPaperSprite* SecurityCompanyLogo;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString SecurityCompanyDescription;
+    
+    UPD3SecurityCompanyDataAsset();
+};
+

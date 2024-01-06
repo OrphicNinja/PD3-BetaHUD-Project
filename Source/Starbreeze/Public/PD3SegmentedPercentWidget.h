@@ -1,0 +1,34 @@
+#pragma once
+#include "CoreMinimal.h"
+//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAttribute -FallbackName=GameplayAttribute
+#include "PD3AttributePercentWidget.h"
+#include "PD3SegmentedPercentWidget.generated.h"
+
+UCLASS(Blueprintable, EditInlineNew)
+class STARBREEZE_API UPD3SegmentedPercentWidget : public UPD3AttributePercentWidget {
+    GENERATED_BODY()
+public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayAttribute ChunkCountGameplayAttribute;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayAttribute ChunkGameplayAttribute;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayAttribute TraumaGameplayAttribute;
+    
+protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 NumberOfChunks;
+    
+public:
+    UPD3SegmentedPercentWidget();
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnTraumaRatioChanged(float StartOffset, float EndOffset);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void BuildChunks();
+    
+};
+

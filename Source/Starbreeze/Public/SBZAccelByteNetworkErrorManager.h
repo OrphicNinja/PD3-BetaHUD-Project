@@ -1,0 +1,34 @@
+#pragma once
+#include "CoreMinimal.h"
+//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "SBZAccelByteNetworkErrorManager.generated.h"
+
+class USBZAccelByteNetworkErrorManager;
+class USBZWidgetBase;
+
+UCLASS(Blueprintable)
+class STARBREEZE_API USBZAccelByteNetworkErrorManager : public UObject {
+    GENERATED_BODY()
+public:
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    USBZWidgetBase* NotifyWidget;
+    
+public:
+    USBZAccelByteNetworkErrorManager();
+private:
+    UFUNCTION(BlueprintCallable)
+    void ValidateFailedInternetConnection();
+    
+    UFUNCTION(BlueprintCallable)
+    void PollAccelTimeService();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnPopUpWaitToReconnectClosed(FName ActionName);
+    
+public:
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static USBZAccelByteNetworkErrorManager* Get(const UObject* WorldContextObject);
+    
+};
+

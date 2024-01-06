@@ -1,0 +1,37 @@
+#include "SBZAIAttractorComponent.h"
+//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AISense_Sight -FallbackName=AISense_Sight
+#include "SBZAttractorPredicate_IsPerceived.h"
+
+void USBZAIAttractorComponent::UnregisterFromPerceptionSystem() {
+}
+
+bool USBZAIAttractorComponent::SetEnabled(bool bEnabled) {
+    return false;
+}
+
+void USBZAIAttractorComponent::SetAttractorInstigator(APawn* Instigator) {
+}
+
+void USBZAIAttractorComponent::RegisterWithPerceptionSystem() {
+}
+
+void USBZAIAttractorComponent::OnHeistStateChanged(EPD3HeistState OldState, EPD3HeistState NewState) {
+}
+
+USBZAIAttractorComponent::USBZAIAttractorComponent() {
+    this->DefaultSense = UAISense_Sight::StaticClass();
+    this->MaxHeistStateToBeEnabled = EPD3HeistState::PointOfNoReturn;
+    this->Priority = ESBZAIAttractorPriority::VeryLow;
+    this->Radius = 800.00f;
+    this->bUseMaxConcurrentUsers = true;
+    this->MaxConcurrentUsers = 1;
+    this->MaxUses = 1;
+    this->bDestroyOnComplete = false;
+    this->bIsReusable = false;
+    this->AttractorPredicate = USBZAttractorPredicate_IsPerceived::StaticClass();
+    this->StealthAttractorPredicate = USBZAttractorPredicate_IsPerceived::StaticClass();
+    this->AttractorInstigator = NULL;
+    this->bIsEnabledAfteSearch = true;
+    this->bIsEnabled = false;
+}
+
