@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Guid -FallbackName=Guid
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintAsyncActionBase -FallbackName=BlueprintAsyncActionBase
+#include "UObject/NoExportTypes.h"
+#include "Kismet/BlueprintAsyncActionBase.h"
 #include "OnMetaRequestResultAndItemIdBluePrintDelegateDelegate.h"
 #include "SBZBuyItemCallbackProxy.generated.h"
 
@@ -21,6 +21,7 @@ private:
     
 public:
     USBZBuyItemCallbackProxy();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static USBZBuyItemCallbackProxy* BuyItem(UObject* NewWorldContextObject, FGuid ItemId, int32 Price, int32 DiscountedPrice, int32 Quantity, const FString& CurrencyCode);
     

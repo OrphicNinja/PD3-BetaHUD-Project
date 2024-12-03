@@ -43,6 +43,7 @@ public:
     TMap<ESBZWeaponAttribute, int32> AttributeModifierMap;
     
     USBZEquippablePartDataAsset();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetModificationsUIData(const USBZBaseWeaponData* WeaponData, FSBZEquippablePartUIData& PartUIData) const;
     

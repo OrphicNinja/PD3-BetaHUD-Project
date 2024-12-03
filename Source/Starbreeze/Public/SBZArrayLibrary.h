@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=RandomStream -FallbackName=RandomStream
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
+#include "UObject/NoExportTypes.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "ArraySelectDelegateDelegate.h"
 #include "ArraySortDelegateDelegate.h"
 #include "SBZArrayLibrary.generated.h"
@@ -13,6 +13,7 @@ class STARBREEZE_API USBZArrayLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     USBZArrayLibrary();
+
     UFUNCTION(BlueprintCallable)
     static void SortArray(const TArray<UObject*>& Array, TArray<UObject*>& OutArray, const FArraySortDelegate& SortCallback);
     

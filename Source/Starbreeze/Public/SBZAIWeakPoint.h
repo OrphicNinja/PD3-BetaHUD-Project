@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=StaticMeshComponent -FallbackName=StaticMeshComponent
+#include "Components/StaticMeshComponent.h"
 #include "ESBZAIWeakPointType.h"
 #include "SBZWeakpointHideInfo.h"
 #include "SBZAIWeakPoint.generated.h"
@@ -37,7 +37,8 @@ protected:
     TArray<FSBZWeakpointHideInfo> HideInfo;
     
 public:
-    USBZAIWeakPoint();
+    USBZAIWeakPoint(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_OnWeakPointDestroyed();

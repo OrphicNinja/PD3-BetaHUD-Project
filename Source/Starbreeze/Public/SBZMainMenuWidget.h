@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=SoftObjectPath -FallbackName=SoftObjectPath
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=FilePath -FallbackName=FilePath
+#include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
 #include "ESBZBlackMarketVendorType.h"
 #include "ESBZEquippableLoadoutSlot.h"
 #include "ESBZItemLoadoutSlot.h"
@@ -32,7 +32,6 @@ class USBZMainMenuSuitCustomization;
 class USBZMainMenuWeaponInventoryScreen;
 class USBZMainMenuWeaponModifierScreen;
 class USBZMainMenuWeaponProgressionScreen;
-class USBZMenuNavBar;
 class USBZSuitPartConfig;
 class USBZWeaponPartSlot;
 class USBZWidgetBase;
@@ -87,9 +86,6 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USBZFullscreenVideoWidget* Widget_FullscreenVideo;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    USBZMenuNavBar* Widget_MainMenuNavbar;
-    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<USBZMainMenuCosmeticItemButton> CosmeticItemButtonClass;
     
@@ -142,6 +138,18 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSoftObjectPath TutorialObjectPath;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZLoginScreenInfoPopupWidget> LoadoutChangePopupWidgetClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FText LoadoutChangePopupHeaderText;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FText LoadoutChangePopupDescriptionText;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FText LoadoutChangePopupListText;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     TArray<USBZMainMenuCosmeticItemButton*> CosmeticButtonPool;
     
@@ -150,6 +158,7 @@ private:
     
 public:
     USBZMainMenuWidget();
+
 private:
     UFUNCTION(BlueprintCallable)
     void ShowTutorialPopup();
@@ -184,6 +193,14 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnTelemetryPopUpClosed(FName ClosingActionName);
+    
+public:
+    UFUNCTION(BlueprintCallable)
+    void OnMainMenuInitializeComplete();
+    
+private:
+    UFUNCTION(BlueprintCallable)
+    void OnLoadoutChangePopupClosed(FName ClosingActionName);
     
     UFUNCTION(BlueprintCallable)
     void OnGameSensePopUpClosed(FName ClosingActionName);

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=ETextCommit -FallbackName=ETextCommit
+#include "Types/SlateEnums.h"
 #include "OnTextButtonSubmittedTextDelegate.h"
 #include "SBZMenuButton.h"
 #include "SBZTextEntryButton.generated.h"
@@ -23,6 +23,7 @@ protected:
     
 public:
     USBZTextEntryButton();
+
     UFUNCTION(BlueprintCallable)
     void SetInputText(const FText& InText);
     

@@ -4,12 +4,13 @@
 #include "SBZPlayerSmokeGrenadeData.generated.h"
 
 UCLASS(Blueprintable)
-class USBZPlayerSmokeGrenadeData : public USBZPlayerGasGrenadeData {
+class STARBREEZE_API USBZPlayerSmokeGrenadeData : public USBZPlayerGasGrenadeData {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RangeMultiplierIncrease;
     
     USBZPlayerSmokeGrenadeData();
+
 };
 

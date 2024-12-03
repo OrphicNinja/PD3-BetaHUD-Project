@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIController -FallbackName=AIController
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EBTNodeResult -FallbackName=EBTNodeResult
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Rotator -FallbackName=Rotator
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
+#include "AIController.h"
+#include "BehaviorTree/BehaviorTreeTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Curves/CurveFloat.h"
 #include "ESBZAIOrderMode.h"
 #include "ESBZEquippableFamily.h"
 #include "SBZAccelerationBasedAngle.h"
@@ -76,6 +76,9 @@ protected:
     float SameRoomTargetFocusDistance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsTargetFocusEnabled;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FocusOnLastVisibleLocationDuration;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -95,7 +98,11 @@ private:
     uint8 HeistStateAlert;
     
 public:
-    ASBZAIController();
+    ASBZAIController(const FObjectInitializer& ObjectInitializer);
+
+    UFUNCTION(BlueprintCallable)
+    void SetAIEnabled(bool bIsEnabled, const FName& Reason);
+    
     UFUNCTION(BlueprintCallable)
     bool PushOrder(USBZAIOrder* Order, ESBZAIOrderMode Mode);
     
@@ -122,7 +129,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnCurrentEnemyAssigned();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

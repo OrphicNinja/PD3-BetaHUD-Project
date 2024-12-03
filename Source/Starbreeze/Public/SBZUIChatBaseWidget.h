@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Components/SlateWrapperTypes.h"
 #include "ChatDisabledSettingChangedEventDelegate.h"
 #include "SBZChatMessage.h"
 #include "SBZWidgetBase.h"
@@ -8,7 +9,7 @@
 class USBZChat;
 class USBZGameUserSettings;
 
-UCLASS(Blueprintable, Config=Engine, DefaultConfig, EditInlineNew, Config=StarbreezeUI)
+UCLASS(Blueprintable, DefaultConfig, EditInlineNew, Config=StarbreezeUI)
 class STARBREEZE_API USBZUIChatBaseWidget : public USBZWidgetBase {
     GENERATED_BODY()
 public:
@@ -16,6 +17,12 @@ public:
     FChatDisabledSettingChangedEvent OnChatDisableSettingChangedEvent;
     
 protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ESlateVisibility DisabledChatVisibility;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ESlateVisibility EnabledChatVisibility;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bEnableLobbyChat;
     
@@ -39,6 +46,7 @@ protected:
     
 public:
     USBZUIChatBaseWidget();
+
     UFUNCTION(BlueprintCallable)
     void SendMessage(const FSBZChatMessage& InMessage);
     

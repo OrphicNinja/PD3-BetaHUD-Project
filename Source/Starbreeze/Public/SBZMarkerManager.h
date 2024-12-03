@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
 #include "SBZMarkerReplication.h"
 #include "SBZMarkerRuntime.h"
 #include "SBZMarkerManager.generated.h"
@@ -21,9 +21,10 @@ private:
     TArray<FSBZMarkerRuntime> RuntimeMarkers;
     
 public:
-    USBZMarkerManager();
+    USBZMarkerManager(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_ReplicatedMarkers();

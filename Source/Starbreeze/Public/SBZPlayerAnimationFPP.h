@@ -1,11 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Rotator -FallbackName=Rotator
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=CachedAnimAssetPlayerData -FallbackName=CachedAnimAssetPlayerData
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Animation/CachedAnimData.h"
 #include "ESBZAdditiveMoveType.h"
 #include "ESBZPoseType.h"
 #include "SBZCharacterAnimation.h"
+#include "SBZTankingData.h"
+#include "SBZWallReactionData.h"
 #include "SBZPlayerAnimationFPP.generated.h"
 
 class ASBZPlayerCharacter;
@@ -95,6 +97,15 @@ protected:
     float MoveGaitValue;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RightHandOnlyRecoilBlendWeight;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FSBZTankingData WeaponTankingData;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FSBZWallReactionData WeaponWallReactionData;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ESBZAdditiveMoveType AdditiveMoveType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -163,5 +174,6 @@ private:
     
 public:
     USBZPlayerAnimationFPP();
+
 };
 

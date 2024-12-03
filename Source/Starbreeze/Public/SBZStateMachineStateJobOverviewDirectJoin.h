@@ -21,6 +21,7 @@ private:
     
 public:
     USBZStateMachineStateJobOverviewDirectJoin();
+
     UFUNCTION(BlueprintCallable)
     void OnHandleBeginPlayState(ASBZPlayerController* PlayerController);
     

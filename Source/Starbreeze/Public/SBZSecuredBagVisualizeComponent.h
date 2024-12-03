@@ -1,11 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZBagHandle.h"
 #include "SBZComponentSelector.h"
 #include "SBZSecuredBagVisualizeBagAddedSignatureDelegate.h"
 #include "SBZSecuredBagVisualizeComponent.generated.h"
 
+class ASBZSecuredBag;
 class USBZBagType;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -22,10 +23,15 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FSBZComponentSelector> SpawnLocationArray;
     
-public:
-    USBZSecuredBagVisualizeComponent();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<ASBZSecuredBag*> SecuredBagArray;
     
+public:
+    USBZSecuredBagVisualizeComponent(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnRep_BagTypes();

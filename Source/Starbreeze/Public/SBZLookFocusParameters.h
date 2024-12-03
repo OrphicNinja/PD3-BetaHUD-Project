@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ENotifyFilterType -FallbackName=ENotifyFilterType
+#include "UObject/NoExportTypes.h"
+#include "Animation/AnimTypes.h"
 #include "SBZLookFocusParameters.generated.h"
 
 USTRUCT(BlueprintType)

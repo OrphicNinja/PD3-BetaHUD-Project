@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=ETextCommit -FallbackName=ETextCommit
+#include "Types/SlateEnums.h"
 #include "SBZAICrewChatEvent.h"
 #include "SBZAICrewDefeatStateChangedData.h"
 #include "SBZDelegateHandle.h"
@@ -26,11 +26,11 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName ChatStackValue;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FName OpenChatActionName;
-    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UEditableTextBox* Text_InputText;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 ShortenTextMaxLines;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsChatInputActive;
@@ -47,6 +47,7 @@ private:
     
 public:
     USBZHUDChatWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void VotingMessageReceived(const FSBZVotingChatEvent& ChatEventData);
@@ -84,7 +85,13 @@ protected:
     
 private:
     UFUNCTION(BlueprintCallable)
+    void OnPingReceived(const FSBZPlayerPingEvent& PingEventData);
+    
+    UFUNCTION(BlueprintCallable)
     void OnMessageReceived(const FSBZPlayerChatEvent& ChatEventData);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnCloseChatReceived();
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
@@ -98,6 +105,9 @@ protected:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void KeyItemCountChanged(const FSBZKeyItemCountChangedEvent& KeyItemCountChangedEventData);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FText GetShortenText(const FText& InText);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void CrewAIMessageReceived(const FSBZAICrewChatEvent& ChatEventData);

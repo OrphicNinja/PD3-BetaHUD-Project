@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TriggerVolume -FallbackName=TriggerVolume
+#include "UObject/NoExportTypes.h"
+#include "Engine/TriggerVolume.h"
 #include "SBZPlayerAndItemTriggerVolumeCountChangedDelegateDelegate.h"
 #include "SBZPlayerAndItemTriggerVolumeEmptyDelegateDelegate.h"
 #include "SBZPlayerAndItemTriggerVolume.generated.h"
@@ -58,7 +58,8 @@ protected:
     TArray<AActor*> ClosedReactorArray;
     
 public:
-    ASBZPlayerAndItemTriggerVolume();
+    ASBZPlayerAndItemTriggerVolume(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetVolumeEnabled(bool bIsEnabled);

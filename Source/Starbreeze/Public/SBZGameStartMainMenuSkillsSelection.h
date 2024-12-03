@@ -39,6 +39,7 @@ private:
     
 public:
     USBZGameStartMainMenuSkillsSelection();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnDescriptionScrollAxisChanged(float Value);
@@ -65,9 +66,6 @@ private:
 public:
     UFUNCTION(BlueprintCallable)
     bool CustomizeSkillsForPlayerLoadoutIndex(int32 InLoadoutIndex);
-    
-    UFUNCTION(BlueprintCallable)
-    bool CustomizeSkillsForPlayerLoadout(const FSBZPlayerLoadoutConfig& InLoadoutToConfig);
     
 };
 

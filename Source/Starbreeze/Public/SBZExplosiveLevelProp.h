@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
+#include "Curves/CurveFloat.h"
 #include "SBZBreakableInterface.h"
 #include "SBZDamageDistance.h"
 #include "SBZExplosionDelegateDelegate.h"
@@ -17,6 +17,7 @@
 
 class UAkAudioEvent;
 class UGameplayEffect;
+class UNiagaraComponent;
 class UNiagaraSystem;
 class USBZDamageType;
 class USBZLocalPlayerFeedback;
@@ -83,8 +84,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     AActor* ExplosionInstigator;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    UNiagaraComponent* ExplosionEffectComponent;
+    
 public:
-    ASBZExplosiveLevelProp();
+    ASBZExplosiveLevelProp(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetExplosionInstigator(AActor* InInstigator);
@@ -104,7 +109,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnExplosion(bool bDoCosmetics);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

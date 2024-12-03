@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAttribute -FallbackName=GameplayAttribute
+#include "AttributeSet.h"
 #include "SBZWidgetBase.h"
 #include "PD3AmmoAttributeWidget.generated.h"
 
@@ -22,6 +22,7 @@ protected:
     
 public:
     UPD3AmmoAttributeWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnSetup(float AmmoLoadedSetup, float AmmoInventorySetup, float AmmoTotal);

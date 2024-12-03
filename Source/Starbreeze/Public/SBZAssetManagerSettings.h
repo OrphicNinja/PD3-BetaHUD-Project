@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DirectoryPath -FallbackName=DirectoryPath
+#include "Engine/EngineTypes.h"
 #include "SBZDeveloperSettings.h"
 #include "SBZAssetManagerSettings.generated.h"
 
 class USBZAssetLookupData;
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class USBZAssetManagerSettings : public USBZDeveloperSettings {
     GENERATED_BODY()
 public:
@@ -19,5 +19,6 @@ private:
     
 public:
     USBZAssetManagerSettings();
+
 };
 

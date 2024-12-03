@@ -15,6 +15,7 @@ protected:
     
 public:
     UPD3OverkillWeaponRequestWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintCosmetic, BlueprintImplementableEvent)
     void OnOverkillWeaponRequestReady();

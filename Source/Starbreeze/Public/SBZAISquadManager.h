@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/Object.h"
+#include "GameplayTagContainer.h"
 #include "EPD3HeistState.h"
 #include "Templates/SubclassOf.h"
 #include "SBZAISquadManager.generated.h"
@@ -30,6 +30,7 @@ protected:
     
 public:
     USBZAISquadManager();
+
     UFUNCTION(BlueprintCallable)
     void OnHeistStateChanged(EPD3HeistState OldState, EPD3HeistState NewState);
     

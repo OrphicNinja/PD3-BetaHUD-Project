@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZUIWeaponStatsBlueprint.generated.h"
 
 class USBZRangedWeaponData;
@@ -10,6 +10,7 @@ class USBZUIWeaponStatsBlueprint : public UObject {
     GENERATED_BODY()
 public:
     USBZUIWeaponStatsBlueprint();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void GetStabilityValueArray(const USBZRangedWeaponData* RangedWeaponData, TArray<float>& OutValueArray) const;
     

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Info -FallbackName=Info
+#include "GameFramework/Info.h"
 #include "SBZPlayerCallEvent.h"
 #include "SBZPlayerChatEvent.h"
 #include "SBZChatInGame.generated.h"
@@ -11,7 +11,8 @@ UCLASS(Blueprintable)
 class STARBREEZE_API ASBZChatInGame : public AInfo {
     GENERATED_BODY()
 public:
-    ASBZChatInGame();
+    ASBZChatInGame(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerChatMessageReceived(int32 PlayerId, const FSBZPlayerChatEvent& PlayerChatEvent);

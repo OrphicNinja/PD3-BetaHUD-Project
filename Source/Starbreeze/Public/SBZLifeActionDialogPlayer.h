@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZLifeActionDialogPlayer.generated.h"
 
 class USBZDialogDataAsset;
@@ -24,5 +24,6 @@ protected:
     
 public:
     USBZLifeActionDialogPlayer();
+
 };
 

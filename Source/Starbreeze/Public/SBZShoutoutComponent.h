@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
+#include "GameplayTagContainer.h"
 #include "ESBZShoutActionType.h"
 #include "Templates/SubclassOf.h"
 #include "SBZShoutoutComponent.generated.h"
@@ -63,6 +63,9 @@ protected:
     FGameplayTagContainer BlockGoDownTagContainer;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayTagContainer BlockSurrenderOwnedTagContainer;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USBZMarkerDataAsset* PingMarkerAsset;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -81,7 +84,8 @@ protected:
     TMap<ESBZShoutActionType, FGameplayTagContainer> ActivationBlockedTags;
     
 public:
-    USBZShoutoutComponent();
+    USBZShoutoutComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetMarkLimit(int32 NewLimit);
     

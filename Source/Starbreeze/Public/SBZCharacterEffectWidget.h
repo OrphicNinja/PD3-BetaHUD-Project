@@ -16,6 +16,7 @@ protected:
     
 public:
     USBZCharacterEffectWidget();
+
     UFUNCTION(BlueprintCallable)
     void SetProgress(float InNewProgress);
     

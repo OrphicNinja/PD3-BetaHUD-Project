@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZSplineOnEndReachedDelegate.h"
 #include "SBZSplineOnEnterDelegate.h"
 #include "SBZSplineOnLeftDelegate.h"
@@ -29,7 +29,8 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USBZSplineComponent* SplineComponent;
     
-    ASBZSpline();
+    ASBZSpline(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<ASBZSpline*> GetOutputSplines() const;
     

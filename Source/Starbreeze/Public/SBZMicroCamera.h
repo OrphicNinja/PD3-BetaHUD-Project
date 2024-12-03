@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "SBZCameraViewInterface.h"
 #include "SBZExplosionResult.h"
 #include "SBZExplosive.h"
@@ -85,7 +85,8 @@ protected:
     FSBZHurtReactionData HurtReactionData;
     
 public:
-    ASBZMicroCamera();
+    ASBZMicroCamera(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnAICharacterKilled(APawn* InAIPawn);
@@ -102,7 +103,7 @@ public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_OverloadMicroCamera();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

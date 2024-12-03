@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Quat -FallbackName=Quat
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Rotator -FallbackName=Rotator
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EEndPlayReason -FallbackName=EEndPlayReason
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
 #include "ESBZPlaceableChargeState.h"
 #include "SBZOnPlaceableReachedTargetDelegateDelegate.h"
 #include "SBZPlaceableBase.h"
@@ -67,21 +67,23 @@ private:
     FVector MeshRelativeLocation;
     
 public:
-    ASBZPlaceableCharges();
+    ASBZPlaceableCharges(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetPlaceableChargeState(ESBZPlaceableChargeState NewPlaceableChargeState);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void Placed();
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnThrown();
     
-private:
     UFUNCTION(BlueprintCallable)
     void OnServerCompleteInteraction(USBZBaseInteractableComponent* InInteractable, USBZInteractorComponent* Interactor, bool bIsLocallyControlledInteractor);
     
-protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_PlaceableChargeState(ESBZPlaceableChargeState OldPlaceableChargeState);
     
@@ -113,7 +115,6 @@ protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetPlaceableChargeState(ESBZPlaceableChargeState NewPlaceableChargeState);
     
-private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetCharges(float NewCharges);
     

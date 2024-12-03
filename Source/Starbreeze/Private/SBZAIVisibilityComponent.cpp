@@ -1,6 +1,6 @@
 #include "SBZAIVisibilityComponent.h"
 
-USBZAIVisibilityComponent::USBZAIVisibilityComponent() {
+USBZAIVisibilityComponent::USBZAIVisibilityComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->bReadyForUse = true;
     this->bIsInRandomSublevel = false;
     this->CollisionChannel = ECC_GameTraceChannel1;
@@ -10,8 +10,10 @@ USBZAIVisibilityComponent::USBZAIVisibilityComponent() {
     this->MaxSubRaycastSideDistFromCenter = 35.00f;
     this->NbSubRaycastPerPolarCoordCoverPoint = 3;
     this->MaxSubRaycastSideDistFromCenterCoverPoint = 5.00f;
+    this->bProcessMeshInstances = false;
     this->bHasFinishedBuilding = false;
     this->bIsParsingDynNode = false;
     this->bDynVerticesHavedBeenTransformed = false;
 }
+
 

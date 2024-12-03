@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZEditVariationSetData.h"
 #include "SBZVariationEditComponent.generated.h"
 
@@ -27,6 +27,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* StaticMeshComponent;
     
-    USBZVariationEditComponent();
+    USBZVariationEditComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

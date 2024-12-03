@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "GameplayTagContainer.h"
 #include "EPD3HeistState.h"
 #include "EPD3MiniGameState.h"
 #include "ESBZDisplayCaseState.h"
@@ -112,9 +112,10 @@ protected:
     AActor* AttachedLoot;
     
 public:
-    ASBZDisplayCase();
+    ASBZDisplayCase(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetLockdownEnabled(bool bEnabled);
     
@@ -161,7 +162,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnGlassBroken(bool bDoCosmetics);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)

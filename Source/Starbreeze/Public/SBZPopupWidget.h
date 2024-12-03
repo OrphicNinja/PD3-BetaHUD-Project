@@ -37,6 +37,7 @@ protected:
     
 public:
     USBZPopupWidget();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnDisplayPopUp();
     
@@ -54,7 +55,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void AdvanceCountdown();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatRange -FallbackName=FloatRange
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "SBZPatrolPoint.generated.h"
 
 class ASBZPatrolPoint;
@@ -27,7 +27,8 @@ protected:
     bool bIsTesting;
     
 public:
-    ASBZPatrolPoint();
+    ASBZPatrolPoint(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsTestingPoint() const;
     

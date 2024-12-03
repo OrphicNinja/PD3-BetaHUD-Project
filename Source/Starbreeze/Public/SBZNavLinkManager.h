@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZCachedNavLinkPoints.h"
 #include "SBZNavLinkManager.generated.h"
 
@@ -22,6 +22,7 @@ private:
     
 public:
     USBZNavLinkManager();
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static USBZNavLinkManager* Get(const UObject* WorldContextObject);
     

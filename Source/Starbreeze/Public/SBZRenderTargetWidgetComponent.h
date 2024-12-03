@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=UMG -ObjectName=WidgetComponent -FallbackName=WidgetComponent
+#include "Components/WidgetComponent.h"
 #include "SBZRenderTargetWidgetComponent.generated.h"
 
 class UMaterialInstanceDynamic;
@@ -10,7 +10,8 @@ UCLASS(Blueprintable, EditInlineNew, ClassGroup=Custom, meta=(BlueprintSpawnable
 class USBZRenderTargetWidgetComponent : public UWidgetComponent {
     GENERATED_BODY()
 public:
-    USBZRenderTargetWidgetComponent();
+    USBZRenderTargetWidgetComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SetWidgetAsTextureParameter(UMaterialInstanceDynamic* Target, const FName& ParameterName);

@@ -18,6 +18,7 @@ protected:
     
 public:
     USBZBlackMarketVendorButton();
+
     UFUNCTION(BlueprintCallable)
     void SetActiveVendor(bool bInIsActiveVendor);
     

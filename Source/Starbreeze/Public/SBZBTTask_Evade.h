@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTTaskNode -FallbackName=BTTaskNode
+#include "BehaviorTree/BTTaskNode.h"
 #include "Templates/SubclassOf.h"
 #include "SBZBTTask_Evade.generated.h"
 
@@ -34,5 +34,6 @@ private:
     
 public:
     USBZBTTask_Evade();
+
 };
 

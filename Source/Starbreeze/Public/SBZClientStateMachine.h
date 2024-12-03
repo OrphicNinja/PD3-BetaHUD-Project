@@ -28,6 +28,7 @@ private:
     
 public:
     USBZClientStateMachine();
+
     UFUNCTION(BlueprintCallable)
     void RequestTravelToServer();
     
@@ -35,7 +36,7 @@ public:
     void RequestSteamLogin();
     
     UFUNCTION(BlueprintCallable)
-    void RequestSoloGame(int32 LevelIdx, int32 DifficultyIdx);
+    void RequestSoloGame(int32 LevelIdx, int32 DifficultyIdx, bool bSkipPreMatch);
     
     UFUNCTION(BlueprintCallable)
     void RequestReturnToMainMenu(ESBZReturnToMainMenuReason Reason);
@@ -124,7 +125,10 @@ public:
     ESBZOnlineSessionPhase GetSessionPhase() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    FString GetCurrentStateNameString();
+    FString GetCurrentStateNameString() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool CanRequestSoloGame() const;
     
     UFUNCTION(BlueprintCallable)
     void ApplyPreplanningAsset(const FString& ItemSku);

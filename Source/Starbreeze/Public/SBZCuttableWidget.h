@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=UMG -ObjectName=UserWidget -FallbackName=UserWidget
+#include "Blueprint/UserWidget.h"
 #include "SBZCuttableWidget.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew)
@@ -8,6 +8,7 @@ class USBZCuttableWidget : public UUserWidget {
     GENERATED_BODY()
 public:
     USBZCuttableWidget();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnWidgetInitialCut(float AtSegment);
     

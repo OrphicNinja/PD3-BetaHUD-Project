@@ -12,6 +12,9 @@ public:
     int32 InitialMaxDownedCount;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 InitialMaxConsumableCount;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float InitialDownedHealth;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -57,9 +60,6 @@ public:
     float InitialArmorDamageScale;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float InitialArmorTraumaScale;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float InitialLoadoutWeight;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -72,5 +72,6 @@ public:
     FSBZRespawnMinimumAttributeData RespawnMinAttributeDataDifficultyArray[4];
     
     USBZPlayerAbilityData();
+
 };
 

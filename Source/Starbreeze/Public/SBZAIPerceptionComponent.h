@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIPerceptionComponent -FallbackName=AIPerceptionComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIStimulus -FallbackName=AIStimulus
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=ActorPerceptionUpdateInfo -FallbackName=ActorPerceptionUpdateInfo
+#include "Perception/AIPerceptionComponent.h"
+#include "Perception/AIPerceptionTypes.h"
+#include "Perception/AIPerceptionComponent.h"
 #include "ESBZSenseConfig.h"
 #include "SBZAIPerceptionComponent.generated.h"
 
@@ -21,7 +21,8 @@ private:
     TArray<UAISenseConfig*> DistractedSensesConfig;
     
 public:
-    USBZAIPerceptionComponent();
+    USBZAIPerceptionComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetSenseConfig(ESBZSenseConfig ConfigID);
     

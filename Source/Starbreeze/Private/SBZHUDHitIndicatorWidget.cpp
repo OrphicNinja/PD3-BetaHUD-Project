@@ -1,10 +1,8 @@
 #include "SBZHUDHitIndicatorWidget.h"
 
-void USBZHUDHitIndicatorWidget::PostOnTakenDamageEvent(const FSBZDamageEvent& DamageEventData) {
-}
-
 USBZHUDHitIndicatorWidget::USBZHUDHitIndicatorWidget() {
     this->Image_HitIndicator = NULL;
+    this->bIsUsedInHUD = false;
     this->EnemyHitAudioEvent = NULL;
     this->CriticalHitAudioEvent = NULL;
     this->EnemyKilledAudioEvent = NULL;
@@ -14,4 +12,8 @@ USBZHUDHitIndicatorWidget::USBZHUDHitIndicatorWidget() {
     this->ArmorPenetrationAudioEvent = NULL;
     this->ArmorBreakAudioEvent = NULL;
 }
+
+void USBZHUDHitIndicatorWidget::PostOnTakenDamageEvent(const FSBZDamageEvent& DamageEventData) {
+}
+
 

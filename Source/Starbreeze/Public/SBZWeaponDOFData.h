@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "SBZCameraDOF.h"
 #include "SBZWeaponDOFData.generated.h"
 
 UCLASS(Blueprintable, Const)
-class USBZWeaponDOFData : public UDataAsset {
+class STARBREEZE_API USBZWeaponDOFData : public UDataAsset {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -21,5 +21,6 @@ public:
     FSBZCameraDOF TopPassTargetingDOF;
     
     USBZWeaponDOFData();
+
 };
 

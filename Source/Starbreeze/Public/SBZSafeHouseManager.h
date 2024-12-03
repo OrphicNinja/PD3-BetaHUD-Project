@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "OnSafeHouseLoadCompleteDelegate.h"
 #include "OnSafeHouseLoadProgressUpdateDelegate.h"
 #include "OnSafeHouseLoadStartDelegate.h"
@@ -30,6 +30,7 @@ private:
     
 public:
     USBZSafeHouseManager();
+
     UFUNCTION(BlueprintCallable)
     void TravelToSafeHouse();
     
@@ -45,7 +46,7 @@ private:
     UFUNCTION(BlueprintCallable, Exec)
     void DebugExitSafeHouse();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

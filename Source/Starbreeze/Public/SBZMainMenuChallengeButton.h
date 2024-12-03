@@ -21,6 +21,7 @@ protected:
     
 public:
     USBZMainMenuChallengeButton();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ChallengeInititalized(const FSBZChallengeData& ChallengeData);

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAttributeData -FallbackName=GameplayAttributeData
+#include "AttributeSet.h"
 #include "SBZCharacterAttributeSet.h"
 #include "SBZAICharacterAttributeSet.generated.h"
 
@@ -12,5 +12,6 @@ public:
     FGameplayAttributeData AccuracyPenalty;
     
     USBZAICharacterAttributeSet();
+
 };
 

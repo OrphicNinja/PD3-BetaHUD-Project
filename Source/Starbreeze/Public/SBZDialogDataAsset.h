@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "ESBZDialogType.h"
 #include "SBZDialogLineDefinition.h"
 #include "SBZVoiceSwitchPerPerformer.h"
@@ -29,8 +29,12 @@ public:
     bool bIsHumanShieldVictimAllowed;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsHostageAllowed;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FSBZVoiceSwitchPerPerformer> VoiceSwitchesPerPerformer;
     
     USBZDialogDataAsset();
+
 };
 

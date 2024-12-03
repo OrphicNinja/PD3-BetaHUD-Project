@@ -40,6 +40,7 @@ protected:
     
 public:
     USBZMaskMaterialData();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     ESBZMaskMaterialState GetMaterialState() const;
     

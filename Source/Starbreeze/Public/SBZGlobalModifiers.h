@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "UObject/Object.h"
+#include "GameplayTagContainer.h"
 #include "SBZGlobalModifiers.generated.h"
 
 UCLASS(Blueprintable, Within=PD3HeistGameMode)
@@ -14,5 +14,6 @@ private:
     
 public:
     USBZGlobalModifiers();
+
 };
 

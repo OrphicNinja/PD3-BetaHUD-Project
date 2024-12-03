@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=PhysicsCore -ObjectName=EPhysicalSurface -FallbackName=EPhysicalSurface
+#include "Engine/DataAsset.h"
+#include "Chaos/ChaosEngineInterface.h"
 #include "ESBZImpactConfigType.h"
 #include "SBZSurfaceImpactConfig.h"
 #include "SBZSurfaceSoundEvents.h"
@@ -33,5 +33,6 @@ protected:
     
 public:
     USBZSurfaceTypesConfig();
+
 };
 

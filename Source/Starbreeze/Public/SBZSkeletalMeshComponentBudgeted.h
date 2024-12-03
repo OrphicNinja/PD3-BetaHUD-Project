@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AnimationBudgetAllocator -ObjectName=SkeletalMeshComponentBudgeted -FallbackName=SkeletalMeshComponentBudgeted
+#include "SkeletalMeshComponentBudgeted.h"
 #include "SBZSkeletalMeshComponentBudgeted.generated.h"
 
 class USBZCapsuleShadowingData;
@@ -14,6 +14,7 @@ protected:
     USBZCapsuleShadowingData* CapsuleShadowingData;
     
 public:
-    USBZSkeletalMeshComponentBudgeted();
+    USBZSkeletalMeshComponentBudgeted(const FObjectInitializer& ObjectInitializer);
+
 };
 

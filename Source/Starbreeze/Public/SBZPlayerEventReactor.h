@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "ESBZEventReactorState.h"
 #include "ESBZReactionType.h"
 #include "SBZEventReactionData.h"
@@ -29,7 +29,7 @@ protected:
     float LastPlayedTime;
     
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
-    FSBZEventReactionData EventReactionArray[28];
+    FSBZEventReactionData EventReactionArray[29];
     
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     UAkStateValue* ReactorStateArray[5];
@@ -41,9 +41,10 @@ protected:
     ESBZEventReactorState CurrentState;
     
 public:
-    ASBZPlayerEventReactor();
+    ASBZPlayerEventReactor(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetState(ESBZEventReactorState NewState);
     

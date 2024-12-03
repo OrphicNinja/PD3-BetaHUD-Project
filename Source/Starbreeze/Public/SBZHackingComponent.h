@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "ESBZHackingState.h"
 #include "SBZHackingComponent.generated.h"
 
@@ -13,9 +13,10 @@ private:
     ESBZHackingState HackingState;
     
 public:
-    USBZHackingComponent();
+    USBZHackingComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetHackingState(ESBZHackingState NewHackingState);
     

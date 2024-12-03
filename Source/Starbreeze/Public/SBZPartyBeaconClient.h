@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "GameFramework/OnlineReplStructs.h"
 #include "SBZOnlineBeaconClient.h"
 #include "SBZPartyData.h"
 #include "SBZPartyMemberInfo.h"
@@ -15,9 +15,10 @@ protected:
     FSBZPartyData PartyState;
     
 public:
-    ASBZPartyBeaconClient();
+    ASBZPartyBeaconClient(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void ServerNotifyLeftLobby(const FUniqueNetIdRepl& ClientId);

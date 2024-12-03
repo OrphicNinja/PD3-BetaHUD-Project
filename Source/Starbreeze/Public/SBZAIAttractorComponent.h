@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "Components/ActorComponent.h"
+#include "GameplayTagContainer.h"
 #include "EPD3HeistState.h"
 #include "ESBZAIAttractorPriority.h"
 #include "SBZAIAttractorInterface.h"
@@ -13,6 +13,7 @@ class AActor;
 class APawn;
 class UAISense;
 class USBZAIAction;
+class USBZAttractorDataAsset;
 class USBZAttractorPredicate;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -28,6 +29,12 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPD3HeistState MaxHeistStateToBeEnabled;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USBZAttractorDataAsset* AttractorDataAssetDefault;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USBZAttractorDataAsset* AttractorDataAsset;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ESBZAIAttractorPriority Priority;
@@ -96,7 +103,8 @@ protected:
     bool bIsEnabled;
     
 public:
-    USBZAIAttractorComponent();
+    USBZAIAttractorComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void UnregisterFromPerceptionSystem();
     
@@ -113,7 +121,7 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnHeistStateChanged(EPD3HeistState OldState, EPD3HeistState NewState);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=ReplicationGraph -ObjectName=ReplicationGraph -FallbackName=ReplicationGraph
+#include "ReplicationGraph.h"
 #include "SBZConfigRepClass.h"
 #include "SBZReplicationGraph.generated.h"
 
@@ -11,7 +11,7 @@ class UReplicationGraphNode_GridSpatialization2D;
 class USBZReplicationGraphNode_InitialFrameReplication;
 class USBZReplicationGraphNode_PrototypingOnly;
 
-UCLASS(Blueprintable, NonTransient)
+UCLASS(Blueprintable, NonTransient, Config=Engine)
 class STARBREEZE_API USBZReplicationGraph : public UReplicationGraph {
     GENERATED_BODY()
 public:
@@ -39,6 +39,7 @@ protected:
     
 public:
     USBZReplicationGraph();
+
     UFUNCTION(BlueprintCallable)
     void OnActorDependencyRemoved(AActor* Master, AActor* Slave);
     

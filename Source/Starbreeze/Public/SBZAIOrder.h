@@ -1,15 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EBTNodeResult -FallbackName=EBTNodeResult
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "BehaviorTree/BehaviorTreeTypes.h"
+#include "UObject/Object.h"
+#include "GameplayTagContainer.h"
 #include "ESBZAIBehaviorCategory.h"
 #include "ESBZAIOrderMode.h"
 #include "SBZAIOrder.generated.h"
 
 class AActor;
 class APawn;
-class ASBZAIController;
 class UBehaviorTree;
 
 UCLASS(Blueprintable, EditInlineNew)
@@ -64,8 +63,9 @@ protected:
     
 public:
     USBZAIOrder();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void OnStoppedBP(APawn* Pawn, TEnumAsByte<EBTNodeResult::Type> NodeResult);
+    void OnStoppedBP(APawn* Pawn, TEnumAsByte<EBTNodeResult::Type>& NodeResult);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnStartedBP(APawn* Pawn);
@@ -77,10 +77,10 @@ public:
     void OnDeselectedBP();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void OnCompletedBP(APawn* Pawn, TEnumAsByte<EBTNodeResult::Type> NodeResult);
+    void OnCompletedBP(APawn* Pawn, TEnumAsByte<EBTNodeResult::Type>& NodeResult);
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
-    bool ExecPredicate(const ASBZAIController* AIController) const;
+    bool ExecPredicate(const UObject* Owner) const;
     
 };
 

@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "Engine/EngineTypes.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "SBZDsStateMachineState.h"
 #include "SBZStateMachineStateDsResult.generated.h"
 
 class USBZWidgetBase;
 class UWorld;
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class STARBREEZE_API USBZStateMachineStateDsResult : public USBZDsStateMachineState {
     GENERATED_BODY()
 public:
@@ -40,6 +40,7 @@ private:
     
 public:
     USBZStateMachineStateDsResult();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRestartTimerFinsihed();

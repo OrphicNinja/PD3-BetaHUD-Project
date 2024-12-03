@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
+#include "Curves/CurveFloat.h"
 #include "SBZCharacterMovementComponent.h"
 #include "SBZPlayerMovementComponent.generated.h"
 
@@ -69,7 +69,8 @@ protected:
     float SkillWalkHumanShieldModifier;
     
 public:
-    USBZPlayerMovementComponent();
+    USBZPlayerMovementComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void Server_SetWantToSprint(bool bInWantToSprint);

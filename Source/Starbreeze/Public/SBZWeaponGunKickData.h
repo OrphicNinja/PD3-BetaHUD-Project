@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
+#include "UObject/NoExportTypes.h"
+#include "Curves/CurveFloat.h"
 #include "SBZWeaponGunKickMultiplierData.h"
 #include "SBZWeaponGunKickData.generated.h"
 

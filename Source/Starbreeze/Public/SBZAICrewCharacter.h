@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=LinearColor -FallbackName=LinearColor
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "GameplayTagContainer.h"
 #include "EPD3DefeatState.h"
 #include "ESBZVoicePriority.h"
 #include "SBZAIBaseCharacter.h"
@@ -135,9 +135,10 @@ private:
     FName CrewAIMarkerSocketName;
     
 public:
-    ASBZAICrewCharacter();
+    ASBZAICrewCharacter(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnServerStartInteraction(USBZBaseInteractableComponent* InInteractable, USBZInteractorComponent* InInteractor, bool bInIsLocallyControlled);
@@ -178,7 +179,7 @@ public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_MarkCamera(ASBZSecurityCamera* Camera);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

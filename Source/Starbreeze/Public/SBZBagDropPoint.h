@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZBagDropPoint.generated.h"
 
 UCLASS(Blueprintable)
@@ -12,7 +12,8 @@ protected:
     bool bShouldActivateOnBeginPlay;
     
 public:
-    ASBZBagDropPoint();
+    ASBZBagDropPoint(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void EnableAsBagDropPoint();
     

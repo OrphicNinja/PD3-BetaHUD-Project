@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Int32Interval -FallbackName=Int32Interval
+#include "UObject/NoExportTypes.h"
 #include "Templates/SubclassOf.h"
 #include "SBZPawnVariationData.generated.h"
 

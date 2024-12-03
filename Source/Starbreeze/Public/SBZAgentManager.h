@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=NavEdgeProviderInterface -FallbackName=NavEdgeProviderInterface
+#include "Components/ActorComponent.h"
+#include "AI/Navigation/NavEdgeProviderInterface.h"
 #include "SBZAgentManagerPostPhysicsTickFunction.h"
 #include "SBZAgentManager.generated.h"
 
@@ -16,7 +16,8 @@ private:
     FSBZAgentManagerPostPhysicsTickFunction PostPhysicsTickFunction;
     
 public:
-    USBZAgentManager();
+    USBZAgentManager(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(Server, Unreliable, WithValidation)
     void ServerUnreliableRPC(uint64 ClientId, const TArray<uint8>& Data);
     
@@ -41,7 +42,7 @@ public:
     UFUNCTION(Reliable, Server, WithValidation)
     void ClientInitializedRPC(uint64 ClientId);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

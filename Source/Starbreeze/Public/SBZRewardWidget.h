@@ -11,6 +11,7 @@ class USBZRewardWidget : public USBZWidgetBase {
     GENERATED_BODY()
 public:
     USBZRewardWidget();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnInfamyChanged(USBZInfamyManager* InfamyManager, int32 NewInfamyExperience, int32 PreviousInfamyExperience);

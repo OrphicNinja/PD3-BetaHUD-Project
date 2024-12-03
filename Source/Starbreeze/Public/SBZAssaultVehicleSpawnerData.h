@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Int32Interval -FallbackName=Int32Interval
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
+#include "GameplayTagContainer.h"
 #include "Templates/SubclassOf.h"
 #include "SBZAssaultVehicleSpawnerData.generated.h"
 
@@ -31,5 +31,6 @@ public:
     bool bInitialSpawnOnly;
     
     USBZAssaultVehicleSpawnerData();
+
 };
 

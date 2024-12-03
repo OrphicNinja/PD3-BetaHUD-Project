@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintAsyncActionBase -FallbackName=BlueprintAsyncActionBase
+#include "Kismet/BlueprintAsyncActionBase.h"
 #include "ESBZUserPrivilegesProxy.h"
 #include "SBZOnPrivilegeAllowedDelegate.h"
 #include "SBZOnPrivilegeBlockedDelegate.h"
@@ -25,6 +25,7 @@ private:
     
 public:
     USBZQueryPrivilege();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static USBZQueryPrivilege* QueryPrivilege(UObject* NewWorldContextObject, ESBZUserPrivilegesProxy Privilege);
     

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintAsyncActionBase -FallbackName=BlueprintAsyncActionBase
+#include "Kismet/BlueprintAsyncActionBase.h"
 #include "SBZOnSanitizeDisplayNamesCompleteDelegate.h"
 #include "SBZSanitizeDisplayNames.generated.h"
 
@@ -30,6 +30,7 @@ private:
     
 public:
     USBZSanitizeDisplayNames();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static USBZSanitizeDisplayNames* SanitizeDisplayNames(UObject* NewWorldContextObject, const ASBZPlayerState* NewPlayerState, const TArray<FString>& DisplayNames);
     

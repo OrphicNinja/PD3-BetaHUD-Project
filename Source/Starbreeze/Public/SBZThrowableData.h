@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Rotator -FallbackName=Rotator
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "UObject/NoExportTypes.h"
+#include "GameplayTagContainer.h"
 #include "SBZInventoryBaseData.h"
 #include "SBZThrowableData.generated.h"
 
@@ -79,9 +79,6 @@ public:
     USBZVoiceCommentDataAsset* DroppedComment;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool bUseThrowCalculation;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxThrowAngle;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
@@ -97,5 +94,6 @@ public:
     USBZWeaponFireData* FireData;
     
     USBZThrowableData();
+
 };
 

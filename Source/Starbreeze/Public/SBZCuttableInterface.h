@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Interface -FallbackName=Interface
+#include "UObject/Interface.h"
 #include "ESBZCuttableState.h"
 #include "SBZCuttableInterface.generated.h"
 
@@ -19,6 +19,9 @@ class ISBZCuttableInterface : public IInterface {
 public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnCuttableStateChanged(ESBZCuttableState NewCuttableState);
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    bool IsWindow();
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     UNiagaraComponent* GetNiagaraComponent();

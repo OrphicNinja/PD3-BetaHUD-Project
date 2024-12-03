@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Interface -FallbackName=Interface
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/Interface.h"
+#include "GameplayTagContainer.h"
 #include "Templates/SubclassOf.h"
 #include "SBZVolumeDamageInterface.generated.h"
 
@@ -21,6 +21,9 @@ class ISBZVolumeDamageInterface : public IInterface {
 public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     bool IsVolumeDamageReady() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    float GetVolumeOverHealDamageMultiplier() const;
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     TSubclassOf<USBZDamageType> GetVolumeDamageType() const;

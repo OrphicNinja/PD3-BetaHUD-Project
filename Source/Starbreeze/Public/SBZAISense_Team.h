@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AISense -FallbackName=AISense
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatRange -FallbackName=FloatRange
+#include "Perception/AISense.h"
+#include "UObject/NoExportTypes.h"
 #include "SBZAITeamStimulusEvent.h"
 #include "SBZAISense_Team.generated.h"
 
@@ -19,5 +19,6 @@ private:
     
 public:
     USBZAISense_Team();
+
 };
 

@@ -64,6 +64,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float CurrentThreatLevel;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    bool bIsMaskOnOverridden;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_CurrentHeistState, meta=(AllowPrivateAccess=true))
     EPD3HeistState CurrentHeistState;
@@ -142,10 +145,13 @@ private:
     bool bIsAICrewSpawned;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    bool bEscalated;
+    bool bIsAssaultStarted;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float SavedCustodyTime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    int32 HostageDemandReduction;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_NegotiationTradeType, meta=(AllowPrivateAccess=true))
     ESBZNegotiationTradeType NegotiationTradeType;
@@ -172,12 +178,18 @@ private:
     float ECMJammerAdditionalIncreasePercentagePerJammer;
     
 public:
-    APD3HeistGameState();
+    APD3HeistGameState(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static EPD3HeistState StealthBranch(UObject* WorldContextObject, ESBZStealthBranch& OutputPins);
     
+private:
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    void SetMaskOnOverride(UObject* WorldContextObject);
+    
+public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetHeistState(EPD3HeistState HeistState);
     
@@ -217,6 +229,9 @@ private:
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetNegotiationEndTime(float EndTime);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetMaskOnOverride();
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetHostagesDemand(uint8 Count);

@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ECollisionEnabled -FallbackName=ECollisionEnabled
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
+#include "Components/ActorComponent.h"
+#include "Engine/EngineTypes.h"
+#include "Engine/EngineTypes.h"
 #include "SBZActorFilterDefinition.h"
 #include "SBZFilterActorDynamicDelegateDelegate.h"
 #include "SBZFilterAllDesiredCountsDynamicDelegateDelegate.h"
@@ -29,6 +29,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FSBZActorFilterDefinition> FilterDefinitions;
     
+public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     uint8 bDisableWhenActorBeginsOverlapping: 1;
     
@@ -41,7 +42,6 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     uint8 bAlwaysBroadcastOverlapEndEvents: 1;
     
-public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSBZFilterActorDynamicDelegate FilteredActorBeginOverlapping;
     
@@ -54,7 +54,8 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSBZFilterAllDesiredCountsDynamicDelegate FiltersAllHaveDesiredCountsChanged;
     
-    USBZActorFilterComponent();
+    USBZActorFilterComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetPrimitiveComponentEnableCollision(bool bEnabled);
     

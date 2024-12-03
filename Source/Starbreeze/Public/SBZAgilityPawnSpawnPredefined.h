@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=NavigationLink -FallbackName=NavigationLink
-//CROSS-MODULE INCLUDE V2: -ModuleName=NavigationSystem -ObjectName=NavLinkCustomInterface -FallbackName=NavLinkCustomInterface
+#include "AI/Navigation/NavLinkDefinition.h"
+#include "NavLinkCustomInterface.h"
 #include "ESBZAgilityType.h"
 #include "SBZAgilityTrajectoryInterface.h"
 #include "SBZPawnSpawnPredefined.h"
@@ -33,7 +33,8 @@ protected:
     FNavigationLink NavigationLink;
     
 public:
-    ASBZAgilityPawnSpawnPredefined();
+    ASBZAgilityPawnSpawnPredefined(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void UpdateAgilityTrajectory();
     
@@ -41,7 +42,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void SpawnedPawnOrderPushed(ASBZAIController* Controller, USBZAIOrder* Order);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

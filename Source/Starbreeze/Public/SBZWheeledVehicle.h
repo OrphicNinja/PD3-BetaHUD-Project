@@ -1,7 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=PhysXVehicles -ObjectName=WheeledVehicle -FallbackName=WheeledVehicle
+#include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
+#include "WheeledVehicle.h"
 #include "ESBZVehicleDoorState.h"
 #include "ESBZVehicleDoorType.h"
 #include "ESBZVehicleLightCPD.h"
@@ -23,8 +24,11 @@
 #include "SBZWheeledVehicle.generated.h"
 
 class AActor;
+class ACharacter;
 class ASBZCoverPoint;
 class ASBZSpline;
+class UBoxComponent;
+class UPrimitiveComponent;
 class USBZAmbientSoundRadioComponent;
 class USBZVariationSetData;
 class USBZVehicleAnimationCollection;
@@ -103,6 +107,24 @@ private:
     TArray<ASBZCoverPoint*> CachedCoverPoints;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bEjectCharactersWhenDriving;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float EjectionCharacterVelocityFactor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float MaxEjectCharacterVelocity;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<ACharacter*> OverlappingEjectionAreaCharacters;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<ACharacter*> PendingCollisionResetCharacters;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    TArray<UBoxComponent*> EjectionVolumes;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ObstacleCheckInterval;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_RepMove, meta=(AllowPrivateAccess=true))
@@ -118,15 +140,13 @@ private:
     FVector DebugLocation;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FVector DebugServerLocation0;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FVector DebugServerLocation1;
+    TArray<FVector> DebugServerLocations;
     
 public:
-    ASBZWheeledVehicle();
+    ASBZWheeledVehicle(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 private:
     UFUNCTION(BlueprintCallable)
     void SetLightType(ESBZVehicleLightType LightType, bool bIsOn);
@@ -167,19 +187,30 @@ private:
     void OnPathEndReachedCallback();
     
     UFUNCTION(BlueprintCallable)
+    void OnEjectionVolumeBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+    
+    UFUNCTION(BlueprintCallable)
     void OnBeginStopCallback();
     
 public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetDoorState(ESBZVehicleDoorType DoorType, ESBZVehicleDoorState DoorState);
     
+private:
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_EjectOverlappingCharacters(ACharacter* Character, const FVector& EjectionVelocity);
+    
+public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     USBZVehicleSplineFollowingComponent* GetVehicleSplineFollowingComponent() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     ESBZVehicleDoorState GetDoorState(ESBZVehicleDoorType DoorType) const;
     
+    UFUNCTION(BlueprintCallable)
+    void AddEjectionVolume(UBoxComponent* EjectionVolume);
     
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     USBZVehicleSplineFollowingComponent* GetSplineFollowingComponent() const override PURE_VIRTUAL(GetSplineFollowingComponent, return NULL;);

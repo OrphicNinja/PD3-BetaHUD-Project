@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "SBZBagSpawner.generated.h"
 
 class USBZBagType;
@@ -36,7 +36,8 @@ protected:
     float ConeAngle;
     
 public:
-    ASBZBagSpawner();
+    ASBZBagSpawner(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void StartSpawningBags();
     

@@ -18,6 +18,7 @@ private:
     
 public:
     USBZMainMenuCosmeticItemButton();
+
     UFUNCTION(BlueprintCallable)
     void SetItemCount(int32 InItemCount);
     

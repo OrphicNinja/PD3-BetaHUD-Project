@@ -1,15 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GameFramework/Actor.h"
+#include "GameplayTagContainer.h"
 #include "ESBZObjectiveGroup.h"
 #include "ESBZObjectiveState.h"
+#include "ESBZObjectiveType.h"
 #include "ESBZProgressTextDisplayOption.h"
 #include "ESBZSubobjectiveComplete.h"
 #include "SBZOnObjectiveDelegate.h"
 #include "SBZObjective.generated.h"
 
 class ASBZObjective;
+class ASBZTickingLootManager;
 class ISBZTimedObjectiveInterface;
 class USBZTimedObjectiveInterface;
 class UObject;
@@ -29,7 +31,13 @@ public:
     bool bIsOptional;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ESBZObjectiveType ObjectiveType;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bUIUseProgressBar;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bReverseProgressBar;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bUIReverseTimer;
@@ -86,11 +94,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_Progress, meta=(AllowPrivateAccess=true))
     int32 Progress;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     int32 MaxProgress;
     
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MaxProgressPerDifficulty[4];
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bCanEverReplicateMaxProgress;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float StartTimeSeconds;
@@ -105,12 +116,16 @@ protected:
     TArray<AActor*> InfoActorArray;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ASBZTickingLootManager* TickingLootManager;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USBZMarkerDataAsset* MarkerAsset;
     
 public:
-    ASBZObjective();
+    ASBZObjective(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetProgress(int32 NewProgress);
     
@@ -120,6 +135,9 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     void OnRep_Progress();
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetMaxProgress(float InMaxProgress);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_OnStateChanged(ESBZObjectiveState NewState);

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EnvQueryTest -FallbackName=EnvQueryTest
+#include "EnvironmentQuery/EnvQueryTest.h"
 #include "SBZEnvQueryTest_SmallestNearbyBottleNeckSize.generated.h"
 
 UCLASS(Blueprintable)
@@ -13,5 +13,6 @@ private:
     
 public:
     USBZEnvQueryTest_SmallestNearbyBottleNeckSize();
+
 };
 

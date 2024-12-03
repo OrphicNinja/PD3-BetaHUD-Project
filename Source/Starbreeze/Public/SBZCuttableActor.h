@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
+#include "GameFramework/Actor.h"
+#include "Engine/EngineTypes.h"
 #include "SBZBreakableInterface.h"
 #include "SBZComponentSelector.h"
 #include "SBZCuttableInterface.h"
@@ -64,7 +64,8 @@ protected:
     bool bIsHinged;
     
 public:
-    ASBZCuttableActor();
+    ASBZCuttableActor(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void PropDamageReached();
     
@@ -86,7 +87,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnCuttingEnabledChanged(bool bCuttingEnabled);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

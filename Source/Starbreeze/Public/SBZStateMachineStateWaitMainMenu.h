@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
+#include "Engine/EngineTypes.h"
 #include "SBZClientStateMachineState.h"
 #include "SBZStateMachineStateWaitMainMenu.generated.h"
 
@@ -20,6 +20,7 @@ private:
     
 public:
     USBZStateMachineStateWaitMainMenu();
+
 private:
     UFUNCTION(BlueprintCallable)
     void HandleP2PSessionDestroyed(FName SessionName, bool bResult);

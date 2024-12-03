@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "UObject/Object.h"
+#include "Engine/EngineTypes.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "ESBZOnlineCode.h"
 #include "OnOnlineSessionEventDelegateDelegate.h"
 #include "OnPartyHostUpdatedDelegateDelegate.h"
@@ -11,7 +11,7 @@
 
 class APlayerState;
 
-UCLASS(Blueprintable, NotPlaceable, Transient)
+UCLASS(Blueprintable, NotPlaceable, Transient, Config=Engine)
 class STARBREEZE_API USBZPartyHost : public UObject {
     GENERATED_BODY()
 public:
@@ -46,6 +46,7 @@ private:
     
 public:
     USBZPartyHost();
+
     UFUNCTION(BlueprintCallable)
     void NotifyClientLeftLobby(const FUniqueNetIdRepl& PartyMemberId);
     

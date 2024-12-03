@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/Object.h"
+#include "GameplayTagContainer.h"
 #include "SBZAIAction.generated.h"
 
 class AActor;
@@ -29,5 +29,6 @@ protected:
     
 public:
     USBZAIAction();
+
 };
 

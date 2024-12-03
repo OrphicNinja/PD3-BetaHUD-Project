@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "Engine/EngineTypes.h"
+#include "GameplayTagContainer.h"
 #include "SBZCarriedHackableKeyDelegateDelegate.h"
 #include "SBZCarriedStaticInteractionActor.h"
 #include "SBZCarriedHackableKey.generated.h"
@@ -48,10 +49,14 @@ protected:
     int32 ChecksMade;
     
 public:
-    ASBZCarriedHackableKey();
+    ASBZCarriedHackableKey(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnInteractionEnabledStateChanged(const USBZBaseInteractableComponent* InteractableComponent, bool bInNewState);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnHackerEndPlay(AActor* Actor, TEnumAsByte<EEndPlayReason::Type> EndPlayReason);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_OnHackComplete();

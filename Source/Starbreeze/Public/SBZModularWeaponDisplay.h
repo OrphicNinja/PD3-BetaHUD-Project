@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZEquippableConfig.h"
 #include "SBZEquippablePartConfigGroup.h"
 #include "SBZModularWeaponDisplay.generated.h"
@@ -29,7 +29,8 @@ protected:
     TMap<USBZModularPartSlotBase*, FSBZEquippablePartConfigGroup> WeaponModMap;
     
 public:
-    ASBZModularWeaponDisplay();
+    ASBZModularWeaponDisplay(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SwapModPart(const USBZModularPartSlotBase* Slot, const USBZEquippablePartDataAsset* EquippablePart);
     

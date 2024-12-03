@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EEndPlayReason -FallbackName=EEndPlayReason
+#include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
 #include "SBZKnifeProjectileTargetData.h"
 #include "SBZThrowable.h"
 #include "Templates/SubclassOf.h"
@@ -45,7 +45,8 @@ protected:
     ASBZAmmoPickup* AmmoPickup;
     
 public:
-    ASBZThrowableKnife();
+    ASBZThrowableKnife(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_ReplicateDamage(const FSBZKnifeProjectileTargetData& TargetData);

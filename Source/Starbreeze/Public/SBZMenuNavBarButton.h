@@ -20,6 +20,7 @@ protected:
     
 public:
     USBZMenuNavBarButton();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnHovered(bool bIsHovered);
     

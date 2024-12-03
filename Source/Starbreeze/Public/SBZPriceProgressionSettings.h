@@ -3,7 +3,7 @@
 #include "SBZDeveloperSettings.h"
 #include "SBZPriceProgressionSettings.generated.h"
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class USBZPriceProgressionSettings : public USBZDeveloperSettings {
     GENERATED_BODY()
 public:
@@ -11,6 +11,7 @@ public:
     TArray<FString> WeeklyResetPriceGroups;
     
     USBZPriceProgressionSettings();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static TArray<FString> GetWeeklyResetPriceGroupSettings();
     

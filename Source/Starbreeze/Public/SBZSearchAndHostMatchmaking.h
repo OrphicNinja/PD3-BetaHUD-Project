@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
+#include "Engine/EngineTypes.h"
 #include "ESBZOnlineCode.h"
 #include "SBZMatchmaking.h"
 #include "SBZSearchAndHostMatchmaking.generated.h"
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class STARBREEZE_API USBZSearchAndHostMatchmaking : public USBZMatchmaking {
     GENERATED_BODY()
 public:
@@ -40,6 +40,7 @@ private:
     
 public:
     USBZSearchAndHostMatchmaking();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void HandleLostConnectionToHost(ESBZOnlineCode Result);

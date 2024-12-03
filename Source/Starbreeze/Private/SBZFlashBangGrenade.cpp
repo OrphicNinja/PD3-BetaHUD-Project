@@ -1,7 +1,11 @@
 #include "SBZFlashBangGrenade.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=CapsuleComponent -FallbackName=CapsuleComponent
+#include "Components/CapsuleComponent.h"
+#include "SBZFlashBangGrenadeData.h"
 
-ASBZFlashBangGrenade::ASBZFlashBangGrenade() {
-    this->CapsuleCollision = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CollisionCapsule"));
+ASBZFlashBangGrenade::ASBZFlashBangGrenade(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer.SetDefaultSubobjectClass<UCapsuleComponent>(TEXT("CollisionCapsule"))) {
+    this->Tags.AddDefaulted(1);
+    this->DataType = USBZFlashBangGrenadeData::StaticClass();
+    this->CapsuleCollision = (UCapsuleComponent*)RootComponent;
 }
+
 

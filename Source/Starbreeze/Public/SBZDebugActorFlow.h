@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZDebugActorFlow.generated.h"
 
 class USBZDebugActorComponentFlow;
@@ -57,6 +57,7 @@ protected:
     USBZDebugObjectFlow* LastDynamicObject;
     
 public:
-    ASBZDebugActorFlow();
+    ASBZDebugActorFlow(const FObjectInitializer& ObjectInitializer);
+
 };
 

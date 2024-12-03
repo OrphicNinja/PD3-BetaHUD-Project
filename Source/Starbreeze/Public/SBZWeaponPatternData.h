@@ -5,13 +5,14 @@
 #include "SBZWeaponPatternData.generated.h"
 
 UCLASS(Blueprintable)
-class USBZWeaponPatternData : public USBZCosmeticsDataAsset {
+class STARBREEZE_API USBZWeaponPatternData : public USBZCosmeticsDataAsset {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FSBZWeaponPatternDataSingleColorAreaList> AreasForEachColor;
     
     USBZWeaponPatternData();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetNbExpectedColorsInConfig() const;
     

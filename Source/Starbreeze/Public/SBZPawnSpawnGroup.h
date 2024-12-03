@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZRoomVolumeInterface.h"
 #include "SBZPawnSpawnGroup.generated.h"
 
@@ -25,12 +25,13 @@ protected:
     ASBZRoomVolume* SpawnGroupRoom;
     
 public:
-    ASBZPawnSpawnGroup();
+    ASBZPawnSpawnGroup(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnPawnSpawnDestroyed(AActor* DestroyedActor);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

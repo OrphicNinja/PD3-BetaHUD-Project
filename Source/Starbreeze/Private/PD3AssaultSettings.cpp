@@ -13,6 +13,7 @@ UPD3AssaultSettings::UPD3AssaultSettings() {
     this->MaxTotalAISpawnCount = 150;
     this->MaxAliveAIPlayerModifier.AddDefaulted(4);
     this->MaxSpawnGroupQueryCount = 1;
+    this->PreferredSpawnTime = 120.00f;
     this->PreferredSpawnDistance = 2000.00f;
     this->SpawnerTimeScoreWeight = 1.00f;
     this->SpawnerDistScoreWeight = 1.50f;
@@ -22,5 +23,7 @@ UPD3AssaultSettings::UPD3AssaultSettings() {
     this->MaxNrAttackers[1] = 15;
     this->MaxNrAttackers[2] = 15;
     this->MaxNrAttackers[3] = 15;
+    this->SecuritySettingDataModifiers = NULL;
 }
+
 

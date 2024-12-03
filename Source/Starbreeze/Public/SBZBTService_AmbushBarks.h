@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTService -FallbackName=BTService
+#include "BehaviorTree/BTService.h"
 #include "ESBZVoicePriority.h"
 #include "SBZBTService_AmbushBarks.generated.h"
 
@@ -19,5 +19,6 @@ private:
     
 public:
     USBZBTService_AmbushBarks();
+
 };
 

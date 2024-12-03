@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TriggerVolume -FallbackName=TriggerVolume
+#include "Engine/TriggerVolume.h"
 #include "ESBZBagTriggerMode.h"
 #include "SBZBagCountChangedDelegateDelegate.h"
 #include "SBZBagEnteredDelegateDelegate.h"
@@ -60,7 +60,8 @@ protected:
     ASBZBagRespawnPoint* BagTeleportPoint;
     
 public:
-    ASBZBagTriggerVolume();
+    ASBZBagTriggerVolume(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetVolumeEnabled(bool bEnabled);
     

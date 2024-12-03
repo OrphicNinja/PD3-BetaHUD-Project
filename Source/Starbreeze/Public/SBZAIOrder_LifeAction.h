@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GameplayTagContainer.h"
+#include "ESBZAIBehaviorCategory.h"
 #include "ESBZLifeActionStopReason.h"
 #include "SBZAIOrder.h"
 #include "SBZComponentSelector.h"
@@ -61,6 +62,7 @@ protected:
     
 public:
     USBZAIOrder_LifeAction();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnCharacterSlotFreed(ASBZCharacter* Character, USBZLifeActionInstance* ActionInstance, USBZLifeActionSlot* ActionSlot, ESBZLifeActionStopReason Result);
@@ -69,6 +71,11 @@ public:
     UFUNCTION(BlueprintCallable)
     void OnBlockingSlotFreed(ASBZCharacter* Character, USBZLifeActionInstance* ActionInstance, USBZLifeActionSlot* ActionSlot, ESBZLifeActionStopReason Result);
     
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnBehaviorCategoryChanged(ESBZAIBehaviorCategory OldCategory, ESBZAIBehaviorCategory NewCategory);
+    
+public:
     UFUNCTION(BlueprintCallable)
     void ClearDelegates();
     

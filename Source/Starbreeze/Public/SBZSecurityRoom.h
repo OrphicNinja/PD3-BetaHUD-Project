@@ -26,8 +26,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ASBZPawnSpawnPredefined* GuardRoomSpawner;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    AActor* FocusActor;
+    
 public:
-    ASBZSecurityRoom();
+    ASBZSecurityRoom(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnPlayableLevelInitialized(UWorld* World);
@@ -35,7 +39,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnCameraDestroyed(AActor* DestroyedActor);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

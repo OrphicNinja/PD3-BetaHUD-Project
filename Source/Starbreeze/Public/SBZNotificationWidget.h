@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=UMG -ObjectName=UserWidget -FallbackName=UserWidget
+#include "Blueprint/UserWidget.h"
 #include "SBZNotificationWidget.generated.h"
 
 class UTextBlock;
@@ -15,6 +15,7 @@ protected:
     
 public:
     USBZNotificationWidget();
+
     UFUNCTION(BlueprintCallable)
     void SetupWidget(UTextBlock* InTextBlock);
     

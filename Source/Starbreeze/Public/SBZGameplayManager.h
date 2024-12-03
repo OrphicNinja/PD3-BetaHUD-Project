@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZGameplayManager.generated.h"
 
 class USBZGameplayManager;
@@ -16,6 +16,7 @@ private:
     
 public:
     USBZGameplayManager();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnRestartLevelStarted();
@@ -25,9 +26,6 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnOutroSequenceStarted(const int32 OutroVariation);
-    
-    UFUNCTION(BlueprintCallable)
-    void OnIntroSequenceStarted();
     
     UFUNCTION(BlueprintCallable)
     void OnBlackScreenStarted();

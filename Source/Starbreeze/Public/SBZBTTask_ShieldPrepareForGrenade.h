@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTTask_BlackboardBase -FallbackName=BTTask_BlackboardBase
+#include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
 #include "SBZBTTask_ShieldPrepareForGrenade.generated.h"
 
 class USBZVoiceCommentDataAsset;
@@ -11,9 +11,10 @@ class USBZBTTask_ShieldPrepareForGrenade : public UBTTask_BlackboardBase {
 public:
 private:
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
-    USBZVoiceCommentDataAsset* VoiceComments[5];
+    USBZVoiceCommentDataAsset* VoiceComments[6];
     
 public:
     USBZBTTask_ShieldPrepareForGrenade();
+
 };
 

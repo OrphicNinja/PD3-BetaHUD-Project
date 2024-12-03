@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Info -FallbackName=Info
+#include "GameFramework/Info.h"
 #include "SBZVoiceComponentInterface.h"
 #include "SBZNarrator.generated.h"
 
@@ -15,8 +15,9 @@ protected:
     USBZCharacterVoiceComponent* VoiceComponent;
     
 public:
-    ASBZNarrator();
-    
+    ASBZNarrator(const FObjectInitializer& ObjectInitializer);
+
+
     // Fix for true pure virtual functions not being implemented
 };
 

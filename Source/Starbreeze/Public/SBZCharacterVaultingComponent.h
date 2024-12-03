@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZCharacterVaultingComponent.generated.h"
 
 class ASBZCharacter;
@@ -31,6 +31,7 @@ protected:
     UCharacterMovementComponent* OwnerCharacterMovementComponent;
     
 public:
-    USBZCharacterVaultingComponent();
+    USBZCharacterVaultingComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

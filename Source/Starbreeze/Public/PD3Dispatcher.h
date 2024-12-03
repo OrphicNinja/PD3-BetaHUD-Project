@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "EPD3DispatchCaller.h"
 #include "EPD3DispatchCallerReason.h"
 #include "PD3CallerReason.h"
@@ -22,6 +22,7 @@ private:
     
 public:
     UPD3Dispatcher();
+
 private:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void Multicast_CallDispatcherByAsset(const USBZActionNotificationAsset* CallerReason);

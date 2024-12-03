@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AnimGraphRuntime -ObjectName=AnimNode_SkeletalControlBase -FallbackName=AnimNode_SkeletalControlBase
-//CROSS-MODULE INCLUDE V2: -ModuleName=AnimGraphRuntime -ObjectName=CopyBoneDeltaMode -FallbackName=CopyBoneDeltaMode
+#include "BoneControllers/AnimNode_SkeletalControlBase.h"
+#include "BoneControllers/AnimNode_CopyBoneDelta.h"
 #include "SBZBoneRefArrayParam.h"
 #include "SBZBoneRefParam.h"
 #include "SBZAnimNode_CopyBoneDeltaMultiTargets.generated.h"

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "ESBZCurrentPlatform.h"
 #include "ESBZGameStateMachineState.h"
 #include "SBZGameStateMachineFunctionLibrary.generated.h"
@@ -13,6 +13,7 @@ class STARBREEZE_API USBZGameStateMachineFunctionLibrary : public UBlueprintFunc
     GENERATED_BODY()
 public:
     USBZGameStateMachineFunctionLibrary();
+
     UFUNCTION(BlueprintCallable)
     static bool IsValidPakchunkIndex(int32 PakchunkIndex);
     

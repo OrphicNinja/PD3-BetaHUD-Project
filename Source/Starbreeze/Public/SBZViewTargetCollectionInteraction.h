@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZViewTargetCollectionInteraction.generated.h"
 
 class USBZBaseInteractableComponent;
@@ -19,7 +19,8 @@ private:
     USBZInteractableComponent* Interactable;
     
 public:
-    ASBZViewTargetCollectionInteraction();
+    ASBZViewTargetCollectionInteraction(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetViewTargetCollection(AActor* InActor);
     

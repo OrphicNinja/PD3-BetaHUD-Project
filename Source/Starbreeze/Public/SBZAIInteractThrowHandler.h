@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZBagHandle.h"
 #include "SBZAIInteractThrowHandler.generated.h"
 
@@ -12,6 +12,7 @@ class USBZAIInteractThrowHandler : public UObject {
     GENERATED_BODY()
 public:
     USBZAIInteractThrowHandler();
+
     UFUNCTION(BlueprintCallable)
     void OnThrowBagInteractionCompleted(ASBZBagTriggerVolume* Volume, ASBZBagItem* BagItem, FSBZBagHandle BagHandle);
     

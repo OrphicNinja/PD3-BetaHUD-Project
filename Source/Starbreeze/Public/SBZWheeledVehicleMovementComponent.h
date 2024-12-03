@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=PhysXVehicles -ObjectName=SimpleWheeledVehicleMovementComponent -FallbackName=SimpleWheeledVehicleMovementComponent
+#include "SimpleWheeledVehicleMovementComponent.h"
 #include "SBZWheeledVehicleMovementComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -15,6 +15,7 @@ private:
     float OverriddenDriveTorque;
     
 public:
-    USBZWheeledVehicleMovementComponent();
+    USBZWheeledVehicleMovementComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

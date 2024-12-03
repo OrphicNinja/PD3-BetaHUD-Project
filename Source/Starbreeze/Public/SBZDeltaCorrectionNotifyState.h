@@ -5,7 +5,9 @@
 #include "SBZDeltaCorrectionNotifyState.generated.h"
 
 UCLASS(Blueprintable, CollapseCategories, EditInlineNew)
-class STARBREEZE_API UAnimNotifyState_WarpingBase : public UAnimNotifyState {
+
+class STARBREEZE_API UAnimNotifyState_WarpingBase : public UAnimNotifyState
+{
     GENERATED_BODY()
 public:
     UAnimNotifyState_WarpingBase()
@@ -43,5 +45,6 @@ public:
     float ReferenceTime;
     
     USBZDeltaCorrectionNotifyState();
+
 };
 

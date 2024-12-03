@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZBagHandle.h"
 #include "SBZZiplinerInterface.h"
 #include "Templates/SubclassOf.h"
@@ -10,8 +10,7 @@ class ASBZZipline;
 class ASBZZiplineMotor;
 class UAkAudioEvent;
 class UAkComponent;
-class UBoxComponent;
-class USBZAIObjectiveComponent;
+class USBZBagBoxComponent;
 class USBZBaseInteractableComponent;
 class USBZInteractableComponent;
 class USBZInteractorComponent;
@@ -43,16 +42,13 @@ public:
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    UBoxComponent* BoxComponent;
+    USBZBagBoxComponent* BoxComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USBZInteractableComponent* Interactable;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USBZSimplePhysicsCorrector* PhysicsCorrector;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    USBZAIObjectiveComponent* ObjectiveComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FSBZBagHandle Bag;
@@ -66,7 +62,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool bIsMovingOnZiplineForward;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_BagId, meta=(AllowPrivateAccess=true))
     int32 BagId;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -81,16 +77,23 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bShouldBroadcastOnHitEvent;
     
-public:
-    ASBZBagItem();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    int32 MarkerID;
     
+public:
+    ASBZBagItem(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     bool SecureBag(bool bDestroyOnSecured);
     
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_CurrentZipline();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_BagId();
     
     UFUNCTION(BlueprintCallable)
     void OnPickup(USBZBaseInteractableComponent* NewInteractable, USBZInteractorComponent* Interactor, bool bInIsLocallyControlled);
@@ -104,7 +107,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnDegradationChanged(const int32 DegredationLevel);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

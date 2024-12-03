@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EQSParametrizedQueryExecutionRequest -FallbackName=EQSParametrizedQueryExecutionRequest
+#include "EnvironmentQuery/EnvQueryTypes.h"
 #include "SBZAIAction.h"
 #include "SBZAIAction_SetBBValue.generated.h"
 
@@ -9,7 +9,7 @@ class USBZAIAction_SetBBValue : public USBZAIAction {
     GENERATED_BODY()
 public:
 private:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     FEQSParametrizedQueryExecutionRequest EQSRequest;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -17,5 +17,6 @@ private:
     
 public:
     USBZAIAction_SetBBValue();
+
 };
 

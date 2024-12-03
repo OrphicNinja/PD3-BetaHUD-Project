@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AnimNotify -FallbackName=AnimNotify
+#include "Animation/AnimNotifies/AnimNotify.h"
 #include "SBZWorldEventSectionSwitchNotify.generated.h"
 
 class USBZWorldEventData;
@@ -21,5 +21,6 @@ protected:
     
 public:
     USBZWorldEventSectionSwitchNotify();
+
 };
 

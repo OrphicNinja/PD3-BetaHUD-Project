@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "ESBZTrafficLightStatus.h"
 #include "SBZTrafficLightPool.h"
 #include "SBZTrafficLightPoolState.h"
@@ -35,9 +35,10 @@ private:
     USBZTrafficSettings* TrafficSettings;
     
 public:
-    ASBZTrafficLights();
+    ASBZTrafficLights(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void UpdatePool(ESBZTrafficLightStatus Status, const TArray<UStaticMeshComponent*>& Pool, const TArray<USBZAmbientSoundComponent*>& PedestrianSoundEmitters);
     

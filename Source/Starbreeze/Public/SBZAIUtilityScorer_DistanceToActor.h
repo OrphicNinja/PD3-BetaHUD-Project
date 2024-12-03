@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatRange -FallbackName=FloatRange
+#include "UObject/NoExportTypes.h"
 #include "SBZAIUtilityScorer.h"
 #include "SBZAIUtilityScorer_DistanceToActor.generated.h"
 
@@ -13,9 +13,13 @@ protected:
     FFloatRange DistanceRange;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float HeightLimit;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName BlackboardKey;
     
 public:
     USBZAIUtilityScorer_DistanceToActor();
+
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EnvQueryTest -FallbackName=EnvQueryTest
+#include "EnvironmentQuery/EnvQueryTest.h"
 #include "Templates/SubclassOf.h"
 #include "SBZEnvQueryTest_CoverHasLOS.generated.h"
 
@@ -14,5 +14,6 @@ public:
     TSubclassOf<UEnvQueryContext> TargetContext;
     
     USBZEnvQueryTest_CoverHasLOS();
+
 };
 

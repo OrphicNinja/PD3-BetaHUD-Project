@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Vector_NetQuantize -FallbackName=Vector_NetQuantize
+#include "Engine/NetSerialization.h"
 #include "SBZQuat_NetQuantizeNormal.h"
 #include "SBZDropPlaceableEquippableData.generated.h"
 

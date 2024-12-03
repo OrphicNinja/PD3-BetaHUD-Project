@@ -3,11 +3,20 @@
 #include "BehaviorTree/Tasks/BTTask_MoveTo.h"
 #include "BehaviorTree/BehaviorTreeTypes.h"
 #include "UObject/NoExportTypes.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTTask_MoveTo -FallbackName=BTTask_MoveTo
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BlackboardKeySelector -FallbackName=BlackboardKeySelector
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
 //CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SBZPathOffset -FallbackName=SBZPathOffset
 #include "SBZBTTask_MoveTo.generated.h"
+
+USTRUCT(BlueprintType)
+struct FSBZPathOffset
+{
+    GENERATED_BODY()
+public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float Offset;
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (AllowPrivateAccess = true))
+    float RandomDeviation;
+};
 
 UCLASS(Blueprintable)
 class USBZBTTask_MoveTo : public UBTTask_MoveTo {
@@ -61,5 +70,6 @@ protected:
     
 public:
     USBZBTTask_MoveTo();
+
 };
 

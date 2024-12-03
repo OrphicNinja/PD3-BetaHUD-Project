@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZBagHandle.h"
 #include "SBZBreakableInterface.h"
 #include "SBZMultiBagGeneratorDelegateDelegate.h"
@@ -39,7 +39,8 @@ protected:
     TArray<FSBZBagHandle> BagHandleArray;
     
 public:
-    ASBZMultiBagGenerator();
+    ASBZMultiBagGenerator(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetEnabled(bool bIsEnabled);
     
@@ -47,7 +48,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnServerCompleteInteraction(USBZBaseInteractableComponent* Comp, USBZInteractorComponent* Interactor, bool bInIsLocallyControlled);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

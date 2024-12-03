@@ -52,7 +52,8 @@ protected:
     float PendingOnScreenTime;
     
 public:
-    USBZPlayerInteractorComponent();
+    USBZPlayerInteractorComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool ShowInteractWidget() const;
     

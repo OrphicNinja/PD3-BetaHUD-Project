@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "EPD3HeistState.h"
 #include "ESBZVehicleSpawnResult.h"
 #include "SBZComponentSelector.h"
@@ -49,7 +49,8 @@ private:
     TArray<ASBZAgilityPawnSpawnPredefined*> Spawners;
     
 public:
-    USBZVehicleSpawnComponent();
+    USBZVehicleSpawnComponent(const FObjectInitializer& ObjectInitializer);
+
 private:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SpawnCompleted(ESBZVehicleSpawnResult Result);

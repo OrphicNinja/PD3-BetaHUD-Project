@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "SBZVariationSetUtils.generated.h"
 
 class AActor;
@@ -13,6 +13,7 @@ class STARBREEZE_API USBZVariationSetUtils : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     USBZVariationSetUtils();
+
     UFUNCTION(BlueprintCallable)
     static void ApplyVariationToStatic(UStaticMeshComponent* StatComponent, USBZVariationSetData* VariationSet, int32 VariationIdx);
     

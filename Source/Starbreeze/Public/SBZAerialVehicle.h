@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Pawn -FallbackName=Pawn
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
+#include "GameFramework/Pawn.h"
+#include "Curves/CurveFloat.h"
 #include "ESBZAerialVehicleDoor.h"
 #include "SBZAerialVehicleOnBeginStopDelegate.h"
 #include "SBZAerialVehicleOnDoorStateChangedDelegate.h"
@@ -115,9 +115,10 @@ private:
     bool bActiveEngine;
     
 public:
-    ASBZAerialVehicle();
+    ASBZAerialVehicle(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetDoorState(uint8 NewState);
     
@@ -159,7 +160,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     USBZVehicleSplineFollowingComponent* GetVehicleSplineFollowingComponent() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     USBZVehicleSplineFollowingComponent* GetSplineFollowingComponent() const override PURE_VIRTUAL(GetSplineFollowingComponent, return NULL;);

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTDecorator -FallbackName=BTDecorator
+#include "BehaviorTree/BTDecorator.h"
 #include "Templates/SubclassOf.h"
 #include "SBZBTDecorator_Evade.generated.h"
 
@@ -25,5 +25,6 @@ protected:
     
 public:
     USBZBTDecorator_Evade();
+
 };
 

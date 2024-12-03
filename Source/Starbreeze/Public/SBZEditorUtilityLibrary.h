@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "SBZEditorUtilityLibrary.generated.h"
 
 class AActor;
@@ -12,6 +12,7 @@ class STARBREEZE_API USBZEditorUtilityLibrary : public UBlueprintFunctionLibrary
     GENERATED_BODY()
 public:
     USBZEditorUtilityLibrary();
+
     UFUNCTION(BlueprintCallable)
     static bool ResetToBlueprintDefault(AActor* Actor);
     

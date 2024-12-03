@@ -1,16 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=RandomStream -FallbackName=RandomStream
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Rotator -FallbackName=Rotator
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Transform -FallbackName=Transform
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagContainer.h"
 #include "EPD3DefeatState.h"
 #include "EPD3HeistState.h"
 #include "ESBZDifficulty.h"
 #include "ESBZSecurityCompany.h"
 #include "SBZBagHandle.h"
+#include "SBZKeyItemCountChangedEvent.h"
 #include "SBZLevelScriptActorBase.h"
+#include "SBZPlayersCarryBagChangedEvent.h"
 #include "SBZLevelScriptActor.generated.h"
 
 class ASBZInstantLoot;
@@ -18,6 +21,7 @@ class ASBZPlayerCharacter;
 class ASBZPlayerState;
 class ULevelStreamingDynamic;
 class UObject;
+class USBZBagType;
 class USBZStatisticCriteriaData;
 class UWorld;
 
@@ -30,7 +34,14 @@ protected:
     int32 Seed;
     
 public:
-    ASBZLevelScriptActor();
+    ASBZLevelScriptActor(const FObjectInitializer& ObjectInitializer);
+
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void SetBagMarkerEnabledByTags(const FGameplayTagContainer& BagGameplayTagContainer, bool bEnabled);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void SetBagMarkerEnabledByBagType(const USBZBagType* BagType, bool bEnabled);
+    
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static ULevelStreamingDynamic* SBZPlaceRandomSublevelBySoftObjectPtr(UObject* WorldContextObject, const TSoftObjectPtr<UWorld> Level, const FTransform& RoomTransform, bool& bOutSuccess);
     
@@ -42,6 +53,12 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OutroSequenceStarted(const int32 OutroVariation);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintImplementableEvent)
+    void OnServerKeyItemTagAdded(FGameplayTag KeyTag);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintImplementableEvent)
+    void OnServerKeyItemCountChanged(const FSBZKeyItemCountChangedEvent& KeyItemCountChangedEventData);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnRandomSublevelPlaced();
@@ -55,7 +72,10 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void OnPreplanningAssetsTagsApplied(const TArray<FGameplayTag>& PreplanningAssetsTags);
+    void OnPreplanningAssetsTagsApplied(const FGameplayTagContainer& PreplanningTagContainer);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnPlayersCarryBagChanged(const FSBZPlayersCarryBagChangedEvent& Data);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnPlayerPickedUpBag(FSBZBagHandle BagHandle);
@@ -79,20 +99,32 @@ public:
     void OnDifficultyModifierApplied(ESBZDifficulty InDifficulty);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnBagSecured(const FSBZBagHandle& BagHandle, int32 SecuredCount, int32 TotalLeftToSecure);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnAllRandomizedRoomsPlaced();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void IntroSequenceStarted();
+    void OnAllBagSecured(int32 SecuredCount);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void IntroSequenceChanged(bool bIsStarted);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void HeistStateChanged(EPD3HeistState OldHeistState, EPD3HeistState CurrentHeistState);
     
 protected:
     UFUNCTION(BlueprintCallable)
+    void HandlePlayersCarryBagChanged(const FSBZPlayersCarryBagChangedEvent& CarryBagChangedEventData);
+    
+    UFUNCTION(BlueprintCallable)
     void HandleOutroSequenceStarted(const int32 OutroVariation);
     
     UFUNCTION(BlueprintCallable)
-    void HandleIntroSequenceStarted();
+    void HandleKeyItemCountChanged(const FSBZKeyItemCountChangedEvent& KeyItemCountChangedEventData);
+    
+    UFUNCTION(BlueprintCallable)
+    void HandleIntroSequenceChanged(bool bIsStarted);
     
     UFUNCTION(BlueprintCallable)
     void HandleBlackScreenStarted();

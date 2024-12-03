@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintAsyncActionBase -FallbackName=BlueprintAsyncActionBase
+#include "Kismet/BlueprintAsyncActionBase.h"
 #include "OnOnlineSessionSearchEventDelegateDelegate.h"
 #include "SBZOnlineSessionParams.h"
 #include "SBZSessionUpdateListCallbackProxy.generated.h"
@@ -21,6 +21,7 @@ private:
     
 public:
     USBZSessionUpdateListCallbackProxy();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static USBZSessionUpdateListCallbackProxy* SessionUpdateList(UObject* NewWorldContextObject, const FSBZOnlineSessionParams& InSearchParams);
     

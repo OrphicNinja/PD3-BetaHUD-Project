@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZRoomVolumeInterface.h"
 #include "SBZRoomActor.generated.h"
 
@@ -19,8 +19,9 @@ private:
     UBoxComponent* BoxComponent;
     
 public:
-    ASBZRoomActor();
-    
+    ASBZRoomActor(const FObjectInitializer& ObjectInitializer);
+
+
     // Fix for true pure virtual functions not being implemented
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZChallengeData.h"
 #include "SBZChallengeCategoryManager.generated.h"
 
@@ -17,6 +17,7 @@ protected:
     
 public:
     USBZChallengeCategoryManager();
+
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static USBZChallengeCategoryManager* GetChallengeCategoryManager(const UObject* WorldContextObject);
     

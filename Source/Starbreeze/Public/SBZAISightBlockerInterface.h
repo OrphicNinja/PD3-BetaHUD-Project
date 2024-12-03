@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Interface -FallbackName=Interface
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
+#include "UObject/Interface.h"
+#include "UObject/NoExportTypes.h"
 #include "SBZAISightBlockerInterface.generated.h"
 
 UINTERFACE(Blueprintable)
@@ -14,6 +14,9 @@ class STARBREEZE_API ISBZAISightBlockerInterface : public IInterface {
 public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     float GetSightModifier(const FVector& Start, const FVector& End) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    bool CanAffectStealth() const;
     
 };
 

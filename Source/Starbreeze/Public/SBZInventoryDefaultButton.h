@@ -13,6 +13,7 @@ protected:
     
 public:
     USBZInventoryDefaultButton();
+
     UFUNCTION(BlueprintCallable)
     void NativeDefaultEquipped(bool bEquipped);
     

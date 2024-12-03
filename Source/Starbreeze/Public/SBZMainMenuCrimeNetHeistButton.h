@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=SoftObjectPath -FallbackName=SoftObjectPath
+#include "UObject/NoExportTypes.h"
 #include "OnMenuButtonCustomNavigationDelegate.h"
 #include "SBZMenuButton.h"
 #include "SBZMainMenuCrimeNetHeistButton.generated.h"
@@ -29,6 +29,7 @@ protected:
     
 public:
     USBZMainMenuCrimeNetHeistButton();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnHeistDataInitialized();
     

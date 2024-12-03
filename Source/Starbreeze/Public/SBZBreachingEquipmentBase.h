@@ -1,10 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AISightTargetInterface -FallbackName=AISightTargetInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagAssetInterface -FallbackName=GameplayTagAssetInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "Perception/AISightTargetInterface.h"
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
+#include "GameplayTagContainer.h"
 #include "ESBZBreachingEquipmentState.h"
 #include "SBZAIActionInteractableInterface.h"
 #include "SBZAIAttractorInterface.h"
@@ -58,10 +59,10 @@ protected:
     ESBZBreachingEquipmentState CurrentEquipmentState;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
-    float EstimatedCompleteTime;
+    float EstimatedDurationLeft;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
-    float ProgressMade;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float UpdateEstimatedTimeInterval;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USBZAIAttractorComponent* AttractorComponent;
@@ -100,10 +101,17 @@ protected:
     TArray<ASBZRoomVolume*> RoomVolumes;
     
 public:
-    ASBZBreachingEquipmentBase();
+    ASBZBreachingEquipmentBase(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
+    UFUNCTION(BlueprintCallable)
+    void UpdateMarker(USBZMarkerDataAsset* MarkerAsset, const FVector MarkerLocation);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void SetState(ESBZBreachingEquipmentState NewState, bool bDoCosmetics);
+    
     UFUNCTION(BlueprintCallable)
     void OnRep_CurrentState(ESBZBreachingEquipmentState OldState);
     
@@ -111,7 +119,7 @@ protected:
     void Multicast_SetState(ESBZBreachingEquipmentState NewState);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void Multicast_SetEstimatedCompleteTime(float InEstimatedCompleteTime);
+    void Multicast_SetEstimatedDurationLeft(float InDurationLeft);
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -123,7 +131,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnStateChanged(ESBZBreachingEquipmentState OldState, ESBZBreachingEquipmentState NewState, bool bDoCosmetics);
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     bool HasMatchingGameplayTag(FGameplayTag TagToCheck) const override PURE_VIRTUAL(HasMatchingGameplayTag, return false;);

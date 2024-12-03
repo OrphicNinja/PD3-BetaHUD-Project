@@ -1,7 +1,8 @@
 #include "SBZLaserGadget.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=StaticMeshComponent -FallbackName=StaticMeshComponent
+#include "Components/StaticMeshComponent.h"
 
-ASBZLaserGadget::ASBZLaserGadget() {
+ASBZLaserGadget::ASBZLaserGadget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->LaserMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
 }
+
 

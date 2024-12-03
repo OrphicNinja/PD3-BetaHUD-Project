@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Int32Range -FallbackName=Int32Range
+#include "UObject/NoExportTypes.h"
 #include "Templates/SubclassOf.h"
 #include "SBZActorFilterDefinition.generated.h"
 

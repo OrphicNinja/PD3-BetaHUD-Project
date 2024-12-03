@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AISense -FallbackName=AISense
+#include "Perception/AISense.h"
 #include "SBZAITouchEvent.h"
 #include "SBZAISense_Touch.generated.h"
 
@@ -14,5 +14,6 @@ private:
     
 public:
     USBZAISense_Touch();
+
 };
 

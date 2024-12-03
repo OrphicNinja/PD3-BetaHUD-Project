@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZLongNavLinkPlatform.generated.h"
 
 class UBoxComponent;
@@ -16,6 +16,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UNavModifierComponent* NavModifierComponent;
     
-    ASBZLongNavLinkPlatform();
+    ASBZLongNavLinkPlatform(const FObjectInitializer& ObjectInitializer);
+
 };
 

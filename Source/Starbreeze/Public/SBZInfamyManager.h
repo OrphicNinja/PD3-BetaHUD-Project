@@ -19,6 +19,7 @@ public:
     FSBZOnRenownLevelChangedDelegate OnRenownLevelChangedDelegate;
     
     USBZInfamyManager();
+
 private:
     UFUNCTION(BlueprintCallable)
     void HandleOnStateMachineStateEntered(FName StateName);

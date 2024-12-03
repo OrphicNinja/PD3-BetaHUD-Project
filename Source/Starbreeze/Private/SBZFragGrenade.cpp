@@ -1,7 +1,11 @@
 #include "SBZFragGrenade.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SphereComponent -FallbackName=SphereComponent
+#include "Components/SphereComponent.h"
+#include "SBZFragGrenadeData.h"
 
-ASBZFragGrenade::ASBZFragGrenade() {
-    this->SphereCollision = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionCapsule"));
+ASBZFragGrenade::ASBZFragGrenade(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer.SetDefaultSubobjectClass<USphereComponent>(TEXT("CollisionCapsule"))) {
+    this->Tags.AddDefaulted(1);
+    this->DataType = USBZFragGrenadeData::StaticClass();
+    this->SphereCollision = (USphereComponent*)RootComponent;
 }
+
 

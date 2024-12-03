@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZLootedSignatureDelegate.h"
 #include "SBZInstantLoot.generated.h"
 
@@ -34,9 +34,10 @@ protected:
     bool bIsLooted;
     
 public:
-    ASBZInstantLoot();
+    ASBZInstantLoot(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetInteractionEnabled(bool bIsEnabled);
     

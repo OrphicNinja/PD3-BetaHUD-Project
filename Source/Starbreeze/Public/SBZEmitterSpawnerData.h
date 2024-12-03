@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Rotator -FallbackName=Rotator
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EAttachmentRule -FallbackName=EAttachmentRule
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EPSCPoolMethod -FallbackName=EPSCPoolMethod
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
+#include "Engine/EngineTypes.h"
+#include "Particles/WorldPSCPool.h"
 #include "SBZEmitterSpawnerData.generated.h"
 
 class UParticleSystem;
@@ -43,5 +43,6 @@ protected:
     
 public:
     USBZEmitterSpawnerData();
+
 };
 

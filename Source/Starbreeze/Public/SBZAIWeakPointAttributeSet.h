@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAttributeData -FallbackName=GameplayAttributeData
+#include "AttributeSet.h"
 #include "SBZAICharacterAttributeSet.h"
 #include "SBZAIWeakPointAttributeSet.generated.h"
 
@@ -23,8 +23,9 @@ protected:
     
 public:
     USBZAIWeakPointAttributeSet();
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_WeakPointHealth(const FGameplayAttributeData& OldValue);

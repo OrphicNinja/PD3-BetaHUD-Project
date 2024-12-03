@@ -23,6 +23,7 @@ private:
     
 public:
     UPD3HUDPlayerCarryWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintCosmetic, BlueprintImplementableEvent)
     void OnCarryTypePickedUp(const USBZCarryType* PickedUpCarryType);

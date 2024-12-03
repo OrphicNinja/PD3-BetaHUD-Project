@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZCodeViewerInterface.h"
 #include "SBZCodeNote.generated.h"
 
@@ -21,14 +21,15 @@ protected:
     bool bForceShowTrueCode;
     
 public:
-    ASBZCodeNote();
+    ASBZCodeNote(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_CodeToShow();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

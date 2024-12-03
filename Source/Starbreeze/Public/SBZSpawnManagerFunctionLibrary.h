@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=LatentActionInfo -FallbackName=LatentActionInfo
+#include "Kismet/BlueprintFunctionLibrary.h"
+#include "Engine/LatentActionManager.h"
 #include "ESBZSpawnRequestStatus.h"
 #include "SBZActorSpawnRequest.h"
 #include "SBZActorSpawnRequestDoneDynamicDelegateDelegate.h"
@@ -23,6 +23,7 @@ class USBZSpawnManagerFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     USBZSpawnManagerFunctionLibrary();
+
     UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo", WorldContext="WorldContextObject"))
     static void WaitForPawnRequest(const UObject* WorldContextObject, FSBZPawnSpawnRequestHandle Handle, FLatentActionInfo LatentInfo);
     

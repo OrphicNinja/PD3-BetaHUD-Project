@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTTaskNode -FallbackName=BTTaskNode
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BlackboardKeySelector -FallbackName=BlackboardKeySelector
+#include "BehaviorTree/BTTaskNode.h"
+#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "SBZBTTask_ObjectiveInteractionBase.generated.h"
 
 UCLASS(Abstract, Blueprintable)
@@ -14,5 +14,6 @@ protected:
     
 public:
     USBZBTTask_ObjectiveInteractionBase();
+
 };
 

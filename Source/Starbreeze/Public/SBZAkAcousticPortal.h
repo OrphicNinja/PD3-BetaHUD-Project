@@ -1,11 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AkAudio -ObjectName=AkAcousticPortal -FallbackName=AkAcousticPortal
+#include "AkAcousticPortal.h"
 #include "SBZAkAcousticPortal.generated.h"
 
 class AActor;
-class ASBZGate;
-class ASBZSoundEnvironment;
 
 UCLASS(Blueprintable)
 class STARBREEZE_API ASBZAkAcousticPortal : public AAkAcousticPortal {
@@ -13,15 +11,6 @@ class STARBREEZE_API ASBZAkAcousticPortal : public AAkAcousticPortal {
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<AActor*> AffectedActors;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    ASBZSoundEnvironment* FrontSoundEnvironment;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    ASBZSoundEnvironment* BackSoundEnvironment;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    ASBZGate* ConnectedGate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DebugScreenTimer;
@@ -35,11 +24,12 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bAllowStateChange;
     
-    ASBZAkAcousticPortal();
-    UFUNCTION(BlueprintCallable)
+    ASBZAkAcousticPortal(const FObjectInitializer& ObjectInitializer);
+
+    UFUNCTION(BlueprintCallable, BlueprintCosmetic)
     void OnDebugLogging();
     
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, BlueprintCosmetic)
     void OnActivateTick(bool bTick);
     
 };

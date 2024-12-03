@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AnimNotifyState -FallbackName=AnimNotifyState
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "Animation/AnimNotifies/AnimNotifyState.h"
+#include "GameplayTagContainer.h"
 #include "SBZAddGameplayTagNotifyState.generated.h"
 
 UCLASS(Blueprintable, CollapseCategories, EditInlineNew)
@@ -14,5 +14,6 @@ protected:
     
 public:
     USBZAddGameplayTagNotifyState();
+
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZChatMessage.h"
 #include "SBZChatReplicatedProxy.generated.h"
 
@@ -8,7 +8,8 @@ UCLASS(Blueprintable)
 class STARBREEZE_API ASBZChatReplicatedProxy : public AActor {
     GENERATED_BODY()
 public:
-    ASBZChatReplicatedProxy();
+    ASBZChatReplicatedProxy(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void ServerSendChatMessage(const FSBZChatMessage& Message);
     

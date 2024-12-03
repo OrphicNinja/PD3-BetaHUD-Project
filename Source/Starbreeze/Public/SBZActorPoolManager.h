@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
+#include "Components/ActorComponent.h"
+#include "Engine/EngineTypes.h"
 #include "SBZActorPool.h"
 #include "Templates/SubclassOf.h"
 #include "SBZActorPoolManager.generated.h"
@@ -23,7 +23,8 @@ protected:
     TMap<AActor*, FTimerHandle> ReturnActorTimerHandles;
     
 public:
-    USBZActorPoolManager();
+    USBZActorPoolManager(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void ReturnActor(AActor* Actor, float Delay);
     

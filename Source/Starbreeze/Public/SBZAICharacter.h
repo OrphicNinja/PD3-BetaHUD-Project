@@ -1,8 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Int32Interval -FallbackName=Int32Interval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/OnlineReplStructs.h"
+#include "GameplayTagContainer.h"
 #include "ESBZAIBehaviorCategory.h"
 #include "ESBZAICharacterVariationCategory.h"
 #include "ESBZInteractionAction.h"
@@ -22,6 +23,7 @@
 #include "Templates/SubclassOf.h"
 #include "SBZAICharacter.generated.h"
 
+class AController;
 class ASBZAIPointOfInterest;
 class ASBZAIPointOfInterestDeadBody;
 class ASBZAmmoPickup;
@@ -58,6 +60,9 @@ class STARBREEZE_API ASBZAICharacter : public ASBZAIBaseCharacter, public ISBZAI
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer BlockGoDownTagContainer;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayTagContainer StunTagContainer;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName BulletMagnetismSocketName;
@@ -155,6 +160,9 @@ protected:
     USBZOutlineAsset* TradeOutline;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USBZOutlineAsset* ReleasedOutline;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USBZOutlineAsset* ObjectiveOutline;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -189,6 +197,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FSBZTagStanceMapping> TagToStanceMappingTable;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint8 DialogAllowedBehaviorCategory;
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_TelegraphAttack, meta=(AllowPrivateAccess=true))
@@ -246,12 +257,6 @@ private:
     uint8 bHasBeenHogtied: 1;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    uint8 bIsInCover: 1;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    uint8 bWantsCoverPose: 1;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     uint8 bIsInDownOnGroundPose: 1;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -259,6 +264,15 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     uint8 bIsScramblerSignalScanSkillActive: 1;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint8 bHasGuardBehavior: 1;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    uint8 bIsHogTiedOnce: 1;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    ASBZPlayerState* LastTieHandsInstigatorPlayerState;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USBZPagerData* PagerData;
@@ -277,9 +291,6 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bCanShootDownedIfFired;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float CivilianNearRange;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UGameplayEffect> HackedGameplayEffectClass;
@@ -305,16 +316,38 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString MarkGuard;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString MarkSpecials;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString MarkEnemy;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString StatisticsMarkEnemyCamera;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString StatisticsMarkEnemyMicroCamera;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bCanBeSeenByThermalScope;
+    
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TSet<uint32> CQCSpecialistPinPullerDoneSet;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TSet<uint32> CQCSpecialistSoftAssetsDoneSet;
     
-public:
-    ASBZAICharacter();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    AController* KillInstigatorController;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FUniqueNetIdRepl> HackedByPlayerArray;
+    
+public:
+    ASBZAICharacter(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     ASBZCarriedStaticInteractionActor* SpawnLootOnCharacter(TSubclassOf<ASBZCarriedStaticInteractionActor> ClassTOSpawn);
     
@@ -397,11 +430,6 @@ private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetVariationCategory(ESBZAICharacterVariationCategory Category);
     
-public:
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void Multicast_SetInCover(bool bInIsInCover);
-    
-private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetHacked(float Duration);
     
@@ -429,10 +457,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void DisableAsObjective();
     
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void BP_OnTagReactionPlayed();
-    
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=PrimitiveComponent -FallbackName=PrimitiveComponent
+#include "Components/PrimitiveComponent.h"
 #include "SBZArrowComponent.generated.h"
 
 class AActor;
@@ -15,6 +15,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     AActor* To;
     
-    USBZArrowComponent();
+    USBZArrowComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

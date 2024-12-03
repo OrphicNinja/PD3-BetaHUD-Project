@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "ESBZOnlineCode.h"
 #include "SBZOnlineSessionParams.h"
 #include "SBZLobby.generated.h"
@@ -12,7 +12,7 @@ class ASBZLobbyBeaconClient;
 class ASBZLobbyBeaconHost;
 class USBZLobbyLocalState;
 
-UCLASS(Blueprintable, Config=Engine, DefaultConfig, NotPlaceable, Transient, Config=Starbreeze)
+UCLASS(Blueprintable, DefaultConfig, NotPlaceable, Transient, Config=Starbreeze)
 class STARBREEZE_API USBZLobby : public UObject {
     GENERATED_BODY()
 public:
@@ -45,6 +45,7 @@ private:
     
 public:
     USBZLobby();
+
 private:
     UFUNCTION(BlueprintCallable)
     void JoinLobbyComplete(ESBZOnlineCode Result);

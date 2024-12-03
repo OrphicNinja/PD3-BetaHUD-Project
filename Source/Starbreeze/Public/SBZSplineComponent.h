@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SplineComponent -FallbackName=SplineComponent
+#include "Components/SplineComponent.h"
 #include "ESBZSplineType.h"
 #include "SBZYawControl.h"
 #include "SBZSplineComponent.generated.h"
@@ -36,6 +36,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ESBZSplineType SplineType;
     
-    USBZSplineComponent();
+    USBZSplineComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Guid -FallbackName=Guid
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
 #include "ESBZItemRarity.h"
 #include "SBZInventoryBaseData.generated.h"
 
@@ -33,6 +33,9 @@ public:
     FText DescriptionText;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FText ShortDescriptionText;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText TypeClassText;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -45,6 +48,10 @@ public:
     TSoftObjectPtr<UPaperSprite> InGameDisplayIcon;
     
     USBZInventoryBaseData();
+
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FText GetFormattedDescriptionText() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetDisplayName(FText& OutDisplayName, bool& OutHasText) const;
     

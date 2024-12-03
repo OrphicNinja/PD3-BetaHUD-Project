@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "SBZMaskConfig.h"
 #include "SBZMaskPartConfigGroup.h"
 #include "SBZSuitConfig.h"
@@ -21,6 +21,7 @@ class STARBREEZE_API USBZCustomizationLibrary : public UBlueprintFunctionLibrary
     GENERATED_BODY()
 public:
     USBZCustomizationLibrary();
+
     UFUNCTION(BlueprintCallable)
     static void UseDefaultMask();
     

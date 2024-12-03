@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=PrimaryDataAsset -FallbackName=PrimaryDataAsset
+#include "Engine/DataAsset.h"
 #include "SBZAgilityRowQueryParam.h"
 #include "SBZAgilityQueryParams.generated.h"
 
@@ -18,5 +18,6 @@ public:
     TArray<FSBZAgilityRowQueryParam> RowQueryParams;
     
     USBZAgilityQueryParams();
+
 };
 

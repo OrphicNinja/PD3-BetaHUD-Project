@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Int32Interval -FallbackName=Int32Interval
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "SBZVehicleArrayElement.h"
 #include "Templates/SubclassOf.h"
 #include "SBZTrafficCivilians.generated.h"

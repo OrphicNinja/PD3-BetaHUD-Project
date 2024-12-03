@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "ESBZInventoryEquipmentType.h"
 #include "SBZEquippableConfig.h"
 #include "SBZMannequinLibrary.generated.h"
@@ -14,6 +14,7 @@ class USBZMannequinLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     USBZMannequinLibrary();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void SetMainMenuMannequinPose(const UObject* WorldContextObject, UAnimSequenceBase* Pose);
     

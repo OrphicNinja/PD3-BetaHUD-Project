@@ -20,6 +20,7 @@ protected:
     
 public:
     USBZAIOrder_Rescue();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnTargetKilled(APawn* KilledPawn);

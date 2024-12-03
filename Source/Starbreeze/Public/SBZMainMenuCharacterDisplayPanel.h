@@ -15,6 +15,7 @@ protected:
     
 public:
     USBZMainMenuCharacterDisplayPanel();
+
     UFUNCTION(BlueprintCallable)
     void SetEmpty();
     

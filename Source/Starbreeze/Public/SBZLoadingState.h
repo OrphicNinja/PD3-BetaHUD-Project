@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Info -FallbackName=Info
+#include "GameFramework/Info.h"
 #include "SBZLoadingState.generated.h"
 
 UCLASS(Blueprintable)
@@ -12,9 +12,10 @@ protected:
     float LoadingProgress;
     
 public:
-    ASBZLoadingState();
+    ASBZLoadingState(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void ServerSetLoadingProgress(float InLoadingProgress);
     

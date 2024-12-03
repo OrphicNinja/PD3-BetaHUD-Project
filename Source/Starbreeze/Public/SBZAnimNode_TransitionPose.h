@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AnimNode_Base -FallbackName=AnimNode_Base
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=PoseLink -FallbackName=PoseLink
+#include "Animation/AnimNodeBase.h"
+#include "Animation/AnimNodeBase.h"
 #include "SBZAnimNode_TransitionPose.generated.h"
 
 USTRUCT(BlueprintType)

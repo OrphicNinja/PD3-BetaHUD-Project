@@ -26,6 +26,7 @@ protected:
     
 public:
     USBZBlackMarketPaydayStoreScreen();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnVendorItemButtonFocused(USBZMenuButton* InButton, bool bIsFocused);

@@ -31,6 +31,7 @@ protected:
     
 public:
     USBZControlsReferenceWidget();
+
 private:
     UFUNCTION(BlueprintCallable)
     void NativeDisplayControlsReference(const FSBZControlsReference& InControlsReference);

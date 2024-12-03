@@ -36,6 +36,7 @@ protected:
     
 public:
     USBZMainMenuLoadoutWeaponModCategoryWidget();
+
     UFUNCTION(BlueprintCallable)
     void OnCategoryButtonSelected(const USBZModularPartSlotBase* ModSlot);
     

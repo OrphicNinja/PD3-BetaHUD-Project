@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "GameplayTagContainer.h"
 #include "EPD3MiniGameState.h"
 #include "ESBZDifficulty.h"
 #include "SBZWidgetBase.h"
@@ -37,6 +37,7 @@ protected:
     
 public:
     UPD3MiniGameWidgetBase();
+
     UFUNCTION(BlueprintCallable)
     void SetMiniGameState(EPD3MiniGameState NewState);
     

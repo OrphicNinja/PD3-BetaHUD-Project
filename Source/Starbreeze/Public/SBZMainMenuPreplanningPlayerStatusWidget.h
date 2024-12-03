@@ -49,6 +49,7 @@ protected:
     
 public:
     USBZMainMenuPreplanningPlayerStatusWidget();
+
     UFUNCTION(BlueprintCallable)
     void SetEmpty();
     

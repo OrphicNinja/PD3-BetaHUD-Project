@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "SBZSpawnStaticInteractionInterface.h"
 #include "Templates/SubclassOf.h"
 #include "SBZHiddenStaticInteractionCollection.generated.h"
@@ -41,12 +41,13 @@ protected:
     int32 ContainerAfterKeyItemIndex;
     
 public:
-    ASBZHiddenStaticInteractionCollection();
+    ASBZHiddenStaticInteractionCollection(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnKeyItemInteractionComplete(USBZBaseInteractableComponent* Interactable, USBZInteractorComponent* Interactor, bool bInIsLocallyControlled);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

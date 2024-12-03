@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "Engine/EngineTypes.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "ESBZOnlineCode.h"
 #include "OPartyHostUpdatedDelegateDelegate.h"
 #include "OnOnlineSessionEventDelegateDelegate.h"
@@ -11,7 +11,7 @@
 
 class APlayerState;
 
-UCLASS(Blueprintable, NonTransient)
+UCLASS(Blueprintable, NonTransient, Config=Engine)
 class STARBREEZE_API ASBZPartyBeaconHost : public ASBZOnlineBeaconHostObject {
     GENERATED_BODY()
 public:
@@ -45,7 +45,8 @@ private:
     FTimerHandle LeaveLobbyTimeoutTimer;
     
 public:
-    ASBZPartyBeaconHost();
+    ASBZPartyBeaconHost(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void NotifyClientLeftLobby(const FUniqueNetIdRepl& PartyMemberId);
     

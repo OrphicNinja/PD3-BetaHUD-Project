@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=ReplicationGraph -ObjectName=ReplicationGraphNode -FallbackName=ReplicationGraphNode
+#include "ReplicationGraph.h"
 #include "SBZReplicationGraphNode_InitialFrameReplication.generated.h"
 
 UCLASS(Blueprintable, NonTransient)
@@ -8,5 +8,6 @@ class STARBREEZE_API USBZReplicationGraphNode_InitialFrameReplication : public U
     GENERATED_BODY()
 public:
     USBZReplicationGraphNode_InitialFrameReplication();
+
 };
 

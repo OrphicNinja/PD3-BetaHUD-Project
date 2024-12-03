@@ -1,35 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=StaticMeshActor -FallbackName=StaticMeshActor
+#include "SBZBaseDebris.h"
 #include "SBZDebris.generated.h"
 
-class AActor;
-class UPhysicalMaterial;
-class UPrimitiveComponent;
 class UStaticMeshComponent;
 
 UCLASS(Blueprintable)
-class ASBZDebris : public AStaticMeshActor {
+class ASBZDebris : public ASBZBaseDebris {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    UStaticMeshComponent* MeshComponent;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float MinimumImpactForce;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UPhysicalMaterial* PhysicalMaterial;
-    
-    ASBZDebris();
 protected:
-    UFUNCTION(BlueprintCallable)
-    void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UStaticMeshComponent* StaticMeshComponent;
     
-    UFUNCTION(BlueprintCallable)
-    void CreateImpactPoint(const FHitResult& Hit);
-    
+public:
+    ASBZDebris(const FObjectInitializer& ObjectInitializer);
+
 };
 

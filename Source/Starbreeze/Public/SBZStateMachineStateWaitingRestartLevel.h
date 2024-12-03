@@ -19,6 +19,7 @@ private:
     
 public:
     USBZStateMachineStateWaitingRestartLevel();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnLocalPlayerStateReady();

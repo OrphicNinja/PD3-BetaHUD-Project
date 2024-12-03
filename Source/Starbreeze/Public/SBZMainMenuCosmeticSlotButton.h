@@ -19,6 +19,7 @@ protected:
     
 public:
     USBZMainMenuCosmeticSlotButton();
+
     UFUNCTION(BlueprintCallable)
     void SetItemInSlot(const USBZInventoryBaseData* InItemBaseData);
     

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ECollisionChannel -FallbackName=ECollisionChannel
+#include "Components/ActorComponent.h"
+#include "Engine/EngineTypes.h"
 #include "SBZAIVisibilityComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -36,6 +36,9 @@ protected:
     UPROPERTY(AdvancedDisplay, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxSubRaycastSideDistFromCenterCoverPoint;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bProcessMeshInstances;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bHasFinishedBuilding;
     
@@ -46,6 +49,7 @@ protected:
     bool bDynVerticesHavedBeenTransformed;
     
 public:
-    USBZAIVisibilityComponent();
+    USBZAIVisibilityComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

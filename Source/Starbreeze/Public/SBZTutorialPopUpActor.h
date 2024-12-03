@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZControlsReference.h"
 #include "SBZOnPopUpWidgetClosedDelegate.h"
 #include "SBZSideBarNotificationData.h"
@@ -23,7 +23,8 @@ protected:
     TArray<FSBZControlsReference> ControlsReferenceArray;
     
 public:
-    ASBZTutorialPopUpActor();
+    ASBZTutorialPopUpActor(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void ShowTutorialPopUp(const int32 TutorialIndex, FSBZOnPopUpWidgetClosed InTutorialPopUpClosed);
     

@@ -18,6 +18,7 @@ protected:
     
 public:
     USBZBreadCrumbButtonWidget();
+
     UFUNCTION(BlueprintCallable)
     void SetStackValue(const FName& InStackValue, const FText& InTextValue);
     

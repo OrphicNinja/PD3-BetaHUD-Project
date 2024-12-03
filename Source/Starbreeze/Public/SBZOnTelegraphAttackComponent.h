@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZOnTelegraphAttackComponent.generated.h"
 
-class ASBZAICharacter;
+class AActor;
 class ASBZEquippable;
 class ASBZWeapon;
 
@@ -13,19 +13,20 @@ class USBZOnTelegraphAttackComponent : public UActorComponent {
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    ASBZAICharacter* OwnerCharacter;
+    AActor* Owner;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ASBZWeapon* OwnerWeapon;
     
 public:
-    USBZOnTelegraphAttackComponent();
+    USBZOnTelegraphAttackComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnUnequip(const ASBZEquippable* Equippable);
     
     UFUNCTION(BlueprintCallable)
-    void OnTelegraphAttackChanged(ASBZAICharacter* Character, bool bActivated);
+    void OnTelegraphAttackChanged(AActor* InActor, bool bActivated);
     
 };
 

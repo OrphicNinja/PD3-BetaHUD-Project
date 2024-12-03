@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AnimNotify -FallbackName=AnimNotify
+#include "Animation/AnimNotifies/AnimNotify.h"
 #include "ESBZCharacterStance.h"
 #include "SBZSetCharacterStanceNofity.generated.h"
 
@@ -14,5 +14,6 @@ private:
     
 public:
     USBZSetCharacterStanceNofity();
+
 };
 

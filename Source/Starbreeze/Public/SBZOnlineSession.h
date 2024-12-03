@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=OnlineSession -FallbackName=OnlineSession
+#include "GameFramework/OnlineSession.h"
 #include "ESBZOnlineSessionRequestType.h"
 #include "ESBZServiceStatus.h"
 #include "OnInviteProcessingBeginDelegateDelegate.h"
@@ -24,6 +24,7 @@ class USBZBlockedPlayerManager;
 class USBZChat;
 class USBZFriendManager;
 class USBZGameRecordsManager;
+class USBZGameSessionManager;
 class USBZGlobalLobby;
 class USBZInvites;
 class USBZKickingManager;
@@ -40,9 +41,10 @@ class USBZOnlineVoip;
 class USBZP2PSession;
 class USBZParty;
 class USBZPartyManager;
+class USBZRecentPlayersManager;
 class USBZVotingManager;
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class STARBREEZE_API USBZOnlineSession : public UOnlineSession {
     GENERATED_BODY()
 public:
@@ -143,6 +145,12 @@ public:
     USBZPartyManager* PartyManager;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USBZGameSessionManager* GameSessionManager;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USBZRecentPlayersManager* RecentPlayersManager;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USBZOnlineSessionSettingsManager* OnlineSessionSettingManager;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -209,6 +217,7 @@ private:
     
 public:
     USBZOnlineSession();
+
     UFUNCTION(BlueprintCallable)
     void SetLocalClientReady(bool bIsClientReady);
     

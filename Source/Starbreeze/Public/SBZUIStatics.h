@@ -1,8 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=LinearColor -FallbackName=LinearColor
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=SlateFontInfo -FallbackName=SlateFontInfo
+#include "UObject/NoExportTypes.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
+#include "Engine/EngineTypes.h"
+#include "Fonts/SlateFontInfo.h"
 #include "ESBZWidgetZOrdering.h"
 #include "SBZHUDNotificationData.h"
 #include "SBZUIStatics.generated.h"
@@ -17,6 +18,7 @@ class USBZUIStatics : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     USBZUIStatics();
+
     UFUNCTION(BlueprintCallable)
     static void Stop2DSound(UPARAM(Ref) int32& SoundID);
     
@@ -41,6 +43,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsWidgetActuallyVisible(UWidget* Widget);
     
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static bool IsPauseSupported(const UObject* WorldContextObject);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsInputTypeController();
     
@@ -49,6 +54,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static USBZUIManager* GetUIManager(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static float GetTimerRemainingNonPausableTimeByHandle(const UObject* WorldContextObject, const FTimerHandle& Handle, bool bIsWorldTimer);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static uint8 GetMaxDifficultyCount();

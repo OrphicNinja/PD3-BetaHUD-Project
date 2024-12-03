@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZOnlineEventDelegateDelegate.h"
 #include "SBZInvites.generated.h"
 
@@ -15,6 +15,7 @@ public:
     FSBZOnlineEventDelegate EventUserSwitchDuringInvite;
     
     USBZInvites();
+
 private:
     UFUNCTION(BlueprintCallable)
     void HandleStateEnteredPlayTogether(FName StateName);

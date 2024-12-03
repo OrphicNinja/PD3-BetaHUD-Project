@@ -33,7 +33,8 @@ protected:
     int32 MaxInactivePlayers;
     
 public:
-    ASBZMissionGameMode();
+    ASBZMissionGameMode(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnActionPhaseStarted();

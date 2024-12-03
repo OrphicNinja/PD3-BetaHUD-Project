@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "SBZCharacterEndMissionResultData.h"
 #include "SBZEndMissionResultData.h"
 #include "SBZEquippableEndMissionResultData.h"
@@ -14,6 +14,7 @@ class USBZMissionResultLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     USBZMissionResultLibrary();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static int32 GetTotalNumberOfSecuredBags(const FSBZEndMissionResultData& Resultdata);
     
@@ -34,6 +35,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static int32 GetAllPlayersHaveKilledCount(const FSBZEndMissionResultData& ResultData);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static int32 GetAllPlayersHaveGuardKilledCount(const FSBZEndMissionResultData& ResultData);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static int32 GetAllPlayersHaveCivilianKilledCount(const FSBZEndMissionResultData& ResultData);

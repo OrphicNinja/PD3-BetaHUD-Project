@@ -17,6 +17,7 @@ private:
     
 public:
     USBZStateMachineStateGameStart();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SessionJoinStarted();
@@ -25,6 +26,9 @@ protected:
     void SessionJoined(UWorld* InWorld);
     
 private:
+    UFUNCTION(BlueprintCallable)
+    void OnPopUpKickedFromHeistClosed(FName CloseActionName);
+    
     UFUNCTION(BlueprintCallable)
     void HandleLostConnectionToPartyHost(ESBZOnlineCode ErrorCode);
     

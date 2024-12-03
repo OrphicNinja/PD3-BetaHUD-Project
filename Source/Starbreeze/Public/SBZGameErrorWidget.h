@@ -16,6 +16,7 @@ private:
     
 public:
     USBZGameErrorWidget();
+
 private:
     UFUNCTION(BlueprintCallable)
     void SetInternetConnected(ESBZServiceStatus ServiceStatus);

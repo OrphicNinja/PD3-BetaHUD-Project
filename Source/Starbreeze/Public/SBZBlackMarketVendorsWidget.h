@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Guid -FallbackName=Guid
+#include "UObject/NoExportTypes.h"
 #include "ESBZMetaRequestResult.h"
 #include "SBZActionControlReference.h"
 #include "SBZBlackMarketUIVendorData.h"
@@ -44,9 +44,6 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSBZActionControlReference PaydayStoreControlsReferenceAction;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    UPanelWidget* Panel_VendorList;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USBZControlsReferenceActionWidget* ControlsRefActionWidget_PaydayStore;
@@ -99,6 +96,7 @@ private:
     
 public:
     USBZBlackMarketVendorsWidget();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdateActiveVendor(int32 NewActiveVendorIndex);
@@ -121,7 +119,7 @@ protected:
     void OnVendorItemButtonFocused(USBZMenuButton* InButton, bool bIsFocused);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void OnVendorChanged(const FSBZBlackMarketUIVendorData& NewVendor);
+    void OnVendorChanged(const FSBZBlackMarketUIVendorData& NewVendor, bool bIsRefresh);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnVendorButtonFocused(USBZMenuButton* InButton, bool bIsFocused);
@@ -155,9 +153,6 @@ public:
 protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     USBZBlackMarketCategoryWidget* GetFirstCategoryWidget();
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    USBZBlackMarketVendorButton* GetActiveVendorButton() const;
     
 };
 

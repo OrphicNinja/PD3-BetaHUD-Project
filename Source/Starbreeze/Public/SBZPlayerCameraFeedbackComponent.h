@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
+#include "Components/ActorComponent.h"
+#include "Engine/EngineTypes.h"
 #include "SBZLocalPlayerFeedbackInfo.h"
 #include "SBZLocalPlayerFeedbackParameters.h"
 #include "Templates/SubclassOf.h"
@@ -28,7 +28,8 @@ private:
     TMap<TSubclassOf<USBZLocalPlayerFeedback>, FTimerHandle> FeedbackFirstPlayCooldowns;
     
 public:
-    USBZPlayerCameraFeedbackComponent();
+    USBZPlayerCameraFeedbackComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     bool SetFeedbackIntensity(int32 FeedbackID, float InIntensity);
     

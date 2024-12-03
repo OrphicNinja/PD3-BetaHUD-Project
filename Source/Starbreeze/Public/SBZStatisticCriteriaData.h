@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "EPD3HeistState.h"
 #include "ESBZDifficulty.h"
 #include "SBZStatisticCriteriaData.generated.h"
@@ -18,11 +18,15 @@ public:
     ESBZDifficulty LowestDifficulty;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPD3HeistState MinPassableState;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPD3HeistState MaxPassableState;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString StatisticCode;
     
     USBZStatisticCriteriaData();
+
 };
 

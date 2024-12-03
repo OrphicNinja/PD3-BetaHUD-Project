@@ -28,12 +28,13 @@ protected:
     FSBZHurtReactionData HurtReactionData;
     
 public:
-    USBZAIExplosiveWeakPoint();
+    USBZAIExplosiveWeakPoint(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_ReplicateExplosion(const FSBZExplosionResult& Result);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

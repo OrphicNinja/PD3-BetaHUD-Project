@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
+#include "UObject/NoExportTypes.h"
 #include "SBZAIUtilityDecider.h"
 #include "SBZAIUtilityDecider_AIObjectiveBase.generated.h"
 
@@ -43,6 +43,7 @@ protected:
     
 public:
     USBZAIUtilityDecider_AIObjectiveBase();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnDoorInteractionCompleted(USBZBaseInteractableComponent* InInteractable, USBZInteractorComponent* InInteractor, bool bIsLocallyControlled);

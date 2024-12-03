@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "ESBZPlacementState.h"
 #include "SBZGhostTool.generated.h"
 
@@ -23,7 +23,8 @@ protected:
     USBZOutlineAsset* OutlineAsset;
     
 public:
-    ASBZGhostTool();
+    ASBZGhostTool(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnGhostToolStateChanged(ESBZPlacementState NewPlacementState);
     

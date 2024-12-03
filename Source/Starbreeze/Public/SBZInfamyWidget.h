@@ -30,6 +30,7 @@ protected:
     
 public:
     USBZInfamyWidget();
+
 private:
     UFUNCTION(BlueprintCallable)
     void RefreshCurrentInfamyData(USBZInfamyManager* InfamyManager);

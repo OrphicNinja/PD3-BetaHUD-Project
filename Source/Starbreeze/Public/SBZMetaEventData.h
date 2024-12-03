@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=DateTime -FallbackName=DateTime
+#include "UObject/NoExportTypes.h"
 #include "ESBZMetaEventType.h"
 #include "SBZMetaEventModifierData.h"
 #include "SBZMetaEventData.generated.h"
@@ -26,6 +26,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FSBZMetaEventModifierData> Modifiers;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FString> Tags;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString EventId;
     
     STARBREEZE_API FSBZMetaEventData();
 };

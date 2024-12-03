@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "GameplayTagContainer.h"
 #include "SBZPrimaryToolWidget.h"
 #include "SBZPrimaryHackingToolWidget.generated.h"
 
@@ -9,6 +9,7 @@ class USBZPrimaryHackingToolWidget : public USBZPrimaryToolWidget {
     GENERATED_BODY()
 public:
     USBZPrimaryHackingToolWidget();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnHackinToolEquipped(bool bHasUpgrade02);
     

@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZAccelByteServerLifeCycle.generated.h"
 
 class USBZAccelByteDS;
 class USBZDsStateMachine;
 
-UCLASS(Blueprintable, Config=Engine, DefaultConfig, Config=Starbreeze)
+UCLASS(Blueprintable, DefaultConfig, Config=Starbreeze)
 class USBZAccelByteServerLifeCycle : public UObject {
     GENERATED_BODY()
 public:
@@ -34,6 +34,7 @@ private:
     
 public:
     USBZAccelByteServerLifeCycle();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnNetDriverTearDown();

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZOnlineVoip.generated.h"
 
 class USBZOnlineVoip;
@@ -10,6 +10,7 @@ class USBZOnlineVoip : public UObject {
     GENERATED_BODY()
 public:
     USBZOnlineVoip();
+
     UFUNCTION(BlueprintCallable)
     void SetCaptureDevice(const FString& DeviceName);
     

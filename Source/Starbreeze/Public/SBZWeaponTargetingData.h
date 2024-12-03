@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "Engine/DataAsset.h"
+#include "Curves/CurveFloat.h"
+#include "GameplayTagContainer.h"
 #include "SBZWeaponTargetingOverrideData.h"
 #include "SBZWeaponTargetingData.generated.h"
 
@@ -56,5 +56,6 @@ public:
     USBZTargetingHeadbobData* HeadbobData;
     
     USBZWeaponTargetingData();
+
 };
 

@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
 #include "ESBZVariationValue.h"
 #include "SBZComponentSelector.h"
 #include "SBZHelmetHideInfo.h"
@@ -53,6 +53,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FSBZHelmetHideInfo> HideInfo;
     
-    USBZHelmetPopper();
+    USBZHelmetPopper(const FObjectInitializer& ObjectInitializer);
+
 };
 

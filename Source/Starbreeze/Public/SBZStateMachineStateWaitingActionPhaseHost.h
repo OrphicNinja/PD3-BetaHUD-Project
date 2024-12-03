@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "GameFramework/OnlineReplStructs.h"
 #include "SBZStateMachineStateWaitingActionPhaseBase.h"
 #include "SBZStateMachineStateWaitingActionPhaseHost.generated.h"
 
 class APlayerState;
 class UWorld;
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class STARBREEZE_API USBZStateMachineStateWaitingActionPhaseHost : public USBZStateMachineStateWaitingActionPhaseBase {
     GENERATED_BODY()
 public:
@@ -17,6 +17,7 @@ protected:
     
 public:
     USBZStateMachineStateWaitingActionPhaseHost();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void PostLoadTransitionMap(UWorld* NewWorld);

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "ESBZMetaRequestResult.h"
 #include "OnPlayerLoadoutConfigChangedDelegate.h"
 #include "SBZOnActiveLoadoutIndexChangedDelegate.h"
@@ -20,14 +20,21 @@ public:
     FOnPlayerLoadoutConfigChanged OnLocalPlayerLoadoutChanged;
     
     USBZLoadoutManager();
+
     UFUNCTION(BlueprintCallable)
     void SetLoadoutAtIndex(int32 LoadoutIndex, const FSBZPlayerLoadoutConfig& InLoadoutConfig);
     
     UFUNCTION(BlueprintCallable)
     ESBZMetaRequestResult SetActiveLoadoutIndex(int32 ActiveLoadoutIndex);
     
+    UFUNCTION(BlueprintCallable)
+    void SendLoadoutName(const int32 LoadoutIndex, const FString& LoadoutName);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<FSBZPlayerLoadoutConfig> GetPlayerLoadouts();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FString GetLoadoutName(const int32 LoadoutIndex) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static USBZLoadoutManager* GetLoadoutManager(const UObject* WorldContextObject);

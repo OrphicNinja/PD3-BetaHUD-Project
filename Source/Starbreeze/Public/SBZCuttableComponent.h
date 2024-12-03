@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "ESBZCuttableState.h"
 #include "ESBZCuttableType.h"
 #include "ESBZCuttingMaterialTier.h"
@@ -50,9 +50,10 @@ protected:
     bool bIsCuttingBlocked;
     
 public:
-    USBZCuttableComponent();
+    USBZCuttableComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_InitialCutAngle();

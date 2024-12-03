@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "EPD3HeistState.h"
 #include "SBZAIAttractorInterface.h"
 #include "SBZRoomVolumeInterface.h"
@@ -84,9 +84,10 @@ private:
     bool bIsPlayingEffects;
     
 public:
-    ASBZLure();
+    ASBZLure(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnServerCompleteInteraction(USBZBaseInteractableComponent* Interactable, USBZInteractorComponent* Interactor, bool bInIsLocallyControlled);
@@ -109,7 +110,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void HandleHeistStateChanged(EPD3HeistState OldState, EPD3HeistState NewState);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)

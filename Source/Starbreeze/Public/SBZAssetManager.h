@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AssetManager -FallbackName=AssetManager
+#include "Engine/AssetManager.h"
 #include "SBZAssetManager.generated.h"
 
 class USBZAssetLookupData;
@@ -15,5 +15,6 @@ private:
     
 public:
     USBZAssetManager();
+
 };
 

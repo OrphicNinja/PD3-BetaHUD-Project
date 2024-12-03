@@ -1,7 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
+#include "GameFramework/Actor.h"
+#include "Engine/EngineTypes.h"
+#include "GameplayTagContainer.h"
 #include "ESBZLootProcessorState.h"
 #include "SBZBagFilter.h"
 #include "SBZBagHandle.h"
@@ -34,7 +35,16 @@ protected:
     float ProcessDuration;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bCanQueueProcessing;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USBZMarkerDataAsset* MarkerAsset;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayTag DurationPreplanningTag;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float PreplanningProcessDuration;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USBZInteractableComponent* ClaimBagInteractable;
@@ -48,6 +58,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_BagCount, meta=(AllowPrivateAccess=true))
     int32 BagCount;
     
+    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_CurrentProcessingIndex, meta=(AllowPrivateAccess=true))
+    int8 CurrentProcessingIndex;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<ASBZSabotagePoint*> SabotagePointArray;
     
@@ -55,7 +68,7 @@ protected:
     ASBZSabotagePoint* SabotagePoint;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    bool bShouldSabotageGoToRunning;
+    ESBZLootProcessorState SabotageRestoreState;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USBZBagType* BagTypeToReturn;
@@ -78,10 +91,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FSBZBagHandle CurrentBag;
     
-public:
-    ASBZLootProcessorBase();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<USBZBagType*> AllowedBagTypeArray;
     
+public:
+    ASBZLootProcessorBase(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetInteractionEnabled(bool bEnabled);
     
@@ -102,6 +119,9 @@ protected:
     void OnRep_CurrentState();
     
     UFUNCTION(BlueprintCallable)
+    void OnRep_CurrentProcessingIndex();
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_BagCount();
     
     UFUNCTION(BlueprintCallable)
@@ -116,8 +136,19 @@ protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetState(ESBZLootProcessorState NewState);
     
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetCurrentProcessingIndex(uint8 Index);
+    
+public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetProcessDuration() const;
+    
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnRunningStateChanged(ESBZLootProcessorState NewState, bool bDoCosmetics, bool bIsDedicatedServer);
+    
+    UFUNCTION(BlueprintCallable, BlueprintCosmetic, BlueprintImplementableEvent)
+    void BP_OnBagProcessed(const USBZBagType* OldBagType, const USBZBagType* NewBagType);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_BagCountUpdated(int32 NumOfBags);

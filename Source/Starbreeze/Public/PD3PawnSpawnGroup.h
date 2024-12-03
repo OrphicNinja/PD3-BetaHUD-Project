@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GameplayTagContainer.h"
 #include "SBZGroupSpawnedPawnDelegateBPDelegate.h"
 #include "SBZPawnSpawnGroup.h"
 #include "SBZPawnSpawnRequestHandle.h"
@@ -27,7 +27,8 @@ protected:
     FGameplayTagContainer AllowedPawnTypeContainer;
     
 public:
-    APD3PawnSpawnGroup();
+    APD3PawnSpawnGroup(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetEnabledForCivilians(bool bInIsEnabledForCivilians);
     
@@ -37,9 +38,6 @@ public:
 protected:
     UFUNCTION(BlueprintCallable)
     void OnSpawnFinished(const FSBZPawnSpawnRequestHandle& Handle, APawn* Pawn, ASBZPawnSpawnBase* Spawner);
-    
-    UFUNCTION(BlueprintCallable)
-    void OnSpawnDie(APawn* Pawn);
     
 };
 

@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Slate -ObjectName=InputChord -FallbackName=InputChord
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=FocusEvent -FallbackName=FocusEvent
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=Geometry -FallbackName=Geometry
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=KeyEvent -FallbackName=KeyEvent
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=PointerEvent -FallbackName=PointerEvent
-//CROSS-MODULE INCLUDE V2: -ModuleName=UMG -ObjectName=EventReply -FallbackName=EventReply
+#include "Framework/Commands/InputChord.h"
+#include "Input/Events.h"
+#include "Layout/Geometry.h"
+#include "Input/Events.h"
+#include "Input/Events.h"
+#include "Components/SlateWrapperTypes.h"
 #include "SBZWidgetBase.h"
 #include "SBZInputKeySelector.generated.h"
 
@@ -35,6 +35,7 @@ public:
     FOnIsSelectingKeyChanged OnIsSelectingKeyChanged;
     
     USBZInputKeySelector();
+
     UFUNCTION(BlueprintCallable)
     void SetSelectedKey(const FInputChord& InSelectedKey);
     

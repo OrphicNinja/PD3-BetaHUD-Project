@@ -1,32 +1,7 @@
 #include "SBZGasVolumeComponent.h"
 #include "Net/UnrealNetwork.h"
 
-bool USBZGasVolumeComponent::IsSegmentOverlapping(const FVector& Start, const FVector& End, bool bQuickOverlap, bool bUseLineTrace) const {
-    return false;
-}
-
-bool USBZGasVolumeComponent::IsLocationOverlapping(const FVector& Location) const {
-    return false;
-}
-
-bool USBZGasVolumeComponent::IsCharacterOverlapping(const ASBZCharacter* Character) const {
-    return false;
-}
-
-void USBZGasVolumeComponent::Init() {
-}
-
-void USBZGasVolumeComponent::FeedNiagaraWithParticleLocations(UNiagaraComponent* NiagaraComponent) {
-}
-
-void USBZGasVolumeComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(USBZGasVolumeComponent, ReplicatedLocalLocations);
-    DOREPLIFETIME(USBZGasVolumeComponent, ReplicatedLocalBorderLocations);
-}
-
-USBZGasVolumeComponent::USBZGasVolumeComponent() {
+USBZGasVolumeComponent::USBZGasVolumeComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->LineBatchComponent = NULL;
     this->bInitOnBeginPlay = false;
     this->Duration = 30.00f;
@@ -55,4 +30,44 @@ USBZGasVolumeComponent::USBZGasVolumeComponent() {
     this->MaxUpdateLocationPerFrame = 2;
     this->OverdrawOptimisationPoolID = 2;
 }
+
+void USBZGasVolumeComponent::OnRep_GasVolumeComponentData() {
+}
+
+void USBZGasVolumeComponent::Multicast_SetRadius_Implementation(float Radius) {
+}
+
+void USBZGasVolumeComponent::Multicast_SetDuration_Implementation(float InDuration) {
+}
+
+void USBZGasVolumeComponent::Multicast_Init_Implementation() {
+}
+
+void USBZGasVolumeComponent::Multicast_AddExpansionScalar_Implementation(float InScalar) {
+}
+
+bool USBZGasVolumeComponent::IsSegmentOverlapping(const FVector& Start, const FVector& End, bool bQuickOverlap, bool bUseLineTrace) const {
+    return false;
+}
+
+bool USBZGasVolumeComponent::IsLocationOverlapping(const FVector& Location) const {
+    return false;
+}
+
+bool USBZGasVolumeComponent::IsCharacterOverlapping(const ASBZCharacter* Character) const {
+    return false;
+}
+
+void USBZGasVolumeComponent::Init() {
+}
+
+void USBZGasVolumeComponent::FeedNiagaraWithParticleLocations(UNiagaraComponent* NiagaraComponent) {
+}
+
+void USBZGasVolumeComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(USBZGasVolumeComponent, ReplicatedData);
+}
+
 

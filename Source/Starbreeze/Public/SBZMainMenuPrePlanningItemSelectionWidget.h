@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "GameFramework/OnlineReplStructs.h"
 #include "SBZMenuStackWidget.h"
 #include "Templates/SubclassOf.h"
 #include "SBZMainMenuPrePlanningItemSelectionWidget.generated.h"
@@ -34,6 +34,7 @@ private:
     
 public:
     USBZMainMenuPrePlanningItemSelectionWidget();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdateAvailablePrePlanningAssetList();

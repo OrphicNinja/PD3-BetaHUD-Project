@@ -1,8 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
+#include "ESBZSabotagePointState.h"
 #include "SBZAIActionInteractableInterface.h"
 #include "SBZAIAttractorInterface.h"
+#include "SBZBreakableInterface.h"
 #include "SBZRoomVolumeInterface.h"
 #include "SBZSabotagePointDelegateDelegate.h"
 #include "SBZSabotagePoint.generated.h"
@@ -20,7 +22,7 @@ class USBZMarkerDataAsset;
 class USBZOutlineComponent;
 
 UCLASS(Blueprintable)
-class ASBZSabotagePoint : public AActor, public ISBZRoomVolumeInterface, public ISBZAIActionInteractableInterface, public ISBZAIAttractorInterface {
+class ASBZSabotagePoint : public AActor, public ISBZRoomVolumeInterface, public ISBZAIActionInteractableInterface, public ISBZAIAttractorInterface, public ISBZBreakableInterface {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -49,6 +51,9 @@ protected:
     USBZLifeActionSlot* LifeActionSlot;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsReplicatingForCosmetics;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsInteractable;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -63,8 +68,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 MarkerId;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_CurrentState, meta=(AllowPrivateAccess=true))
+    ESBZSabotagePointState CurrentState;
+    
 public:
-    ASBZSabotagePoint();
+    ASBZSabotagePoint(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     bool SetEnabled(bool bEnabled);
     
@@ -73,12 +84,21 @@ protected:
     void OnServerCompleteInteraction(USBZBaseInteractableComponent* Interactable, USBZInteractorComponent* Interactor, bool bInIsLocallyControlled);
     
     UFUNCTION(BlueprintCallable)
+    void OnRep_CurrentState();
+    
+    UFUNCTION(BlueprintCallable)
     void OnInteractionStateChanged(const USBZBaseInteractableComponent* Interactable, bool bNewState);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetState(ESBZSabotagePointState NewState);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void BroadcastOnSabotaged(bool bIsSabotaged);
     
+    UFUNCTION(BlueprintCallable, BlueprintCosmetic, BlueprintImplementableEvent)
+    void BP_StateChanged(ESBZSabotagePointState OldState, ESBZSabotagePointState NewState, bool bDoCosmetics);
     
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)

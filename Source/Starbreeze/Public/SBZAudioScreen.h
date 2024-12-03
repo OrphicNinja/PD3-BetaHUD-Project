@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AkAudio -ObjectName=EAkCallbackType -FallbackName=EAkCallbackType
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "EAkCallbackType.h"
+#include "GameFramework/Actor.h"
 #include "ESBZEventReactorState.h"
 #include "SBZRoomVolumeInterface.h"
 #include "SBZAudioScreen.generated.h"
@@ -25,7 +25,8 @@ protected:
     ESBZEventReactorState CurrentReactorState;
     
 public:
-    ASBZAudioScreen();
+    ASBZAudioScreen(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnAudioEventComplete(EAkCallbackType Type, UAkCallbackInfo* CallbackInfo);
@@ -39,7 +40,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_Activate();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

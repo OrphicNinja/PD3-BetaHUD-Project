@@ -19,6 +19,7 @@ private:
     
 public:
     USBZSecurityCompanyVisualsWidget();
+
     UFUNCTION(BlueprintCallable)
     void SetEmpty();
     

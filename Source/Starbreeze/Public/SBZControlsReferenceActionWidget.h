@@ -38,6 +38,7 @@ protected:
     
 public:
     USBZControlsReferenceActionWidget();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void PressControlsReferenceAction();

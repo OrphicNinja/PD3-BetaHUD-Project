@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZCharacterSlotData.h"
 #include "SBZCharacterManager.generated.h"
 
@@ -11,6 +11,7 @@ class USBZCharacterManager : public UObject {
     GENERATED_BODY()
 public:
     USBZCharacterManager();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetPreferredCharacters(TArray<FSBZCharacterSlotData>& PreferredCharacterIndexArrayOut);
     

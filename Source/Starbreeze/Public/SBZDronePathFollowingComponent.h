@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=PathFollowingComponent -FallbackName=PathFollowingComponent
+#include "Navigation/PathFollowingComponent.h"
 #include "SBZDronePathUpVectorComputationSettings.h"
 #include "SBZDronePathFollowingComponent.generated.h"
 
@@ -24,7 +24,8 @@ private:
     FSBZDronePathUpVectorComputationSettings UpVectorComputationSettings;
     
 public:
-    USBZDronePathFollowingComponent();
+    USBZDronePathFollowingComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void FollowSpline(const USplineComponent* SplineComponent, bool bIsSpawnSpline, bool bIsPathContainingLastPoint);
     

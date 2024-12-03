@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZComponentSelector.h"
 #include "SBZItemContainer.generated.h"
 
@@ -34,7 +34,8 @@ protected:
     bool bIsBeforeOtherContainer;
     
 public:
-    ASBZItemContainer();
+    ASBZItemContainer(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetInteractionEnabled(bool bEnabled);
     

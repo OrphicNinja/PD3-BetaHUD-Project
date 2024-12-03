@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EBTNodeResult -FallbackName=EBTNodeResult
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "BehaviorTree/BehaviorTreeTypes.h"
+#include "UObject/Object.h"
+#include "GameplayTagContainer.h"
 #include "ESBZAIBehaviorCategory.h"
 #include "SBZAIUtilityDecider.generated.h"
 
@@ -47,6 +47,7 @@ protected:
     
 public:
     USBZAIUtilityDecider();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnSelectedBP();
     
@@ -69,10 +70,10 @@ public:
     void OnDeselected();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void OnDeactivatedBP(TEnumAsByte<EBTNodeResult::Type> NodeResult);
+    void OnDeactivatedBP(TEnumAsByte<EBTNodeResult::Type>& NodeResult);
     
     UFUNCTION(BlueprintCallable)
-    void OnDeactivated(TEnumAsByte<EBTNodeResult::Type> NodeResult);
+    void OnDeactivated(TEnumAsByte<EBTNodeResult::Type>& NodeResult);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnActivatedBP();

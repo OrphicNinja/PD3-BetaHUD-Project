@@ -1,9 +1,27 @@
 #include "SBZPlaceableCharges.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BoxComponent -FallbackName=BoxComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ProjectileMovementComponent -FallbackName=ProjectileMovementComponent
+#include "Components/BoxComponent.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "Net/UnrealNetwork.h"
 
+ASBZPlaceableCharges::ASBZPlaceableCharges(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer.SetDefaultSubobjectClass<UBoxComponent>(TEXT("BoxComp"))) {
+    this->Tags.AddDefaulted(1);
+    this->InitialCharges = 6.00f;
+    this->Charges = 0.00f;
+    this->bRequiresRelativeLocation = false;
+    this->ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
+    this->BoxComponent = (UBoxComponent*)RootComponent;
+    this->OutOfBoundsBoxComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("OutOfBoundsBoxComp"));
+    this->CloakerBMMessage = NULL;
+    this->PlaceableChargeState = ESBZPlaceableChargeState::None;
+    this->PlacedVoiceComment = NULL;
+    this->bIsAIPlaced = false;
+    this->OutOfBoundsBoxComponent->SetupAttachment(RootComponent);
+}
+
 void ASBZPlaceableCharges::Server_SetPlaceableChargeState_Implementation(ESBZPlaceableChargeState NewPlaceableChargeState) {
+}
+
+void ASBZPlaceableCharges::Placed() {
 }
 
 
@@ -46,16 +64,4 @@ void ASBZPlaceableCharges::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
     DOREPLIFETIME(ASBZPlaceableCharges, PlaceableChargeState);
 }
 
-ASBZPlaceableCharges::ASBZPlaceableCharges() {
-    this->InitialCharges = 6.00f;
-    this->Charges = 0.00f;
-    this->bRequiresRelativeLocation = false;
-    this->ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
-    this->BoxComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComp"));
-    this->OutOfBoundsBoxComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("OutOfBoundsBoxComp"));
-    this->CloakerBMMessage = NULL;
-    this->PlaceableChargeState = ESBZPlaceableChargeState::None;
-    this->PlacedVoiceComment = NULL;
-    this->bIsAIPlaced = false;
-}
 

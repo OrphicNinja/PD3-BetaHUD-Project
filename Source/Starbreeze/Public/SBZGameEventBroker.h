@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "CharacterRevivedDelegate.h"
 #include "CharacterTakenDamageDelegate.h"
 #include "OnGameStateReceivedDelegate.h"
@@ -19,7 +19,8 @@
 #include "SBZOnPlayerBeginPlayStateDelegate.h"
 #include "SBZOnPlayerInEscapeChangedDelegate.h"
 #include "SBZOnPlayerPingedDelegate.h"
-#include "SBZOnSeasonalEventItemPickedUpDelegate.h"
+#include "SBZOnPowerUpPickedUpDelegate.h"
+#include "SBZOnPrivilegeQueriedDelegate.h"
 #include "SBZOnSharedKeyItemTagChangedDelegate.h"
 #include "SBZPlayerCallEvent.h"
 #include "SBZPlayerCallMessageEventDelegate.h"
@@ -27,6 +28,7 @@
 #include "SBZPlayerChatMessageEventDelegate.h"
 #include "SBZPlayerDefeatStateChangedData.h"
 #include "SBZPlayerDefeatStateChangedDelegateDelegate.h"
+#include "SBZPlayersCarryBagChangedDelegateDelegate.h"
 #include "SBZPreMatchAsyncLoadingCancelDelegate.h"
 #include "SBZPreMatchAsyncLoadingDoneDelegate.h"
 #include "SBZPreMatchAsyncLoadingProgressDelegate.h"
@@ -39,6 +41,9 @@ UCLASS(Blueprintable)
 class USBZGameEventBroker : public UObject {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FSBZOnPrivilegeQueried OnPrivilegeQueried;
+    
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnGameStateReceived OnGameStateReceived;
     
@@ -103,6 +108,9 @@ public:
     FSBZAICrewDefeatStateChangedDelegate OnAICrewDefeatStateChangedDelegate;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FSBZPlayersCarryBagChangedDelegate OnPlayersCarryBagChanged;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSBZGameEventSignature OnWaitActionPhaseEntered;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -136,9 +144,10 @@ public:
     FSBZOnFBIActivation OnFBIActivation;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FSBZOnSeasonalEventItemPickedUp OnSeasonalItemPickedUp;
+    FSBZOnPowerUpPickedUp OnPowerUpPickedUp;
     
     USBZGameEventBroker();
+
     UFUNCTION(BlueprintCallable)
     void SendChatMessage(const FSBZPlayerChatEvent& ChatEventData);
     

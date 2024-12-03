@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=UMG -ObjectName=ESlateVisibility -FallbackName=ESlateVisibility
+#include "Components/SlateWrapperTypes.h"
 #include "SBZButtonControlReference.h"
 #include "SBZInfoPopupText.h"
 #include "SBZInternetStatusWidget.h"
@@ -81,6 +81,7 @@ protected:
     
 public:
     USBZLoginScreenBaseWidget();
+
     UFUNCTION(BlueprintCallable)
     void WidgetReady();
     

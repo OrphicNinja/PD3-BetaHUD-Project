@@ -1,15 +1,9 @@
 #include "SBZDebris.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=StaticMeshComponent -FallbackName=StaticMeshComponent
+#include "Components/StaticMeshComponent.h"
 
-void ASBZDebris::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
+ASBZDebris::ASBZDebris(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->RootComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent0"));
+    this->StaticMeshComponent = (UStaticMeshComponent*)RootComponent;
 }
 
-void ASBZDebris::CreateImpactPoint(const FHitResult& Hit) {
-}
-
-ASBZDebris::ASBZDebris() {
-    this->MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent0"));
-    this->MinimumImpactForce = 10.00f;
-    this->PhysicalMaterial = NULL;
-}
 

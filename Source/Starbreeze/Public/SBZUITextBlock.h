@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=UMG -ObjectName=ESlateVisibility -FallbackName=ESlateVisibility
-//CROSS-MODULE INCLUDE V2: -ModuleName=UMG -ObjectName=TextBlock -FallbackName=TextBlock
+#include "Components/SlateWrapperTypes.h"
+#include "Components/TextBlock.h"
 #include "Templates/SubclassOf.h"
 #include "SBZUITextBlock.generated.h"
 
@@ -9,7 +9,7 @@ class USBZColorStyle;
 class USBZTextStyle;
 class USBZUITextScrollStyle;
 
-UCLASS(Blueprintable, Config=Engine, DefaultConfig, Config=StarbreezeUI)
+UCLASS(Blueprintable, DefaultConfig, Config=StarbreezeUI)
 class STARBREEZE_API USBZUITextBlock : public UTextBlock {
     GENERATED_BODY()
 public:
@@ -37,6 +37,7 @@ private:
     
 public:
     USBZUITextBlock();
+
     UFUNCTION(BlueprintCallable)
     void SetStyle(USBZTextStyle* InStyle);
     

@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector2D -FallbackName=Vector2D
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AnimNode_AssetPlayerBase -FallbackName=AnimNode_AssetPlayerBase
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlendFilter -FallbackName=BlendFilter
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlendSampleData -FallbackName=BlendSampleData
+#include "UObject/NoExportTypes.h"
+#include "Animation/AnimNode_AssetPlayerBase.h"
+#include "Animation/AnimationAsset.h"
+#include "Animation/AnimationAsset.h"
 #include "SBZAnimNode_PoseMatchingBlendSpacePlayer.generated.h"
 
 class UBlendSpaceBase;
@@ -40,7 +40,7 @@ public:
     bool bStartSearchFromCurrentTime;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     FBlendFilter BlendFilter;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

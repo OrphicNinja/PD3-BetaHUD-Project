@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GameplayTagContainer.h"
 #include "SBZGameplayAbility.h"
 #include "Templates/SubclassOf.h"
 #include "SBZEquippableInspectAbility.generated.h"
@@ -21,6 +21,7 @@ protected:
     
 public:
     USBZEquippableInspectAbility();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);

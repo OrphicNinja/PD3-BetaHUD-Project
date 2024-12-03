@@ -1,10 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTTaskNode -FallbackName=BTTaskNode
+#include "BehaviorTree/BTTaskNode.h"
 #include "SBZBTTask_DozerTaunt.generated.h"
 
-class UAnimMontage;
-class UBehaviorTreeComponent;
 class USBZVoiceCommentDataAsset;
 
 UCLASS(Blueprintable)
@@ -17,9 +15,6 @@ private:
     
 public:
     USBZBTTask_DozerTaunt();
-private:
-    UFUNCTION(BlueprintCallable)
-    void OnMontageEnded(UAnimMontage* Montage, bool bIsInterrupted, UBehaviorTreeComponent* OwnerComp);
-    
+
 };
 

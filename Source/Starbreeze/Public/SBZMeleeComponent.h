@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZExplosionResult.h"
 #include "SBZExplosive.h"
 #include "SBZExplosivePhysicsEffectData.h"
@@ -24,16 +24,17 @@ private:
     bool bIsFriendlyFireAllowedOverride;
     
 public:
-    USBZMeleeComponent();
+    USBZMeleeComponent(const FObjectInitializer& ObjectInitializer);
+
 private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void Multicast_SetEnforcerSolidNetIDArray(const TArray<int32>& InEnforcerSolidNetIDArray);
+    void Multicast_SetRemoveStaggeredTagNetIDArray(const TArray<int32>& InRemoveStaggeredTagNetIDArray);
     
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_ReplicateExplosion(const FSBZExplosionResult& Result);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

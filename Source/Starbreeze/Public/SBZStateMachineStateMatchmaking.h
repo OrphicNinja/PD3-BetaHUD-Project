@@ -6,7 +6,7 @@
 
 class USBZStateMachineDataMatchmaking;
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class STARBREEZE_API USBZStateMachineStateMatchmaking : public USBZClientStateMachineState {
     GENERATED_BODY()
 public:
@@ -32,6 +32,7 @@ private:
     
 public:
     USBZStateMachineStateMatchmaking();
+
 private:
     UFUNCTION(BlueprintCallable)
     void HandleSessionBecomeOutdated();

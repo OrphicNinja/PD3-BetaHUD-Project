@@ -26,6 +26,7 @@ private:
     
 public:
     USBZSideBarNotifications();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnNotificationDisplayed(FSBZSideBarNotificationData InNotificationToDisplay);

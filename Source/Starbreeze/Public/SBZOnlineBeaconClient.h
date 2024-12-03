@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
-//CROSS-MODULE INCLUDE V2: -ModuleName=OnlineSubsystemUtils -ObjectName=OnlineBeaconClient -FallbackName=OnlineBeaconClient
+#include "GameFramework/OnlineReplStructs.h"
+#include "OnlineBeaconClient.h"
 #include "ESBZKickingError.h"
 #include "ESBZKickingMode.h"
 #include "SBZChatMessage.h"
@@ -12,7 +12,8 @@ UCLASS(Blueprintable, NonTransient)
 class STARBREEZE_API ASBZOnlineBeaconClient : public AOnlineBeaconClient {
     GENERATED_BODY()
 public:
-    ASBZOnlineBeaconClient();
+    ASBZOnlineBeaconClient(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void VoteToKick(FUniqueNetIdRepl PlayerIdToKick, FUniqueNetIdRepl PlayerProposingKick, ESBZKickingMode ModeKick);
     

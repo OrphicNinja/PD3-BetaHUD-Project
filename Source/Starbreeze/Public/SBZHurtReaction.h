@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=PrimaryDataAsset -FallbackName=PrimaryDataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "Engine/DataAsset.h"
+#include "GameplayTagContainer.h"
 #include "SBZHurtReactionArray.h"
 #include "SBZHurtReactionLookup.h"
 #include "SBZHurtReactionPose.h"
@@ -27,8 +27,12 @@ public:
     TMap<FGameplayTag, FSBZHurtReactionArray> GameplayTagMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<FGameplayTag, FSBZHurtReactionArray> DamageTypeTagMap;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FSBZHurtReactionLookup> LookupArray;
     
     USBZHurtReaction();
+
 };
 

@@ -1,6 +1,7 @@
 #include "SBZAISystem.h"
 
-USBZAISystem::USBZAISystem() {
+USBZAISystem::USBZAISystem(const class FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->AirPathFinder = NULL;
 }
+
 

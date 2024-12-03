@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=NavRelevantInterface -FallbackName=NavRelevantInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=NavigationLink -FallbackName=NavigationLink
-//CROSS-MODULE INCLUDE V2: -ModuleName=NavigationSystem -ObjectName=NavLinkCustomInterface -FallbackName=NavLinkCustomInterface
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
+#include "AI/Navigation/NavRelevantInterface.h"
+#include "AI/Navigation/NavLinkDefinition.h"
+#include "NavLinkCustomInterface.h"
 #include "SBZBlockableNavlinkInterface.h"
 #include "SBZSmartLinkReachedSignatureDelegate.h"
 #include "Templates/SubclassOf.h"
@@ -64,7 +64,8 @@ private:
     UBillboardComponent* SpriteComponent;
     
 public:
-    ASBZSmartNavLink();
+    ASBZSmartNavLink(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetNavArea(TSubclassOf<UNavArea> AreaClass);
     
@@ -77,7 +78,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<UNavArea> GetNavArea() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

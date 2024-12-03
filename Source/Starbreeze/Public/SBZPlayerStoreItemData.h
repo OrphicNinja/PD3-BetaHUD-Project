@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Guid -FallbackName=Guid
+#include "UObject/NoExportTypes.h"
 #include "SBZCoinStoreItem.h"
 #include "SBZGloveStoreItem.h"
 #include "SBZHeistStoreItem.h"
@@ -12,6 +12,7 @@
 #include "SBZMaskPreconfigStoreItem.h"
 #include "SBZMaskPresetStoreItem.h"
 #include "SBZMaskVFXStoreItem.h"
+#include "SBZPlayerCharacterStoreItem.h"
 #include "SBZPreplanningAssetStoreItem.h"
 #include "SBZSprayCanStoreItem.h"
 #include "SBZSuitBaseStoreItem.h"
@@ -120,6 +121,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FGuid, FSBZVendorPermissionStoreItem> VendorPermissionMap;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<FGuid, FSBZPlayerCharacterStoreItem> PlayerCharacterMap;
     
     STARBREEZE_API FSBZPlayerStoreItemData();
 };

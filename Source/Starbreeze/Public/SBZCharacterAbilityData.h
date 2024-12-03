@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "Templates/SubclassOf.h"
 #include "SBZCharacterAbilityData.generated.h"
 
@@ -26,5 +26,6 @@ public:
     TArray<TSubclassOf<USBZGameplayAbility>> AbilityArray;
     
     USBZCharacterAbilityData();
+
 };
 

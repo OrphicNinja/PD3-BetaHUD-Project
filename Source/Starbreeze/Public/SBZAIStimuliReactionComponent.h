@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIStimulus -FallbackName=AIStimulus
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Perception/AIPerceptionTypes.h"
+#include "Components/ActorComponent.h"
 #include "SBZStimuliReaction.h"
 #include "SBZAIStimuliReactionComponent.generated.h"
 
@@ -22,13 +22,14 @@ protected:
     USBZAIOrder_Escalate* EscalationOrder;
     
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
-    USBZActionNotificationAsset* ReasonAssets[13];
+    USBZActionNotificationAsset* ReasonAssets[16];
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<ASBZCharacter*> DetectedCharacters;
     
 public:
-    USBZAIStimuliReactionComponent();
+    USBZAIStimuliReactionComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void HandleStimuli(AActor* Actor, FAIStimulus Stimulus);

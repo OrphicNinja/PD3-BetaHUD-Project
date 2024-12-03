@@ -26,6 +26,7 @@ private:
     
 public:
     USBZSkillManager();
+
     UFUNCTION(BlueprintCallable)
     bool UnequipSkills(TArray<USBZSkill*>& Skills, FSBZPlayerLoadoutConfig& PlayerLoadoutConfig);
     
@@ -61,9 +62,6 @@ public:
     
     UFUNCTION(BlueprintCallable)
     USBZSkillLine* GetPlayerSkillLine(const FName& AccelByteSkuNo);
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    int32 GetMaxSkillPoints() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetMaxProgressLevel(const USBZSkillLineData* SkillLine) const;

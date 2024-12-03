@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Vector_NetQuantize -FallbackName=Vector_NetQuantize
+#include "Engine/EngineTypes.h"
+#include "Engine/NetSerialization.h"
 #include "SBZFragGrenade.h"
 #include "SBZGasExplosionData.h"
-#include "SBZGasGrenadeTarget.h"
+#include "SBZGasVolumeTarget.h"
 #include "SBZVolumeDamageInterface.h"
 #include "SBZGasGrenade.generated.h"
 
@@ -40,12 +40,13 @@ protected:
     FSBZGasExplosionData GasExplosionRepData;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TArray<FSBZGasGrenadeTarget> TargetArray;
+    TArray<FSBZGasVolumeTarget> TargetArray;
     
 public:
-    ASBZGasGrenade();
+    ASBZGasGrenade(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_GasExplosionData();
@@ -59,7 +60,7 @@ protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_ReplicateExplosionLocation(const FVector_NetQuantize& Location);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

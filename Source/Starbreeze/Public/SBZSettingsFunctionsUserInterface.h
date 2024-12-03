@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=LinearColor -FallbackName=LinearColor
+#include "UObject/NoExportTypes.h"
 #include "SBZSettingsFunctions.h"
 #include "SBZSettingsFunctionsUserInterface.generated.h"
 
@@ -11,6 +11,7 @@ class USBZSettingsFunctionsUserInterface : public USBZSettingsFunctions {
     GENERATED_BODY()
 public:
     USBZSettingsFunctionsUserInterface();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void SetSubtitlesSize(UObject* WorldContextObject, float Size);
     

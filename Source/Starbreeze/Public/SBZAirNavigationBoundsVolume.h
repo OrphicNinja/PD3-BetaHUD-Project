@@ -1,12 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Volume -FallbackName=Volume
+#include "GameFramework/Volume.h"
 #include "SBZAirNavigationBoundsVolume.generated.h"
 
 UCLASS(Blueprintable)
 class ASBZAirNavigationBoundsVolume : public AVolume {
     GENERATED_BODY()
 public:
-    ASBZAirNavigationBoundsVolume();
+    ASBZAirNavigationBoundsVolume(const FObjectInitializer& ObjectInitializer);
+
 };
 

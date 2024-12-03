@@ -1,13 +1,14 @@
 #include "SBZMeleeComponent.h"
 
-void USBZMeleeComponent::Multicast_SetEnforcerSolidNetIDArray_Implementation(const TArray<int32>& InEnforcerSolidNetIDArray) {
+USBZMeleeComponent::USBZMeleeComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->OwningCharacter = NULL;
+    this->bIsFriendlyFireAllowedOverride = false;
+}
+
+void USBZMeleeComponent::Multicast_SetRemoveStaggeredTagNetIDArray_Implementation(const TArray<int32>& InRemoveStaggeredTagNetIDArray) {
 }
 
 void USBZMeleeComponent::Multicast_ReplicateExplosion_Implementation(const FSBZExplosionResult& Result) {
 }
 
-USBZMeleeComponent::USBZMeleeComponent() {
-    this->OwningCharacter = NULL;
-    this->bIsFriendlyFireAllowedOverride = false;
-}
 

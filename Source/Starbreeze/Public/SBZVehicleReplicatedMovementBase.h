@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Quat -FallbackName=Quat
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Vector_NetQuantize10 -FallbackName=Vector_NetQuantize10
+#include "UObject/NoExportTypes.h"
+#include "Engine/NetSerialization.h"
 #include "SBZVehicleReplicatedMovementBase.generated.h"
 
 USTRUCT(BlueprintType)
@@ -16,6 +16,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ServerTimestamp;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, NotReplicated, meta=(AllowPrivateAccess=true))
+    float PredictionCorrectionTimer;
     
     STARBREEZE_API FSBZVehicleReplicatedMovementBase();
 };

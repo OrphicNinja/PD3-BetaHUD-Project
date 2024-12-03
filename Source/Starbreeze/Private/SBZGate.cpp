@@ -1,69 +1,16 @@
 #include "SBZGate.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=NavigationSystem -ObjectName=NavArea_Null -FallbackName=NavArea_Null
+#include "Components/SceneComponent.h"
+#include "NavAreas/NavArea_Null.h"
 #include "Net/UnrealNetwork.h"
 #include "SBZAIAttractorComponent.h"
+#include "SBZAcousticPortalConnectorComponent.h"
 
-void ASBZGate::SetYaw(USceneComponent* Mesh, float InYaw) {
-}
-
-bool ASBZGate::SetState(ESBZGateState InState) {
-    return false;
-}
-
-void ASBZGate::SetAttractorInstigator(APawn* InInstigator) {
-}
-
-void ASBZGate::SetAllowPortalStateChange(bool bValue) {
-}
-
-void ASBZGate::OnStateDone() {
-}
-
-
-void ASBZGate::OnRep_State(ESBZGateState OldState) {
-}
-
-void ASBZGate::Multicast_SetState_Implementation(ESBZGateState InState) {
-}
-
-void ASBZGate::Multicast_ReplicateExplosion_Implementation(const FSBZExplosionResult& Result) {
-}
-
-void ASBZGate::Multicast_OnUnlockingLinkMoveStarted_Implementation() {
-}
-
-void ASBZGate::Multicast_OnUnlockingLinkMoveEnded_Implementation() {
-}
-
-void ASBZGate::Multicast_OnAddIgnoreMoveActor_Implementation(APawn* InPawn) {
-}
-
-void ASBZGate::Multicast_HandleAgilityTagEvent_Implementation(const FGameplayTag& TagEvent, ASBZAIBaseCharacter* AICharacterInstigator) {
-}
-
-bool ASBZGate::IsOpenForwardFromLocation(const FVector& Location) const {
-    return false;
-}
-
-bool ASBZGate::IsOpenForwardFromDirection(const FVector& Direction) const {
-    return false;
-}
-
-ASBZAkAcousticPortal* ASBZGate::GetPortalObject() const {
-    return NULL;
-}
-
-bool ASBZGate::GetAllowPortalStateChange() {
-    return false;
-}
-
-void ASBZGate::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(ASBZGate, State);
-}
-
-ASBZGate::ASBZGate() {
+ASBZGate::ASBZGate(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->bReplicates = true;
+    const FProperty* p_RemoteRole = GetClass()->FindPropertyByName("RemoteRole");
+    (*p_RemoteRole->ContainerPtrToValuePtr<TEnumAsByte<ENetRole>>(this)) = ROLE_SimulatedProxy;
+    this->RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
+    this->Tags.AddDefaulted(1);
     this->InitialState = ESBZGateState::Closed;
     this->State = ESBZGateState::Closed;
     this->LinkMoveFinishedState = ESBZGateState::Closed;
@@ -88,13 +35,13 @@ ASBZGate::ASBZGate() {
     this->CloseSound = NULL;
     this->BreachSound = NULL;
     this->UnlockSound = NULL;
-    this->PortalObject = NULL;
     this->bUseBreachPOIandSound = false;
     this->NavAreaClass = UNavArea_Null::StaticClass();
     this->ToolSnapData = NULL;
     this->SoundRange = 1500.00f;
     this->SoundRangeSlammedOpen = 1500.00f;
     this->AttractorComponent = CreateDefaultSubobject<USBZAIAttractorComponent>(TEXT("SBZAIAttractorComponent"));
+    this->AcousticPortalConnector = CreateDefaultSubobject<USBZAcousticPortalConnectorComponent>(TEXT("SBZAcousticPortalConnectorComponent"));
     this->LeftNavlinkOffset = 75.00f;
     this->RightNavlinkOffset = 75.00f;
     this->TraversableBehaviorCategoryBitmask = 14;
@@ -103,4 +50,54 @@ ASBZGate::ASBZGate() {
     this->PendingMoveIgnorePawn = NULL;
     this->bIsNavigationLinksEnabled = true;
 }
+
+void ASBZGate::SetYaw(USceneComponent* Mesh, float InYaw) {
+}
+
+bool ASBZGate::SetState(ESBZGateState InState) {
+    return false;
+}
+
+void ASBZGate::SetAttractorInstigator(APawn* InInstigator) {
+}
+
+void ASBZGate::OnStateDone() {
+}
+
+
+void ASBZGate::OnRep_State(ESBZGateState OldState) {
+}
+
+void ASBZGate::Multicast_SetState_Implementation(ESBZGateState InState) {
+}
+
+void ASBZGate::Multicast_ReplicateExplosion_Implementation(const FSBZExplosionResult& Result) {
+}
+
+void ASBZGate::Multicast_OnUnlockingLinkMoveStarted_Implementation() {
+}
+
+void ASBZGate::Multicast_OnUnlockingLinkMoveEnded_Implementation() {
+}
+
+void ASBZGate::Multicast_OnAddIgnoreMoveActor_Implementation(APawn* InPawn) {
+}
+
+void ASBZGate::Multicast_HandleAgilityTagEvent_Implementation(const FGameplayTag& TagEvent, ASBZAIBaseCharacter* AICharacterInstigator, const FVector& InstigatorLocation) {
+}
+
+bool ASBZGate::IsOpenForwardFromLocation(const FVector& Location) const {
+    return false;
+}
+
+bool ASBZGate::IsOpenForwardFromDirection(const FVector& Direction) const {
+    return false;
+}
+
+void ASBZGate::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(ASBZGate, State);
+}
+
 

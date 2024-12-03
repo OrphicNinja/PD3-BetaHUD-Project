@@ -32,9 +32,6 @@ protected:
     USBZMarkerDataAsset* DisassembleMarkerAsset;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool bPauseProgressWhileAdjustingIsNeeded;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 NumberOfNeededAdjusts;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -77,9 +74,10 @@ protected:
     float ProgressPerSecond;
     
 public:
-    ASBZPocketDrill();
+    ASBZPocketDrill(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetActive(bool bIsActive);
     
@@ -101,9 +99,6 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     void OnActivationComplete(USBZBaseInteractableComponent* Interactable, USBZInteractorComponent* Interactor, bool bInIsLocallyControlled);
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void Multicast_SetEnabled(bool bInIsEnabled);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_ReduceDuration();

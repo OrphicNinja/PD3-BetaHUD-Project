@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "GameFramework/OnlineReplStructs.h"
 #include "SBZDsStateMachineState.h"
 #include "SBZPreplanningAsset.h"
 #include "SBZStateMachineStateDsRestartLevel.generated.h"
@@ -15,6 +15,7 @@ private:
     
 public:
     USBZStateMachineStateDsRestartLevel();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnClientStartSeamlessTravel(const FUniqueNetIdRepl& PlayerId);

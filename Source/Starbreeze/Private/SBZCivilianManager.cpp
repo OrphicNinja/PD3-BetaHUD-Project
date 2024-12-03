@@ -1,15 +1,22 @@
 #include "SBZCivilianManager.h"
 
+USBZCivilianManager::USBZCivilianManager() {
+    this->Settings = NULL;
+}
+
 void USBZCivilianManager::StopStaying() {
 }
 
 void USBZCivilianManager::OnPawnSpawned(USBZSpawnManager* SpawnManager, APawn* Pawn) {
 }
 
-void USBZCivilianManager::OnPawnKilled(APawn* Pawn) {
+void USBZCivilianManager::OnHeistStateChanged(EPD3HeistState OldState, EPD3HeistState NewState) {
 }
 
-void USBZCivilianManager::OnHeistStateChanged(EPD3HeistState OldState, EPD3HeistState NewState) {
+void USBZCivilianManager::OnExitedActionPhase() {
+}
+
+void USBZCivilianManager::OnEnteredActionPhase() {
 }
 
 bool USBZCivilianManager::IsAllowedToFlee(ASBZAIController* AIController) {
@@ -20,7 +27,4 @@ USBZCivilianManager* USBZCivilianManager::Get(const UObject* WorldContextObject)
     return NULL;
 }
 
-USBZCivilianManager::USBZCivilianManager() {
-    this->Settings = NULL;
-}
 

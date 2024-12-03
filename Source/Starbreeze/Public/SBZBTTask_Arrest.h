@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTTask_BlackboardBase -FallbackName=BTTask_BlackboardBase
+#include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
 #include "ESBZArrestType.h"
 #include "SBZBTTask_Arrest.generated.h"
 
@@ -23,5 +23,6 @@ protected:
     
 public:
     USBZBTTask_Arrest();
+
 };
 

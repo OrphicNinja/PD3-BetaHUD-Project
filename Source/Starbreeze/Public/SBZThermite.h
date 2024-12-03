@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
+#include "Engine/EngineTypes.h"
+#include "GameplayTagContainer.h"
 #include "ESBZThermiteBurnState.h"
 #include "SBZBreakableInterface.h"
 #include "SBZThermiteDelegateDelegate.h"
@@ -91,9 +91,10 @@ protected:
     int32 InitialSeed;
     
 public:
-    ASBZThermite();
+    ASBZThermite(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetOutsideInterferenceActive(const bool bInActive);
     
@@ -140,7 +141,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintCosmetic, BlueprintImplementableEvent)
     void BP_OnFlashOver();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

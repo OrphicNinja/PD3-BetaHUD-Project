@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "EPD3HeistState.h"
 #include "SBZCivilianManager.generated.h"
 
@@ -27,6 +27,7 @@ protected:
     
 public:
     USBZCivilianManager();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void StopStaying();
@@ -35,10 +36,13 @@ protected:
     void OnPawnSpawned(USBZSpawnManager* SpawnManager, APawn* Pawn);
     
     UFUNCTION(BlueprintCallable)
-    void OnPawnKilled(APawn* Pawn);
+    void OnHeistStateChanged(EPD3HeistState OldState, EPD3HeistState NewState);
     
     UFUNCTION(BlueprintCallable)
-    void OnHeistStateChanged(EPD3HeistState OldState, EPD3HeistState NewState);
+    void OnExitedActionPhase();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnEnteredActionPhase();
     
 public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)

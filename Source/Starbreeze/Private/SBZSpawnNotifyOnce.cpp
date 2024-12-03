@@ -1,9 +1,11 @@
 #include "SBZSpawnNotifyOnce.h"
 
-void ASBZSpawnNotifyOnce::OnSpawnComplete(APawn* SpawnedPawn) {
-}
-
-ASBZSpawnNotifyOnce::ASBZSpawnNotifyOnce() {
+ASBZSpawnNotifyOnce::ASBZSpawnNotifyOnce(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->bNetLoadOnClient = false;
     this->Spawner = NULL;
 }
+
+void ASBZSpawnNotifyOnce::OnSpawnComplete(APawn* SpawnedPawn, ASBZCarriedStaticInteractionActor* SpawnedLoot) {
+}
+
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Plane -FallbackName=Plane
+#include "UObject/NoExportTypes.h"
 #include "SBZCableCollisionPlane.generated.h"
 
 USTRUCT(BlueprintType)

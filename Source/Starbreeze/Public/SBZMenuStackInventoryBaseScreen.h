@@ -8,6 +8,7 @@ class USBZMenuStackInventoryBaseScreen : public USBZMenuStackScreenWidgetWithTut
     GENERATED_BODY()
 public:
     USBZMenuStackInventoryBaseScreen();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnEmptySlotSelected();

@@ -28,6 +28,7 @@ protected:
     
 public:
     USBZPingWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnPingValueChanged(const int32 PingValue);

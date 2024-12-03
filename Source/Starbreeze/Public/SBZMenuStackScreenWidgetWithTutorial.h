@@ -33,6 +33,7 @@ protected:
     
 public:
     USBZMenuStackScreenWidgetWithTutorial();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void ToggleShowingTutorial();

@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EBTNodeResult -FallbackName=EBTNodeResult
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "BehaviorTree/BehaviorTreeTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/Object.h"
 #include "EPD3HeistState.h"
 #include "SBZInvestigationData.h"
 #include "SBZInvestigationRequest.h"
@@ -58,6 +58,7 @@ private:
     
 public:
     USBZAISearchManager();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnInvestigationCompleted(USBZAIOrder* Order, APawn* Pawn, TEnumAsByte<EBTNodeResult::Type> Result);

@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTTaskNode -FallbackName=BTTaskNode
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "BehaviorTree/BTTaskNode.h"
+#include "UObject/NoExportTypes.h"
+#include "GameplayTagContainer.h"
 #include "SBZBTTask_CoverInFear.generated.h"
 
 UCLASS(Blueprintable)
@@ -36,5 +36,6 @@ protected:
     
 public:
     USBZBTTask_CoverInFear();
+
 };
 

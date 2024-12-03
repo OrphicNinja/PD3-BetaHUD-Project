@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Rotator -FallbackName=Rotator
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
+#include "UObject/Object.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Curves/CurveFloat.h"
 #include "SBZLockCameraData.h"
 #include "Templates/SubclassOf.h"
 #include "SBZLocalPlayerFeedback.generated.h"
@@ -15,11 +15,12 @@ class UCameraShakeBase;
 class UForceFeedbackEffect;
 class UNiagaraComponent;
 class UNiagaraSystem;
+class USBZChromaEffectDataAsset;
 class USBZPostProcessSettingsPresetDataAsset;
 class USBZTransformCameraModifier;
 
 UCLASS(Abstract, Blueprintable)
-class USBZLocalPlayerFeedback : public UObject {
+class STARBREEZE_API USBZLocalPlayerFeedback : public UObject {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -105,6 +106,9 @@ protected:
     UForceFeedbackEffect* ForceFeedbackEffect;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USBZChromaEffectDataAsset* ChromaEffect;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString AudioRTPC;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -137,5 +141,6 @@ private:
     
 public:
     USBZLocalPlayerFeedback();
+
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EEndPlayReason -FallbackName=EEndPlayReason
+#include "Engine/EngineTypes.h"
 #include "ESBZToolState.h"
 #include "SBZEquippable.h"
 #include "Templates/SubclassOf.h"
@@ -88,9 +88,10 @@ protected:
     TSubclassOf<USBZLocalPlayerFeedback> ActiveUsingPlayerFeedback;
     
 public:
-    ASBZTool();
+    ASBZTool(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void StopAllSounds();
@@ -108,6 +109,9 @@ public:
     void Server_CallReady();
     
 protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnToolDestroyed();
+    
     UFUNCTION(BlueprintCallable)
     void OnRep_ToolState(ESBZToolState OldToolState);
     

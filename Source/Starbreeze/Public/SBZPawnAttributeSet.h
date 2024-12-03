@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=AttributeSet -FallbackName=AttributeSet
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAttributeData -FallbackName=GameplayAttributeData
+#include "AttributeSet.h"
+#include "AttributeSet.h"
 #include "SBZPawnAttributeSet.generated.h"
 
 class APawn;
@@ -14,6 +14,9 @@ class USBZPawnAttributeSet : public UAttributeSet {
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FGameplayAttributeData Damage;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FGameplayAttributeData OverHealDamageMultiplier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FGameplayAttributeData ArmorPenetration;
@@ -39,6 +42,12 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FGameplayAttributeData DealtDamageMultiplier;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_OverHeal, meta=(AllowPrivateAccess=true))
+    FGameplayAttributeData OverHeal;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FGameplayAttributeData OverHealMax;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USBZDamageType* LastDamageTypeCDO;
@@ -57,14 +66,21 @@ protected:
     
 public:
     USBZPawnAttributeSet();
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
+    UFUNCTION(BlueprintCallable)
+    void OnRep_OverHeal(const FGameplayAttributeData& OldOverHeal);
+    
     UFUNCTION(BlueprintCallable)
     void OnRep_Health(const FGameplayAttributeData& OldHealth);
     
     UFUNCTION(BlueprintCallable)
     void OnRep_Armor(const FGameplayAttributeData& OldArmor);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetOverHeal(float NewCurrentValue);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetHealth(float NewCurrentValue);

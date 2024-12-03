@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AnimGraphRuntime -ObjectName=AnimNode_SkeletalControlBase -FallbackName=AnimNode_SkeletalControlBase
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BoneReference -FallbackName=BoneReference
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EBoneControlSpace -FallbackName=EBoneControlSpace
+#include "BoneControllers/AnimNode_SkeletalControlBase.h"
+#include "UObject/NoExportTypes.h"
+#include "BoneContainer.h"
+#include "Animation/AnimTypes.h"
 #include "SBZSpeedWarpingFootDefinition.h"
 #include "SBZAnimNode_SpeedWarping.generated.h"
 

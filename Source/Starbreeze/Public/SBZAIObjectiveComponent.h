@@ -1,9 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EBTNodeResult -FallbackName=EBTNodeResult
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "BehaviorTree/BehaviorTreeTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
 #include "ColliderDataContainer.h"
 #include "EAIObjectiveInteractionTypes.h"
 #include "EAIObjectivePriority.h"
@@ -36,12 +35,6 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EAIObjectivePriority InteractionPriority;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FGameplayTagContainer HasIteractionItems;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FGameplayTagContainer DoesNotHaveIteractionItems;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<ASBZAIController> CurrentUser;
@@ -83,7 +76,8 @@ protected:
     UEnvQuery* MoveToPosEQSQuery;
     
 public:
-    USBZAIObjectiveComponent();
+    USBZAIObjectiveComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnOrderCompleted(USBZAIOrder* Order, APawn* Owner, TEnumAsByte<EBTNodeResult::Type> OrderResult);
@@ -101,7 +95,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     ASBZRoomVolume* GetCurrentRoom_Implementation() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

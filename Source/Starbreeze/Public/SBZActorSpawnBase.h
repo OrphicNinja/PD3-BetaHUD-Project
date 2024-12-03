@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Transform -FallbackName=Transform
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "SBZActorSpawnBase.generated.h"
 
 UCLASS(Abstract, Blueprintable)
@@ -22,6 +22,7 @@ protected:
     int32 NextSpawnTransformIndex;
     
 public:
-    ASBZActorSpawnBase();
+    ASBZActorSpawnBase(const FObjectInitializer& ObjectInitializer);
+
 };
 

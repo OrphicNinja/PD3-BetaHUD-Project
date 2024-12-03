@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZZiplineAudioController.generated.h"
 
 class UAkAudioEvent;
@@ -34,7 +34,8 @@ protected:
     float ZiplineSoundMultiplicationValue;
     
 public:
-    USBZZiplineAudioController();
+    USBZZiplineAudioController(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void UpdateZiplineRtpc(float ZiplineVelocity);
     

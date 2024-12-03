@@ -1,11 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AISightTargetInterface -FallbackName=AISightTargetInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Quat -FallbackName=Quat
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Rotator -FallbackName=Rotator
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EEndPlayReason -FallbackName=EEndPlayReason
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
+#include "Perception/AISightTargetInterface.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
+#include "Curves/CurveFloat.h"
+#include "GameplayTagContainer.h"
 #include "SBZArmedPawn.h"
 #include "SBZDamageDistance.h"
 #include "SBZExplosionResult.h"
@@ -17,7 +18,8 @@
 #include "SBZSentryGun.generated.h"
 
 class AActor;
-class ASBZCharacter;
+class APawn;
+class ASBZAIDrone;
 class ASBZPlayerState;
 class UAkAudioEvent;
 class UAkComponent;
@@ -68,7 +70,7 @@ protected:
     AActor* LastTarget;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    ASBZCharacter* CurrentMarkedTarget;
+    APawn* CurrentMarkedTarget;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     FVector CurrentScanTargetDirection;
@@ -160,20 +162,27 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UProjectileMovementComponent* ProjectileMovementComponent;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayTagContainer InvalidTargetTags;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_TargetLocation, meta=(AllowPrivateAccess=true))
     FVector TargetLocation;
     
-public:
-    ASBZSentryGun();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    ASBZAIDrone* HackingDrone;
     
+public:
+    ASBZSentryGun(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnServerCompleteInteraction(USBZBaseInteractableComponent* InInteractable, USBZInteractorComponent* Interactor, bool bIsLocallyControlledInteractor);
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnSentryEnemyMarked(ASBZCharacter* InCharacter, float InDuration);
+    void OnSentryEnemyMarked(APawn* InPawn, float InDuration);
     
 private:
     UFUNCTION(BlueprintCallable)
@@ -217,7 +226,7 @@ protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_Fall(const FVector& InStartLocation, const FVector& InTargetLocation, const FQuat& InTargetQuat);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

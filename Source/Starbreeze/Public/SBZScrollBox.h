@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=UMG -ObjectName=ScrollBox -FallbackName=ScrollBox
+#include "Components/ScrollBox.h"
 #include "SBZScrollBox.generated.h"
 
 class UInputComponent;
@@ -27,6 +27,7 @@ private:
     
 public:
     USBZScrollBox();
+
     UFUNCTION(BlueprintCallable)
     void SetCustomFocus(bool bInIsCustomFocus);
     

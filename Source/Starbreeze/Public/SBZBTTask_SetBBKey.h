@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTTask_BlackboardBase -FallbackName=BTTask_BlackboardBase
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BlackboardKeySelector -FallbackName=BlackboardKeySelector
+#include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
+#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "SBZBTTask_SetBBKey.generated.h"
 
 UCLASS(Blueprintable)
@@ -14,5 +14,6 @@ private:
     
 public:
     USBZBTTask_SetBBKey();
+
 };
 

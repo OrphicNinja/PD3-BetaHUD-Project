@@ -22,6 +22,7 @@ protected:
     
 public:
     USBZBaseInventoryItemVisualsWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SpriteLoaded(UPaperSprite* OutLoadedSprite);

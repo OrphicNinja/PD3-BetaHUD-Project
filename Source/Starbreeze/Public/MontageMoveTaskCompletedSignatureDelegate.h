@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EPathFollowingResult -FallbackName=EPathFollowingResult
+#include "Navigation/PathFollowingComponent.h"
 #include "MontageMoveTaskCompletedSignatureDelegate.generated.h"
 
 class AAIController;

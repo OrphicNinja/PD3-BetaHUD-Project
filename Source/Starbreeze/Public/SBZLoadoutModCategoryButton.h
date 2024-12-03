@@ -20,6 +20,7 @@ protected:
     
 public:
     USBZLoadoutModCategoryButton();
+
     UFUNCTION(BlueprintCallable)
     void SetSelectedCallback(FOnCategoryButtonSelected SelectedCallback);
     

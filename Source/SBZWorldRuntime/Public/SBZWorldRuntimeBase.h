@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/Object.h"
+#include "Templates/SubclassOf.h"
 #include "SBZWorldRuntimeBase.generated.h"
 
-class UClass;
 class USBZWorldRuntimeBase;
 
-UCLASS(Blueprintable, Config=Engine, DefaultConfig, Transient)
+UCLASS(Blueprintable, DefaultConfig, Transient, Config=Engine)
 class SBZWORLDRUNTIME_API USBZWorldRuntimeBase : public UObject {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, GlobalConfig, meta=(AllowPrivateAccess=true))
-    UClass* WorldRuntimeClass;
+    TSubclassOf<USBZWorldRuntimeBase> WorldRuntimeClass;
     
     USBZWorldRuntimeBase();
 

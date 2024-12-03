@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "UObject/NoExportTypes.h"
+#include "UObject/Object.h"
+#include "GameplayTagContainer.h"
 #include "EPD3ThreatLevel.h"
 #include "SBZAIConfigDPSData.h"
 #include "SBZAIConfigEvade.h"
@@ -15,7 +15,7 @@ class USBZAIAction;
 class USBZAIConfig;
 class USBZAIOrder;
 
-UCLASS(Blueprintable, Config=Engine, DefaultConfig, Config=Starbreeze)
+UCLASS(Blueprintable, DefaultConfig, Config=Starbreeze)
 class STARBREEZE_API USBZAIConfig : public UObject {
     GENERATED_BODY()
 public:
@@ -68,6 +68,9 @@ public:
     float TauntTimeFiredThreshold[4];
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float MeleeFireTimeAddition;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PreferredHidingRange;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -100,6 +103,7 @@ private:
     
 public:
     USBZAIConfig();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<FSBZCoverShootingPoints> GetShootingPoints() const;
     

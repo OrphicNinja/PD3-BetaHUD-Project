@@ -14,8 +14,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName ToggleSocialScreenInputName;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName SocialScreenStackValue;
+    
 public:
     USBZSocialMainMenuScreenBaseWidget();
+
     UFUNCTION(BlueprintCallable)
     void SetToggleSocialScreenInput(FName InNewToggleActionName);
     

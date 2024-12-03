@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTDecorator -FallbackName=BTDecorator
+#include "BehaviorTree/BTDecorator.h"
 #include "ESBZFireTokenType.h"
 #include "SBZBTDecorator_FirePermissionGuard.generated.h"
 
@@ -15,5 +15,6 @@ public:
     ESBZFireTokenType TokenType;
     
     UDEPRECATED_SBZBTDecorator_FirePermissionGuard();
+
 };
 

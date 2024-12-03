@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Transform -FallbackName=Transform
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "SBZEquippableConfig.h"
 #include "Templates/SubclassOf.h"
 #include "SBZStandaloneWeaponDisplay.generated.h"
@@ -45,12 +45,13 @@ protected:
     AActor* SpawnedPivotPoint;
     
 public:
-    ASBZStandaloneWeaponDisplay();
+    ASBZStandaloneWeaponDisplay(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
-    void SetupWeaponData(const USBZBaseWeaponData* InWeaponData);
+    void SetupWeaponData(const USBZBaseWeaponData* InWeaponData, bool bIsRotationReset);
     
     UFUNCTION(BlueprintCallable)
-    void SetupWeaponConfig(const FSBZEquippableConfig& InWeaponConfig);
+    void SetupWeaponConfig(const FSBZEquippableConfig& InWeaponConfig, bool bIsRotationReset);
     
     UFUNCTION(BlueprintCallable)
     void SetPart(const USBZModularPartSlotBase* Slot, const USBZEquippablePartDataAsset* PartAsset, USBZEquippablePartConfig* PartConfig);

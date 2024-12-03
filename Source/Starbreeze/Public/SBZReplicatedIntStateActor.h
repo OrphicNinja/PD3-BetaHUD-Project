@@ -1,26 +1,32 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
+#include "SBZBreakableInterface.h"
 #include "SBZReplicatedIntStateActor.generated.h"
 
 UCLASS(Blueprintable)
-class ASBZReplicatedIntStateActor : public AActor {
+class ASBZReplicatedIntStateActor : public AActor, public ISBZBreakableInterface {
     GENERATED_BODY()
 public:
-private:
+protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     int32 State;
     
+private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bClientDelayStateFromServer;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ClientStateDelay;
     
-public:
-    ASBZReplicatedIntStateActor();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<AActor*> IntStateReactorArray;
     
+public:
+    ASBZReplicatedIntStateActor(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetState(int32 NewState, bool bDoCosmetics);
     
@@ -45,5 +51,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void DecreaseState(bool bDoCosmetics);
     
+
+    // Fix for true pure virtual functions not being implemented
 };
 

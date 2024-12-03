@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=EUINavigation -FallbackName=EUINavigation
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=Margin -FallbackName=Margin
+#include "Types/SlateEnums.h"
+#include "Layout/Margin.h"
 #include "SBZHeistCollectionWithOwnership.h"
 #include "SBZMenuStackScreenWidget.h"
 #include "Templates/SubclassOf.h"
@@ -43,9 +43,6 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     TArray<USBZMainMenuCrimeNetHeistButton*> ActiveHeistButtons;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    bool bShowStoryModeButtons;
-    
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 ActiveHeistCollectionIndex;
@@ -64,6 +61,7 @@ private:
     
 public:
     USBZMainMenuCrimeNet();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdateHeistCollection();

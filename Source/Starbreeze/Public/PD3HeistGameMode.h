@@ -54,7 +54,8 @@ private:
     TSet<ASBZAICharacter*> TransporterBrutalCarrySkillAISet;
     
 public:
-    APD3HeistGameMode();
+    APD3HeistGameMode(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     USBZNegotiationManager* GetNegotiationManager() const;
     

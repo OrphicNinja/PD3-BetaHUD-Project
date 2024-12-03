@@ -1,22 +1,30 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=NavigationLink -FallbackName=NavigationLink
-//CROSS-MODULE INCLUDE V2: -ModuleName=NavigationSystem -ObjectName=NavLinkCustomInterface -FallbackName=NavLinkCustomInterface
+#include "Components/ActorComponent.h"
+#include "AI/Navigation/NavLinkDefinition.h"
+#include "NavLinkCustomInterface.h"
 #include "SBZAgilityTrajectoryInterface.h"
 #include "SBZBlockableNavlinkInterface.h"
+#include "SBZRoomConnectorInterface.h"
 #include "Templates/SubclassOf.h"
 #include "SBZGateNavLinkComponent.generated.h"
 
 class AController;
 class ASBZCharacter;
+class ASBZRoomVolume;
 class UNavArea;
 class USBZNavLinkAgilityComponent;
 
 UCLASS(Blueprintable, EditInlineNew, HideDropdown, ClassGroup=Custom, Within=SBZGate, meta=(BlueprintSpawnableComponent))
-class USBZGateNavLinkComponent : public UActorComponent, public INavLinkCustomInterface, public ISBZBlockableNavlinkInterface, public ISBZAgilityTrajectoryInterface {
+class USBZGateNavLinkComponent : public UActorComponent, public INavLinkCustomInterface, public ISBZBlockableNavlinkInterface, public ISBZAgilityTrajectoryInterface, public ISBZRoomConnectorInterface {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ASBZRoomVolume* LeftRoom;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ASBZRoomVolume* RightRoom;
+    
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FNavigationLink NavigationLink;
@@ -40,8 +48,9 @@ private:
     TSubclassOf<UNavArea> OriginalAreaClass;
     
 public:
-    USBZGateNavLinkComponent();
-    
+    USBZGateNavLinkComponent(const FObjectInitializer& ObjectInitializer);
+
+
     // Fix for true pure virtual functions not being implemented
 };
 

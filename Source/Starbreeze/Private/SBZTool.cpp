@@ -2,40 +2,13 @@
 #include "Net/UnrealNetwork.h"
 #include "SBZToolSkeletalMeshComponent.h"
 
-void ASBZTool::StopAllSounds() {
-}
-
-void ASBZTool::Server_SetToolState_Implementation(ESBZToolState NewToolState) {
-}
-
-void ASBZTool::Server_SetEquippedAnimationFullyPlayed_Implementation(bool bInIsEquippedAnimationReady) {
-}
-
-void ASBZTool::Server_CallReady_Implementation() {
-}
-
-void ASBZTool::OnRep_ToolState(ESBZToolState OldToolState) {
-}
-
-
-void ASBZTool::OnInstigatorEndPlay(AActor* Actor, TEnumAsByte<EEndPlayReason::Type> EndPlayReason) {
-}
-
-
-
-
-
-void ASBZTool::Multicast_SetToolState_Implementation(ESBZToolState NewToolState) {
-}
-
-void ASBZTool::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(ASBZTool, ToolState);
-}
-
-ASBZTool::ASBZTool() {
-    this->SkeletalMesh = CreateDefaultSubobject<USBZToolSkeletalMeshComponent>(TEXT("MeshComponent"));
+ASBZTool::ASBZTool(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer.SetDefaultSubobjectClass<USBZToolSkeletalMeshComponent>(TEXT("MeshComponent"))) {
+    this->bReplicates = true;
+    const FProperty* p_RemoteRole = GetClass()->FindPropertyByName("RemoteRole");
+    (*p_RemoteRole->ContainerPtrToValuePtr<TEnumAsByte<ENetRole>>(this)) = ROLE_SimulatedProxy;
+    this->bIsInventory = false;
+    this->bReplicateRootAttachment = true;
+    this->SkeletalMesh = (USBZToolSkeletalMeshComponent*)RootComponent;
     this->Data = NULL;
     this->ToolState = ESBZToolState::Canceled;
     this->InstigatorCharacter = NULL;
@@ -58,4 +31,38 @@ ASBZTool::ASBZTool() {
     this->ActivePlayerFeedback = NULL;
     this->ActiveUsingPlayerFeedback = NULL;
 }
+
+void ASBZTool::StopAllSounds() {
+}
+
+void ASBZTool::Server_SetToolState_Implementation(ESBZToolState NewToolState) {
+}
+
+void ASBZTool::Server_SetEquippedAnimationFullyPlayed_Implementation(bool bInIsEquippedAnimationReady) {
+}
+
+void ASBZTool::Server_CallReady_Implementation() {
+}
+
+
+void ASBZTool::OnRep_ToolState(ESBZToolState OldToolState) {
+}
+
+
+void ASBZTool::OnInstigatorEndPlay(AActor* Actor, TEnumAsByte<EEndPlayReason::Type> EndPlayReason) {
+}
+
+
+
+
+
+void ASBZTool::Multicast_SetToolState_Implementation(ESBZToolState NewToolState) {
+}
+
+void ASBZTool::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(ASBZTool, ToolState);
+}
+
 

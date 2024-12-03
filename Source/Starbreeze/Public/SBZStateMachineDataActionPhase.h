@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=SBZStateMachineBase -ObjectName=SBZStateMachineData -FallbackName=SBZStateMachineData
+#include "SBZStateMachineData.h"
 #include "SBZStateMachineDataActionPhase.generated.h"
 
 UCLASS(Blueprintable)
@@ -8,5 +8,6 @@ class STARBREEZE_API USBZStateMachineDataActionPhase : public USBZStateMachineDa
     GENERATED_BODY()
 public:
     USBZStateMachineDataActionPhase();
+
 };
 

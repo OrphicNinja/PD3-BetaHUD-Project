@@ -9,6 +9,7 @@ class UPD3HUDPagerWidget : public USBZWidgetBase {
     GENERATED_BODY()
 public:
     UPD3HUDPagerWidget();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnHeistStateChangedEvent(EPD3HeistState OldState, EPD3HeistState NewState);

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZSensorComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -12,6 +12,7 @@ protected:
     bool bIsBlueMode;
     
 public:
-    USBZSensorComponent();
+    USBZSensorComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

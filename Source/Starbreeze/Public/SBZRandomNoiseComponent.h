@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatRange -FallbackName=FloatRange
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
 #include "SBZRandomNoiseComponent.generated.h"
 
 class UAkAudioEvent;
@@ -18,7 +18,8 @@ private:
     UAkAudioEvent* NoiseToMake;
     
 public:
-    USBZRandomNoiseComponent();
+    USBZRandomNoiseComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void MulticastForceSound();
     

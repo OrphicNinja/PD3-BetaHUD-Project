@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Guid -FallbackName=Guid
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/NoExportTypes.h"
+#include "UObject/Object.h"
 #include "SBZArmorInventoryItem.h"
 #include "SBZGloveInventoryItem.h"
 #include "SBZOverkillWeaponInventoryItem.h"
@@ -49,5 +49,6 @@ public:
     TMap<FGuid, FSBZPlayerCharacterInventoryItem> PlayerCharacterInventoryItemMap;
     
     USBZPlayerInventory();
+
 };
 

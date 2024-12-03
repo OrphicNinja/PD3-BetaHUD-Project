@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "UObject/NoExportTypes.h"
+#include "Curves/CurveFloat.h"
+#include "GameplayTagContainer.h"
 #include "ESBZCookingState.h"
 #include "SBZCookingDifficultyDurations.h"
 #include "SBZCookingStationIngredientAddedDelegateDelegate.h"
@@ -130,9 +130,10 @@ protected:
     AActor* LastInteractor;
     
 public:
-    ASBZCookingStation();
+    ASBZCookingStation(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetCookingEnabled(bool bIsEnabled);
     
@@ -158,7 +159,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintCosmetic, BlueprintImplementableEvent)
     void BP_OnIngredientAdded(int32 IngredientIndex);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

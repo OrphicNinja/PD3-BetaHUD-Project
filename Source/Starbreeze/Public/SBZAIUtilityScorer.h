@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EBTNodeResult -FallbackName=EBTNodeResult
+#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "SBZAIScorer.h"
 #include "SBZAIUtilityScorer.generated.h"
 
@@ -9,6 +9,7 @@ class USBZAIUtilityScorer : public USBZAIScorer {
     GENERATED_BODY()
 public:
     USBZAIUtilityScorer();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnSelectedBP();
     
@@ -16,7 +17,7 @@ public:
     void OnDeselectedBP();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void OnDeactivatedBP(TEnumAsByte<EBTNodeResult::Type> NodeResult);
+    void OnDeactivatedBP(TEnumAsByte<EBTNodeResult::Type>& NodeResult);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnActivatedBP();

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Info -FallbackName=Info
+#include "GameFramework/Info.h"
 #include "SBZEventIndexes.h"
 #include "SBZHackableInfoActorCollection.h"
 #include "SBZLevelEventDistributorDelegate.h"
@@ -38,7 +38,8 @@ protected:
     TMap<int32, FSBZEventIndexes> EventIndexMap;
     
 public:
-    ASBZRandomLevelEventDistributor();
+    ASBZRandomLevelEventDistributor(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnHackComplete(const int32 EventIndex);

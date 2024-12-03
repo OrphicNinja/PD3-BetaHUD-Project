@@ -52,6 +52,7 @@ private:
     
 public:
     USBZMainMenuWeaponStatsWidget();
+
     UFUNCTION(BlueprintCallable)
     void SetEmpty();
     

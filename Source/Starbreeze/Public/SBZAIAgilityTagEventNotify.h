@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AnimNotify -FallbackName=AnimNotify
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "Animation/AnimNotifies/AnimNotify.h"
+#include "GameplayTagContainer.h"
 #include "SBZAIAgilityTagEventNotify.generated.h"
 
 UCLASS(Blueprintable, CollapseCategories)
@@ -14,5 +14,6 @@ protected:
     
 public:
     USBZAIAgilityTagEventNotify();
+
 };
 

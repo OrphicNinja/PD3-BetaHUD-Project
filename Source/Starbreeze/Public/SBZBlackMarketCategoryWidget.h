@@ -14,6 +14,7 @@ public:
     UWrapBox* Panel_ButtonList;
     
     USBZBlackMarketCategoryWidget();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SetStoreCategoryName(const FText& InCategoryName);
     

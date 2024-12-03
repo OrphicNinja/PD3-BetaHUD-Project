@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Volume -FallbackName=Volume
+#include "GameFramework/Volume.h"
 #include "SBZTrafficVolume.generated.h"
 
 class ASBZTrafficLights;
@@ -15,6 +15,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 TrafficLightIndex;
     
-    ASBZTrafficVolume();
+    ASBZTrafficVolume(const FObjectInitializer& ObjectInitializer);
+
 };
 

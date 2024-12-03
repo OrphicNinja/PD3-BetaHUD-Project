@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTDecorator_BlackboardBase -FallbackName=BTDecorator_BlackboardBase
+#include "BehaviorTree/Decorators/BTDecorator_BlackboardBase.h"
 #include "ESBZFocusPriority.h"
 #include "SBZBTDecorator_Focus.generated.h"
 
@@ -17,5 +17,6 @@ protected:
     
 public:
     USBZBTDecorator_Focus();
+
 };
 

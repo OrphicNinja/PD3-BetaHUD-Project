@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
+#include "Engine/DataAsset.h"
+#include "Curves/CurveFloat.h"
 #include "SBZHeightTransitionCameraSettings.h"
 #include "SBZLockCameraData.h"
 #include "SBZAgilitySlideParams.generated.h"
@@ -74,5 +74,6 @@ public:
     float CancelingBackInputAlpha;
     
     USBZAgilitySlideParams();
+
 };
 

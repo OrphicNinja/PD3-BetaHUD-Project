@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "Templates/SubclassOf.h"
 #include "SBZModularPartApplier.generated.h"
 
@@ -12,6 +12,7 @@ class USBZModularPartApplier : public UObject {
     GENERATED_BODY()
 public:
     USBZModularPartApplier();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool NeedConfig() const;
     

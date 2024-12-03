@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZOnInitializedItemProgressionDoneDelegate.h"
 #include "SBZItemProgressionManager.generated.h"
 
@@ -20,6 +20,7 @@ private:
     
 public:
     USBZItemProgressionManager();
+
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static USBZItemProgressionManager* GetItemProgressionManager(const UObject* WorldContextObject);
     

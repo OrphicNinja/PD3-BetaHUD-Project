@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=PathFollowingComponent -FallbackName=PathFollowingComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatRange -FallbackName=FloatRange
+#include "Navigation/PathFollowingComponent.h"
+#include "UObject/NoExportTypes.h"
 #include "SBZAgentPathFollowingComponent.generated.h"
 
 class ASBZAIBaseCharacter;
@@ -59,6 +59,7 @@ protected:
     UClass* CachedCurrentNavAreaClass;
     
 public:
-    USBZAgentPathFollowingComponent();
+    USBZAgentPathFollowingComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

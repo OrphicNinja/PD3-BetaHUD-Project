@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AnimNotify -FallbackName=AnimNotify
+#include "UObject/NoExportTypes.h"
+#include "Animation/AnimNotifies/AnimNotify.h"
 #include "ESBZFootContactIntensity.h"
 #include "ESBZFootType.h"
 #include "SBZFootContactNotify.generated.h"
@@ -25,5 +25,6 @@ private:
     
 public:
     USBZFootContactNotify();
+
 };
 

@@ -4,9 +4,10 @@
 #include "SBZPlaceableArmorData.generated.h"
 
 UCLASS(Blueprintable)
-class USBZPlaceableArmorData : public USBZPlaceableData {
+class STARBREEZE_API USBZPlaceableArmorData : public USBZPlaceableData {
     GENERATED_BODY()
 public:
     USBZPlaceableArmorData();
+
 };
 

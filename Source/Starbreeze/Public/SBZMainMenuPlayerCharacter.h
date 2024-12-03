@@ -1,16 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
+#include "ESBZMainMenuAnimationName.h"
 #include "PD3PlayerLoadout.h"
+#include "SBZEquippableConfig.h"
 #include "SBZMaskConfig.h"
 #include "SBZMainMenuPlayerCharacter.generated.h"
 
 class ASBZEquippable;
+class ASBZMainMenuPlayerCharacter;
 class UObject;
 class USBZCharacterComponent;
 class USBZMaskData;
 class USBZModularCharacterComponent;
 class USBZPlayerCharacterData;
+class UWidgetComponent;
 
 UCLASS(Blueprintable)
 class STARBREEZE_API ASBZMainMenuPlayerCharacter : public AActor {
@@ -40,6 +44,9 @@ private:
     USBZPlayerCharacterData* PlayerCharacterData;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FSBZEquippableConfig AsyncEquippableConfig;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UObject*> CachedWeaponObjects;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -48,8 +55,21 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FPD3PlayerLoadout CachedLoadout;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<ASBZMainMenuPlayerCharacter*> DuplicateArray;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ESBZMainMenuAnimationName StartMontageName;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 PreferredEquippableIndex;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UWidgetComponent* NameplateWidgetComponent;
+    
 public:
-    ASBZMainMenuPlayerCharacter();
+    ASBZMainMenuPlayerCharacter(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void DestroyEquippable();
     

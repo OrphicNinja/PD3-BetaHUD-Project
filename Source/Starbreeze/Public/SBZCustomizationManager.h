@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Rotator -FallbackName=Rotator
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "SBZMaskConfig.h"
 #include "Templates/SubclassOf.h"
 #include "SBZCustomizationManager.generated.h"
@@ -32,10 +32,16 @@ public:
     TSubclassOf<USBZCustomizationRotateComponent> MaskRotationComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FVector SpawnOffsetForCameraFromMask;
+    FVector CenteredSpawnOffsetForCameraFromMask;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FRotator StartRotationForMask;
+    FRotator CenteredStartRotationForMask;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FVector RightSidedSpawnOffsetForCameraFromMask;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FRotator RightSidedStartRotationForMask;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> MannequinToSpawn;
@@ -74,10 +80,14 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ASBZMainMenuPlayerCharacter* Mannequin;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FSBZMaskConfig MaskConfig;
+    
 public:
-    ASBZCustomizationManager();
+    ASBZCustomizationManager(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
-    void SpawnGlobalMaskWithConfig(const FSBZMaskConfig& MaskConfig);
+    void SpawnGlobalMaskWithConfig(const FSBZMaskConfig& InMaskConfig);
     
     UFUNCTION(BlueprintCallable)
     void SpawnGlobalMask(const USBZMaskData* MaskData);
@@ -86,7 +96,7 @@ public:
     void ShowMainMenuMannequin();
     
     UFUNCTION(BlueprintCallable)
-    void ShowGlobalMask();
+    void ShowGlobalMask(const bool InCentered);
     
     UFUNCTION(BlueprintCallable)
     void ShowCustomizableWeapon();

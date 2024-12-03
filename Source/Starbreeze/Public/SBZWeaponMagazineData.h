@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
+#include "UObject/NoExportTypes.h"
 #include "ESBZWeaponAmmoVisibilityType.h"
 #include "SBZEquippablePartCustomData.h"
 #include "SBZWeaponMagazineData.generated.h"
 
 UCLASS(Blueprintable)
-class USBZWeaponMagazineData : public USBZEquippablePartCustomData {
+class STARBREEZE_API USBZWeaponMagazineData : public USBZEquippablePartCustomData {
     GENERATED_BODY()
 public:
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -31,5 +31,6 @@ public:
     ESBZWeaponAmmoVisibilityType AmmoVisibilityType;
     
     USBZWeaponMagazineData();
+
 };
 

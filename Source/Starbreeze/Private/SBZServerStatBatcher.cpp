@@ -1,9 +1,9 @@
 #include "SBZServerStatBatcher.h"
 
+USBZServerStatBatcher::USBZServerStatBatcher() {
+}
+
 void USBZServerStatBatcher::HandleMissionEnd(const int32 OutroVariation) {
 }
 
-USBZServerStatBatcher::USBZServerStatBatcher() {
-    this->WorldContext = NULL;
-}
 

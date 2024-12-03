@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIDataProvider -FallbackName=AIDataProvider
+#include "DataProviders/AIDataProvider.h"
 #include "SBZAIDataProvider_PrimaryIsEquipped.generated.h"
 
 UCLASS(Blueprintable, CollapseCategories, EditInlineNew)
@@ -11,5 +11,6 @@ public:
     bool bBoolValue;
     
     USBZAIDataProvider_PrimaryIsEquipped();
+
 };
 

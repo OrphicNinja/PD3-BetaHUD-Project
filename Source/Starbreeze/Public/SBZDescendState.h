@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZAerialVehicleState.h"
 #include "SBZDescendState.generated.h"
 
@@ -16,7 +16,8 @@ private:
     
 public:
     USBZDescendState();
-    
+
+
     // Fix for true pure virtual functions not being implemented
 };
 

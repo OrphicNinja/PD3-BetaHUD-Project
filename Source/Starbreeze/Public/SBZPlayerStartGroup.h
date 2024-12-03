@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZOnSpawnGroupChosenDelegate.h"
 #include "SBZPlayerStartGroup.generated.h"
 
@@ -19,6 +19,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float Weight;
     
-    ASBZPlayerStartGroup();
+    ASBZPlayerStartGroup(const FObjectInitializer& ObjectInitializer);
+
 };
 

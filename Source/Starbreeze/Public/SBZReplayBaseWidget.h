@@ -35,6 +35,7 @@ private:
     
 public:
     USBZReplayBaseWidget();
+
     UFUNCTION(BlueprintCallable)
     bool StopReplay();
     

@@ -36,6 +36,7 @@ private:
     
 public:
     UPD3KeyItemContainer();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnSharedKeyItemCountChanged(const FSBZSharedKeyItemTagChangedEvent& SharedKeyItemTagChangedEventData);

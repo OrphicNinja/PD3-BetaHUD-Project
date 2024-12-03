@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "EPD3HeistState.h"
 #include "SBZRagdollInfo.h"
 #include "SBZRagdollSyncData.h"
@@ -15,9 +15,10 @@ private:
     TArray<FSBZRagdollInfo> Ragdolls;
     
 public:
-    USBZRagdollSyncManager();
+    USBZRagdollSyncManager(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void OnHeistStateChanged(EPD3HeistState OldState, EPD3HeistState NewState);
     

@@ -1,10 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAttributeData -FallbackName=GameplayAttributeData
+#include "AttributeSet.h"
+#include "SBZArmorChunkTypeData.h"
 #include "SBZCharacterAttributeSet.h"
+#include "SBZWeightTagData.h"
 #include "SBZPlayerAttributeSet.generated.h"
 
-class USBZArmorData;
 class USBZPlayerAbilityData;
 
 UCLASS(Blueprintable)
@@ -177,9 +178,6 @@ public:
     FGameplayAttributeData ArmorTrauma;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FGameplayAttributeData ArmorTraumaScale;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayAttributeData LoadoutWeight;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -209,17 +207,30 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayAttributeData MinRespawnEquippableAmmo;
     
-protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    USBZArmorData* ArmorData;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_HealthTrauma, meta=(AllowPrivateAccess=true))
+    FGameplayAttributeData HealthTrauma;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayAttributeData MaxConsumableCount;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_ConsumableCount, meta=(AllowPrivateAccess=true))
+    FGameplayAttributeData ConsumableCount;
+    
+protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USBZPlayerAbilityData* AbilityData;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FSBZWeightTagData> WeightTagDataArray;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FSBZArmorChunkTypeData> ArmorChunkTypeDataArray;
+    
 public:
     USBZPlayerAttributeSet();
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_TertiaryToolPlaceableAmmoInventory(const FGameplayAttributeData& OldData);
@@ -276,10 +287,16 @@ protected:
     void OnRep_PrimaryEquippableAmmoInventory(const FGameplayAttributeData& OldData);
     
     UFUNCTION(BlueprintCallable)
+    void OnRep_HealthTrauma(const FGameplayAttributeData& OldArmorTrauma);
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_DownedCount(const FGameplayAttributeData& OldDownedCount);
     
     UFUNCTION(BlueprintCallable)
     void OnRep_Dodge(const FGameplayAttributeData& OldDodge);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_ConsumableCount(const FGameplayAttributeData& OldConsumableCount);
     
     UFUNCTION(BlueprintCallable)
     void OnRep_ArmorTrauma(const FGameplayAttributeData& OldArmorTrauma);
@@ -342,10 +359,16 @@ protected:
     void Multicast_SetPrimaryEquippableAmmoInventory(float NewCurrentValue);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetHealthTrauma(float NewCurrentValue);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetDownedCount(float NewCurrentValue);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetDodge(float NewCurrentValue);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetConsumableCount(float NewCurrentValue);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetArmorTrauma(float NewCurrentValue);

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AnimInstance -FallbackName=AnimInstance
+#include "Animation/AnimInstance.h"
 #include "SBZEquippableAnimation.generated.h"
 
 class ASBZEquippable;
@@ -23,5 +23,6 @@ protected:
     
 public:
     USBZEquippableAnimation();
+
 };
 

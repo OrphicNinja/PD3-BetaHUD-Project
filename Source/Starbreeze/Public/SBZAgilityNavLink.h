@@ -22,9 +22,17 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USBZNavLinkAgilityComponent* NavLinkAgilityComponent;
     
-public:
-    ASBZAgilityNavLink();
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsHeistStateDependant;
     
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint16 AllowedHeistStates;
+    
+public:
+    ASBZAgilityNavLink(const FObjectInitializer& ObjectInitializer);
+
+
     // Fix for true pure virtual functions not being implemented
 };
 

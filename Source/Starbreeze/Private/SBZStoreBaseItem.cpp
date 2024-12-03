@@ -18,5 +18,7 @@ FSBZStoreBaseItem::FSBZStoreBaseItem() {
     this->bIsPremiumItem = false;
     this->bIsInexhaustibleItem = false;
     this->ItemCategory = ESBZItemCategory::PrimaryWeapon;
+    this->bIsMaskOfTheWeek = false;
+    this->bReportsTelemetry = false;
 }
 

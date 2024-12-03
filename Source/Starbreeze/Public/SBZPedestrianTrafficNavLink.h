@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "EPD3HeistState.h"
 #include "SBZSmartNavLink.h"
 #include "SBZPedestrianTrafficNavLink.generated.h"
@@ -37,7 +37,8 @@ protected:
     TArray<ASBZAIBaseCharacter*> CrossingCharacters;
     
 public:
-    ASBZPedestrianTrafficNavLink();
+    ASBZPedestrianTrafficNavLink(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetTrafficAllowed(bool bAllowed);
     

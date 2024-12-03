@@ -1,9 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZCharacterComponent.generated.h"
 
-class USkeletalMesh;
 class USkeletalMeshComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -15,10 +14,7 @@ private:
     USkeletalMeshComponent* MeshComponent;
     
 public:
-    USBZCharacterComponent();
-protected:
-    UFUNCTION(BlueprintCallable)
-    void NativeOnSkeletalMeshLoaded(USkeletalMesh* NewSkeletalMesh);
-    
+    USBZCharacterComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

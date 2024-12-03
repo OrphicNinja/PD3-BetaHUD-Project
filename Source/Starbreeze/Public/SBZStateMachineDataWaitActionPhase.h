@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=SBZStateMachineBase -ObjectName=SBZStateMachineData -FallbackName=SBZStateMachineData
+#include "SBZStateMachineData.h"
 #include "SBZStateMachineDataWaitActionPhase.generated.h"
 
 UCLASS(Blueprintable)
@@ -11,5 +11,6 @@ public:
     int32 TargetLevelIdx;
     
     USBZStateMachineDataWaitActionPhase();
+
 };
 

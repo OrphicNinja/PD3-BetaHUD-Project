@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
+#include "Engine/EngineTypes.h"
 #include "ESBZDecorativeSmokeState.h"
 #include "SBZDecorativeSmokeGrenade.generated.h"
 
@@ -38,9 +38,10 @@ protected:
     ESBZDecorativeSmokeState SmokeState;
     
 public:
-    ASBZDecorativeSmokeGrenade();
+    ASBZDecorativeSmokeGrenade(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnSpawned();
     

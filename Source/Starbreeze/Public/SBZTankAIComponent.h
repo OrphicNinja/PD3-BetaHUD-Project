@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "UObject/NoExportTypes.h"
+#include "GameplayTagContainer.h"
 #include "SBZArmorVariationInfo.h"
 #include "SBZComponentSelector.h"
 #include "SBZSpecialAIComponent.h"
@@ -66,10 +66,11 @@ private:
     TArray<FSBZArmorVariationInfo> ArmorInfo;
     
 public:
-    USBZTankAIComponent();
+    USBZTankAIComponent(const FObjectInitializer& ObjectInitializer);
+
 private:
     UFUNCTION(BlueprintCallable)
-    void OnFiringTagChanged(const FGameplayTag InTag, int32 TagCount);
+    void OnAttackTagChanged(const FGameplayTag InTag, int32 TagCount);
     
 };
 

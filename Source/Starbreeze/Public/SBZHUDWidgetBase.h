@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GameplayTagContainer.h"
 #include "SBZWidgetBase.h"
 #include "SBZHUDWidgetBase.generated.h"
 
@@ -17,6 +17,7 @@ protected:
     
 public:
     USBZHUDWidgetBase();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnWidgetRequiresUITagsChanged(bool bInHasRequiredTags);

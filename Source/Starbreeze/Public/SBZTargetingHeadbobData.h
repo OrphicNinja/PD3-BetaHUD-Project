@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "SBZTargetingHeadbobData.generated.h"
 
 class UCurveVector;
@@ -22,5 +22,6 @@ public:
     float BreathingAmplitude;
     
     USBZTargetingHeadbobData();
+
 };
 

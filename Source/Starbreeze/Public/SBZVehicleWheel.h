@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=PhysXVehicles -ObjectName=VehicleWheel -FallbackName=VehicleWheel
+#include "VehicleWheel.h"
 #include "SBZVehicleWheel.generated.h"
 
 UCLASS(Blueprintable)
@@ -11,5 +11,6 @@ public:
     bool bDriven;
     
     USBZVehicleWheel();
+
 };
 

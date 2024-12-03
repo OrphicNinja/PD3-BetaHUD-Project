@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
+#include "UObject/NoExportTypes.h"
 #include "SBZDamageDistance.h"
 #include "SBZWeaponFireData.h"
 #include "SBZPlayerWeaponFireData.generated.h"
@@ -42,6 +42,7 @@ public:
     USBZWeaponMuzzleData* MuzzleData;
     
     USBZPlayerWeaponFireData();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetDamageOnEachDistance(float MinDistance, float MaxDistance, float DistanceStep, TArray<float>& OutDamageArray) const;
     

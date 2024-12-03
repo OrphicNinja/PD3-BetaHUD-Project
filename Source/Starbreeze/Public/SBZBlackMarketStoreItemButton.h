@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Guid -FallbackName=Guid
+#include "UObject/NoExportTypes.h"
 #include "ESBZCurrencyCode.h"
 #include "SBZMenuButton.h"
 #include "SBZStoreItemUIData.h"
@@ -18,6 +18,7 @@ protected:
     
 public:
     USBZBlackMarketStoreItemButton();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnPlayerStoreItemDataIntialized();
@@ -36,7 +37,7 @@ public:
     USBZInventoryBaseData* GetItemData() const;
     
     UFUNCTION(BlueprintCallable)
-    void GetItemCost(int32& Price, ESBZCurrencyCode& Currency);
+    void GetItemCost(int64& Price, ESBZCurrencyCode& Currency);
     
 };
 

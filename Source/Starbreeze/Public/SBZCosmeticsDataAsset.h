@@ -14,6 +14,7 @@ protected:
     
 public:
     USBZCosmeticsDataAsset();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsConsumable() const;
     

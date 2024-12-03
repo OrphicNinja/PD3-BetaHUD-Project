@@ -3,7 +3,7 @@
 #include "SBZDeveloperSettings.h"
 #include "SBZChallengeToAchievementSettings.generated.h"
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class USBZChallengeToAchievementSettings : public USBZDeveloperSettings {
     GENERATED_BODY()
 public:
@@ -14,6 +14,7 @@ public:
     TArray<FName> AchievementObjectiveStatCodeArray;
     
     USBZChallengeToAchievementSettings();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static TMap<FName, FName> GetChallengeToAchievementSettings();
     

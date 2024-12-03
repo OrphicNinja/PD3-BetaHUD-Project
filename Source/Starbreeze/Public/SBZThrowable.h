@@ -1,12 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EEndPlayReason -FallbackName=EEndPlayReason
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Vector_NetQuantizeNormal -FallbackName=Vector_NetQuantizeNormal
+#include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
+#include "Engine/EngineTypes.h"
+#include "Engine/NetSerialization.h"
 #include "ESBZThrowableState.h"
 #include "SBZEquippable.h"
 #include "SBZProjectileInterface.h"
+#include "Templates/SubclassOf.h"
 #include "SBZThrowable.generated.h"
 
 class AActor;
@@ -76,10 +77,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AudioImpactForceModifierValue;
     
-public:
-    ASBZThrowable();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZThrowableData> DataType;
     
+public:
+    ASBZThrowable(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetThrowableState(ESBZThrowableState NewThrowableState);
     
@@ -133,7 +138,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void CreateImpactPoint(const FHitResult& Hit, float Velocity);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

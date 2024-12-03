@@ -1,9 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "UObject/NoExportTypes.h"
+#include "UObject/Object.h"
+#include "GameplayTagContainer.h"
 #include "EPD3HeistState.h"
+#include "SBZBagHandle.h"
 #include "Templates/SubclassOf.h"
 #include "PD3GameIntensityAnalyzer.generated.h"
 
@@ -56,6 +57,12 @@ private:
     TMap<TSubclassOf<USBZAIOrder>, USBZDialogDataAsset*> SquadDialog;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<USBZDialogDataAsset*> SecuredBagDialogArray;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<USBZDialogDataAsset*> SecuredBagLeftDialogArray;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMaterialInterface* HUDGlitchMaterial;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -65,10 +72,16 @@ private:
     float GlitchStrengthModifier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float GlitchMinimumDotModifier;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName GlitchStrengthParameterName;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName GlitchTextureParameterName;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName GlitchActiveParameterName;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<AActor*, float> GlitchEffectSourceMap;
@@ -81,6 +94,7 @@ private:
     
 public:
     UPD3GameIntensityAnalyzer();
+
     UFUNCTION(BlueprintCallable)
     void RemoveGlitchEffectSourceActor(AActor* Actor);
     
@@ -97,6 +111,10 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     void HandleGameStateChanged(EPD3HeistState OldState, EPD3HeistState NewState);
+    
+private:
+    UFUNCTION(BlueprintCallable)
+    void HandleBagSecured(const FSBZBagHandle& BagHandle, int32 SecuredCount, int32 TotalLeftToSecure);
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))

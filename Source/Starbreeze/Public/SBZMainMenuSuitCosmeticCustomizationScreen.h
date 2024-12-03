@@ -54,6 +54,7 @@ private:
     
 public:
     USBZMainMenuSuitCosmeticCustomizationScreen();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnPopUpClosed(FName ClosingActionName);

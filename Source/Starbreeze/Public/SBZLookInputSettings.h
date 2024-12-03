@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
+#include "UObject/NoExportTypes.h"
 #include "SBZLookInputStanceSettings.h"
 #include "SBZLookInputSettings.generated.h"
 
@@ -10,6 +10,9 @@ struct FSBZLookInputSettings {
 public:
     UPROPERTY(Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     FFloatInterval InputDeadZone;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsSensitivityCurveEnabled;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSBZLookInputStanceSettings NormalStance;

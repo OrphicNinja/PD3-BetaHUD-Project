@@ -1,13 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=GenericTeamAgentInterface -FallbackName=GenericTeamAgentInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=GenericTeamId -FallbackName=GenericTeamId
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Character -FallbackName=Character
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=AbilitySystemInterface -FallbackName=AbilitySystemInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagAssetInterface -FallbackName=GameplayTagAssetInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GenericTeamAgentInterface.h"
+#include "GenericTeamAgentInterface.h"
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Character.h"
+#include "Curves/CurveFloat.h"
+#include "GameFramework/OnlineReplStructs.h"
+#include "AbilitySystemInterface.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
+#include "GameplayTagContainer.h"
 #include "ESBZAIVisibilityNodeComputationFrequency.h"
 #include "ESBZRuntimeState.h"
 #include "SBZAIVisibilityRelevant.h"
@@ -18,9 +20,11 @@
 #include "SBZFactionIdHelper.h"
 #include "SBZHurtReactionData.h"
 #include "SBZHurtReactionDataInterface.h"
+#include "SBZMarkableInterface.h"
 #include "SBZPawnInterface.h"
 #include "SBZPawnLifetime.h"
 #include "SBZProjectileInterface.h"
+#include "SBZReplicatedEquippableState.h"
 #include "SBZRoomVolumeInterface.h"
 #include "SBZRuntimeInterface.h"
 #include "SBZTypeInterface.h"
@@ -34,7 +38,9 @@ class ASBZRangedWeapon;
 class ASBZRoomVolume;
 class UAIPerceptionStimuliSourceComponent;
 class UAkAudioEvent;
+class UAkComponent;
 class UGameplayEffect;
+class UNiagaraComponent;
 class UNiagaraSystem;
 class USBZAICharacterAbilityData;
 class USBZAIDroneAttributeSet;
@@ -43,12 +49,14 @@ class USBZBaseInteractableComponent;
 class USBZCharacterVoiceComponent;
 class USBZHackableInteractableComponent;
 class USBZInteractorComponent;
+class USBZLocalPlayerFeedback;
+class USBZOutlineAsset;
 class USBZOutlineComponent;
 class USBZShoutTargetComponent;
 class USBZVoiceCommentDataAsset;
 
 UCLASS(Blueprintable)
-class ASBZAIDrone : public ACharacter, public ISBZPawnInterface, public IAbilitySystemInterface, public IGenericTeamAgentInterface, public ISBZPawnLifetime, public ISBZProjectileInterface, public ISBZTypeInterface, public ISBZAIVisibilityRelevant, public ISBZRoomVolumeInterface, public IGameplayTagAssetInterface, public ISBZRuntimeInterface, public ISBZExplosive, public ISBZHurtReactionDataInterface, public ISBZVoiceComponentInterface, public ISBZAutoAimInterface {
+class ASBZAIDrone : public ACharacter, public ISBZPawnInterface, public IAbilitySystemInterface, public IGenericTeamAgentInterface, public ISBZPawnLifetime, public ISBZProjectileInterface, public ISBZTypeInterface, public ISBZAIVisibilityRelevant, public ISBZRoomVolumeInterface, public IGameplayTagAssetInterface, public ISBZRuntimeInterface, public ISBZExplosive, public ISBZHurtReactionDataInterface, public ISBZVoiceComponentInterface, public ISBZAutoAimInterface, public ISBZMarkableInterface {
     GENERATED_BODY()
 public:
 protected:
@@ -66,6 +74,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<ASBZEquippable*> EquippableArray;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float PreferredRangeBuffer;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USBZAbilitySystemComponent* AbilitySystemComponent;
@@ -131,6 +142,39 @@ protected:
     float EMPStunDuration;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UGameplayEffect> TacticalFlashEffectClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZLocalPlayerFeedback> TacticalFlashPlayerFeedback;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float GuaranteedFlashDistance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float MaximumAngleDifference;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float FlashPlayerFalloffExponent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FRuntimeFloatCurve TacticalFlashFeedbackCurve;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayTag TacticalFlashTag;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float FlashTagEffectDuration;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float TacticalFlashRange;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float BuffBlockMinThreshold;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float BuffBlockCooldownAmount;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSBZHurtReactionData HurtReactionData;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -143,15 +187,80 @@ protected:
     AActor* ExplosionInstigator;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
-    FVector MoveUpVector;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     AActor* CurrentTarget;
     
-public:
-    ASBZAIDrone();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString StatisticsMarkDrone;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString StatisticsMarkEnemy;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString StatisticsMarkEnemyCamera;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString StatisticsMarkEnemyMicroCamera;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float AIDamageModifier;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UGameplayEffect> MarkedGameplayEffectClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USBZOutlineAsset* MarkedOutline;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UAkComponent* AKComponent;
+    
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    float SentryHackDamageAmount[4];
+    
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    float SentryHackDamageInterval[4];
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint8 bIsDeathAllowed: 1;
+    
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bShouldTelegraphAttack;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_IsHackingSentry, meta=(AllowPrivateAccess=true))
+    bool bIsHackingSentry;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    UNiagaraComponent* HackingSentryEffectComponent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UNiagaraSystem* HackingSentryEffect;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName TraceEffectDistanceName;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName TraceEffectStunDurationName;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName TraceEndBone;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAkAudioEvent* HackingSentryEventStart;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAkAudioEvent* HackingSentryEventStop;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FSBZReplicatedEquippableState ReplicatedEquippableState;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FUniqueNetIdRepl> HackedByPlayerArray;
+    
+public:
+    ASBZAIDrone(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnServerAbortInteraction(USBZBaseInteractableComponent* InInteractable, USBZInteractorComponent* Interactor, bool bIsLocallyControlledInteractor);
@@ -165,6 +274,11 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_RuntimeState();
     
+private:
+    UFUNCTION(BlueprintCallable)
+    void OnRep_IsHackingSentry();
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void OnPredictedAbortInteraction(USBZBaseInteractableComponent* InInteractable, USBZInteractorComponent* Interactor, bool bIsLocallyControlledInteractor);
     
@@ -179,6 +293,18 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnAckAbortInteraction(USBZBaseInteractableComponent* InInteractable, USBZInteractorComponent* Interactor, bool bIsLocallyControlledInteractor);
     
+private:
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_TelegraphAttack(bool bInIsTelegraphingAttack);
+    
+public:
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_StopHackingSentry();
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_StartHackingSentry();
+    
+protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetRuntimed(ESBZRuntimeState InRuntimeState);
     
@@ -194,6 +320,9 @@ protected:
     void Multicast_RemoveRuntime(ESBZRuntimeState InRuntimeToRemove);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_PredictedRagdollDenied(int32 HurtReactionIndex);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_OnKill();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
@@ -202,7 +331,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void AddForce(const FVector& LinearForce);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintCallable)
@@ -216,6 +345,8 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const override PURE_VIRTUAL(GetOwnedGameplayTags,);
-    
+
+    UFUNCTION(BlueprintCallable)
+    UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 };
 

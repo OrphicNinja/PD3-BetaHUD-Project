@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZMusicManager.generated.h"
 
 class UAkAudioEvent;
@@ -25,6 +25,7 @@ protected:
     
 public:
     USBZMusicManager();
+
     UFUNCTION(BlueprintCallable)
     void StopMusic();
     

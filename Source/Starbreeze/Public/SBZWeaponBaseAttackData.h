@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "SBZHurtReactionData.h"
 #include "SBZHurtReactionDataInterface.h"
 #include "Templates/SubclassOf.h"
@@ -23,7 +23,8 @@ public:
     FSBZHurtReactionData HurtReactionData;
     
     USBZWeaponBaseAttackData();
-    
+
+
     // Fix for true pure virtual functions not being implemented
 };
 

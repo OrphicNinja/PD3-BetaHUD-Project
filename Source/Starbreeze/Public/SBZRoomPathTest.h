@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "SBZRoomPathTest.generated.h"
 
 UCLASS(Blueprintable)
@@ -14,6 +14,7 @@ public:
     UPROPERTY(AdvancedDisplay, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector EndPosition;
     
-    ASBZRoomPathTest();
+    ASBZRoomPathTest(const FObjectInitializer& ObjectInitializer);
+
 };
 

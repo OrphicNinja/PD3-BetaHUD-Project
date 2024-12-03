@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
 #include "SBZSimplePhysicsState.h"
 #include "SBZSimplePhysicsCorrector.generated.h"
 
@@ -23,18 +23,22 @@ protected:
     FSBZSimplePhysicsState LastState;
     
 public:
-    USBZSimplePhysicsCorrector();
+    USBZSimplePhysicsCorrector(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetVelocity(FVector Vel);
     
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void MulticastSyncState(FSBZSimplePhysicsState State);
+    void Multicast_SyncState(const FSBZSimplePhysicsState& State);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void MulticastInvalidateState();
+    void Multicast_InvalidateState();
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_ForceTeleport(const FSBZSimplePhysicsState& State);
     
 };
 

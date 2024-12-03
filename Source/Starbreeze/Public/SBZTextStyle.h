@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector2D -FallbackName=Vector2D
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=Margin -FallbackName=Margin
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=SlateFontInfo -FallbackName=SlateFontInfo
+#include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
+#include "Layout/Margin.h"
+#include "Fonts/SlateFontInfo.h"
 #include "SBZTextStyle.generated.h"
 
 class USBZColorStyle;
@@ -31,5 +31,6 @@ public:
     float LineHeightPercentage;
     
     USBZTextStyle();
+
 };
 

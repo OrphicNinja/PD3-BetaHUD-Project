@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=SoftClassPath -FallbackName=SoftClassPath
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=SoftObjectPath -FallbackName=SoftObjectPath
-//CROSS-MODULE INCLUDE V2: -ModuleName=DeveloperSettings -ObjectName=DeveloperSettings -FallbackName=DeveloperSettings
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Engine/DeveloperSettings.h"
 #include "SBZHeistCollection.h"
 #include "Templates/SubclassOf.h"
 #include "SBZGameStateMachineSettings.generated.h"
@@ -15,11 +15,12 @@ class USBZJobOverviewBaseWidget;
 class USBZLoadingScreen;
 class USBZLoginScreenBaseWidget;
 class USBZMainMenuWidget;
+class USBZPSOCompilationScreen;
 class USBZReplayBaseWidget;
 class USBZSafeHouseBaseWidget;
 class USBZWidgetBase;
 
-UCLASS(Blueprintable, Config=Engine, DefaultConfig, Config=Game)
+UCLASS(Blueprintable, DefaultConfig, Config=Game)
 class STARBREEZE_API USBZGameStateMachineSettings : public UDeveloperSettings {
     GENERATED_BODY()
 public:
@@ -57,6 +58,9 @@ public:
     FSoftClassPath LoadingScreenWidgetClassName;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FSoftClassPath PSOCompilationScreenWidgetClassName;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSoftClassPath LoginScreenWidgetClassName;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -70,6 +74,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TSubclassOf<USBZLoginScreenBaseWidget> LoginScreenWidgetClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZPSOCompilationScreen> PSOCompilationScreenWidgetClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TSubclassOf<USBZJobOverviewBaseWidget> JobOverviewWidgetClass;
@@ -119,6 +126,7 @@ protected:
     
 public:
     USBZGameStateMachineSettings();
+
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static int32 LevelShortNameToIdx(const UObject* WorldContextObject, const FString& ShortName);
     

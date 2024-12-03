@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZBreakableInterface.h"
 #include "SBZReplicatedBinaryStateActor.generated.h"
 
@@ -19,9 +19,10 @@ private:
     float ClientStateDelay;
     
 public:
-    ASBZReplicatedBinaryStateActor();
+    ASBZReplicatedBinaryStateActor(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetState(bool bNewState, bool bDoCosmetics);
     
@@ -39,7 +40,7 @@ private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetState(bool bNewState);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

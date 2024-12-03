@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=FastArraySerializer -FallbackName=FastArraySerializer
+#include "Engine/NetSerialization.h"
 #include "SBZLocalGasLocation.h"
 #include "SBZLocalGasLocations.generated.h"
 

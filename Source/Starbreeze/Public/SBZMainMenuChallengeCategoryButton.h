@@ -15,6 +15,7 @@ protected:
     
 public:
     USBZMainMenuChallengeCategoryButton();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnChallengeCategoryDataInititalized(USBZChallengeCategoryData* InCategoryData);

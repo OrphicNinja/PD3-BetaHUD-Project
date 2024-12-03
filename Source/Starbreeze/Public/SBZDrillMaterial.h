@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
 #include "SBZDrillMatData.h"
 #include "SBZDrillMaterial.generated.h"
 
@@ -22,5 +22,6 @@ public:
     float MinimumProgress;
     
     USBZDrillMaterial();
+
 };
 

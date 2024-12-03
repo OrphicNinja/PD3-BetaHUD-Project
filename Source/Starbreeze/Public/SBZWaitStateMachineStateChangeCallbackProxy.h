@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintAsyncActionBase -FallbackName=BlueprintAsyncActionBase
+#include "Kismet/BlueprintAsyncActionBase.h"
 #include "OnEnterGameStateDynamicDelegateDelegate.h"
 #include "SBZWaitStateMachineStateChangeCallbackProxy.generated.h"
 
@@ -20,6 +20,7 @@ private:
     
 public:
     USBZWaitStateMachineStateChangeCallbackProxy();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static USBZWaitStateMachineStateChangeCallbackProxy* WaitGameStateMachineStateChange(UObject* NewWorldContextObject);
     

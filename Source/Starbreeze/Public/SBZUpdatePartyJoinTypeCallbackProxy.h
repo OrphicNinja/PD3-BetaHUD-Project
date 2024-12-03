@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintAsyncActionBase -FallbackName=BlueprintAsyncActionBase
+#include "Kismet/BlueprintAsyncActionBase.h"
 #include "ESBZOnlineJoinType.h"
 #include "OnOnlineSessionEventDelegateDelegate.h"
 #include "SBZUpdatePartyJoinTypeCallbackProxy.generated.h"
@@ -21,6 +21,7 @@ private:
     
 public:
     USBZUpdatePartyJoinTypeCallbackProxy();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static USBZUpdatePartyJoinTypeCallbackProxy* UpdatePartyJoinType(UObject* NewWorldContextObject, ESBZOnlineJoinType InNewJoinType);
     

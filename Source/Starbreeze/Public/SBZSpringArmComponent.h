@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SpringArmComponent -FallbackName=SpringArmComponent
+#include "GameFramework/SpringArmComponent.h"
 #include "SBZSpringArmComponent.generated.h"
 
 class AActor;
@@ -14,6 +14,7 @@ protected:
     AActor* Target;
     
 public:
-    USBZSpringArmComponent();
+    USBZSpringArmComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

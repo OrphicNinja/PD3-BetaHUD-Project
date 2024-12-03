@@ -1,7 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
+#include "UObject/Object.h"
+#include "Engine/EngineTypes.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "SBZOnlineSlotsHost.generated.h"
 
 class ASBZOnlineSlotsSync;
@@ -36,5 +37,9 @@ private:
     
 public:
     USBZOnlineSlotsHost();
+
+    UFUNCTION(BlueprintCallable)
+    void IndividualReadyTimerTimeout(FUniqueNetIdRepl PlayerId);
+    
 };
 

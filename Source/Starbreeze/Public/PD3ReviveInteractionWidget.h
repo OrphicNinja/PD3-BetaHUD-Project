@@ -16,6 +16,7 @@ protected:
     
 public:
     UPD3ReviveInteractionWidget();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnReviveInteractionEnded(USBZBaseInteractableComponent* InInteractable, USBZInteractorComponent* InInteractor, bool bInIsLocallyControlled);

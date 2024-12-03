@@ -15,6 +15,7 @@ protected:
     
 public:
     USBZPlayerStateWidgetBase();
+
     UFUNCTION(BlueprintCallable)
     bool IsWidgetForPlayerState(ASBZPlayerState* NewPlayerState);
     

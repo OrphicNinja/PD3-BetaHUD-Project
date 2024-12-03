@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "SBZChatGameSettings.generated.h"
 
 UCLASS(Blueprintable)
@@ -29,5 +29,6 @@ public:
     int32 MaxTotalDisplayedMessages;
     
     USBZChatGameSettings();
+
 };
 

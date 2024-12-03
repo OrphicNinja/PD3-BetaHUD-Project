@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatRange -FallbackName=FloatRange
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "SBZBaseCharacterAnimationData.h"
 #include "SBZCharacterAnimationDataTP.generated.h"
 
@@ -205,5 +205,6 @@ public:
     bool bCanDoHipsZBlending;
     
     USBZCharacterAnimationDataTP();
+
 };
 

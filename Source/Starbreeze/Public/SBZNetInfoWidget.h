@@ -13,6 +13,7 @@ protected:
     
 public:
     USBZNetInfoWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnValidPlayerState();

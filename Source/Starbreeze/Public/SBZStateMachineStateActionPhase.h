@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "GameFramework/OnlineReplStructs.h"
 #include "SBZClientStateMachineState.h"
 #include "SBZPlayerStateAddedEvent.h"
 #include "SBZPlayerStateRemovedEvent.h"
@@ -10,7 +10,7 @@ class ASBZPlayerController;
 class USBZActionPhaseBaseWidget;
 class USBZStateMachineDataActionPhase;
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class STARBREEZE_API USBZStateMachineStateActionPhase : public USBZClientStateMachineState {
     GENERATED_BODY()
 public:
@@ -26,6 +26,7 @@ private:
     
 public:
     USBZStateMachineStateActionPhase();
+
     UFUNCTION(BlueprintCallable)
     void PlayerReadyReceived(const FUniqueNetIdRepl& PlayerId);
     

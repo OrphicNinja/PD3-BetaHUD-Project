@@ -28,6 +28,7 @@ private:
     
 public:
     USBZCharacterEffectContainer();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnCharacterEffectRemoved(FSBZCharacterEffectRuntime& CharacterRuntime);

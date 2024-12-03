@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AccelByteUe4Sdk -ObjectName=AccelByteModelsCreditSummary -FallbackName=AccelByteModelsCreditSummary
-//CROSS-MODULE INCLUDE V2: -ModuleName=AccelByteUe4Sdk -ObjectName=AccelByteModelsEntitlementSummary -FallbackName=AccelByteModelsEntitlementSummary
+#include "AccelByteModelsCreditSummary.h"
+#include "AccelByteModelsEntitlementSummary.h"
 #include "ECommerenceRewardNotifPayload.generated.h"
 
 USTRUCT(BlueprintType)

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AITask -FallbackName=AITask
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTasks -ObjectName=GameplayTask -FallbackName=GameplayTask
+#include "Tasks/AITask.h"
+#include "GameplayTask.h"
 #include "MontageMoveTaskCompletedSignatureDelegate.h"
 #include "SBZAIMontageMoveRequest.h"
 #include "SBZAITask_MontageMoveTo.generated.h"
@@ -30,5 +30,6 @@ protected:
     
 public:
     USBZAITask_MontageMoveTo();
+
 };
 

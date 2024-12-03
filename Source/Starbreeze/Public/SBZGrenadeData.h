@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
+#include "Curves/CurveFloat.h"
 #include "SBZThrowableData.h"
 #include "Templates/SubclassOf.h"
 #include "SBZGrenadeData.generated.h"
@@ -42,7 +42,10 @@ public:
     UNiagaraSystem* DropDetonationEffect;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSubclassOf<USBZLocalPlayerFeedback> LocalplayerFeedback;
+    TSubclassOf<USBZLocalPlayerFeedback> LocalPlayerFeedback;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZLocalPlayerFeedback> LocalPlayerInstigatorFeedback;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRuntimeFloatCurve PlayerFeedbackCurve;
@@ -54,5 +57,6 @@ public:
     TMap<FName, float> TacticianDiscombobulateEffectValueMap;
     
     USBZGrenadeData();
+
 };
 

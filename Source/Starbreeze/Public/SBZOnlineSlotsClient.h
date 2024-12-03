@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
+#include "UObject/Object.h"
+#include "Engine/EngineTypes.h"
 #include "SBZLobbyCharacterInfoUi.h"
 #include "SBZSlotData.h"
 #include "SBZOnlineSlotsClient.generated.h"
@@ -26,7 +26,11 @@ protected:
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PreTravelTimeLimit;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FString SoloPreplanningItem;
+    
 public:
     USBZOnlineSlotsClient();
+
 };
 

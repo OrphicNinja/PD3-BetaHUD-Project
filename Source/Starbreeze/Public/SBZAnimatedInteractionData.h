@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "Engine/DataAsset.h"
+#include "GameplayTagContainer.h"
 #include "ESBZAnimatedInteractionStartType.h"
 #include "ESBZAnimationScalePlayRateType.h"
 #include "SBZAnimatedInteractionTagPerDuration.h"
@@ -24,5 +24,6 @@ public:
     TArray<FSBZAnimatedInteractionTagPerDuration> AnimatedInteractionTagPerDurations;
     
     USBZAnimatedInteractionData();
+
 };
 

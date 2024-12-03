@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=SoftObjectPath -FallbackName=SoftObjectPath
+#include "UObject/NoExportTypes.h"
 #include "SBZHeistLevelWithOwnership.generated.h"
 
 USTRUCT(BlueprintType)

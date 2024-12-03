@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AnimNode_AssetPlayerBase -FallbackName=AnimNode_AssetPlayerBase
+#include "Animation/AnimNode_AssetPlayerBase.h"
 #include "SBZAnimNode_CurveMatchedSequencePlayer.generated.h"
 
 class UAnimSequenceBase;

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAttribute -FallbackName=GameplayAttribute
+#include "AttributeSet.h"
 #include "SBZPlayerStateWidgetBase.h"
 #include "SBZDoubleAttributeWidget.generated.h"
 
@@ -17,6 +17,7 @@ protected:
     
 public:
     USBZDoubleAttributeWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnSetup(float PrimaryValue, float SecondaryValue);

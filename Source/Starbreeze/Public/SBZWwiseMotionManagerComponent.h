@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SceneComponent -FallbackName=SceneComponent
+#include "Components/SceneComponent.h"
 #include "SBZWwiseMotionManagerComponent.generated.h"
 
 class UAkComponent;
@@ -20,6 +20,7 @@ protected:
     FString WwiseMotionBusName;
     
 public:
-    USBZWwiseMotionManagerComponent();
+    USBZWwiseMotionManagerComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

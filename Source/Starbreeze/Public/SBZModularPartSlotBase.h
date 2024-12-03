@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "Engine/DataAsset.h"
+#include "GameplayTagContainer.h"
 #include "Templates/SubclassOf.h"
 #include "SBZModularPartSlotBase.generated.h"
 
@@ -33,6 +33,7 @@ protected:
     
 public:
     USBZModularPartSlotBase();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetDisplayName(FText& OutDisplayName, bool& OutHasText) const;
     

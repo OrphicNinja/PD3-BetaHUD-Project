@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=NavLinkProxy -FallbackName=NavLinkProxy
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ENavLinkDirection -FallbackName=ENavLinkDirection
+#include "Navigation/NavLinkProxy.h"
+#include "UObject/NoExportTypes.h"
+#include "AI/Navigation/NavLinkDefinition.h"
 #include "SBZSmartLinkReachedSignatureDelegate.h"
 #include "Templates/SubclassOf.h"
 #include "SBZLongNavLink.generated.h"
@@ -51,7 +51,8 @@ protected:
     TArray<ASBZLongNavLinkPlatform*> NavMeshPlatforms;
     
 public:
-    ASBZLongNavLink();
+    ASBZLongNavLink(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetPlatformNavArea(TSubclassOf<UNavArea> AreaClass);
     

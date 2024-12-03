@@ -1,9 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
+#include "ESBZVolumeType.h"
 #include "SBZVolumeTypeSetting.h"
 #include "SBZVolumeManager.generated.h"
 
+class UAkAudioEvent;
 class USBZVolumeManager;
 
 UCLASS(Blueprintable)
@@ -30,10 +32,26 @@ protected:
     FSBZVolumeTypeSetting VoipVolumeSetting;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FSBZVolumeTypeSetting VoipMicVolumeSetting;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSBZVolumeTypeSetting CinematicVolumeSetting;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSet<ESBZVolumeType> PausedMuteSet;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAkAudioEvent* PauseEvent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAkAudioEvent* ResumeEvent;
     
 public:
     USBZVolumeManager();
+
+    UFUNCTION(BlueprintCallable)
+    void UpdateVOIPVolumeOnEOSLogin(int32 InUserIndex, const FString& NativePlatformUserId, const FString& EOSPlatformProductUserId, bool bLoginSuccess);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static USBZVolumeManager* GetVolumeManager(UObject* WorldContextObject);
     

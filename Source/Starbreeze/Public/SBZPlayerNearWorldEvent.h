@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
+#include "UObject/NoExportTypes.h"
 #include "SBZWorldEventBase.h"
 #include "SBZPlayerNearWorldEvent.generated.h"
 
@@ -17,5 +17,6 @@ protected:
     
 public:
     USBZPlayerNearWorldEvent();
+
 };
 

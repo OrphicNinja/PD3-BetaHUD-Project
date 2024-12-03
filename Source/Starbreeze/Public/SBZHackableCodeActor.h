@@ -37,9 +37,10 @@ protected:
     bool bIsResetToGenericHack;
     
 public:
-    ASBZHackableCodeActor();
+    ASBZHackableCodeActor(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ResetHackableActorToGenericHack(const float InDuration, bool bKeepCustomMessage, ESBZHackableActorState ResetState);
     

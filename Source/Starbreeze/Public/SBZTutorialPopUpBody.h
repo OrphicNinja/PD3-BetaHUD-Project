@@ -19,6 +19,7 @@ protected:
     
 public:
     USBZTutorialPopUpBody();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnTutorialPopUpInitialized(const USBZTutorialPopUpDataAsset* InPopUpDataAsset);

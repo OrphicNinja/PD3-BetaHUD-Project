@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZEquippableConfig.h"
 #include "Templates/SubclassOf.h"
 #include "SBZEquippable.generated.h"
@@ -57,9 +57,10 @@ protected:
     FName EquipmentState;
     
 public:
-    ASBZEquippable();
+    ASBZEquippable(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_EquippableIndex();

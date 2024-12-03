@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "SBZPawnSpawnDefinition.h"
 #include "SBZSpawnRotationHandlingMethod.h"
 #include "SBZPawnSpawnBase.generated.h"
@@ -30,6 +30,7 @@ protected:
     FVector WeightedLocation;
     
 public:
-    ASBZPawnSpawnBase();
+    ASBZPawnSpawnBase(const FObjectInitializer& ObjectInitializer);
+
 };
 

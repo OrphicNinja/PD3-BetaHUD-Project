@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=Margin -FallbackName=Margin
+#include "Layout/Margin.h"
 #include "ESBZEquippableLoadoutSlot.h"
 #include "SBZMenuStackScreenWidget.h"
 #include "Templates/SubclassOf.h"
@@ -35,6 +35,7 @@ private:
     
 public:
     USBZMainMenuWeaponProgressionScreen();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnWeaponPartProgressionButtonFocusedChanged(USBZMenuButton* InButton, bool bIsFocused);

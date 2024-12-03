@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
+#include "UObject/NoExportTypes.h"
 #include "SBZAIOrder.h"
 #include "SBZAIOrder_BrokenCamera.generated.h"
 
@@ -14,5 +14,6 @@ private:
     
 public:
     USBZAIOrder_BrokenCamera();
+
 };
 

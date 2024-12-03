@@ -7,7 +7,7 @@ class UMaterialInstance;
 class USkeletalMesh;
 
 UCLASS(Blueprintable)
-class USBZGloveData : public USBZInventoryBaseData {
+class STARBREEZE_API USBZGloveData : public USBZInventoryBaseData {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -20,5 +20,6 @@ public:
     TSoftObjectPtr<UMaterialInstance> OverrideMaterial;
     
     USBZGloveData();
+
 };
 

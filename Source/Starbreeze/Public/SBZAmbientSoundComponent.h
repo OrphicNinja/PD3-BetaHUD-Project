@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SceneComponent -FallbackName=SceneComponent
+#include "UObject/NoExportTypes.h"
+#include "Components/SceneComponent.h"
 #include "SBZAmbientSoundComponent.generated.h"
 
 class UAkAudioEvent;
@@ -52,7 +52,8 @@ private:
     float AttenuationSquared;
     
 public:
-    USBZAmbientSoundComponent();
+    USBZAmbientSoundComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetSwitchState(const UAkSwitchValue* SwitchValue, const FString& InSwitchGroup, const FString& InSwitchState);
     

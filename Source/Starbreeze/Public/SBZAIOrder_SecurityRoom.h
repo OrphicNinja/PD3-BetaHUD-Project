@@ -28,6 +28,7 @@ private:
     
 public:
     USBZAIOrder_SecurityRoom();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnPausedFunc(const FName& Reason);

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayEffectContextHandle -FallbackName=GameplayEffectContextHandle
+#include "GameplayEffectTypes.h"
 #include "SBZAIFireRangedWeaponAbility.h"
 #include "SBZAIFireTaserAbility.generated.h"
 
@@ -23,5 +23,6 @@ private:
     
 public:
     USBZAIFireTaserAbility();
+
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
+#include "Engine/EngineTypes.h"
 #include "ESBZOnlineCode.h"
 #include "SBZClientStateMachineState.h"
 #include "SBZStateMachineStateWaitingActionPhase.generated.h"
@@ -25,6 +25,7 @@ protected:
     
 public:
     USBZStateMachineStateWaitingActionPhase();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void TravelToHostTimeout();

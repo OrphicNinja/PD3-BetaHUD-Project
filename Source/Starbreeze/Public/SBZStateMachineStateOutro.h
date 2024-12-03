@@ -19,6 +19,7 @@ protected:
     
 public:
     USBZStateMachineStateOutro();
+
     UFUNCTION(BlueprintCallable)
     void OutroSequenceTimeout();
     

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "ESBZFacialEmotion.h"
 #include "SBZFacialAnimationContainer.h"
 #include "SBZFacialAnimationCollection.generated.h"
@@ -13,5 +13,6 @@ public:
     TMap<ESBZFacialEmotion, FSBZFacialAnimationContainer> Animations;
     
     USBZFacialAnimationCollection();
+
 };
 

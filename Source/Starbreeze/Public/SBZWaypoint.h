@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZWaypoint.generated.h"
 
 class USBZMarkerDataAsset;
@@ -17,7 +17,8 @@ protected:
     USBZMarkerDataAsset* MarkerAsset;
     
 public:
-    ASBZWaypoint();
+    ASBZWaypoint(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void RemoveMarker();
     

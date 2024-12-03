@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTService -FallbackName=BTService
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EQSParametrizedQueryExecutionRequest -FallbackName=EQSParametrizedQueryExecutionRequest
+#include "BehaviorTree/BTService.h"
+#include "EnvironmentQuery/EnvQueryTypes.h"
 #include "Templates/SubclassOf.h"
 #include "SBZBTService_UpdateShieldCover.generated.h"
 
@@ -13,7 +13,7 @@ class USBZBTService_UpdateShieldCover : public UBTService {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     FEQSParametrizedQueryExecutionRequest EQSRequest;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -30,5 +30,6 @@ protected:
     
 public:
     USBZBTService_UpdateShieldCover();
+
 };
 

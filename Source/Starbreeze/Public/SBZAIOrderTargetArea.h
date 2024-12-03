@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZCoverPointContainerInterface.h"
 #include "SBZRoomVolumeInterface.h"
 #include "SBZAIOrderTargetArea.generated.h"
@@ -28,7 +28,7 @@ protected:
     UBoxComponent* BoxComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    ASBZRoomVolume* Room;
+    TArray<ASBZRoomVolume*> RoomVolumes;
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -38,7 +38,8 @@ private:
     TArray<ASBZCoverPoint*> CachedCoverPoints;
     
 public:
-    ASBZAIOrderTargetArea();
+    ASBZAIOrderTargetArea(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdateCoverPoints();
@@ -50,7 +51,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsEnabled() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

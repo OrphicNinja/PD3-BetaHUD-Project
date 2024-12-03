@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZRecoilComponent.generated.h"
 
 class ASBZPlayerCharacter;
@@ -22,6 +22,7 @@ protected:
     USBZRecoilData* CurrentRecoilData;
     
 public:
-    USBZRecoilComponent();
+    USBZRecoilComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

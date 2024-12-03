@@ -1,12 +1,16 @@
 #include "SBZClientStateMachine.h"
 
+USBZClientStateMachine::USBZClientStateMachine() {
+    this->LoadingScreen = NULL;
+}
+
 void USBZClientStateMachine::RequestTravelToServer() {
 }
 
 void USBZClientStateMachine::RequestSteamLogin() {
 }
 
-void USBZClientStateMachine::RequestSoloGame(int32 LevelIdx, int32 DifficultyIdx) {
+void USBZClientStateMachine::RequestSoloGame(int32 LevelIdx, int32 DifficultyIdx, bool bSkipPreMatch) {
 }
 
 void USBZClientStateMachine::RequestReturnToMainMenu(ESBZReturnToMainMenuReason Reason) {
@@ -97,14 +101,15 @@ ESBZOnlineSessionPhase USBZClientStateMachine::GetSessionPhase() const {
     return ESBZOnlineSessionPhase::Undefined;
 }
 
-FString USBZClientStateMachine::GetCurrentStateNameString() {
+FString USBZClientStateMachine::GetCurrentStateNameString() const {
     return TEXT("");
+}
+
+bool USBZClientStateMachine::CanRequestSoloGame() const {
+    return false;
 }
 
 void USBZClientStateMachine::ApplyPreplanningAsset(const FString& ItemSku) {
 }
 
-USBZClientStateMachine::USBZClientStateMachine() {
-    this->LoadingScreen = NULL;
-}
 

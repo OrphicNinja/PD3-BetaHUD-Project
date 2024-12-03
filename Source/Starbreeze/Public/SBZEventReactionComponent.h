@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "Components/ActorComponent.h"
+#include "Engine/EngineTypes.h"
+#include "GameplayTagContainer.h"
 #include "SBZEventRequestContainer.h"
 #include "SBZEventReactionComponent.generated.h"
 
@@ -18,6 +18,7 @@ private:
     TMap<FGameplayTag, FSBZEventRequestContainer> EventReactionRequests;
     
 public:
-    USBZEventReactionComponent();
+    USBZEventReactionComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=Margin -FallbackName=Margin
+#include "Layout/Margin.h"
 #include "OnPreferredCharacterSlotIndexChangedDelegate.h"
 #include "SBZWidgetBase.h"
 #include "Templates/SubclassOf.h"
@@ -35,6 +35,7 @@ private:
     
 public:
     USBZMainMenuInventoryCharacterPreferenceDisplay();
+
     UFUNCTION(BlueprintCallable)
     void SetActiveIndex(int32 NewActiveIndex);
     

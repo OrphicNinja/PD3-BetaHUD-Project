@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZGlobalItemDatabase.generated.h"
 
 class USBZArmorDatabase;
@@ -18,6 +18,7 @@ class USBZMaskPatternDatabase;
 class USBZMaskPreconfigDatabase;
 class USBZMaskPresetDatabase;
 class USBZMaskVFXDatabase;
+class USBZNewsItemDatabase;
 class USBZPayDayCreditDatabase;
 class USBZPlaceableDatabase;
 class USBZPlayerCharacterDatabase;
@@ -172,6 +173,10 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<USBZHeistDatabase> Heists;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftObjectPtr<USBZNewsItemDatabase> NewsItems;
+    
     USBZGlobalItemDatabase();
+
 };
 

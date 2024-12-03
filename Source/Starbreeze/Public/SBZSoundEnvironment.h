@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Volume -FallbackName=Volume
+#include "Engine/EngineTypes.h"
+#include "GameFramework/Volume.h"
 #include "SBZSoundEnvironment.generated.h"
 
 class AActor;
@@ -60,7 +60,8 @@ private:
     UBrushComponent* BrushComponentPointer;
     
 public:
-    ASBZSoundEnvironment();
+    ASBZSoundEnvironment(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
     

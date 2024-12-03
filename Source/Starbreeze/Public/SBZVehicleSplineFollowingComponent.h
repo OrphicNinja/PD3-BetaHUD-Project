@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZVehicleOnStartedDelegate.h"
 #include "SBZVehicleSplineFollowingComponentReplicatedProperties.h"
 #include "SBZVehicleSplineFollowingComponent.generated.h"
@@ -68,9 +68,10 @@ private:
     TArray<ASBZSpline*> FullPath;
     
 public:
-    USBZVehicleSplineFollowingComponent();
+    USBZVehicleSplineFollowingComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void Stop();
     

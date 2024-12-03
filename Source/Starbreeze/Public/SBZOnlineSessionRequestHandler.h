@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "EOnlineSessionInfo.h"
 #include "SBZOnlineSessionRequestHandler.generated.h"
 
@@ -31,6 +31,7 @@ private:
     
 public:
     USBZOnlineSessionRequestHandler();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     EOnlineSessionInfo GetSessionInfo() const;
     

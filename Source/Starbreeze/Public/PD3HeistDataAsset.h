@@ -1,18 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Int32Interval -FallbackName=Int32Interval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=SoftObjectPath -FallbackName=SoftObjectPath
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector2D -FallbackName=Vector2D
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=FilePath -FallbackName=FilePath
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
+#include "GameplayTagContainer.h"
 #include "ESBZDifficulty.h"
 #include "ESBZHeistComplexity.h"
+#include "ESBZHeistPlaystyle.h"
 #include "SBZInventoryBaseData.h"
 #include "SBZStorymodeStruct.h"
 #include "PD3HeistDataAsset.generated.h"
 
 class UAkAudioEvent;
 class UPaperSprite;
+class USBZPersonalStatisticCriteriaData;
+class USBZPlayerCharacterData;
 class USBZStatisticCriteriaData;
 
 UCLASS(Blueprintable)
@@ -36,6 +39,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ESBZHeistComplexity HeistComplexity;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ESBZHeistPlaystyle HeistPlaystyle;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bHasIntroSequence;
@@ -63,6 +69,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText HeistDescription;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FText HeistInspectDescription;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UPaperSprite> HeistDisplayIcon;
@@ -109,7 +118,20 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<USBZStatisticCriteriaData*> StatisticCriteriaDataArray;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<USBZPersonalStatisticCriteriaData*> PersonalStatisticCriteriaDataArray;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USBZStatisticCriteriaData* HostageTradeStatistiCriteriaData;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<USBZPlayerCharacterData*> LockedCharacterArray;
+    
     UPD3HeistDataAsset();
+
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    void GetOverallPayout(int32& OutMin, int32& OutMax) const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetHeistTimeShort() const;
     

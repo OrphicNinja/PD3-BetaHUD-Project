@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTDecorator -FallbackName=BTDecorator
+#include "BehaviorTree/BTDecorator.h"
 #include "SBZBTDecorator_SendAIMessage.generated.h"
 
 UCLASS(Blueprintable)
@@ -13,5 +13,6 @@ protected:
     
 public:
     USBZBTDecorator_SendAIMessage();
+
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=FastArraySerializerItem -FallbackName=FastArraySerializerItem
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "Engine/NetSerialization.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "EPlayerReadyStatusValue.h"
 #include "ESBZFirstPartyPlatform.h"
 #include "ESBZPlatform.h"

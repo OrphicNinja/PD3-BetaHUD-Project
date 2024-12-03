@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/Object.h"
+#include "GameplayTagContainer.h"
 #include "EPD3HeistState.h"
 #include "PD3VehicleSpawnRequest.h"
 #include "SBZDamageEvent.h"
@@ -41,10 +41,14 @@ private:
     TArray<FPD3VehicleSpawnRequest> VehicleSpawnRequests;
     
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
-    float ThrowableTypeCooldown[5];
+    float ThrowableTypeCooldown[6];
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float BuddySystemAdditionalSpecials;
     
 public:
     UPD3AssaultManager();
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void StartEndlessAssault();
     
@@ -58,6 +62,12 @@ public:
     void SetAssaultActive(bool bIsActive);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void SetAdditionalTimeScoreWeight(float InWeight);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void SetAdditionalDistanceScoreWeight(float InWeight);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void RequestVehicleSpawn(USBZAssaultVehicleSpawnerData* VehicleData, ASBZSpline* EnterSpline, ASBZSpline* ExitSpline);
     
 private:
@@ -66,9 +76,6 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnPawnSpawned(USBZSpawnManager* SpawnManager, APawn* Pawn);
-    
-    UFUNCTION(BlueprintCallable)
-    void OnPawnKilled(APawn* Pawn);
     
     UFUNCTION(BlueprintCallable)
     void OnHeistStateChanged(EPD3HeistState OldState, EPD3HeistState NewState);

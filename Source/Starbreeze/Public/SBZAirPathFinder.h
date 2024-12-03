@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AISubsystem -FallbackName=AISubsystem
+#include "AISubsystem.h"
 #include "SBZAirPathFinder.generated.h"
 
 class ASBZAirNavigation;
@@ -15,5 +15,6 @@ protected:
     
 public:
     USBZAirPathFinder();
+
 };
 

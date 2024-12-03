@@ -1,5 +1,17 @@
 #include "SBZCheatManagerMainMenu.h"
 
+USBZCheatManagerMainMenu::USBZCheatManagerMainMenu() {
+    this->MenuInputComponent = NULL;
+    this->SelectedMaskSprayCanData[0] = NULL;
+    this->SelectedMaskSprayCanData[1] = NULL;
+    this->SelectedMaskSprayCanData[2] = NULL;
+    this->SelectedMaskSprayCanData[3] = NULL;
+    this->SelectedMaskSprayCanData[4] = NULL;
+    this->SuitPartConfigs[0] = NULL;
+    this->SuitPartConfigs[1] = NULL;
+    this->SuitPartConfigs[2] = NULL;
+}
+
 void USBZCheatManagerMainMenu::WriteAchievement(const FString& AchievementId) {
 }
 
@@ -15,9 +27,6 @@ void USBZCheatManagerMainMenu::UnlockCharacterForTutorial() {
 void USBZCheatManagerMainMenu::SyncDLC() {
 }
 
-void USBZCheatManagerMainMenu::SimulateProgressivePriceResetEveryMinute() {
-}
-
 void USBZCheatManagerMainMenu::SimulateForeground() {
 }
 
@@ -25,6 +34,9 @@ void USBZCheatManagerMainMenu::SetSecondaryWeaponLoadout(uint32 LoadoutIndex, ui
 }
 
 void USBZCheatManagerMainMenu::SetPrimaryWeaponLoadout(uint32 LoadoutIndex, uint32 ConfigSlotIndex) {
+}
+
+void USBZCheatManagerMainMenu::SetLoadoutName(const int32 LoadoutIndex, const FString& LoadoutName) {
 }
 
 void USBZCheatManagerMainMenu::SetEquippiedSuitInventoryIndex(uint32 ConfigSlotIndex) {
@@ -69,6 +81,9 @@ void USBZCheatManagerMainMenu::RemoveCharacterFromSelectedSlot(int32 SlotIndex) 
 void USBZCheatManagerMainMenu::RemoveAsset() {
 }
 
+void USBZCheatManagerMainMenu::RefreshDailyChallenges() {
+}
+
 void USBZCheatManagerMainMenu::QueryAchivements() {
 }
 
@@ -76,6 +91,9 @@ void USBZCheatManagerMainMenu::PurchaseRealMoneyItems(const FString& ItemId) {
 }
 
 void USBZCheatManagerMainMenu::PurchaseItem(const FString& ItemId) {
+}
+
+void USBZCheatManagerMainMenu::PrintNews(ESBZOnlineCode ErrorCode, const TArray<FSBZNewsDataUIEntry>& NewsFeedList) {
 }
 
 void USBZCheatManagerMainMenu::LockCharacterForTutorial() {
@@ -114,6 +132,9 @@ void USBZCheatManagerMainMenu::DumpWeaponWeaponPartProgressionArray(const FStrin
 void USBZCheatManagerMainMenu::DumpWeaponSlotToWeaponPartMap(const FString& ItemId) {
 }
 
+void USBZCheatManagerMainMenu::DumpWeaponSlotEntitlementSkuDlcMap() const {
+}
+
 void USBZCheatManagerMainMenu::DumpSteamItems() {
 }
 
@@ -138,13 +159,28 @@ void USBZCheatManagerMainMenu::DumpPlayerSkills() {
 void USBZCheatManagerMainMenu::DumpPlayerSkillPoints() {
 }
 
+void USBZCheatManagerMainMenu::DumpPartyMemberLoadout() {
+}
+
 void USBZCheatManagerMainMenu::DumpOwnedHeists() {
 }
 
 void USBZCheatManagerMainMenu::DumpNextResetTime() {
 }
 
+void USBZCheatManagerMainMenu::DumpNews() {
+}
+
+void USBZCheatManagerMainMenu::DumpMaskOfTheWeek() {
+}
+
+void USBZCheatManagerMainMenu::DumpLoadoutName(const int32 LoadoutIndex) {
+}
+
 void USBZCheatManagerMainMenu::DumpItemsProgressions() {
+}
+
+void USBZCheatManagerMainMenu::DumpIsQuickPlayEnabled() {
 }
 
 void USBZCheatManagerMainMenu::DumpInventoryItems() {
@@ -157,6 +193,9 @@ void USBZCheatManagerMainMenu::DumpEntitlementSkuFromDLCButNotOwnedArray() const
 }
 
 void USBZCheatManagerMainMenu::DumpDLCRewards() const {
+}
+
+void USBZCheatManagerMainMenu::DumpDailyChallenges() {
 }
 
 void USBZCheatManagerMainMenu::DumpCurrentRenownLevel() {
@@ -255,15 +294,7 @@ void USBZCheatManagerMainMenu::ApplyAsset(const FString& ItemSku) {
 void USBZCheatManagerMainMenu::AddUniquePartToWeaponConfig(uint32 SlotIndex, const FString& SlotName, const FString& WeaponPartName) {
 }
 
-USBZCheatManagerMainMenu::USBZCheatManagerMainMenu() {
-    this->MenuInputComponent = NULL;
-    this->SelectedMaskSprayCanData[0] = NULL;
-    this->SelectedMaskSprayCanData[1] = NULL;
-    this->SelectedMaskSprayCanData[2] = NULL;
-    this->SelectedMaskSprayCanData[3] = NULL;
-    this->SelectedMaskSprayCanData[4] = NULL;
-    this->SuitPartConfigs[0] = NULL;
-    this->SuitPartConfigs[1] = NULL;
-    this->SuitPartConfigs[2] = NULL;
+void USBZCheatManagerMainMenu::AddOwnedDLCAndPopulateEntitlementDisabledArray(const FString& DLCNameCommaList) {
 }
+
 

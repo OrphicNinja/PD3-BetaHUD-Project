@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Slate -ObjectName=InputChord -FallbackName=InputChord
+#include "Framework/Commands/InputChord.h"
 #include "SBZSettingsButton.h"
 #include "SBZSettingsButtonKeyboardBinding.generated.h"
 
@@ -23,6 +23,7 @@ protected:
     
 public:
     USBZSettingsButtonKeyboardBinding();
+
     UFUNCTION(BlueprintCallable)
     void SetSecondaryBinding(FInputChord InBinding);
     

@@ -1,7 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-#include "SBZFriendListEntry.h"
+#include "UObject/Object.h"
 #include "SBZPlatformsBlockedPlayersInfo.h"
 #include "SBZBlockedPlayerManager.generated.h"
 
@@ -17,12 +16,13 @@ private:
     
 public:
     USBZBlockedPlayerManager();
+
 private:
     UFUNCTION(BlueprintCallable)
-    void XsxBlockListChangeTimer();
+    void OnPlatformUserInitialized();
     
     UFUNCTION(BlueprintCallable)
-    void OnPlatformUserInitialized();
+    void OnMatchInfoUpdated();
     
     UFUNCTION(BlueprintCallable)
     void OnBlockedPlayersUpdated();
@@ -30,9 +30,6 @@ private:
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsPlayerBlocked(const FString& PlayerId) const;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    TMap<FString, FSBZFriendListEntry> GetBlockedPlayers() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static USBZBlockedPlayerManager* Get(const UObject* WorldContextObject);

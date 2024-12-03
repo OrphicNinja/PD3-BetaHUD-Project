@@ -1,16 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ESpawnActorCollisionHandlingMethod -FallbackName=ESpawnActorCollisionHandlingMethod
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=LatentActionInfo -FallbackName=LatentActionInfo
+#include "Engine/EngineTypes.h"
+#include "Engine/LatentActionManager.h"
 #include "SBZKilledPawnSpawnPredefinedDelegateDelegate.h"
 #include "SBZPawnSpawnBase.h"
 #include "SBZPawnSpawnRequest.h"
 #include "SBZPawnSpawnRequestHandle.h"
 #include "SBZSpawnRequestCompletedDelegateDelegate.h"
+#include "Templates/SubclassOf.h"
 #include "SBZPawnSpawnPredefined.generated.h"
 
 class AActor;
-class APawn;
+class ASBZCarriedStaticInteractionActor;
 
 UCLASS(Blueprintable)
 class ASBZPawnSpawnPredefined : public ASBZPawnSpawnBase {
@@ -29,6 +30,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bEnableRandomMeshScale;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<ASBZCarriedStaticInteractionActor> SpawnLootClass;
+    
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSBZKilledPawnSpawnPredefinedDelegate KilledPawnDelegate;
     
@@ -42,16 +46,19 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSBZPawnSpawnRequest PredefinedPawnRequest;
     
-    ASBZPawnSpawnPredefined();
+    ASBZPawnSpawnPredefined(const FObjectInitializer& ObjectInitializer);
+
+    UFUNCTION(BlueprintCallable)
+    void SpawnPredefinedMulti();
+    
     UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
     void SpawnPredefinedLatent(FLatentActionInfo LatentInfo);
     
     UFUNCTION(BlueprintCallable)
     FSBZPawnSpawnRequestHandle SpawnPredefined();
     
-private:
-    UFUNCTION(BlueprintCallable)
-    void OnSpawnedPawnKilled(APawn* Pawn);
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnSelectedTick();
     
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AnimGraphRuntime -ObjectName=EBoneModificationMode -FallbackName=EBoneModificationMode
+#include "BoneControllers/AnimNode_ModifyBone.h"
 #include "SBZBuiltInAnimMontageValueTrack.h"
 #include "SBZBuiltInAnimMontageBoneTrack.generated.h"
 

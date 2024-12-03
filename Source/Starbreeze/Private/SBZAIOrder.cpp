@@ -1,14 +1,5 @@
 #include "SBZAIOrder.h"
 
-
-
-
-
-
-bool USBZAIOrder::ExecPredicate_Implementation(const ASBZAIController* AIController) const {
-    return false;
-}
-
 USBZAIOrder::USBZAIOrder() {
     this->bShouldRemoveTagsOnStopped = true;
     this->Mode = ESBZAIOrderMode::Deferred;
@@ -22,4 +13,14 @@ USBZAIOrder::USBZAIOrder() {
     this->TargetActor = NULL;
     this->bCompleteOnStop = false;
 }
+
+
+
+
+
+
+bool USBZAIOrder::ExecPredicate_Implementation(const UObject* Owner) const {
+    return false;
+}
+
 

@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=DeveloperSettings -ObjectName=DeveloperSettings -FallbackName=DeveloperSettings
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
+#include "Engine/DeveloperSettings.h"
+#include "Engine/EngineTypes.h"
 #include "SBZAccelByteAdminHelper.generated.h"
 
 class USBZMetaDataLoader;
 
-UCLASS(Blueprintable, Config=Engine, DefaultConfig, Config=Starbreeze)
+UCLASS(Blueprintable, DefaultConfig, Config=Starbreeze)
 class STARBREEZE_API USBZAccelByteAdminHelper : public UDeveloperSettings {
     GENERATED_BODY()
 public:
@@ -31,6 +31,7 @@ private:
     
 public:
     USBZAccelByteAdminHelper();
+
     UFUNCTION(BlueprintCallable)
     void CheckLogoutDone(const FString& Email, const FString& Username, const FString& Password);
     

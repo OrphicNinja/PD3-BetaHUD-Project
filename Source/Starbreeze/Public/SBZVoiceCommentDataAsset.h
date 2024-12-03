@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
+#include "GameplayTagContainer.h"
 #include "ESBZVoiceEvent.h"
 #include "SBZGlobalVoiceCommentPermission.h"
 #include "SBZVoiceCommentDataAsset.generated.h"
@@ -33,5 +33,6 @@ public:
     FGameplayTagContainer BlockingTags;
     
     USBZVoiceCommentDataAsset();
+
 };
 

@@ -20,6 +20,7 @@ protected:
     
 public:
     USBZMenuStackWidget();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnStackStateChanged(FSBZUIStackChangedEvent UIStackStateChangedEvent);

@@ -4,10 +4,11 @@
 
 UENUM(BlueprintType)
 enum class ESBZOnlineJoinType : uint8 {
-    Debug,
+    Debug_DEPRECATED,
     Public,
     Private,
     FriendsOnly,
     InviteOnly,
+    Default = Public,
 };
 

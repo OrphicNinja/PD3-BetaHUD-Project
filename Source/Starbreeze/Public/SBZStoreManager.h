@@ -1,7 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Guid -FallbackName=Guid
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/NoExportTypes.h"
+#include "UObject/Object.h"
+#include "SBZMaskMouldStoreItem.h"
 #include "SBZPayDayCreditStoreItem.h"
 #include "SBZPlayerStoreItemData.h"
 #include "SBZStoreBaseItem.h"
@@ -32,6 +33,10 @@ private:
     
 public:
     USBZStoreManager();
+
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static USBZStoreManager* GetStoreManagerChecked(const UObject* WorldContextObject);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static USBZStoreManager* GetStoreManager(const UObject* WorldContextObject);
     
@@ -40,6 +45,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetInfamyLevelItemUnlockCount(int32 InfamyLevel) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FSBZMaskMouldStoreItem GetCurrentMaskOfTheWeekStoreItem() const;
     
 };
 

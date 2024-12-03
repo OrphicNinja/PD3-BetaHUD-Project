@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "SBZGameplayTagContainerComparison.h"
 #include "SBZGameplayAbilityQueryLibrary.generated.h"
 
@@ -14,6 +14,7 @@ class USBZGameplayAbilityQueryLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     USBZGameplayAbilityQueryLibrary();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool QueryGameplayTagContainerFromAbilitySystemComponent(UAbilitySystemComponent* AbilitySystem, const FSBZGameplayTagContainerComparison& Comparison);
     

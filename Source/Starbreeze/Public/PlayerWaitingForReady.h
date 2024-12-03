@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "Engine/EngineTypes.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "PlayerWaitingForReady.generated.h"
 
 USTRUCT(BlueprintType)

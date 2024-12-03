@@ -8,6 +8,10 @@ class USBZPartyManagerABV2 : public USBZPartyManagerAB {
     GENERATED_BODY()
 public:
     USBZPartyManagerABV2();
+
+    UFUNCTION(BlueprintCallable)
+    void OnStateEntered(FName StateName);
+    
 private:
     UFUNCTION(BlueprintCallable)
     void OnConfirmPartyLeaderLeft(FName ClosingActionName);
@@ -19,6 +23,9 @@ public:
 protected:
     UFUNCTION(BlueprintCallable)
     void HandlePlatformUserChanged(int32 OldUserIndex);
+    
+    UFUNCTION(BlueprintCallable)
+    void HandleNotLoggedInEntered();
     
 };
 

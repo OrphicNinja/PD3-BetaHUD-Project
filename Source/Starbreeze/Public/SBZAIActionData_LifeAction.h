@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GameplayTagContainer.h"
 #include "ESBZLifeActionDataExecutionMode.h"
 #include "SBZAIActionData.h"
 #include "SBZLifeActionRequest.h"
@@ -49,5 +49,6 @@ public:
     int32 CompleteOrderForResults;
     
     USBZAIActionData_LifeAction();
+
 };
 

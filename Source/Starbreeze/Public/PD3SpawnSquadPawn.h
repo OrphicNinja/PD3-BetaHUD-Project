@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "Engine/DataAsset.h"
+#include "GameplayTagContainer.h"
 #include "PD3SpawnSquadPawn.generated.h"
 
 class UPD3PawnVariation;
@@ -25,5 +25,6 @@ private:
     
 public:
     UPD3SpawnSquadPawn();
+
 };
 

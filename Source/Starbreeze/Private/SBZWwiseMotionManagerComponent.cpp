@@ -1,9 +1,10 @@
 #include "SBZWwiseMotionManagerComponent.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AkAudio -ObjectName=AkComponent -FallbackName=AkComponent
+#include "AkComponent.h"
 
-USBZWwiseMotionManagerComponent::USBZWwiseMotionManagerComponent() {
+USBZWwiseMotionManagerComponent::USBZWwiseMotionManagerComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->AkComponent = CreateDefaultSubobject<UAkComponent>(TEXT("AkComponent"));
     this->RootComponent = NULL;
     this->WwiseMotionBusName = TEXT("Wwise_Motion_AD");
 }
+
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "GameFramework/OnlineReplStructs.h"
 #include "EBlackScreenTransitionType.h"
 #include "SBZClientStateMachineState.h"
 #include "SBZPlayerStateAddedEvent.h"
@@ -21,6 +21,7 @@ private:
     
 public:
     USBZStateMachineStateJobOverview();
+
     UFUNCTION(BlueprintCallable)
     void WaitForRandomizedRooms();
     
@@ -55,6 +56,9 @@ private:
     void OnPlayerBeginPlayState(ASBZPlayerController* PlayerController);
     
 public:
+    UFUNCTION(BlueprintCallable)
+    void OnLocalPlayerStateReady();
+    
     UFUNCTION(BlueprintCallable)
     void OnAllPlayersReady(EBlackScreenTransitionType BlackScreenTransitionType);
     

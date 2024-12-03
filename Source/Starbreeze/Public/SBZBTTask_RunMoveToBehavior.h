@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTTask_RunBehavior -FallbackName=BTTask_RunBehavior
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BlackboardKeySelector -FallbackName=BlackboardKeySelector
+#include "BehaviorTree/Tasks/BTTask_RunBehavior.h"
+#include "BehaviorTree/BehaviorTreeTypes.h"
 //CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SBZPathOffset -FallbackName=SBZPathOffset
 #include "Templates/SubclassOf.h"
 #include "SBZBTTask_RunMoveToBehavior.generated.h"
@@ -49,5 +49,6 @@ public:
     FSBZPathOffset PathOffset;
     
     USBZBTTask_RunMoveToBehavior();
+
 };
 

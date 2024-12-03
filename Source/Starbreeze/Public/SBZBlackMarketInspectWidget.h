@@ -50,6 +50,7 @@ protected:
     
 public:
     USBZBlackMarketInspectWidget();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SetInspectCamera(FName CameraName);

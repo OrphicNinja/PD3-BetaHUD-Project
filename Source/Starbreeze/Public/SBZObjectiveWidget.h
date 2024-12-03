@@ -1,10 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "ESBZObjectiveType.h"
+#include "ESBZTickingLootType.h"
 #include "SBZWidgetBase.h"
 #include "Templates/SubclassOf.h"
 #include "SBZObjectiveWidget.generated.h"
 
 class ASBZObjective;
+class ASBZTickingLootManager;
 class UPanelWidget;
 class UProgressBar;
 class URichTextBlock;
@@ -37,12 +40,23 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsTimed;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    ASBZTickingLootManager* TickingLootManagerPtr;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    ESBZObjectiveType ObjectiveType;
+    
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ASBZObjective* Objective;
     
 public:
     USBZObjectiveWidget();
+
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnTickingTypeChanged(ESBZTickingLootType InTickingLootType);
+    
 private:
     UFUNCTION(BlueprintCallable)
     void OnObjectiveUpdated();

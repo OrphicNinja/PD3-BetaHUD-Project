@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=InputCore -ObjectName=Key -FallbackName=Key
+#include "InputCoreTypes.h"
 #include "SBZDeveloperSettings.h"
 #include "SBZKeyPropertyModeData.h"
 #include "SBZLookInputSettings.h"
 #include "SBZPlayerSettings.generated.h"
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class USBZPlayerSettings : public USBZDeveloperSettings {
     GENERATED_BODY()
 public:
@@ -20,5 +20,6 @@ public:
     float RepeatDelay;
     
     USBZPlayerSettings();
+
 };
 

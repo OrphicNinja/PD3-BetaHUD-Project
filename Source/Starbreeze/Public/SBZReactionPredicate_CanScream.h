@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
+#include "UObject/NoExportTypes.h"
 #include "SBZReactionPredicate.h"
 #include "SBZReactionPredicate_CanScream.generated.h"
 
@@ -20,5 +20,6 @@ protected:
     
 public:
     USBZReactionPredicate_CanScream();
+
 };
 

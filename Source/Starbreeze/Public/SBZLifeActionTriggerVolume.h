@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TriggerBox -FallbackName=TriggerBox
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "Engine/TriggerBox.h"
+#include "GameplayTagContainer.h"
 #include "ESBZLifeActionStopReason.h"
 #include "SBZLifeActionEventDelegateDelegate.h"
 #include "SBZLifeActionStopEventDelegateDelegate.h"
@@ -68,7 +68,8 @@ protected:
     FSBZLifeActionStopEventDelegate OnCharacterSlotFreed;
     
 public:
-    ASBZLifeActionTriggerVolume();
+    ASBZLifeActionTriggerVolume(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetVolumeEnabled(bool bEnabled);
     

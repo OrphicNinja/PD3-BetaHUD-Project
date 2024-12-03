@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZCharacterEffectRuntime.h"
 #include "SBZUICharacterEffectComponent.generated.h"
 
@@ -13,6 +13,7 @@ private:
     TMap<uint32, FSBZCharacterEffectRuntime> CharacterEffectRuntimes;
     
 public:
-    USBZUICharacterEffectComponent();
+    USBZUICharacterEffectComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

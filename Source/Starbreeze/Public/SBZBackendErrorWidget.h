@@ -15,6 +15,7 @@ protected:
     
 public:
     USBZBackendErrorWidget();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetErrorText() const;
     

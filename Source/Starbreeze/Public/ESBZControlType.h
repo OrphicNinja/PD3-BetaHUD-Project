@@ -4,12 +4,16 @@
 
 UENUM(BlueprintType)
 enum class ESBZControlType : uint8 {
+    ActionClick,
     Toggle,
     MultipleChoice,
     FramerateChoice,
     GamepadPresetChoice,
     ResolutionChoice,
-    DLSSSRModeChoice,
+    AntiAliasingModeChoice,
+    UpscalerChoice,
+    UpscalingModeChoice,
+    FrameInterpolatorChoice,
     Slider,
     KeyboardInputBinding,
     GamepadInputBinding,

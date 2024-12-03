@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "SBZCharacterMovementSetting.h"
 #include "SBZCharacterMovementSettings.generated.h"
 
@@ -17,5 +17,6 @@ protected:
     
 public:
     USBZCharacterMovementSettings();
+
 };
 

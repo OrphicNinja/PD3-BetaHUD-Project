@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAttribute -FallbackName=GameplayAttribute
+#include "AttributeSet.h"
+#include "ESBZArmorChunkType.h"
 #include "PD3AttributePercentWidget.h"
 #include "PD3SegmentedPercentWidget.generated.h"
 
@@ -21,11 +22,21 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 NumberOfChunks;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsHealthBar;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<ESBZArmorChunkType> ArmorChunkTypeArray;
+    
 public:
     UPD3SegmentedPercentWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnTraumaRatioChanged(float StartOffset, float EndOffset);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnArmorChunkTypeArrayChanged();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BuildChunks();

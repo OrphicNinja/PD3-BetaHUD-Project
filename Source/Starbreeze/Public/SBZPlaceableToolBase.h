@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EEndPlayReason -FallbackName=EEndPlayReason
+#include "Engine/EngineTypes.h"
 #include "SBZTool.h"
 #include "SBZPlaceableToolBase.generated.h"
 
@@ -24,7 +24,8 @@ protected:
     USBZInteractableComponent* Interactable;
     
 public:
-    ASBZPlaceableToolBase();
+    ASBZPlaceableToolBase(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnServerCompleteInteraction(USBZBaseInteractableComponent* InInteractable, USBZInteractorComponent* Interactor, bool bIsLocallyControlledInteractor);

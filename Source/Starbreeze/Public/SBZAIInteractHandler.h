@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZAIInteractHandler.generated.h"
 
 class USBZBaseInteractableComponent;
@@ -18,6 +18,7 @@ public:
     USBZInteractorComponent* Interactor;
     
     USBZAIInteractHandler();
+
     UFUNCTION(BlueprintCallable)
     void OnInteractionStarted(USBZBaseInteractableComponent* InInteractable, USBZInteractorComponent* InInteractor, bool bInIsLocallyControlled);
     

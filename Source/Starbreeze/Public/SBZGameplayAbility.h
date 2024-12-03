@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAbility -FallbackName=GameplayAbility
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "Abilities/GameplayAbility.h"
+#include "GameplayTagContainer.h"
 #include "ESBZAbilityInput.h"
 #include "SBZGameplayAbility.generated.h"
 
 UCLASS(Blueprintable)
-class USBZGameplayAbility : public UGameplayAbility {
+class STARBREEZE_API USBZGameplayAbility : public UGameplayAbility {
     GENERATED_BODY()
 public:
 protected:
@@ -32,7 +32,7 @@ protected:
     FGameplayTagContainer QueuedOwnerTags;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    uint8 bIsInputToggledOnActivationOnly: 1;
+    uint8 bIsCancelToggleOnInputPressed: 1;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     uint8 bIsCancelOnInputReleased: 1;
@@ -54,5 +54,6 @@ protected:
     
 public:
     USBZGameplayAbility();
+
 };
 

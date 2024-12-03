@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZAIShieldCoverAttachPoint.generated.h"
 
 class APawn;
@@ -18,6 +18,7 @@ private:
     TArray<ASBZAIShieldCoverAttachPoint*> BlockingCovers;
     
 public:
-    ASBZAIShieldCoverAttachPoint();
+    ASBZAIShieldCoverAttachPoint(const FObjectInitializer& ObjectInitializer);
+
 };
 

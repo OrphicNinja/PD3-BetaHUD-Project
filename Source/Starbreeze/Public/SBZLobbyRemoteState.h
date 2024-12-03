@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Info -FallbackName=Info
+#include "GameFramework/Info.h"
 #include "OnOnlineSessionEventDelegateDelegate.h"
 #include "SBZLobbyCharacterInfo.h"
 #include "SBZLobbyRemoteState.generated.h"
 
-UCLASS(Blueprintable, NotPlaceable, Transient)
+UCLASS(Blueprintable, NotPlaceable, Transient, Config=Engine)
 class STARBREEZE_API ASBZLobbyRemoteState : public AInfo {
     GENERATED_BODY()
 public:
@@ -29,9 +29,10 @@ private:
     int32 LobbyTimeout;
     
 public:
-    ASBZLobbyRemoteState();
+    ASBZLobbyRemoteState(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnRep_LobbyTimeout();

@@ -19,6 +19,7 @@ protected:
     
 public:
     USBZSettingsButtonTwoChoice();
+
     UFUNCTION(BlueprintCallable)
     void SetToggleValue(bool bIsToggled);
     

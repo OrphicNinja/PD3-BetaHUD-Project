@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector2D -FallbackName=Vector2D
+#include "UObject/NoExportTypes.h"
 #include "SBZWidgetBase.h"
 #include "SBZMainMenuDamageFalloffWidget.generated.h"
 
@@ -28,6 +28,7 @@ protected:
     
 public:
     USBZMainMenuDamageFalloffWidget();
+
     UFUNCTION(BlueprintCallable)
     void SetFireData(const USBZPlayerWeaponFireData* InFireData);
     

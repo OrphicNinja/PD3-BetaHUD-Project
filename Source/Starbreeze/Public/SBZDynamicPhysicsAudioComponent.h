@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AkAudio -ObjectName=AkComponent -FallbackName=AkComponent
+#include "AkComponent.h"
 #include "SBZDynamicPhysicsAudioComponent.generated.h"
 
 class UAkAudioEvent;
@@ -54,6 +54,7 @@ protected:
     
 public:
     USBZDynamicPhysicsAudioComponent();
+
     UFUNCTION(BlueprintCallable)
     void UpdateRollingVelocity(float Value);
     

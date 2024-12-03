@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "SBZKeyItemData.generated.h"
 
 class UPaperSprite;
@@ -16,5 +16,6 @@ public:
     UPaperSprite* KeyItemIcon;
     
     USBZKeyItemData();
+
 };
 

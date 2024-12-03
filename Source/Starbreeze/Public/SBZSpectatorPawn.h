@@ -1,12 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SpectatorPawn -FallbackName=SpectatorPawn
+#include "GameFramework/SpectatorPawn.h"
 #include "SBZSpectatorPawn.generated.h"
 
 UCLASS(Blueprintable)
 class ASBZSpectatorPawn : public ASpectatorPawn {
     GENERATED_BODY()
 public:
-    ASBZSpectatorPawn();
+    ASBZSpectatorPawn(const FObjectInitializer& ObjectInitializer);
+
 };
 

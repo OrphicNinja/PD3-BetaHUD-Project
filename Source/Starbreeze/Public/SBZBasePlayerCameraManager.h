@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=PlayerCameraManager -FallbackName=PlayerCameraManager
+#include "Camera/PlayerCameraManager.h"
 #include "SBZBasePlayerCameraManager.generated.h"
 
 class UAkComponent;
@@ -12,6 +12,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     TArray<UAkComponent*> DefaultListenerComponentArray;
     
-    ASBZBasePlayerCameraManager();
+    ASBZBasePlayerCameraManager(const FObjectInitializer& ObjectInitializer);
+
 };
 

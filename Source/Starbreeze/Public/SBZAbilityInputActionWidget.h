@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAbilitySpecHandle -FallbackName=GameplayAbilitySpecHandle
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "GameplayAbilitySpec.h"
+#include "GameplayTagContainer.h"
 #include "SBZPlayerStateWidgetBase.h"
 #include "SBZAbilityInputActionWidget.generated.h"
 
@@ -32,6 +32,7 @@ private:
     
 public:
     USBZAbilityInputActionWidget();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnPlayerStateDestroyed(AActor* DestroyedActor);

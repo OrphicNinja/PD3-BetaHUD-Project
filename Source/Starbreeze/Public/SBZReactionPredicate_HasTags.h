@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GameplayTagContainer.h"
 #include "ESBZPredicateQueryTarget.h"
 #include "ESBZTagsQuerySetting.h"
 #include "SBZReactionPredicate.h"
@@ -22,5 +22,6 @@ protected:
     
 public:
     USBZReactionPredicate_HasTags();
+
 };
 

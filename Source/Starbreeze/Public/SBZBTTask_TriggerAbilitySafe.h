@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTTaskNode -FallbackName=BTTaskNode
+#include "BehaviorTree/BTTaskNode.h"
 #include "ESBZAbilityInput.h"
 #include "SBZBTTask_TriggerAbilitySafe.generated.h"
 
@@ -23,5 +23,6 @@ protected:
     
 public:
     USBZBTTask_TriggerAbilitySafe();
+
 };
 

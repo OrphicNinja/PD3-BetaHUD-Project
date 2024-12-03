@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector2D -FallbackName=Vector2D
+#include "UObject/NoExportTypes.h"
 #include "SBZEquippablePartDataAsset.h"
 #include "SBZWeaponDecalData.generated.h"
 
@@ -23,5 +23,6 @@ public:
     FVector2D DecalTexturePosition;
     
     USBZWeaponDecalData();
+
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=IntPoint -FallbackName=IntPoint
+#include "UObject/NoExportTypes.h"
 #include "SBZSettingsButtonMultipleChoice.h"
 #include "SBZSettingsButtonResolutionChoice.generated.h"
 
@@ -14,6 +14,7 @@ protected:
     
 public:
     USBZSettingsButtonResolutionChoice();
+
     UFUNCTION(BlueprintCallable)
     void SetOptionResolutions(const TArray<FIntPoint>& InOptionResolutions);
     

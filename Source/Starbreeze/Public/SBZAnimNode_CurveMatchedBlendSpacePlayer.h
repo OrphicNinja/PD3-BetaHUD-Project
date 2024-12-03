@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AnimNode_AssetPlayerBase -FallbackName=AnimNode_AssetPlayerBase
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlendFilter -FallbackName=BlendFilter
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlendSampleData -FallbackName=BlendSampleData
+#include "Animation/AnimNode_AssetPlayerBase.h"
+#include "Animation/AnimationAsset.h"
+#include "Animation/AnimationAsset.h"
 #include "SBZAnimNode_CurveMatchedBlendSpacePlayer.generated.h"
 
 class UBlendSpaceBase;
@@ -33,7 +33,7 @@ public:
     float PlayRate;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     FBlendFilter BlendFilter;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

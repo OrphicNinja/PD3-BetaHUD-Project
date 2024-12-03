@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "ESBZVehicleDoorState.h"
 #include "SBZVehicleDoorAnimationContainer.h"
 #include "SBZVehicleAnimationCollection.generated.h"
@@ -15,5 +15,6 @@ protected:
     
 public:
     USBZVehicleAnimationCollection();
+
 };
 

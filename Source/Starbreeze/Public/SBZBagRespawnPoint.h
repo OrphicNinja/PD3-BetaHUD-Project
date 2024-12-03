@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZBagRespawnPoint.generated.h"
 
 UCLASS(Blueprintable)
@@ -12,7 +12,8 @@ protected:
     bool bStartEnabled;
     
 public:
-    ASBZBagRespawnPoint();
+    ASBZBagRespawnPoint(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void EnableBagRespawnPoint();
     

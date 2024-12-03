@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AISightTargetInterface -FallbackName=AISightTargetInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=GenericTeamAgentInterface -FallbackName=GenericTeamAgentInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=GenericTeamId -FallbackName=GenericTeamId
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Transform -FallbackName=Transform
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Character -FallbackName=Character
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=AbilitySystemInterface -FallbackName=AbilitySystemInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagAssetInterface -FallbackName=GameplayTagAssetInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "Perception/AISightTargetInterface.h"
+#include "GenericTeamAgentInterface.h"
+#include "GenericTeamAgentInterface.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Character.h"
+#include "Engine/EngineTypes.h"
+#include "AbilitySystemInterface.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
+#include "GameplayTagContainer.h"
 #include "EPD3HeistState.h"
 #include "ESBZAIVisibilityNodeComputationFrequency.h"
 #include "ESBZCharacterStance.h"
@@ -35,6 +35,7 @@
 #include "SBZPawnInterface.h"
 #include "SBZPawnLifetime.h"
 #include "SBZProjectileInterface.h"
+#include "SBZReplicatedEquippableState.h"
 #include "SBZReplicatedMontage.h"
 #include "SBZReplicatedReloadState.h"
 #include "SBZRoomVolumeInterface.h"
@@ -63,6 +64,7 @@ class UAnimInstance;
 class UAnimMontage;
 class UAnimSequence;
 class UDamageType;
+class UGameplayEffect;
 class UPaperSprite;
 class UPhysicalMaterial;
 class UPhysicsAsset;
@@ -141,6 +143,9 @@ public:
     FName ZiplineAttachmentBone;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayTagContainer ForbidZipLineAdditiveMontageTags;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSBZCharacterMeshScaleData MeshScaleData;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_RandomMeshScaleEnabled, meta=(AllowPrivateAccess=true))
@@ -177,6 +182,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     uint8 bIsRagdolled: 1;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint8 bIsDeathAllowed: 1;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     uint8 bIsLocallyControlled: 1;
     
@@ -188,12 +196,6 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     uint8 bIsTargeting: 1;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    uint8 bIsHurtReactionScope: 1;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    uint8 bIsHurtReactionScopeStackAllowedOnce: 1;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     uint8 bIsPlayReady: 1;
@@ -215,6 +217,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ReplicatedReloadState, meta=(AllowPrivateAccess=true))
     FSBZReplicatedReloadState ReplicatedReloadState;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ReplicatedEquippableState, meta=(AllowPrivateAccess=true))
+    FSBZReplicatedEquippableState ReplicatedEquippableState;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ESBZReloadState StartReloadState;
@@ -453,6 +458,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UPhysicsAsset* PhysicsAssetWhenNotCarried;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UAnimInstance> AnimClassWhenCarriedDead;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_HumanShieldInstigatorState, meta=(AllowPrivateAccess=true))
     ESBZHumanShieldInstigatorState HumanShieldInstigatorState;
     
@@ -507,6 +515,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer HitImmunityGrantingTags;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UGameplayEffect> MarkedGameplayEffectClass;
+    
 private:
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 HurtReactionOffset[24];
@@ -557,14 +568,18 @@ private:
     TArray<ASBZGrenadeProjectile*> ReplicatedGrenadeProjectileArray;
     
 public:
-    ASBZCharacter();
+    ASBZCharacter(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetStance(ESBZCharacterStance InStance);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_TransferBagFrom(ASBZCharacter* ToCharacter);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_ThrowBag(const FVector& ReplicatedVelocity);
     
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
@@ -618,6 +633,9 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     void OnRep_ReplicatedReloadState(const FSBZReplicatedReloadState& OldReplicatedReloadState);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_ReplicatedEquippableState();
     
 public:
     UFUNCTION(BlueprintCallable)
@@ -677,6 +695,9 @@ public:
     void Multicast_SnapVictimOntoInstigator(const FVector& SnapLocation, const ASBZCharacter* HSInstigator);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetThrowBagAnimationActive(bool bActive);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetStance(ESBZCharacterStance NewStance);
     
 protected:
@@ -731,7 +752,7 @@ public:
     
 protected:
     UFUNCTION(NetMulticast, Reliable)
-    void Multicast_OnThrowCarryActor(uint32 NetID);
+    void Multicast_OnThrowCarryActor(uint32 NetID, bool bInIsCarriedLastHitByIgnored);
     
     UFUNCTION(NetMulticast, Reliable)
     void Multicast_OnPickupCarryActor(uint32 NetID);
@@ -742,11 +763,6 @@ protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_HumanShieldInstigatorSlotReached();
     
-public:
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void Multicast_ExplodedInHand(int32 Index);
-    
-protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_EnableThrowState();
     
@@ -801,7 +817,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void AddLooseGameplayTag(const FGameplayTag& GameplayTag, int32 Count);
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     bool HasMatchingGameplayTag(FGameplayTag TagToCheck) const override PURE_VIRTUAL(HasMatchingGameplayTag, return false;);
@@ -814,6 +830,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const override PURE_VIRTUAL(GetOwnedGameplayTags,);
+    
+    UFUNCTION(BlueprintCallable)
+    UAbilitySystemComponent* GetAbilitySystemComponent() const override;
     
 };
 

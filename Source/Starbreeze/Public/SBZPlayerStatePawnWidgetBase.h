@@ -15,6 +15,7 @@ protected:
     
 public:
     USBZPlayerStatePawnWidgetBase();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsWidgetPawnLocallyControlled() const;
     

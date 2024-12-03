@@ -1,11 +1,9 @@
 #include "SBZSeasonalEventItemExploding.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SceneComponent -FallbackName=SceneComponent
+#include "Components/SceneComponent.h"
 #include "SBZExplosionDamageType.h"
 
-void ASBZSeasonalEventItemExploding::Multicast_ReplicateExplosion_Implementation(const FSBZExplosionResult& Result) {
-}
-
-ASBZSeasonalEventItemExploding::ASBZSeasonalEventItemExploding() {
+ASBZSeasonalEventItemExploding::ASBZSeasonalEventItemExploding(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
     this->ExplosionSoundEvent = NULL;
     this->ExplosionDelay = 0.10f;
     this->AIExplosionRadius = 500.00f;
@@ -21,5 +19,10 @@ ASBZSeasonalEventItemExploding::ASBZSeasonalEventItemExploding() {
     this->LocalPlayerFeedback = NULL;
     this->ExplosionInstigator = NULL;
     this->ExplosionLocation = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
+    this->ExplosionLocation->SetupAttachment(RootComponent);
 }
+
+void ASBZSeasonalEventItemExploding::Multicast_ReplicateExplosion_Implementation(const FSBZExplosionResult& Result) {
+}
+
 

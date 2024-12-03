@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "ESBZMaintenanceBoxState.h"
 #include "SBZMaintenanceBoxBoolDelegateDelegate.h"
 #include "SBZMaintenanceBoxDelegateDelegate.h"
@@ -97,9 +97,10 @@ protected:
     bool bHasTriggeredSearch;
     
 public:
-    ASBZConnectedMaintenanceBox();
+    ASBZConnectedMaintenanceBox(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetEnabled(bool bEnabled);
     

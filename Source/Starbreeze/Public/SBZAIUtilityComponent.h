@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZAIUtilityComponent.generated.h"
 
 class APawn;
@@ -8,7 +8,7 @@ class ASBZAIController;
 class USBZAIUtilityData;
 class USBZAIUtilityDecider;
 
-UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, Config=Engine, meta=(BlueprintSpawnableComponent))
 class STARBREEZE_API USBZAIUtilityComponent : public UActorComponent {
     GENERATED_BODY()
 public:
@@ -42,6 +42,7 @@ private:
     USBZAIUtilityDecider* CachedTopDecider;
     
 public:
-    USBZAIUtilityComponent();
+    USBZAIUtilityComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

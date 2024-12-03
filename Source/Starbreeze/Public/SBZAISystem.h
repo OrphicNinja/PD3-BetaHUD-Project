@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AISystem -FallbackName=AISystem
+#include "AISystem.h"
 #include "SBZAISystem.generated.h"
 
 class USBZAirPathFinder;
@@ -14,6 +14,7 @@ protected:
     USBZAirPathFinder* AirPathFinder;
     
 public:
-    USBZAISystem();
+    USBZAISystem(const class FObjectInitializer& ObjectInitializer);
+
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZSuitConfig.h"
 #include "SBZSuitCustomizationComponent.generated.h"
 
@@ -18,7 +18,8 @@ private:
     FSBZSuitConfig SuitConfig;
     
 public:
-    USBZSuitCustomizationComponent();
+    USBZSuitCustomizationComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetSuitConfig(const FSBZSuitConfig& Config);
     

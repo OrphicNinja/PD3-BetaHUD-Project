@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "Templates/SubclassOf.h"
 #include "SBZAIOrderDebugBlueprintLibrary.generated.h"
 
@@ -12,6 +12,7 @@ class USBZAIOrderDebugBlueprintLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     USBZAIOrderDebugBlueprintLibrary();
+
     UFUNCTION(BlueprintCallable)
     static void SetOrderToAllSquads(UObject* ContextObject, TSubclassOf<USBZAISquadOrder> AIOrder);
     

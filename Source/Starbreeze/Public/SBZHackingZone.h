@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
+#include "GameFramework/Actor.h"
+#include "Engine/EngineTypes.h"
 #include "SBZHackingZone.generated.h"
 
 class UPrimitiveComponent;
@@ -25,9 +25,10 @@ protected:
     float ActiveTime;
     
 public:
-    ASBZHackingZone();
+    ASBZHackingZone(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_ZoneEnabled();

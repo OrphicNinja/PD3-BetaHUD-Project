@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EEndPlayReason -FallbackName=EEndPlayReason
+#include "Engine/EngineTypes.h"
 #include "SBZObjectContainer.h"
 #include "SBZActorContainer.generated.h"
 
@@ -11,6 +11,7 @@ class USBZActorContainer : public USBZObjectContainer {
     GENERATED_BODY()
 public:
     USBZActorContainer();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnActorEndPlay(AActor* Actor, TEnumAsByte<EEndPlayReason::Type> EndPlayReason);

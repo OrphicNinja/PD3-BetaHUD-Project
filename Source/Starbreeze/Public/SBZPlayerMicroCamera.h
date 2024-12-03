@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Vector_NetQuantizeNormal -FallbackName=Vector_NetQuantizeNormal
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
+#include "Engine/NetSerialization.h"
 #include "SBZCameraViewInterface.h"
 #include "SBZPlayerMicroCamera.generated.h"
 
@@ -40,9 +40,10 @@ private:
     TArray<int32> ViewTargetPlayerStateIdArray;
     
 public:
-    ASBZPlayerMicroCamera();
+    ASBZPlayerMicroCamera(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnRep_ViewTargetPlayerStateIdArray(const TArray<int32>& OldViewTargetPlayerStateIdArray);
@@ -66,7 +67,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnViewTargetChanged(bool bIsViewTarget);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

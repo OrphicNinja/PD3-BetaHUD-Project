@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTService -FallbackName=BTService
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "BehaviorTree/BTService.h"
+#include "GameplayTagContainer.h"
 #include "SBZBTService_WeaponSelector.generated.h"
 
 class USBZBaseWeaponData;
@@ -29,5 +29,6 @@ private:
     
 public:
     USBZBTService_WeaponSelector();
+
 };
 

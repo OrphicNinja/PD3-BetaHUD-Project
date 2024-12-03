@@ -37,6 +37,7 @@ private:
     
 public:
     USBZMainMenuItemInventoryScreen();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnItemSlotsUpdated();

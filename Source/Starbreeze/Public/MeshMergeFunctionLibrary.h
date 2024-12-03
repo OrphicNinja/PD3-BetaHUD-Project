@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "SkeletalMeshMergeParams.h"
 #include "MeshMergeFunctionLibrary.generated.h"
 
@@ -11,6 +11,7 @@ class STARBREEZE_API UMeshMergeFunctionLibrary : public UBlueprintFunctionLibrar
     GENERATED_BODY()
 public:
     UMeshMergeFunctionLibrary();
+
     UFUNCTION(BlueprintCallable)
     static USkeletalMesh* MergeMeshes(const FSkeletalMeshMergeParams& Params);
     

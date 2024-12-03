@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Slate -ObjectName=InputChord -FallbackName=InputChord
+#include "Framework/Commands/InputChord.h"
 #include "SBZGamepadBindingInputAction.h"
 #include "SBZGamepadBinding.generated.h"
 

@@ -24,6 +24,7 @@ protected:
     
 public:
     UPD3HUDRoomStatusWidget();
+
 private:
     UFUNCTION(BlueprintCallable)
     void RoomVolumeChanged(ASBZRoomVolume* InRoomVolume);

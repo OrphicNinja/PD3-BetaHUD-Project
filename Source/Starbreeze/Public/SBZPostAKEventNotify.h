@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AnimNotify -FallbackName=AnimNotify
+#include "Animation/AnimNotifies/AnimNotify.h"
 #include "SBZPostAKEventNotify.generated.h"
 
 class UAkAudioEvent;
@@ -33,5 +33,6 @@ protected:
     
 public:
     USBZPostAKEventNotify();
+
 };
 

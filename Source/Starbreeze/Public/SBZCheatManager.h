@@ -1,12 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ECollisionChannel -FallbackName=ECollisionChannel
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EInputEvent -FallbackName=EInputEvent
-//CROSS-MODULE INCLUDE V2: -ModuleName=InputCore -ObjectName=Key -FallbackName=Key
+#include "Engine/EngineTypes.h"
+#include "Engine/EngineBaseTypes.h"
+#include "InputCoreTypes.h"
 #include "EPD3DispatchCaller.h"
 #include "EPD3DispatchCallerReason.h"
 #include "EPD3HeistState.h"
 #include "ESBZAIOrderMode.h"
+#include "ESBZArmorChunkType.h"
 #include "ESBZCharacterStance.h"
 #include "ESBZDamageWeight.h"
 #include "ESBZDifficulty.h"
@@ -46,6 +47,7 @@ private:
     
 public:
     USBZCheatManager();
+
     UFUNCTION(BlueprintCallable, Exec)
     void ViewTarget(int32 PlayerIndex);
     
@@ -122,6 +124,9 @@ public:
     void SetTargetCharacterStance(ESBZCharacterStance Stance, int32 PlayerIndex);
     
     UFUNCTION(BlueprintCallable, Exec)
+    void SetTargetAttributeValue(const FName& Name, float Value, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void SetSkill(const FName& SkillDataName, bool bIsAcquired, int32 PlayerIndex);
     
     UFUNCTION(BlueprintCallable, Exec)
@@ -131,16 +136,43 @@ public:
     void SetRegisterRewardPrints(bool bIsRegistered);
     
     UFUNCTION(BlueprintCallable, Exec)
+    void SetPlayerSuit(const FName& PlayerMaskName, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void SetPlayerName(const FString& Name, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void SetPlayerMergePartySelected(bool bIsMergePartySelected);
     
     UFUNCTION(BlueprintCallable, Exec)
     void SetPlayerMask(const FName& PlayerMaskName, int32 PlayerIndex);
     
     UFUNCTION(BlueprintCallable, Exec)
+    void SetPlayerGlove(const FName& PlayerMaskName, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void SetPlayerCharacter(const FName& CharacterClassName, int32 PlayerIndex);
     
     UFUNCTION(BlueprintCallable, Exec)
+    void SetPlayerArmorChunkTypeCount(int32 ChunkTypeCount, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void SetPlayerArmorChunkType(int32 ChunkTypeIndex, ESBZArmorChunkType ChunkType, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void SetPlayerArmor(const FName& PlayerArmorName, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void SetPlayerAbilityBuffBlockedAll(bool bIsBlocked, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void SetPlayerAbilityBuffBlocked(ESBZPlayerAbilityBuffType Type, bool bIsBlocked, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void SetPlayerAbilityBuffBlockCooldownAll(float Cooldown, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void SetPlayerAbilityBuffBlockCooldown(ESBZPlayerAbilityBuffType Type, float Cooldown, int32 PlayerIndex);
     
     UFUNCTION(BlueprintCallable, Exec)
     void SetPlaceableAmmo(int32 Count, int32 PlaceableIndex, int32 PlayerIndex);
@@ -149,13 +181,22 @@ public:
     void SetPlaceable(const FName& PlaceableDataName, int32 PlaceableIndex, int32 PlayerIndex);
     
     UFUNCTION(BlueprintCallable, Exec)
+    void SetOverskillLoadout(const FName& DataName, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void SetOverkillWeaponProgress(float InProgress, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void SetOverkillWeaponLoadout(const FName& DataName, int32 PlayerIndex);
     
     UFUNCTION(BlueprintCallable, Exec)
     void SetOptionalMilestonePassed(const FString& OptionalMilestoneName);
     
     UFUNCTION(BlueprintCallable, Exec)
     void SetMissionFailedEnabled(bool bIsEnabled);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void SetMissionActive(bool bIsActive, bool bIsLocalOnly);
     
     UFUNCTION(BlueprintCallable, Exec)
     void SetMilestonesPassedStealth(int32 MilestonesPassed);
@@ -224,10 +265,16 @@ public:
     void SetDrawTransform(float X, float Y, float Z, float Yaw, float Pitch, float Roll, float ScaleX, float ScaleY, float ScaleZ);
     
     UFUNCTION(BlueprintCallable, Exec)
+    void SetDownedCount(int32 Count, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void SetDifficulty(ESBZDifficulty Difficulty);
     
     UFUNCTION(BlueprintCallable, Exec)
     void SetCrouchedTarget(bool bIsCrouched, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void SetAttributeValue(const FName& Name, float Value, int32 PlayerIndex);
     
     UFUNCTION(BlueprintCallable, Exec)
     void SetAssaultLevelProgression(float Progression);
@@ -272,13 +319,19 @@ public:
     void ResetCVars();
     
     UFUNCTION(BlueprintCallable, Exec)
-    void RequestMissionSuccess();
+    void ResearchAllSkills(int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void RequestMissionTimeOut(int32 PlayersInEscapeVolume);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void RequestMissionSuccess(int32 PlayersInEscapeVolume);
     
     UFUNCTION(BlueprintCallable, Exec)
     void RequestMissionFail();
     
     UFUNCTION(BlueprintCallable, Exec)
-    void RequestMissionEnd(ESBZEndMissionResult Result, int32 OutroVariation);
+    void RequestMissionEnd(ESBZEndMissionResult Result, int32 OutroVariation, int32 PlayersInEscapeVolume);
     
     UFUNCTION(BlueprintCallable, Exec)
     void ReportBug(const FString& Description, bool bIsEverywhere, bool bIsBlockerChecked, bool bIsInteractableChecked);
@@ -420,9 +473,6 @@ public:
     void GainPlayerAbilityBuff(ESBZPlayerAbilityBuffType Type, bool bIsRefreshAllowed, int32 PlayerIndex);
     
     UFUNCTION(BlueprintCallable, Exec)
-    void FulfillUserItem(const FString& AccelByteItemIdString, const FString& AccelByteItemSku, FString& ItemNamespace, int32 PlayerIndex);
-    
-    UFUNCTION(BlueprintCallable, Exec)
     void FindClassReferences(const FName& ClassName, bool bIsSubClassesIncluded, bool bIsBlueprintsIncluded, bool bIsAssetsLoaded);
     
     UFUNCTION(BlueprintCallable, Exec)
@@ -430,6 +480,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Exec)
     void EquipOverkillWeapon(int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void DumpPlayersMergePartyStatus();
     
     UFUNCTION(BlueprintCallable, Exec)
     void DestroyTargetAI(int32 PlayerIndex);
@@ -472,6 +525,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Exec)
     void DamageCharacter(float Damage, ESBZDamageWeight DamageWeight, int32 DamageWeightModifier, const FName& DamageTypeName, int32 PlayerIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void DamageAllCrewAI(float Damage, ESBZDamageWeight DamageWeight, int32 DamageWeightModifier, const FName& DamageTypeName, int32 PlayerIndex);
     
     UFUNCTION(BlueprintCallable, Exec)
     void CuffPlayer(int32 PlayerIndex);

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZModularMeshVisibility.h"
 #include "SBZModularMeshComponent.generated.h"
 
@@ -32,6 +32,7 @@ protected:
     uint8 bMeshReady: 1;
     
 public:
-    USBZModularMeshComponent();
+    USBZModularMeshComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

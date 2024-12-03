@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SkeletalMeshComponent -FallbackName=SkeletalMeshComponent
+#include "Components/SkeletalMeshComponent.h"
 #include "EPlayerCharacterSizeCategory.h"
 #include "SBZSuitConfig.h"
 #include "SBZCustomizableSuitMeshComponent.generated.h"
@@ -27,7 +27,8 @@ protected:
     USBZCapsuleShadowingData* CapsuleShadowingData;
     
 public:
-    USBZCustomizableSuitMeshComponent();
+    USBZCustomizableSuitMeshComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetSuitConfig(const FSBZSuitConfig& Config);
     

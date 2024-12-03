@@ -1,5 +1,11 @@
 #include "SBZSocialFriendButton.h"
 
+USBZSocialFriendButton::USBZSocialFriendButton() {
+    this->FriendButtonType = ESocialFriendButtonType::AccelByteFriend;
+    this->SocialFriendButtonContainer = NULL;
+    this->CurrentFeedbackType = ESBZRequestFeedbackType::AcceptFriendRequest;
+}
+
 void USBZSocialFriendButton::UnblockPlayerAction() {
 }
 
@@ -28,12 +34,6 @@ void USBZSocialFriendButton::QuaternaryAction() {
 void USBZSocialFriendButton::OnRequestStatusPopupClosed(FName ActionName) {
 }
 
-void USBZSocialFriendButton::OnRequestFeedback(ESBZRequestFeedbackType FeedbackType, bool bResult, const FString& ErrorCode) {
-}
-
-
-void USBZSocialFriendButton::OnPartyRequestFeedback(ESBZPartyRequestFeedbackType FeedbackType, bool bResult, const FString& ErrorCode) {
-}
 
 void USBZSocialFriendButton::OnConfirmationPopupClosed(FName ActionName) {
 }
@@ -42,6 +42,14 @@ void USBZSocialFriendButton::JoinParty() {
 }
 
 void USBZSocialFriendButton::JoinLobby() {
+}
+
+bool USBZSocialFriendButton::IsUserValid() const {
+    return false;
+}
+
+FSBZUser USBZSocialFriendButton::GetUser() const {
+    return FSBZUser{};
 }
 
 void USBZSocialFriendButton::FriendProfileAction() {
@@ -83,9 +91,4 @@ void USBZSocialFriendButton::BlockPlayerAction() {
 void USBZSocialFriendButton::AcceptFriendRequest() {
 }
 
-USBZSocialFriendButton::USBZSocialFriendButton() {
-    this->FriendButtonType = ESocialFriendButtonType::AccelByteFriend;
-    this->SocialFriendButtonContainer = NULL;
-    this->CurrentFeedbackType = ESBZRequestFeedbackType::AcceptFriendRequest;
-}
 

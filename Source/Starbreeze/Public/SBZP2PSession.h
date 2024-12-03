@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZOnSessionJoinStartedDelegate.h"
 #include "SBZOnSessionJoinedDelegate.h"
 #include "SBZP2PSession.generated.h"
@@ -18,6 +18,7 @@ public:
     FSBZOnSessionJoinStarted OnSessionJoinStarted;
     
     USBZP2PSession();
+
     UFUNCTION(BlueprintCallable)
     void OnLevelLoaded(UWorld* InWorld);
     

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIDataProviderTypedValue -FallbackName=AIDataProviderTypedValue
+#include "DataProviders/AIDataProvider.h"
 #include "Templates/SubclassOf.h"
 #include "SBZAIDataProvider_NavQueryFilter.generated.h"
 

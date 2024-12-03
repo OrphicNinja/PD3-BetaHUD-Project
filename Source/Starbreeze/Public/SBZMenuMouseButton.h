@@ -16,6 +16,7 @@ public:
     FOnMenuMouseButtonSelected OnButtonSelected;
     
     USBZMenuMouseButton();
+
     UFUNCTION(BlueprintCallable)
     void SelectButton();
     

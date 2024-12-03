@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=PointDamageEvent -FallbackName=PointDamageEvent
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RadialDamageEvent -FallbackName=RadialDamageEvent
+#include "Engine/EngineTypes.h"
+#include "Engine/EngineTypes.h"
 #include "SBZEllipsoidComponent.h"
 #include "SBZPersistentWorldDamageZoneComponent.generated.h"
 
@@ -33,7 +33,8 @@ private:
     bool bAffectOwnerOnly;
     
 public:
-    USBZPersistentWorldDamageZoneComponent();
+    USBZPersistentWorldDamageZoneComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void HandleTakeRadialDamage(AActor* DamagedActor, float DamageAmount, const FRadialDamageEvent& DamageEvent, AController* EventInstigator, AActor* DamageCauser);
     

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BoxComponent -FallbackName=BoxComponent
+#include "Components/BoxComponent.h"
 #include "ESBZGateState.h"
 #include "SBZDoorBoxComponent.generated.h"
 
@@ -11,6 +11,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ESBZGateState OpenDirection;
     
-    USBZDoorBoxComponent();
+    USBZDoorBoxComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "ESBZPlayerGestureType.h"
 #include "ESBZShoutActionType.h"
 #include "SBZComponentSelector.h"
@@ -77,7 +77,8 @@ private:
     bool bEnabled;
     
 public:
-    USBZShoutTargetComponent();
+    USBZShoutTargetComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetEnabled(bool bNewValue);
     

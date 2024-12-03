@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZTargetCandidate.h"
 #include "SBZAimAssistComponent.generated.h"
 
@@ -28,6 +28,7 @@ private:
     float MaxFireTime;
     
 public:
-    USBZAimAssistComponent();
+    USBZAimAssistComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

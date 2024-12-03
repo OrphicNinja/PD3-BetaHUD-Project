@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZComponentSelector.h"
 #include "SBZAmmoPickup.generated.h"
 
@@ -16,6 +16,7 @@ private:
     FSBZComponentSelector PhysicsComponent;
     
 public:
-    ASBZAmmoPickup();
+    ASBZAmmoPickup(const FObjectInitializer& ObjectInitializer);
+
 };
 

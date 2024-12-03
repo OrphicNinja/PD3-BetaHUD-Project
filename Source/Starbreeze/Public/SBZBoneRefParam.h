@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BoneReference -FallbackName=BoneReference
+#include "BoneContainer.h"
 #include "SBZBoneRefParam.generated.h"
 
 USTRUCT(BlueprintType)

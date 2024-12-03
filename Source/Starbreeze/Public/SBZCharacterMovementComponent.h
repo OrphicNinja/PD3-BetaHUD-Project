@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=CharacterMovementComponent -FallbackName=CharacterMovementComponent
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "ESBZCharacterMovementState.h"
 #include "SBZMinimalAgilityTraversalTrajectory.h"
 #include "SBZCharacterMovementComponent.generated.h"
@@ -50,6 +50,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TraversingHalfHeight;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float TraversingMaxAngle;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ESBZCharacterMovementState CharacterMovementState;
     
@@ -57,7 +60,8 @@ protected:
     ASBZCharacter* SBZCharacterOwner;
     
 public:
-    USBZCharacterMovementComponent();
+    USBZCharacterMovementComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_StopZipline(const bool bWasCancelled);

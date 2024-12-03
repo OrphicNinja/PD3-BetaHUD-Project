@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Transform -FallbackName=Transform
+#include "UObject/NoExportTypes.h"
 #include "SBZCosmeticProp.h"
 #include "SBZZiplineMotor.generated.h"
 
@@ -27,6 +27,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USBZCableComponent* CableComponent;
     
-    ASBZZiplineMotor();
+    ASBZZiplineMotor(const FObjectInitializer& ObjectInitializer);
+
 };
 

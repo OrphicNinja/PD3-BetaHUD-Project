@@ -25,6 +25,7 @@ protected:
     
 public:
     USBZObjectiveContainerWidget();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnObjectiveRemoved(UObject* ObjectiveUObject);

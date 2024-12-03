@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=InputCore -ObjectName=Key -FallbackName=Key
+#include "UObject/Object.h"
+#include "InputCoreTypes.h"
 #include "SBZGamepadBindingsManager.generated.h"
 
 class USBZGamepadBindingsManager;
@@ -15,6 +15,7 @@ public:
     USBZGamepadBindingsPresetsConfig* GamepadBindingsPresetsConfig;
     
     USBZGamepadBindingsManager();
+
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static USBZGamepadBindingsManager* GetGamepadBindingsManager(UObject* WorldContextObject);
     

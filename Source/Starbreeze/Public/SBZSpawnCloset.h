@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZSpawnCloset.generated.h"
 
 class APD3PawnSpawnGroup;
@@ -25,7 +25,7 @@ protected:
     bool bStayOpenDuringStealth;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float CivilianDespawnDelay;
+    float ReactionDelay;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 NumberOfBlockingActors;
@@ -40,7 +40,8 @@ protected:
     TArray<ASBZAICharacter*> CiviliansInVolume;
     
 public:
-    ASBZSpawnCloset();
+    ASBZSpawnCloset(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRoomVolumeEndOverlap(AActor* OverlappedActor, AActor* OtherActor);

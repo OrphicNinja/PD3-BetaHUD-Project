@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EnvQueryTest -FallbackName=EnvQueryTest
+#include "EnvironmentQuery/EnvQueryTest.h"
 #include "ESBZDrillState.h"
 #include "SBZEnvQueryTest_DrillState.generated.h"
 
@@ -17,5 +17,6 @@ private:
     
 public:
     USBZEnvQueryTest_DrillState();
+
 };
 

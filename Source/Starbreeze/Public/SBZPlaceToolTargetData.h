@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAbilityTargetData -FallbackName=GameplayAbilityTargetData
+#include "Abilities/GameplayAbilityTargetTypes.h"
 #include "SBZPlaceToolTargetData.generated.h"
 
 class UPrimitiveComponent;

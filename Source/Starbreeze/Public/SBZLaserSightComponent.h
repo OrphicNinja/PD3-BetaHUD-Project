@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Rotator -FallbackName=Rotator
+#include "UObject/NoExportTypes.h"
 #include "SBZOnTelegraphAttackComponent.h"
 #include "SBZLaserSightComponent.generated.h"
 
@@ -33,7 +33,8 @@ protected:
     float PhaseShift;
     
 public:
-    USBZLaserSightComponent();
+    USBZLaserSightComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     FRotator ModifyWeaponRotation(const FRotator& InOutRotation);

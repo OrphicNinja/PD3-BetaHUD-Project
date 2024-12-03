@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=SlateColor -FallbackName=SlateColor
+#include "Engine/DataAsset.h"
+#include "Styling/SlateColor.h"
 #include "SBZRenownData.generated.h"
 
 class UPaperSprite;
@@ -20,5 +20,6 @@ public:
     TArray<UPaperSprite*> DivisionSprites;
     
     USBZRenownData();
+
 };
 

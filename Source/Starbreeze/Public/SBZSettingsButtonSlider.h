@@ -22,6 +22,7 @@ protected:
     
 public:
     USBZSettingsButtonSlider();
+
     UFUNCTION(BlueprintCallable)
     void SetSliderValue(float InNewValue);
     

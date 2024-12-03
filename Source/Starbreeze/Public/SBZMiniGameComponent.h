@@ -1,11 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
+#include "Engine/EngineTypes.h"
 #include "ESBZWidgetZOrdering.h"
 #include "SBZAnimatedInteractionInterface.h"
 #include "SBZOnMiniGameInteractionDelegate.h"
 #include "SBZMiniGameComponent.generated.h"
 
+class AActor;
 class APlayerController;
 class ASBZCharacter;
 class ASBZPlayerState;
@@ -27,7 +29,7 @@ public:
     FSBZOnMiniGameInteraction OnPreMiniGameInteraction;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     USBZMiniGameData* Data;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
@@ -107,7 +109,13 @@ private:
     APlayerController* ActiveLocallyController;
     
 public:
-    USBZMiniGameComponent();
+    USBZMiniGameComponent(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void SetMiniGameData(USBZMiniGameData* InData);
+    
 protected:
     UFUNCTION(BlueprintCallable)
     void SetAudioPerspective(UAkComponent* AkComponent, UAkRtpc* Rtpc, bool bIsLocallyControlled);
@@ -123,6 +131,15 @@ protected:
     UFUNCTION(BlueprintCallable)
     void PlaySound(UAkComponent* AkComponent, UAkAudioEvent* AudioEvent);
     
+public:
+    UFUNCTION(BlueprintCallable)
+    void OnPlayerStateEndPlay(AActor* Actor, TEnumAsByte<EEndPlayReason::Type> EndPlayReason);
+    
+private:
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetMiniGameData(USBZMiniGameData* InData);
+    
+protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_ActivateMiniGame(ASBZCharacter* Character);
     
@@ -133,7 +150,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void ActivateMiniGame(ASBZCharacter* Character, bool bIsLocallyControlled, bool bIsReplicated);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

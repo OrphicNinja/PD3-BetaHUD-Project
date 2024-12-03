@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIController -FallbackName=AIController
+#include "AIController.h"
 #include "SBZPerceptionController.generated.h"
 
 class USBZAIVisualDetectionComponent;
@@ -14,6 +14,7 @@ private:
     USBZAIVisualDetectionComponent* VisualDetectionComponent;
     
 public:
-    ASBZPerceptionController();
+    ASBZPerceptionController(const FObjectInitializer& ObjectInitializer);
+
 };
 

@@ -33,6 +33,7 @@ protected:
     
 public:
     USBZMenuNavBar();
+
     UFUNCTION(BlueprintCallable)
     void SetActiveTab(const FName& InTabName);
     

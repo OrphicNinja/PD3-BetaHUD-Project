@@ -41,6 +41,7 @@ protected:
     
 public:
     USBZLoginScreenWidget();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ShowLoginFailedMessage();
     

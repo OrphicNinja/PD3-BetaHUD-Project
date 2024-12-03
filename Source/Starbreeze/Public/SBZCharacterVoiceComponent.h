@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AkAudio -ObjectName=AkComponent -FallbackName=AkComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Transform -FallbackName=Transform
+#include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
 #include "ESBZVoiceGruntType.h"
 #include "ESBZVoicePriority.h"
 #include "SBZAIAlertnessComment.h"
@@ -15,13 +15,14 @@
 class ASBZCharacter;
 class UAkAudioBank;
 class UAkAudioEvent;
+class UAkComponent;
 class UAkRtpc;
 class USBZDialogAnimDataCollection;
 class USBZDialogDataAsset;
 class USBZVoiceCommentDataAsset;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
-class USBZCharacterVoiceComponent : public UAkComponent {
+class USBZCharacterVoiceComponent : public UActorComponent {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -88,11 +89,15 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ASBZCharacter* SBZCharacterOwner;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    UAkComponent* AudioComponent;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USBZDialogDataAsset* PerformsInDialog;
     
 public:
-    USBZCharacterVoiceComponent();
+    USBZCharacterVoiceComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void StopTalking();
     
@@ -133,6 +138,12 @@ public:
     void Multicast_SaySystemComment(const USBZVoiceCommentDataAsset* CommentDataAsset, ESBZVoicePriority InPlayingPriority);
     
 private:
+    UFUNCTION(BlueprintCallable)
+    void HandleAudioComponentDeactivated(UActorComponent* Component);
+    
+    UFUNCTION(BlueprintCallable)
+    void HandleAudioComponentActivated(UActorComponent* Component, bool bReset);
+    
     UFUNCTION(BlueprintCallable)
     void CallRecieved(const FSBZPlayerCallEvent& CallEventData);
     

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZAmbientSound.generated.h"
 
 class UActorComponent;
@@ -15,7 +15,8 @@ protected:
     USBZAmbientSoundComponent* AmbientSoundComponent;
     
 public:
-    ASBZAmbientSound();
+    ASBZAmbientSound(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void HandleDeactivateSoundComponent(UActorComponent* Component);

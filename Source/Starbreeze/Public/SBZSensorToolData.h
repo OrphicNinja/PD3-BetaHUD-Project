@@ -8,7 +8,7 @@ class USBZLocalPlayerFeedback;
 class USBZOutlineAsset;
 
 UCLASS(Blueprintable)
-class USBZSensorToolData : public USBZToolData {
+class STARBREEZE_API USBZSensorToolData : public USBZToolData {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -39,5 +39,6 @@ public:
     float ScanLineTime;
     
     USBZSensorToolData();
+
 };
 

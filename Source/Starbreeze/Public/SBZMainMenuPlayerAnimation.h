@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Transform -FallbackName=Transform
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AnimInstance -FallbackName=AnimInstance
+#include "UObject/NoExportTypes.h"
+#include "Animation/AnimInstance.h"
 #include "SBZMainMenuPlayerAnimation.generated.h"
 
 class ASBZMainMenuPlayerCharacter;
@@ -44,5 +44,6 @@ protected:
     
 public:
     USBZMainMenuPlayerAnimation();
+
 };
 

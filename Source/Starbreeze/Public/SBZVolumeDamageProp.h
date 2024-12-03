@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "SBZVolumeDamageInterface.h"
 #include "SBZVolumeDamageProp.generated.h"
 
@@ -54,9 +54,10 @@ protected:
     bool bIsCollisionEnabled;
     
 public:
-    ASBZVolumeDamageProp();
+    ASBZVolumeDamageProp(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetServerDamageEnabled(const TScriptInterface<IAbilitySystemInterface>& AbilitySystemScriptInterface, bool bIsEnabled);
     
@@ -79,7 +80,7 @@ protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnVolumeEnabledChanged(bool bIsEnabled);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

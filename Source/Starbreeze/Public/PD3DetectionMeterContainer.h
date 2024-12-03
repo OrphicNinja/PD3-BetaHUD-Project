@@ -37,6 +37,7 @@ private:
     
 public:
     UPD3DetectionMeterContainer();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnObservedChanged(bool bObserved);
     

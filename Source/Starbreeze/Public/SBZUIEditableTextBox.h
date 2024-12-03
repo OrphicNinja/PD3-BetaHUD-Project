@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=UMG -ObjectName=EditableTextBox -FallbackName=EditableTextBox
+#include "Components/EditableTextBox.h"
 #include "OnMaxInputLengthReachedDelegate.h"
 #include "SBZUIEditableTextBox.generated.h"
 
-UCLASS(Blueprintable, Config=Engine, DefaultConfig, Config=StarbreezeUI)
+UCLASS(Blueprintable, DefaultConfig, Config=StarbreezeUI)
 class STARBREEZE_API USBZUIEditableTextBox : public UEditableTextBox {
     GENERATED_BODY()
 public:
@@ -20,6 +20,7 @@ private:
     
 public:
     USBZUIEditableTextBox();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsEmptyOrConsistsOfWhitespaces(const FString& InString) const;
     

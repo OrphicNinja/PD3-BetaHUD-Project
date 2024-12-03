@@ -1,6 +1,7 @@
 #include "SBZCharacter.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AkAudio -ObjectName=AkComponent -FallbackName=AkComponent
+#include "AkComponent.h"
 #include "Net/UnrealNetwork.h"
+#include "SBZApplyMarkedTagEffect.h"
 #include "SBZCharacterFootStepComponent.h"
 #include "SBZCharacterInteractableComponent.h"
 #include "SBZCharacterMantlingComponent.h"
@@ -10,246 +11,10 @@
 #include "SBZDamageTracker.h"
 #include "SBZMeleeComponent.h"
 #include "SBZOutlineComponent.h"
+#include "SBZSkeletalMeshComponentBudgeted.h"
 #include "SBZZiplineAudioController.h"
 
-void ASBZCharacter::SetStance(ESBZCharacterStance InStance) {
-}
-
-void ASBZCharacter::Server_TransferBagFrom_Implementation(ASBZCharacter* ToCharacter) {
-}
-
-void ASBZCharacter::Server_SetEquipStateAndIndex_Implementation(uint8 InEquipStateAndIndex) {
-}
-
-void ASBZCharacter::Server_OnThrowCarryActorFailed_Implementation(uint32 NetID) {
-}
-
-void ASBZCharacter::Server_OnPickupCarryActorFailed_Implementation(uint32 NetID) {
-}
-
-void ASBZCharacter::Server_HumanShieldInstigatorSlotReached_Implementation() {
-}
-bool ASBZCharacter::Server_HumanShieldInstigatorSlotReached_Validate() {
-    return true;
-}
-
-void ASBZCharacter::RemoveLooseGameplayTags(const FGameplayTagContainer& GameplayTags, int32 Count) {
-}
-
-void ASBZCharacter::RemoveLooseGameplayTag(const FGameplayTag& GameplayTag, int32 Count) {
-}
-
-void ASBZCharacter::OnStopZipline_Implementation(const ASBZZipline* Zipline, bool bIsMovingZiplineForward) {
-}
-
-void ASBZCharacter::OnStopTraversal_Implementation(const FSBZAgilityTraversalTrajectory& Trajectory) {
-}
-
-void ASBZCharacter::OnStopSlide_Implementation() {
-}
-
-void ASBZCharacter::OnStartZipline_Implementation(const ASBZZipline* Zipline, bool bIsMovingZiplineForward) {
-}
-
-void ASBZCharacter::OnStartTraversal_Implementation(const FSBZAgilityTraversalTrajectory& Trajectory) {
-}
-
-void ASBZCharacter::OnStartSlide_Implementation() {
-}
-
-void ASBZCharacter::OnReplicatedEquippableDestroyedOnClient(AActor* InEquippableActor) {
-}
-
-void ASBZCharacter::OnRep_Stance(ESBZCharacterStance InStance) {
-}
-
-void ASBZCharacter::OnRep_Seed() {
-}
-
-void ASBZCharacter::OnRep_ReplicatedReloadState(const FSBZReplicatedReloadState& OldReplicatedReloadState) {
-}
-
-void ASBZCharacter::OnRep_RandomMeshScaleEnabled() {
-}
-
-void ASBZCharacter::OnRep_IsAlive() {
-}
-
-void ASBZCharacter::OnRep_HumanShieldInstigatorState() {
-}
-
-void ASBZCharacter::OnRep_EquipStateAndIndex() {
-}
-
-void ASBZCharacter::OnRep_CurrentThrowableIndex(int32 OldThrowableIndex) {
-}
-
-void ASBZCharacter::OnRep_CurrentPlaceableIndex(int32 OldPlaceableIndex) {
-}
-
-void ASBZCharacter::OnRep_BagHandleArray(const TArray<FSBZBagHandle>& OldBagHandleArray) {
-}
-
-void ASBZCharacter::OnEquipStateTimerDone() {
-}
-
-void ASBZCharacter::OnCharacterMontageInstanceEnded(int32 AnimMontageInstanceID, bool bInterrupted) {
-}
-
-void ASBZCharacter::Multicast_SwitchMontageSection_Implementation(UAnimMontage* Montage, const FName& SectionName) {
-}
-
-void ASBZCharacter::Multicast_StopTargeting_Implementation() {
-}
-
-void ASBZCharacter::Multicast_StopRecoil_Implementation(bool bWasCancelled) {
-}
-
-void ASBZCharacter::Multicast_StopOverrideMaxWalkSpeed_Implementation() {
-}
-
-void ASBZCharacter::Multicast_StopMontage_Implementation(UAnimMontage* Montage, bool bAllowExitSectionSwitch) {
-}
-
-void ASBZCharacter::Multicast_StartTargeting_Implementation() {
-}
-
-void ASBZCharacter::Multicast_SnapVictimOntoInstigator_Implementation(const FVector& SnapLocation, const ASBZCharacter* HSInstigator) {
-}
-
-void ASBZCharacter::Multicast_SetStance_Implementation(ESBZCharacterStance NewStance) {
-}
-
-void ASBZCharacter::Multicast_SetReloadState_Implementation(const FSBZReplicatedReloadState& InReplicatedReloadState) {
-}
-
-void ASBZCharacter::Multicast_SetMontageNextSection_Implementation(UAnimMontage* Montage, const FName& NextSectionName) {
-}
-
-void ASBZCharacter::Multicast_SetMarked_Implementation(bool bIsMarked) {
-}
-
-void ASBZCharacter::Multicast_SetEquipStateAndIndex_Implementation(uint8 InEquipStateAndIndex) {
-}
-
-void ASBZCharacter::Multicast_SetEnableRandomMeshScale_Implementation(bool bInEnableRandomMeshScale) {
-}
-
-void ASBZCharacter::Multicast_SetCurrentThrowableIndex_Implementation(int32 NewThrowableIndex) {
-}
-
-void ASBZCharacter::Multicast_SetCurrentPlaceableIndex_Implementation(int32 NewPlaceableIndex) {
-}
-
-void ASBZCharacter::Multicast_SetActiveGadget_Implementation(int32 NewIndex) {
-}
-
-void ASBZCharacter::Multicast_PredictedRagdollDenied_Implementation(int32 HurtReactionIndex) {
-}
-
-void ASBZCharacter::Multicast_PlayMontageMoveTo_Implementation(UAnimMontage* Montage, const TArray<FTransform>& TargetTransforms, bool bDisableAutoBlendOut) {
-}
-
-void ASBZCharacter::Multicast_PlayMontageMoveMulti_Implementation(FName MontageName, const TArray<FTransform>& TargetTransforms) {
-}
-
-void ASBZCharacter::Multicast_PlayMontageMove_Implementation(FName MontageName, const FVector& EndMoveToWorldPosition, float PlayRate) {
-}
-
-void ASBZCharacter::Multicast_PlayMontage_Implementation(UAnimMontage* Montage, bool bPlayOnDedicatedServer, bool bStopAllActiveMontages) {
-}
-
-void ASBZCharacter::Multicast_OverrideMaxWalkSpeed_Implementation(float MaxWalkSpeed) {
-}
-
-void ASBZCharacter::Multicast_OnThrowCarryActor_Implementation(uint32 NetID) {
-}
-
-void ASBZCharacter::Multicast_OnPickupCarryActor_Implementation(uint32 NetID) {
-}
-
-void ASBZCharacter::Multicast_OnKill_Implementation() {
-}
-
-void ASBZCharacter::Multicast_HumanShieldInstigatorSlotReached_Implementation() {
-}
-
-void ASBZCharacter::Multicast_ExplodedInHand_Implementation(int32 Index) {
-}
-
-void ASBZCharacter::Multicast_EnableThrowState_Implementation() {
-}
-
-void ASBZCharacter::Multicast_DisableThrowState_Implementation() {
-}
-
-void ASBZCharacter::Multicast_CancelMelee_Implementation() {
-}
-
-void ASBZCharacter::Multicast_ApplyHurtReaction_Implementation(const FSBZHurtReactionPrediction& HurtReactionPrediction) {
-}
-
-void ASBZCharacter::Multicast_ActivateMelee_Implementation() {
-}
-
-void ASBZCharacter::HandleTakePointDamage(AActor* DamagedActor, float Damage, AController* InstigatedBy, FVector HitLocation, UPrimitiveComponent* HitComponent, FName BoneName, FVector ShotFromDirection, const UDamageType* DamageType, AActor* DamageCauser) {
-}
-
-int32 ASBZCharacter::GetSeed() const {
-    return 0;
-}
-
-ASBZRoomVolume* ASBZCharacter::GetLastKnownRoom() const {
-    return NULL;
-}
-
-USBZCarryType* ASBZCharacter::GetLastCurrentCarryType() const {
-    return NULL;
-}
-
-FSBZBagHandle ASBZCharacter::GetLastBagHandle() const {
-    return FSBZBagHandle{};
-}
-
-ASBZRoomVolume* ASBZCharacter::GetCurrentRoom_Implementation() const {
-    return NULL;
-}
-
-void ASBZCharacter::Client_OnThrowCarryActorFailed_Implementation(uint32 NetID) {
-}
-
-void ASBZCharacter::Client_OnPickupCarryActorFailed_Implementation(uint32 NetID) {
-}
-
-
-
-void ASBZCharacter::AddLooseGameplayTags(const FGameplayTagContainer& GameplayTags, int32 Count) {
-}
-
-void ASBZCharacter::AddLooseGameplayTag(const FGameplayTag& GameplayTag, int32 Count) {
-}
-
-void ASBZCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(ASBZCharacter, bRandomMeshScaleEnabled);
-    DOREPLIFETIME(ASBZCharacter, BagHandleArray);
-    DOREPLIFETIME(ASBZCharacter, ReplicatedMontage);
-    DOREPLIFETIME(ASBZCharacter, bIsAlive);
-    DOREPLIFETIME(ASBZCharacter, bIsTargeting);
-    DOREPLIFETIME(ASBZCharacter, ReplicatedReloadState);
-    DOREPLIFETIME(ASBZCharacter, Stance);
-    DOREPLIFETIME(ASBZCharacter, RemoteViewYaw);
-    DOREPLIFETIME(ASBZCharacter, EquipStateAndIndex);
-    DOREPLIFETIME(ASBZCharacter, TeamId);
-    DOREPLIFETIME(ASBZCharacter, CurrentThrowableIndex);
-    DOREPLIFETIME(ASBZCharacter, GadgetIndexArray);
-    DOREPLIFETIME(ASBZCharacter, CurrentPlaceableIndex);
-    DOREPLIFETIME(ASBZCharacter, HumanShieldInstigatorState);
-    DOREPLIFETIME(ASBZCharacter, Seed);
-}
-
-ASBZCharacter::ASBZCharacter() {
+ASBZCharacter::ASBZCharacter(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer.SetDefaultSubobjectClass<USBZSkeletalMeshComponentBudgeted>(TEXT("CharacterMesh0"))) {
     this->MarkedVoiceComment = NULL;
     this->MarkedOutline = NULL;
     this->OutlineComponent = CreateDefaultSubobject<USBZOutlineComponent>(TEXT("SBZOutlineComponent"));
@@ -265,12 +30,11 @@ ASBZCharacter::ASBZCharacter() {
     this->MaxCarryBagCount = 1;
     this->bIsAlive = true;
     this->bIsRagdolled = false;
+    this->bIsDeathAllowed = true;
     this->bIsLocallyControlled = false;
     this->bIsRunning = false;
     this->bIsJumping = false;
     this->bIsTargeting = false;
-    this->bIsHurtReactionScope = false;
-    this->bIsHurtReactionScopeStackAllowedOnce = false;
     this->bIsPlayReady = false;
     this->bIsCarried = false;
     this->bIsCarriedPredicted = false;
@@ -364,6 +128,7 @@ ASBZCharacter::ASBZCharacter() {
     this->CarryActorSocketName = TEXT("Spine");
     this->PhysicsAssetWhenCarried = NULL;
     this->PhysicsAssetWhenNotCarried = NULL;
+    this->AnimClassWhenCarriedDead = NULL;
     this->HumanShieldInstigatorState = ESBZHumanShieldInstigatorState::None;
     this->HumanShieldInstigatorAcceptableRadius = 5.00f;
     this->MeleeComment = NULL;
@@ -375,6 +140,7 @@ ASBZCharacter::ASBZCharacter() {
     this->ForcedFacialAnimaton = NULL;
     this->EquippedMask = NULL;
     this->DisplayIcon = NULL;
+    this->MarkedGameplayEffectClass = USBZApplyMarkedTagEffect::StaticClass();
     this->HurtReactionOffset[0] = 0;
     this->HurtReactionOffset[1] = 0;
     this->HurtReactionOffset[2] = 0;
@@ -409,5 +175,258 @@ ASBZCharacter::ASBZCharacter() {
     this->HeadBone = TEXT("Head");
     this->CarryWeightTierOffset = 1.00f;
     this->CurrentlyUsedThrowable = NULL;
+    const FProperty* p_Mesh = GetClass()->FindPropertyByName("Mesh");
+    (*p_Mesh->ContainerPtrToValuePtr<USkeletalMeshComponent*>(this))->SetupAttachment(RootComponent);
+    this->AudioComponent->SetupAttachment(RootComponent);
 }
+
+void ASBZCharacter::SetStance(ESBZCharacterStance InStance) {
+}
+
+void ASBZCharacter::Server_TransferBagFrom_Implementation(ASBZCharacter* ToCharacter) {
+}
+
+void ASBZCharacter::Server_ThrowBag_Implementation(const FVector& ReplicatedVelocity) {
+}
+
+void ASBZCharacter::Server_SetEquipStateAndIndex_Implementation(uint8 InEquipStateAndIndex) {
+}
+
+void ASBZCharacter::Server_OnThrowCarryActorFailed_Implementation(uint32 NetID) {
+}
+
+void ASBZCharacter::Server_OnPickupCarryActorFailed_Implementation(uint32 NetID) {
+}
+
+void ASBZCharacter::Server_HumanShieldInstigatorSlotReached_Implementation() {
+}
+bool ASBZCharacter::Server_HumanShieldInstigatorSlotReached_Validate() {
+    return true;
+}
+
+void ASBZCharacter::RemoveLooseGameplayTags(const FGameplayTagContainer& GameplayTags, int32 Count) {
+}
+
+void ASBZCharacter::RemoveLooseGameplayTag(const FGameplayTag& GameplayTag, int32 Count) {
+}
+
+void ASBZCharacter::OnStopZipline_Implementation(const ASBZZipline* Zipline, bool bIsMovingZiplineForward) {
+}
+
+void ASBZCharacter::OnStopTraversal_Implementation(const FSBZAgilityTraversalTrajectory& Trajectory) {
+}
+
+void ASBZCharacter::OnStopSlide_Implementation() {
+}
+
+void ASBZCharacter::OnStartZipline_Implementation(const ASBZZipline* Zipline, bool bIsMovingZiplineForward) {
+}
+
+void ASBZCharacter::OnStartTraversal_Implementation(const FSBZAgilityTraversalTrajectory& Trajectory) {
+}
+
+void ASBZCharacter::OnStartSlide_Implementation() {
+}
+
+void ASBZCharacter::OnReplicatedEquippableDestroyedOnClient(AActor* InEquippableActor) {
+}
+
+void ASBZCharacter::OnRep_Stance(ESBZCharacterStance InStance) {
+}
+
+void ASBZCharacter::OnRep_Seed() {
+}
+
+void ASBZCharacter::OnRep_ReplicatedReloadState(const FSBZReplicatedReloadState& OldReplicatedReloadState) {
+}
+
+void ASBZCharacter::OnRep_ReplicatedEquippableState() {
+}
+
+void ASBZCharacter::OnRep_RandomMeshScaleEnabled() {
+}
+
+void ASBZCharacter::OnRep_IsAlive() {
+}
+
+void ASBZCharacter::OnRep_HumanShieldInstigatorState() {
+}
+
+void ASBZCharacter::OnRep_EquipStateAndIndex() {
+}
+
+void ASBZCharacter::OnRep_CurrentThrowableIndex(int32 OldThrowableIndex) {
+}
+
+void ASBZCharacter::OnRep_CurrentPlaceableIndex(int32 OldPlaceableIndex) {
+}
+
+void ASBZCharacter::OnRep_BagHandleArray(const TArray<FSBZBagHandle>& OldBagHandleArray) {
+}
+
+void ASBZCharacter::OnEquipStateTimerDone() {
+}
+
+void ASBZCharacter::OnCharacterMontageInstanceEnded(int32 AnimMontageInstanceID, bool bInterrupted) {
+}
+
+void ASBZCharacter::Multicast_SwitchMontageSection_Implementation(UAnimMontage* Montage, const FName& SectionName) {
+}
+
+void ASBZCharacter::Multicast_StopTargeting_Implementation() {
+}
+
+void ASBZCharacter::Multicast_StopRecoil_Implementation(bool bWasCancelled) {
+}
+
+void ASBZCharacter::Multicast_StopOverrideMaxWalkSpeed_Implementation() {
+}
+
+void ASBZCharacter::Multicast_StopMontage_Implementation(UAnimMontage* Montage, bool bAllowExitSectionSwitch) {
+}
+
+void ASBZCharacter::Multicast_StartTargeting_Implementation() {
+}
+
+void ASBZCharacter::Multicast_SnapVictimOntoInstigator_Implementation(const FVector& SnapLocation, const ASBZCharacter* HSInstigator) {
+}
+
+void ASBZCharacter::Multicast_SetThrowBagAnimationActive_Implementation(bool bActive) {
+}
+
+void ASBZCharacter::Multicast_SetStance_Implementation(ESBZCharacterStance NewStance) {
+}
+
+void ASBZCharacter::Multicast_SetReloadState_Implementation(const FSBZReplicatedReloadState& InReplicatedReloadState) {
+}
+
+void ASBZCharacter::Multicast_SetMontageNextSection_Implementation(UAnimMontage* Montage, const FName& NextSectionName) {
+}
+
+void ASBZCharacter::Multicast_SetMarked_Implementation(bool bIsMarked) {
+}
+
+void ASBZCharacter::Multicast_SetEquipStateAndIndex_Implementation(uint8 InEquipStateAndIndex) {
+}
+
+void ASBZCharacter::Multicast_SetEnableRandomMeshScale_Implementation(bool bInEnableRandomMeshScale) {
+}
+
+void ASBZCharacter::Multicast_SetCurrentThrowableIndex_Implementation(int32 NewThrowableIndex) {
+}
+
+void ASBZCharacter::Multicast_SetCurrentPlaceableIndex_Implementation(int32 NewPlaceableIndex) {
+}
+
+void ASBZCharacter::Multicast_SetActiveGadget_Implementation(int32 NewIndex) {
+}
+
+void ASBZCharacter::Multicast_PredictedRagdollDenied_Implementation(int32 HurtReactionIndex) {
+}
+
+void ASBZCharacter::Multicast_PlayMontageMoveTo_Implementation(UAnimMontage* Montage, const TArray<FTransform>& TargetTransforms, bool bDisableAutoBlendOut) {
+}
+
+void ASBZCharacter::Multicast_PlayMontageMoveMulti_Implementation(FName MontageName, const TArray<FTransform>& TargetTransforms) {
+}
+
+void ASBZCharacter::Multicast_PlayMontageMove_Implementation(FName MontageName, const FVector& EndMoveToWorldPosition, float PlayRate) {
+}
+
+void ASBZCharacter::Multicast_PlayMontage_Implementation(UAnimMontage* Montage, bool bPlayOnDedicatedServer, bool bStopAllActiveMontages) {
+}
+
+void ASBZCharacter::Multicast_OverrideMaxWalkSpeed_Implementation(float MaxWalkSpeed) {
+}
+
+void ASBZCharacter::Multicast_OnThrowCarryActor_Implementation(uint32 NetID, bool bInIsCarriedLastHitByIgnored) {
+}
+
+void ASBZCharacter::Multicast_OnPickupCarryActor_Implementation(uint32 NetID) {
+}
+
+void ASBZCharacter::Multicast_OnKill_Implementation() {
+}
+
+void ASBZCharacter::Multicast_HumanShieldInstigatorSlotReached_Implementation() {
+}
+
+void ASBZCharacter::Multicast_EnableThrowState_Implementation() {
+}
+
+void ASBZCharacter::Multicast_DisableThrowState_Implementation() {
+}
+
+void ASBZCharacter::Multicast_CancelMelee_Implementation() {
+}
+
+void ASBZCharacter::Multicast_ApplyHurtReaction_Implementation(const FSBZHurtReactionPrediction& HurtReactionPrediction) {
+}
+
+void ASBZCharacter::Multicast_ActivateMelee_Implementation() {
+}
+
+void ASBZCharacter::HandleTakePointDamage(AActor* DamagedActor, float Damage, AController* InstigatedBy, FVector HitLocation, UPrimitiveComponent* HitComponent, FName BoneName, FVector ShotFromDirection, const UDamageType* DamageType, AActor* DamageCauser) {
+}
+
+int32 ASBZCharacter::GetSeed() const {
+    return 0;
+}
+
+ASBZRoomVolume* ASBZCharacter::GetLastKnownRoom() const {
+    return NULL;
+}
+
+USBZCarryType* ASBZCharacter::GetLastCurrentCarryType() const {
+    return NULL;
+}
+
+FSBZBagHandle ASBZCharacter::GetLastBagHandle() const {
+    return FSBZBagHandle{};
+}
+
+ASBZRoomVolume* ASBZCharacter::GetCurrentRoom_Implementation() const {
+    return NULL;
+}
+
+void ASBZCharacter::Client_OnThrowCarryActorFailed_Implementation(uint32 NetID) {
+}
+
+void ASBZCharacter::Client_OnPickupCarryActorFailed_Implementation(uint32 NetID) {
+}
+
+
+
+void ASBZCharacter::AddLooseGameplayTags(const FGameplayTagContainer& GameplayTags, int32 Count) {
+}
+
+void ASBZCharacter::AddLooseGameplayTag(const FGameplayTag& GameplayTag, int32 Count) {
+}
+
+void ASBZCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(ASBZCharacter, bRandomMeshScaleEnabled);
+    DOREPLIFETIME(ASBZCharacter, BagHandleArray);
+    DOREPLIFETIME(ASBZCharacter, ReplicatedMontage);
+    DOREPLIFETIME(ASBZCharacter, bIsAlive);
+    DOREPLIFETIME(ASBZCharacter, bIsTargeting);
+    DOREPLIFETIME(ASBZCharacter, ReplicatedReloadState);
+    DOREPLIFETIME(ASBZCharacter, ReplicatedEquippableState);
+    DOREPLIFETIME(ASBZCharacter, Stance);
+    DOREPLIFETIME(ASBZCharacter, RemoteViewYaw);
+    DOREPLIFETIME(ASBZCharacter, EquipStateAndIndex);
+    DOREPLIFETIME(ASBZCharacter, TeamId);
+    DOREPLIFETIME(ASBZCharacter, CurrentThrowableIndex);
+    DOREPLIFETIME(ASBZCharacter, GadgetIndexArray);
+    DOREPLIFETIME(ASBZCharacter, CurrentPlaceableIndex);
+    DOREPLIFETIME(ASBZCharacter, HumanShieldInstigatorState);
+    DOREPLIFETIME(ASBZCharacter, Seed);
+}
+
+UAbilitySystemComponent* ASBZCharacter::GetAbilitySystemComponent() const
+{
+    return nullptr; 
+}
+
 

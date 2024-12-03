@@ -9,7 +9,7 @@ class UMaterialInstance;
 class USkeletalMesh;
 
 UCLASS(Blueprintable)
-class USBZSuitBaseData : public USBZCosmeticsDataAsset {
+class STARBREEZE_API USBZSuitBaseData : public USBZCosmeticsDataAsset {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
@@ -43,5 +43,6 @@ public:
     uint8 CPD01;
     
     USBZSuitBaseData();
+
 };
 

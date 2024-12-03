@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIStimulus -FallbackName=AIStimulus
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "Perception/AIPerceptionTypes.h"
+#include "GameplayTagContainer.h"
 #include "EPD3HeistState.h"
 #include "SBZAIOrder.h"
 #include "SBZAIOrder_FirstResponder.generated.h"
@@ -22,6 +22,7 @@ protected:
     
 public:
     USBZAIOrder_FirstResponder();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);

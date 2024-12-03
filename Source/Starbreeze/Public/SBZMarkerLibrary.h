@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
+#include "UObject/NoExportTypes.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "SBZMarkerLibrary.generated.h"
 
 class UObject;
@@ -13,6 +13,7 @@ class USBZMarkerLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     USBZMarkerLibrary();
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void RemoveReplicatedMarker(UObject* WorldContextObject, int32 ID);
     

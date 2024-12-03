@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=SBZStateMachineBase -ObjectName=SBZStateMachineState -FallbackName=SBZStateMachineState
+#include "SBZStateMachineState.h"
 #include "AsyncLoadLevelParams.h"
 #include "SBZAsyncLoadLevelInterface.h"
 #include "SBZCommonStateMachineState.generated.h"
 
-UCLASS(Blueprintable, Config=Engine, DefaultConfig, Config=Starbreeze)
+UCLASS(Blueprintable, DefaultConfig, Config=Starbreeze)
 class STARBREEZE_API USBZCommonStateMachineState : public USBZStateMachineState, public ISBZAsyncLoadLevelInterface {
     GENERATED_BODY()
 public:
@@ -27,7 +27,8 @@ protected:
     
 public:
     USBZCommonStateMachineState();
-    
+
+
     // Fix for true pure virtual functions not being implemented
 };
 

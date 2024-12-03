@@ -41,6 +41,7 @@ private:
     
 public:
     USBZMainMenuChallengeScreenDescriptionPanel();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SetEmpty();
     

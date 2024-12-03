@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
+#include "Curves/CurveFloat.h"
 #include "SBZBreakableInterface.h"
 #include "SBZDamageDistance.h"
 #include "SBZExplosionResult.h"
@@ -81,12 +81,13 @@ protected:
     USceneComponent* ExplosionLocation;
     
 public:
-    ASBZSeasonalEventItemExploding();
+    ASBZSeasonalEventItemExploding(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_ReplicateExplosion(const FSBZExplosionResult& Result);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

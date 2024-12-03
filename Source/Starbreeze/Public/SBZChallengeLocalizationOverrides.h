@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "SBZObjectiveKeysOverrides.h"
 #include "SBZChallengeLocalizationOverrides.generated.h"
 
@@ -12,5 +12,6 @@ public:
     TMap<FString, FSBZObjectiveKeysOverrides> ObjectiveKeysOverrides;
     
     USBZChallengeLocalizationOverrides();
+
 };
 

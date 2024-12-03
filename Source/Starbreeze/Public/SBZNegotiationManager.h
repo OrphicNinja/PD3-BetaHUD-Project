@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/Object.h"
+#include "GameplayTagContainer.h"
 #include "EPD3HeistState.h"
+#include "SBZHostageTradeData.h"
 #include "SBZNegotiationManager.generated.h"
 
-class APawn;
 class USBZNegotiationSettings;
 
 UCLASS(Blueprintable, Within=PD3HeistGameMode)
@@ -19,12 +19,13 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USBZNegotiationSettings* Settings;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FSBZHostageTradeData> HostageTradeDataArray;
+    
 public:
     USBZNegotiationManager();
+
 private:
-    UFUNCTION(BlueprintCallable)
-    void OnPawnKilledDuringNegotiation(APawn* DeadPawn);
-    
     UFUNCTION(BlueprintCallable)
     void OnHeistStateChanged(EPD3HeistState OldState, EPD3HeistState NewState);
     

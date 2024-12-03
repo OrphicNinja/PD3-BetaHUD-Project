@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Guid -FallbackName=Guid
+#include "UObject/NoExportTypes.h"
 #include "ESBZEquippableLoadoutSlot.h"
 #include "ESBZMetaRequestResult.h"
 #include "SBZInventorySlotStoreItem.h"
@@ -50,6 +50,7 @@ private:
     
 public:
     USBZMainMenuWeaponInventoryWidget();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdateWeaponSlotButtons();

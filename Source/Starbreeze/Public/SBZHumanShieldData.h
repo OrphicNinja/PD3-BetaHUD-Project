@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "Engine/DataAsset.h"
+#include "GameplayTagContainer.h"
 #include "SBZHumanShieldDirection.h"
 #include "SBZHumanShieldData.generated.h"
 
@@ -19,5 +19,6 @@ public:
     FGameplayTagContainer AllowAnyDirectionTags;
     
     USBZHumanShieldData();
+
 };
 

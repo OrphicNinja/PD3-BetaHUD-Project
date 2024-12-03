@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "GameplayTagContainer.h"
 #include "ESBZPlayerAbilityBuffType.h"
 #include "SBZAbilityBuffTypeActivation.h"
 #include "SBZInventoryBaseData.h"
@@ -26,6 +26,12 @@ public:
     bool bIsEquippedTagGranted;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsMissionFailTimeoutDelay;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float MissionFailTimeoutDelay;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UGameplayEffect> PlayerEffect;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -46,9 +52,6 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsAnyRequiredBuffTypeEnough;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float CooldownSeconds;
-    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
     TArray<FSBZSkillFloatValue> FloatArray;
     
@@ -56,8 +59,6 @@ public:
     TArray<FSBZSkillIntValue> IntArray;
     
     USBZSkillData();
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    FText GetFormattedDescriptionText() const;
-    
+
 };
 

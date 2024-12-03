@@ -3,6 +3,8 @@
 #include "SBZPlayerCameraModifier.h"
 #include "SBZAnimatedCameraModifier.generated.h"
 
+class ASBZPlayerCharacter;
+
 UCLASS(Blueprintable)
 class USBZAnimatedCameraModifier : public USBZPlayerCameraModifier {
     GENERATED_BODY()
@@ -11,7 +13,11 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName CameraSocket;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    ASBZPlayerCharacter* PlayerCharacter;
+    
 public:
     USBZAnimatedCameraModifier();
+
 };
 

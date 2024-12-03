@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Guid -FallbackName=Guid
+#include "UObject/NoExportTypes.h"
 #include "ESBZStoreItemUIIdSource.h"
 #include "SBZStoreBaseItem.h"
 #include "SBZStoreItemUIData.generated.h"

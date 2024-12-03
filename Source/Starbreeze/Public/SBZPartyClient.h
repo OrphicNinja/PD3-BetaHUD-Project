@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "UObject/Object.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "SBZPartyData.h"
 #include "SBZPartyMemberInfo.h"
 #include "SBZPartyClient.generated.h"
@@ -16,8 +16,9 @@ protected:
     
 public:
     USBZPartyClient();
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void ServerNotifyLeftLobby(const FUniqueNetIdRepl& ClientId);

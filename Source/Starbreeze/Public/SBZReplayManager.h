@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZReplayManager.generated.h"
 
 class USBZGameInstance;
@@ -24,6 +24,7 @@ private:
     
 public:
     USBZReplayManager();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsRecording() const;
     

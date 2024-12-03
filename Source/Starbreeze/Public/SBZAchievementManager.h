@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZChallengeData.h"
 #include "SBZAchievementManager.generated.h"
 
@@ -11,6 +11,7 @@ class USBZAchievementManager : public UObject {
     GENERATED_BODY()
 public:
     USBZAchievementManager();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnInitializedChallengeRecordsCacheDone();

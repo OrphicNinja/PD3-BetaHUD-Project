@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
+#include "UObject/NoExportTypes.h"
 #include "SBZAgilityAnimationQueryFilter.h"
 #include "SBZAgilityMontage.h"
 #include "Templates/SubclassOf.h"

@@ -1,17 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Vector_NetQuantize -FallbackName=Vector_NetQuantize
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
+#include "Curves/CurveFloat.h"
+#include "Engine/NetSerialization.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagContainer.h"
 #include "EPD3DefeatState.h"
 #include "EPD3MiniGameState.h"
 #include "SBZAIVisualDetectionGeneratorInterface.h"
 #include "SBZCharacter.h"
 #include "SBZControlsReference.h"
 #include "SBZDetectionData.h"
+#include "SBZEjectableByVehicleInterface.h"
+#include "SBZEmoteInterface.h"
+#include "SBZEquippableConfig.h"
 #include "SBZEquippableInspectInterface.h"
 #include "SBZLastAttackerData.h"
 #include "SBZLocalPlayerFeedbackParameters.h"
@@ -36,6 +40,7 @@ class USBZBaseWeaponData;
 class USBZCharacterComponent;
 class USBZCustomizableSuitMeshComponent;
 class USBZDialogDataAsset;
+class USBZEmoteData;
 class USBZFirstPersonCameraAttachment;
 class USBZFloorHeightCameraSmoother;
 class USBZHeightTransitionCameraModifier;
@@ -58,7 +63,7 @@ class USBZVoiceCommentDataAsset;
 class USkeletalMeshComponent;
 
 UCLASS(Blueprintable)
-class STARBREEZE_API ASBZPlayerCharacter : public ASBZCharacter, public ISBZAIVisualDetectionGeneratorInterface, public ISBZEquippableInspectInterface {
+class STARBREEZE_API ASBZPlayerCharacter : public ASBZCharacter, public ISBZAIVisualDetectionGeneratorInterface, public ISBZEquippableInspectInterface, public ISBZEmoteInterface, public ISBZEjectableByVehicleInterface {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -109,6 +114,12 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float IntimidationRange;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OverkillWeaponVODelay;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OverkillWeaponVORate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USBZFirstPersonCameraAttachment* FPCameraAttachment;
@@ -218,6 +229,18 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<USBZLocalPlayerFeedback> RunFeedback;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZLocalPlayerFeedback> OverHealDamageFeedback;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZLocalPlayerFeedback> OverHealGainedFeedback;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZLocalPlayerFeedback> OverHealRestoredFeedback;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZLocalPlayerFeedback> ShieldFlashFeedback;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize DesiredAcceleration;
     
@@ -281,6 +304,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<ASBZZiplineMotor> FPZiplineMotorClass;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USBZEmoteData* EmoteData;
+    
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     USBZPlayerAbilitySystemComponent* PlayerAbilitySystem;
@@ -290,6 +316,9 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer IgnoreMovementTags;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayTagContainer ForbidLandSlideTagContainer;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float OnTopBaseFOV;
@@ -397,6 +426,9 @@ private:
     float RequestOverkillWeaponAnimationTime;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float FirstAidKitOverHealAmount;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRuntimeFloatCurve FallDamageCurve;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -409,7 +441,7 @@ private:
     bool bHasTriggeredCoupDeGraceSkill;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    AActor* CurrentFollower;
+    TArray<AActor*> CurrentFollowersArray;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MiniGameDetectionMultiplier;
@@ -495,12 +527,34 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     AActor* LastHackedActor;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayTag SpawnAnimationTag;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FHitResult ClientUpdateLandHitResult;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FRuntimeFloatCurve PostProcessFadeInBlendCurve;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FRuntimeFloatCurve PostProcessFadeOutBlendCurve;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ReflectorShieldMaxBlindedDuration;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ReflectorShieldCooldownTime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FSBZEquippableConfig> StoredConsumableConfigArray;
+    
 public:
-    ASBZPlayerCharacter();
+    ASBZPlayerCharacter(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+    UFUNCTION(BlueprintCallable)
+    void StartEmote(const FText& EmoteText);
     
     UFUNCTION(BlueprintCallable)
     bool StartCurrentEquippableInspect();
@@ -512,28 +566,17 @@ public:
     void ServerStartEquipOverkillWeapon();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_StopCurrentEmoteMontage(float BlendOutTime);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetPhoneInteractionFlow(bool bInPhoneInteractionFlow);
     
-    UFUNCTION(Reliable, Server)
-    void Server_PickupAmmo(uint32 ID, bool bIsSimulatedPickup);
+    UFUNCTION(BlueprintCallable, Server, Unreliable)
+    void Server_PlayEmoteMontage(const FGameplayTag& MontageTag);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_OnMaskInputAbilityComplete();
     
-private:
-    UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_HackingSyncSucceeded(UObject* InHackable);
-    
-    UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_HackingSyncStarted(UObject* InHackable);
-    
-    UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_HackingSyncCompleted(UObject* InHackable, bool bInSyncedOnEquipped);
-    
-    UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_HackingSyncAborted(UObject* InHackable, bool bInIsSynchedAlready);
-    
-public:
     UFUNCTION(BlueprintCallable)
     bool RemoveCameraFeedback(int32 RemoveID);
     
@@ -582,6 +625,11 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnAckCompleteInteraction(USBZBaseInteractableComponent* InInteractable, USBZInteractorComponent* InInteractor, bool bInIsLocallyControlled);
     
+public:
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_StopCurrentEmoteMontage(float BlendOutTime);
+    
+private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetDefeatTime(float InDefeatTime);
     
@@ -595,21 +643,12 @@ public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_PlayRequestOverkillAnimation();
     
+    UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
+    void Multicast_PlayEmoteMontage(const FGameplayTag& MontageTag);
+    
 private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_PauseDefeatTime();
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void Multicast_HackingSyncSucceeded(UObject* InHackable);
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void Multicast_HackingSyncStarted(UObject* InHackable);
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void Multicast_HackingSyncCompleted(UObject* InHackable, bool bInSyncedOnEquipped);
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void Multicast_HackingSyncAborted(UObject* InHackable, bool bInIsSynchedAlready);
     
 public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
@@ -655,15 +694,17 @@ protected:
     UFUNCTION(Client, Reliable)
     void Client_SetDetectionData(uint32 PackedData);
     
-private:
-    UFUNCTION(Client, Reliable)
-    void Client_PickupAmmo(uint32 ID);
+    UFUNCTION(BlueprintCallable, Client, Unreliable)
+    void Client_PlayOverHealRestoredEffect();
+    
+    UFUNCTION(BlueprintCallable, Client, Unreliable)
+    void Client_PlayOverHealGainedEffect();
     
 public:
     UFUNCTION(BlueprintCallable)
     int32 ApplyCameraFeedback(UPARAM(Ref) FSBZLocalPlayerFeedbackParameters& Parameters);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

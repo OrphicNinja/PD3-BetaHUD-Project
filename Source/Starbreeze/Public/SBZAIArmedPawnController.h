@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIController -FallbackName=AIController
+#include "AIController.h"
 #include "SBZFactionIdHelper.h"
 #include "SBZAIArmedPawnController.generated.h"
 
@@ -13,6 +13,7 @@ private:
     FSBZFactionIdHelper Faction;
     
 public:
-    ASBZAIArmedPawnController();
+    ASBZAIArmedPawnController(const FObjectInitializer& ObjectInitializer);
+
 };
 

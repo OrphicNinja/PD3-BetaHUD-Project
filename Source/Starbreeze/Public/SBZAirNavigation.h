@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Info -FallbackName=Info
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Info.h"
 #include "SBZAirNavigationTree.h"
 #include "SBZAirNavigation.generated.h"
 
@@ -13,7 +14,11 @@ private:
     TArray<FSBZAirNavigationTree> NavData;
     
 public:
-    ASBZAirNavigation();
+    ASBZAirNavigation(const FObjectInitializer& ObjectInitializer);
+
+    UFUNCTION(BlueprintCallable)
+    static bool HasValidNavigationAt(const FVector& Location);
+    
     UFUNCTION(BlueprintCallable)
     void GenerateNavigationData();
     

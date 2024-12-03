@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TimerHandle -FallbackName=TimerHandle
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "Engine/EngineTypes.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "SBZDsStateMachineState.h"
 #include "SBZPlayerStateAddedEvent.h"
 #include "SBZPlayerStateRemovedEvent.h"
 #include "SBZStateMachineStateDsWaitingForPlayers.generated.h"
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class STARBREEZE_API USBZStateMachineStateDsWaitingForPlayers : public USBZDsStateMachineState {
     GENERATED_BODY()
 public:
@@ -20,6 +20,7 @@ private:
     
 public:
     USBZStateMachineStateDsWaitingForPlayers();
+
     UFUNCTION(BlueprintCallable)
     void UnregisterClient(const FUniqueNetIdRepl& PlayerId);
     

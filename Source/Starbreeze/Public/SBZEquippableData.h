@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Transform -FallbackName=Transform
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "ESBZEquippableFamily.h"
 #include "SBZInventoryBaseData.h"
 #include "Templates/SubclassOf.h"
@@ -12,6 +12,7 @@ class UAnimSequenceBase;
 class USBZEquippableAnimationCollection;
 class USBZEquippableMenuAnimationCollection;
 class USBZGameplayAbility;
+class USBZOverskillData;
 class USBZPlayerAnimationCollectionFPP;
 class USBZTagReactionAsset;
 
@@ -47,6 +48,18 @@ public:
     UAnimSequenceBase* DefaultLeftGripTPPose;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAnimSequenceBase* TriggerDisciplineRightGripFPPose;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAnimSequenceBase* TriggerDisciplineLeftGripFPPose;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAnimSequenceBase* TriggerDisciplineRightGripTPPose;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAnimSequenceBase* TriggerDisciplineLeftGripTPPose;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ESBZEquippableFamily EquippableFamily;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -73,6 +86,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector BoundsOffsetHack;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USBZOverskillData* OverskillData;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<USBZPlayerAnimationCollectionFPP> AnimationCollectionFP;
@@ -85,5 +101,6 @@ protected:
     
 public:
     USBZEquippableData();
+
 };
 

@@ -1,11 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "ESBZTimerState.h"
 #include "SBZProgressionReachedDelegateDelegate.h"
 #include "SBZTimedObjectiveInterface.h"
 #include "SBZTimerDelegateDelegate.h"
 #include "SBZModifiableTimer.generated.h"
+
+class ASBZSabotagePoint;
 
 UCLASS(Blueprintable)
 class ASBZModifiableTimer : public AActor, public ISBZTimedObjectiveInterface {
@@ -37,12 +39,19 @@ protected:
     ESBZTimerState CurrentTimerState;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ASBZSabotagePoint* SabotagePoint;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<ASBZSabotagePoint*> SabotagePointArray;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 NextProgressionToPostIndex;
     
 public:
-    ASBZModifiableTimer();
+    ASBZModifiableTimer(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void StartTimer();
     
@@ -58,6 +67,11 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void PauseTimer();
     
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnSabotaged(bool bNewSabotagedState);
+    
+public:
     UFUNCTION(BlueprintCallable)
     void OnRep_TimerState();
     
@@ -80,7 +94,19 @@ public:
     void Multicast_ResetTimerAndPause();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetTimerSpeed() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetTimeRemaining() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetTimeElapsed() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetProgressMade() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetDuration() const;
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintCosmetic, BlueprintImplementableEvent)
@@ -99,7 +125,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void AddTimeElapsed(float TimeToAdd);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

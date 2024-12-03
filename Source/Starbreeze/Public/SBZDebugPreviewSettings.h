@@ -1,11 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=DeveloperSettings -ObjectName=DeveloperSettings -FallbackName=DeveloperSettings
+#include "Engine/DeveloperSettings.h"
 #include "SBZDebugPreviewSettings.generated.h"
 
 class USBZLifeActionPreviewData;
 class USBZPedestrianTrafficNavLinkPreviewData;
 class USkeletalMesh;
+class UTexture2D;
 
 UCLASS(Blueprintable, Config=EditorPerProjectUserSettings)
 class USBZDebugPreviewSettings : public UDeveloperSettings {
@@ -20,6 +21,10 @@ public:
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<USkeletalMesh> AgilitySkeletalPreview;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<FString, TSoftObjectPtr<UTexture2D>> LifeActionsIcons;
+    
     USBZDebugPreviewSettings();
+
 };
 

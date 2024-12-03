@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AccelByteUe4Sdk -ObjectName=AccelByteModelsQosServerList -FallbackName=AccelByteModelsQosServerList
+#include "AccelByteModelsQosServerList.h"
 #include "ESBZOnlineCode.h"
 #include "OnOnlineGetRegionsEventDelegateDelegate.generated.h"
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "EPD3MiniGameState.h"
 #include "ESBZModuleActorState.h"
 #include "SBZModuleActorStateChangedDelegateDelegate.h"
@@ -44,9 +44,10 @@ protected:
     ESBZModuleActorState CurrentState;
     
 public:
-    ASBZModuleActor();
+    ASBZModuleActor(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetEnabled(bool bInEnabled);
     

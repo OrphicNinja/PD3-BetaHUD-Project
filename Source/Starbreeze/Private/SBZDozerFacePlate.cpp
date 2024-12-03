@@ -1,6 +1,6 @@
 #include "SBZDozerFacePlate.h"
 
-USBZDozerFacePlate::USBZDozerFacePlate() {
-    this->PoppedMaterial = NULL;
+USBZDozerFacePlate::USBZDozerFacePlate(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
 }
+
 

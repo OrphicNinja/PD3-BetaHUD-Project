@@ -1,12 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=LinearColor -FallbackName=LinearColor
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=SoftObjectPath -FallbackName=SoftObjectPath
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=PlayerState -FallbackName=PlayerState
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=AbilitySystemInterface -FallbackName=AbilitySystemInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=ActiveGameplayEffectHandle -FallbackName=ActiveGameplayEffectHandle
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "ChallengeNotifPayload.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
+#include "GameFramework/PlayerState.h"
+#include "GameFramework/OnlineReplStructs.h"
+#include "AbilitySystemInterface.h"
+#include "GameplayEffectTypes.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagContainer.h"
 #include "EPD3DefeatState.h"
 #include "EPD3MiniGameState.h"
 #include "EPlayerReadyStatusValue.h"
@@ -16,10 +19,11 @@
 #include "SBZAmmoPickupLookup.h"
 #include "SBZCrewStateInterface.h"
 #include "SBZDropPlaceableEquippableData.h"
-#include "SBZEffectHandleArray.h"
 #include "SBZOnInfamyLevelChangedDynamicDelegate.h"
 #include "SBZPlayerEndMissionResultData.h"
+#include "SBZPlayerSkillEffectData.h"
 #include "SBZReplicatedReloadState.h"
+#include "SBZVoiceSessionData.h"
 #include "Templates/SubclassOf.h"
 #include "SBZPlayerState.generated.h"
 
@@ -31,14 +35,17 @@ class ASBZPlayerMicroCamera;
 class ASBZPlayerState;
 class ASBZTool;
 class UPaperSprite;
+class USBZArmorData;
 class USBZCharacterEffectDataAsset;
 class USBZEquippableData;
 class USBZMaskData;
+class USBZOverskillData;
 class USBZPingCallAsset;
 class USBZPlaceableData;
 class USBZPlayerAbilitySystemComponent;
 class USBZPlayerAttributeSet;
 class USBZPlayerCharacterData;
+class USBZProgressionSaveChallenges;
 class USBZProgressionSaveGame;
 class USBZSkillData;
 class USBZThrowableData;
@@ -74,13 +81,22 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FString AccelByteSessionId;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_EOSProductUserId, meta=(AllowPrivateAccess=true))
+    FString EOSProductUserId;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USBZProgressionSaveGame* ProgressionSaveGame;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USBZProgressionSaveChallenges* ProgressionSaveChallenges;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSBZOnInfamyLevelChangedDynamic OnInfamyLevelChangedDynamic;
     
 protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnIsSkipIntroSequenceChanged, meta=(AllowPrivateAccess=true))
+    bool bIsSkipIntroSequence;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FString ServerRegion;
     
@@ -104,12 +120,6 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<USBZPingCallAsset*> EquippablePings;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TMap<FGameplayTag, USBZSkillData*> SkillDataLookupMap;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TSet<FGameplayTag> SkillTagSet;
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ReplicatedStartReplenishDodgeServerTime, meta=(AllowPrivateAccess=true))
@@ -197,10 +207,16 @@ private:
     TArray<ASBZPlayerCharacter*> PlayerCharacterArray;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TArray<FActiveGameplayEffectHandle> AppliedLoadoutEffectArray;
+    TMap<USBZSkillData*, FSBZPlayerSkillEffectData> AppliedLoadoutSkillEffectMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TMap<USBZSkillData*, FSBZEffectHandleArray> AppliedCrewSkillEffectMap;
+    USBZArmorData* AppliedLoadoutArmorData;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FActiveGameplayEffectHandle AppliedLoadoutArmorEffectHandle;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<USBZSkillData*, FSBZPlayerSkillEffectData> AppliedCrewSkillEffectMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ASBZPlayerMicroCamera* PlayerMicroCamera;
@@ -231,6 +247,15 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USBZCharacterEffectDataAsset* ECMGUIEffectData;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USBZCharacterEffectDataAsset* PrecisionShotGUIEffectData;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<FGameplayTag, USBZCharacterEffectDataAsset*> TagGUIDataMap;
+    
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<FGameplayTag, uint32> TagGUIDataHandleMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float SkillTankDisengageActivatedTimeSeconds;
@@ -274,9 +299,55 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_IsTargeting, meta=(AllowPrivateAccess=true))
     bool bIsTargeting;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    int32 CustodyCount;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_CustodyReleaseCost, meta=(AllowPrivateAccess=true))
+    int32 CustodyReleaseCost;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    int32 CurrentTradeReduction;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bServerIsHardBargainCustody;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_MergePartySelected, meta=(AllowPrivateAccess=true))
+    bool bIsMergePartySelected;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float PickupConsumableCooldownTime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<USBZOverskillData*> EquippedOverskillArray;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<USBZSkillData*> EquippedOverskillSkillDataArray;
+    
 public:
-    ASBZPlayerState();
+    ASBZPlayerState(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+protected:
+    UFUNCTION(BlueprintCallable)
+    void SetSkipIntroSequence(bool bInIsSkipIntroSequence);
+    
+private:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_VoiceSessionLeft();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_VoiceSessionJoined();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_VoiceSessionCreateFailed();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_VoiceSessionCreated(const FString& SessionId);
+    
+public:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_UpdateGameSession();
     
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
@@ -284,6 +355,10 @@ private:
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_StartTargeting();
+    
+protected:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_SetSkipIntroSequence(bool bInIsSkipIntroSequence);
     
 public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
@@ -293,9 +368,23 @@ private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetEquipStateAndIndex(uint8 InEquipStateAndIndex);
     
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_SetEOSProductUserId(const FString& InEOSProductUserId);
+    
 public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetDropPlaceableEquippableData(const FSBZDropPlaceableEquippableData& Data);
+    
+private:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_RequestVoiceSessionLeave(const FUniqueNetIdRepl& InPlayerId);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_RequestVoiceSessionJoin(const FUniqueNetIdRepl& InPlayerId);
+    
+public:
+    UFUNCTION(Reliable, Server)
+    void Server_PickupAmmo(uint32 ID, bool bIsSimulatedPickup);
     
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
@@ -315,6 +404,9 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnRuntimeRoutedPingExpired(AActor* InRuntimeActor);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRuntimeActorEndPlay(AActor* RuntimeActor, TEnumAsByte<EEndPlayReason::Type> EndPlayReason);
     
     UFUNCTION(BlueprintCallable)
     void OnRuntimeActorDestroyed(AActor* InRuntimeActor);
@@ -346,6 +438,9 @@ private:
     void OnRep_MiniGameState(EPD3MiniGameState OldMiniGameState);
     
     UFUNCTION(BlueprintCallable)
+    void OnRep_MergePartySelected();
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_Loadout(const FPD3PlayerLoadout& InOldLoadout);
     
     UFUNCTION(BlueprintCallable)
@@ -363,10 +458,16 @@ public:
     
 private:
     UFUNCTION(BlueprintCallable)
-    void OnRep_EquipStateAndIndex();
+    void OnRep_EquipStateAndIndex(uint8 OldEquipStateAndIndex);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_EOSProductUserId(const FString& OldEOSProductUserId);
     
     UFUNCTION(BlueprintCallable)
     void OnRep_DefeatState(EPD3DefeatState OldDefeatState);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_CustodyReleaseCost();
     
     UFUNCTION(BlueprintCallable)
     void OnRep_CustodyCharacterClass();
@@ -377,16 +478,25 @@ public:
     
 private:
     UFUNCTION(BlueprintCallable)
-    void OnRep_AccelByteUserId();
+    void OnRep_AccelByteUserId(const FString& OldAccelByteUserId);
     
 public:
     UFUNCTION(BlueprintCallable)
     void OnRep_AccelByteDisplayName();
     
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnIsSkipIntroSequenceChanged();
+    
 private:
     UFUNCTION(BlueprintCallable)
     void OnECMCountChanged(int32 NewCount, int32 OldCount, float AddedTime, bool bInIsSignalScanActive);
     
+public:
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void MulticastNotifyClientsHostRestart(int32 ServerRestartTimeInSeconds);
+    
+private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_StopTargeting();
     
@@ -402,6 +512,11 @@ private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetSpectateDurationModification(float Duration);
     
+protected:
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetSkipIntroSequence(bool bInIsSkipIntroSequence);
+    
+private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetServerReloadState(const FSBZReplicatedReloadState& InServerReloadState);
     
@@ -426,6 +541,9 @@ private:
     void Multicast_SetEquipStateAndIndex(uint8 InEquipStateAndIndex);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetEOSProductUserId(const FString& InEOSProductUserId);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetDefeatState(EPD3DefeatState InDefeatState);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
@@ -439,6 +557,9 @@ private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetAccelByteUserId(const FString& InAccelByteUserId);
     
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_RejectEquipStateAndIndex(uint8 InEquipStateAndIndex);
+    
     UFUNCTION(NetMulticast, Reliable)
     void Multicast_OnKill(uint32 NetID);
     
@@ -446,6 +567,9 @@ private:
     void Multicast_DebugConsoleCommand(const FString& Command, const FString& InstigatorContextText, bool bIsLocallyControlledOnly, int32 PlayerIndex);
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsSkipIntroSequence() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsPlayerDisplayNameReady() const;
     
@@ -456,7 +580,13 @@ public:
     ESBZPlatform GetPlatform() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetMergePartySelected() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetInfamyLevel() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FString GetEOSProductUserId() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPaperSprite* GetCharacterIcon() const;
@@ -489,6 +619,9 @@ private:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_SetReducedCustodyTime(float InReducedCustodyTime);
     
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void Client_SetCustodyReleaseCost(int32 InNewCustodyReleaseCost);
+    
 public:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_SendPlayerReloadProgressionSaveGame();
@@ -498,13 +631,37 @@ private:
     void Client_SendOverkillWeaponProgress(float InOverkillWeaponProgress);
     
 public:
+    UFUNCTION(Client, Reliable)
+    void Client_PickupAmmo(uint32 ID);
+    
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_OnSaveLoadoutPending();
     
+private:
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void Client_LeaveVoiceSession();
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void Client_JoinVoiceSession(const FSBZVoiceSessionData& VoiceSessionData);
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void Client_DestroyVoiceSession();
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void Client_CreateVoiceSession();
+    
+public:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_CheatSetInfiniteAmmo(bool bInHasInifiniteAmmo);
     
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void Client_ChallengeCompleted(const FChallengeNotifPayload& ChallengeNotifPayload);
     
+
     // Fix for true pure virtual functions not being implemented
+
+    UFUNCTION(BlueprintCallable)
+    UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+    
 };
 

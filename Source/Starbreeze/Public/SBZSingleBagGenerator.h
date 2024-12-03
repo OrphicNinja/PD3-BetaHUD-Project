@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZBagHandle.h"
 #include "SBZBagPickedUpDelegate.h"
 #include "SBZBreakableInterface.h"
@@ -37,9 +37,10 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ShouldUseSecondaryType, meta=(AllowPrivateAccess=true))
     bool bIsSecondaryTypeUsed;
     
-    ASBZSingleBagGenerator();
+    ASBZSingleBagGenerator(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetInteractionEnabled(bool bEnabled);
     
@@ -66,7 +67,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintCosmetic, BlueprintImplementableEvent)
     void BP_OnChangedToSecondaryType(bool bDoCosmetics);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

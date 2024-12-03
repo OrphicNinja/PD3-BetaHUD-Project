@@ -1,7 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=GameInstance -FallbackName=GameInstance
+#include "Engine/GameInstance.h"
 #include "ESBZDifficulty.h"
+#include "ESBZHostingProvider.h"
+#include "ESBZMatchmakingProvider.h"
 #include "SBZReplayInfo.h"
 #include "Templates/SubclassOf.h"
 #include "SBZGameInstance.generated.h"
@@ -18,6 +20,7 @@ class USBZChallengeManager;
 class USBZCharacterManager;
 class USBZCosmeticsManager;
 class USBZCurrencyManager;
+class USBZDSChallengeManager;
 class USBZExperienceManager;
 class USBZFineGrainedRateLimitManager;
 class USBZGameEventBroker;
@@ -29,16 +32,21 @@ class USBZInfamyManager;
 class USBZInstantLootManager;
 class USBZInventoryManager;
 class USBZItemProgressionManager;
+class USBZLazyLoadingManager;
 class USBZListenerManager;
 class USBZLoadoutManager;
+class USBZMergePartyManager;
 class USBZMusicManager;
 class USBZOnlineEventBroker;
+class USBZPartyMemberDataManager;
 class USBZPlatformUserManager;
 class USBZPlayerStatisticsManager;
 class USBZPreplanningAssetManager;
 class USBZReplayManager;
+class USBZRequestFeedbackManager;
 class USBZSafeHouseManager;
 class USBZSaveManager;
+class USBZServerStatusManager;
 class USBZSettingsMenuManager;
 class USBZSkillManager;
 class USBZSoundEnvironmentManager;
@@ -46,13 +54,14 @@ class USBZStoreManager;
 class USBZTimeEventManager;
 class USBZUE4StatsProfiler;
 class USBZUIManager;
+class USBZUserManager;
 class USBZVolumeManager;
 class USBZWeaponConfigManager;
 class USBZWeaponProgressionManager;
 class USBZWorldLoader;
 class USBZWwiseMotionManagerComponent;
 
-UCLASS(Blueprintable, NonTransient)
+UCLASS(Blueprintable, DefaultConfig, NonTransient, Config=Starbreeze)
 class STARBREEZE_API USBZGameInstance : public UGameInstance {
     GENERATED_BODY()
 public:
@@ -61,6 +70,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USBZOnlineEventBroker* OnlineEventBroker;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ESBZMatchmakingProvider MatchmakingProvider;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ESBZHostingProvider HostingProvider;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -89,6 +104,12 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<USBZChallengeCategoryManager> ChallengeCategoryManagerClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZDSChallengeManager> DSChallengeManagerClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZServerStatusManager> ServerStatusManagerClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<USBZUIManager> UIManagerClass;
@@ -161,7 +182,13 @@ private:
     USBZChallengeManager* ChallengeManager;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USBZDSChallengeManager* DSChallengeManager;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USBZChallengeCategoryManager* ChallengeCategoryManager;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USBZServerStatusManager* ServerStatusManager;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USBZUIManager* UIManager;
@@ -224,13 +251,29 @@ private:
     USBZGameplayManager* GameplayManager;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USBZMergePartyManager* MergePartyManager;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USBZPartyMemberDataManager* PartyMemberDataManager;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USBZFineGrainedRateLimitManager* FGRLManager;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USBZLazyLoadingManager* LazyLoadingManager;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USBZUserManager* UserManager;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USBZRequestFeedbackManager* RequestFeedbackManager;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USBZPlatformUserManager* PlatformUserManager;
     
 public:
     USBZGameInstance();
+
     UFUNCTION(BlueprintCallable)
     void SetDifficulty(ESBZDifficulty InDifficulty);
     
@@ -242,6 +285,9 @@ protected:
     void HandleGameStateEntered(FName StateName);
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    USBZTimeEventManager* GetTimeEventManager() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     USBZSaveManager* GetSaveManager() const;
     

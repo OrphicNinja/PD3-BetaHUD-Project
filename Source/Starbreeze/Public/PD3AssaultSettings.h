@@ -1,15 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Int32Interval -FallbackName=Int32Interval
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
+#include "Curves/CurveFloat.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagContainer.h"
 #include "PD3AssaultDifficultySettings.h"
 #include "PD3AssaultPlatformSettings.h"
 #include "PD3DramaSettings.h"
 #include "PD3AssaultSettings.generated.h"
+
+class UPD3SecuritySettingDataModifiers;
 
 UCLASS(Blueprintable)
 class UPD3AssaultSettings : public UDataAsset {
@@ -66,8 +68,8 @@ public:
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     FPD3DramaSettings DramaDifficultySettingsArray[4];
     
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
-    FFloatInterval SpawnGroupCooldownSeconds;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float PreferredSpawnTime;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PreferredSpawnDistance;
@@ -100,8 +102,12 @@ public:
     uint8 MaxNrAttackers[4];
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPD3SecuritySettingDataModifiers* SecuritySettingDataModifiers;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FGameplayTag, int32> TypeLimits;
     
     UPD3AssaultSettings();
+
 };
 

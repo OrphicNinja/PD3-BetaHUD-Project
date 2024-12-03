@@ -18,9 +18,10 @@ private:
     bool bSpawnDebris;
     
 public:
-    ASBZAIPointOfInterestReplicatedDebris();
+    ASBZAIPointOfInterestReplicatedDebris(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnRep_OnSpawnDebris();

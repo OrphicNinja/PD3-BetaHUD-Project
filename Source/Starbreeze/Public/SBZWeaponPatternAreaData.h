@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "SBZWeaponPatternAreaDefinition.h"
 #include "SBZWeaponPatternAreaData.generated.h"
 
@@ -15,5 +15,6 @@ public:
     FSBZWeaponPatternAreaDefinition DefaultAreaDefinition;
     
     USBZWeaponPatternAreaData();
+
 };
 

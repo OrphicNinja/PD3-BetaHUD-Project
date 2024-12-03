@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZPropDamageContext.h"
 #include "SBZAIRefractorShield.generated.h"
 
@@ -38,9 +38,10 @@ private:
     bool bHasDeployed;
     
 public:
-    ASBZAIRefractorShield();
+    ASBZAIRefractorShield(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnRep_HasDeployed();

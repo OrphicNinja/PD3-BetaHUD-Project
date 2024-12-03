@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZComponentSelector.h"
 #include "SBZGameplayEffectData.h"
 #include "SBZInteractableModeData.h"
@@ -67,6 +67,12 @@ protected:
     uint8 bOverrideScreenInteractAngle: 1;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint8 bOverrideScreenInteractPendingDelay: 1;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint8 bIsRequirementsCheckedEveryTick: 1;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ScreenInteractDistance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -74,9 +80,6 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinScreenInteractDot;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    uint8 bOverrideScreenInteractPendingDelay: 1;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PendingOnScreenDelay;
@@ -114,8 +117,8 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USBZVoiceCommentDataAsset* CancelComment;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
-    USBZInteractorComponent* LastInteractor;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<USBZInteractorComponent> LastInteractor;
     
     UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int8 ModeIndex;
@@ -130,7 +133,8 @@ protected:
     bool bIsScramblerAffected;
     
 public:
-    USBZBaseInteractableComponent();
+    USBZBaseInteractableComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetGameplayEffectsOnInteract(const TArray<FSBZGameplayEffectData> GameplayEffects);
     

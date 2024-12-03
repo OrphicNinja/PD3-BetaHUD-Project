@@ -1,5 +1,5 @@
 #include "SBZEnvQueryTest_RoomPathfinding.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EnvQueryContext_Querier -FallbackName=EnvQueryContext_Querier
+#include "EnvironmentQuery/Contexts/EnvQueryContext_Querier.h"
 
 USBZEnvQueryTest_RoomPathfinding::USBZEnvQueryTest_RoomPathfinding() {
     this->Detail = ESBZEnvTestPathfindingDetail::Rough;
@@ -7,4 +7,5 @@ USBZEnvQueryTest_RoomPathfinding::USBZEnvQueryTest_RoomPathfinding() {
     this->RoomContext = NULL;
     this->bIsLockedExpensive = false;
 }
+
 

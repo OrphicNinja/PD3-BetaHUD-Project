@@ -44,6 +44,7 @@ private:
     
 public:
     USBZMainMenuInventoryCharacterPreferenceScreen();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void UpdateCharacterSlotButtonControlsReference(ESBZCharacterPreferenceButtonSelectionAction SelectionAction);

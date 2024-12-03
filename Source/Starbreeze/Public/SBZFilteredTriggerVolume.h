@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TriggerVolume -FallbackName=TriggerVolume
+#include "Engine/TriggerVolume.h"
 #include "SBZFilterActorDynamicDelegateDelegate.h"
 #include "SBZFilterAllDesiredCountsDynamicDelegateDelegate.h"
 #include "SBZFilterDesiredCountDynamicDelegateDelegate.h"
@@ -33,7 +33,8 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSBZFilterAllDesiredCountsDynamicDelegate FiltersAllHaveDesiredCountsChanged;
     
-    ASBZFilteredTriggerVolume();
+    ASBZFilteredTriggerVolume(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetVolumeEnabled(bool bEnabled);
     

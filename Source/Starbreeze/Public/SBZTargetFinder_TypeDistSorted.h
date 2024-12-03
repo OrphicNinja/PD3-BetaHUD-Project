@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatRange -FallbackName=FloatRange
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/NoExportTypes.h"
+#include "GameplayTagContainer.h"
 #include "SBZTargetFinder.h"
 #include "SBZTargetFinder_TypeDistSorted.generated.h"
 
@@ -21,5 +21,6 @@ protected:
     
 public:
     USBZTargetFinder_TypeDistSorted();
+
 };
 

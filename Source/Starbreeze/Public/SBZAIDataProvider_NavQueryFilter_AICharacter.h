@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIDataProvider -FallbackName=AIDataProvider
+#include "DataProviders/AIDataProvider.h"
 #include "Templates/SubclassOf.h"
 #include "SBZAIDataProvider_NavQueryFilter_AICharacter.generated.h"
 
@@ -14,5 +14,6 @@ public:
     TSubclassOf<UNavigationQueryFilter> NQFClass;
     
     USBZAIDataProvider_NavQueryFilter_AICharacter();
+
 };
 

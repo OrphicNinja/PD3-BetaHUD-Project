@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=NavRelevantInterface -FallbackName=NavRelevantInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TriggerVolume -FallbackName=TriggerVolume
+#include "AI/Navigation/NavRelevantInterface.h"
+#include "Engine/TriggerVolume.h"
 #include "ESBZRoomLabel.h"
 #include "ESBZRoomType.h"
 #include "SBZCoverPointContainerInterface.h"
@@ -46,7 +46,8 @@ private:
     TArray<USBZAIObjectiveComponent*> AIObjectivesInRoom;
     
 public:
-    ASBZRoomVolume();
+    ASBZRoomVolume(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetRoomType(ESBZRoomType InRoomType);
     
@@ -59,7 +60,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetRoomName() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

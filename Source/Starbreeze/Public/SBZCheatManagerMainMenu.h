@@ -1,7 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=InputCore -ObjectName=Key -FallbackName=Key
+#include "InputCoreTypes.h"
+#include "ESBZOnlineCode.h"
 #include "SBZCheatManagerBase.h"
+#include "SBZNewsDataUIEntry.h"
+#include "SBZServersListInterpreter.h"
 #include "SBZCheatManagerMainMenu.generated.h"
 
 class UInputComponent;
@@ -10,7 +13,7 @@ class USBZSuitPartConfig;
 class UTexture2D;
 
 UCLASS(Blueprintable)
-class USBZCheatManagerMainMenu : public USBZCheatManagerBase {
+class USBZCheatManagerMainMenu : public USBZCheatManagerBase, public ISBZServersListInterpreter {
     GENERATED_BODY()
 public:
 private:
@@ -28,6 +31,7 @@ private:
     
 public:
     USBZCheatManagerMainMenu();
+
     UFUNCTION(BlueprintCallable, Exec)
     void WriteAchievement(const FString& AchievementId);
     
@@ -44,9 +48,6 @@ public:
     void SyncDLC();
     
     UFUNCTION(BlueprintCallable, Exec)
-    void SimulateProgressivePriceResetEveryMinute();
-    
-    UFUNCTION(BlueprintCallable, Exec)
     void SimulateForeground();
     
     UFUNCTION(Exec)
@@ -54,6 +55,9 @@ public:
     
     UFUNCTION(Exec)
     void SetPrimaryWeaponLoadout(uint32 LoadoutIndex, uint32 ConfigSlotIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void SetLoadoutName(const int32 LoadoutIndex, const FString& LoadoutName);
     
     UFUNCTION(Exec)
     void SetEquippiedSuitInventoryIndex(uint32 ConfigSlotIndex);
@@ -98,6 +102,9 @@ public:
     void RemoveAsset();
     
     UFUNCTION(BlueprintCallable, Exec)
+    void RefreshDailyChallenges();
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void QueryAchivements();
     
     UFUNCTION(BlueprintCallable, Exec)
@@ -106,6 +113,11 @@ public:
     UFUNCTION(BlueprintCallable, Exec)
     void PurchaseItem(const FString& ItemId);
     
+private:
+    UFUNCTION(BlueprintCallable)
+    void PrintNews(ESBZOnlineCode ErrorCode, const TArray<FSBZNewsDataUIEntry>& NewsFeedList);
+    
+public:
     UFUNCTION(BlueprintCallable, Exec)
     void LockCharacterForTutorial();
     
@@ -143,6 +155,9 @@ public:
     void DumpWeaponSlotToWeaponPartMap(const FString& ItemId);
     
     UFUNCTION(BlueprintCallable, Exec)
+    void DumpWeaponSlotEntitlementSkuDlcMap() const;
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void DumpSteamItems();
     
     UFUNCTION(BlueprintCallable, Exec)
@@ -167,13 +182,28 @@ public:
     void DumpPlayerSkillPoints();
     
     UFUNCTION(BlueprintCallable, Exec)
+    void DumpPartyMemberLoadout();
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void DumpOwnedHeists();
     
     UFUNCTION(BlueprintCallable, Exec)
     void DumpNextResetTime();
     
     UFUNCTION(BlueprintCallable, Exec)
+    void DumpNews();
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void DumpMaskOfTheWeek();
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void DumpLoadoutName(const int32 LoadoutIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void DumpItemsProgressions();
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void DumpIsQuickPlayEnabled();
     
     UFUNCTION(BlueprintCallable, Exec)
     void DumpInventoryItems();
@@ -186,6 +216,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Exec)
     void DumpDLCRewards() const;
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void DumpDailyChallenges();
     
     UFUNCTION(BlueprintCallable, Exec)
     void DumpCurrentRenownLevel();
@@ -283,5 +316,10 @@ public:
     UFUNCTION(Exec)
     void AddUniquePartToWeaponConfig(uint32 SlotIndex, const FString& SlotName, const FString& WeaponPartName);
     
+    UFUNCTION(BlueprintCallable, Exec)
+    void AddOwnedDLCAndPopulateEntitlementDisabledArray(const FString& DLCNameCommaList);
+    
+
+    // Fix for true pure virtual functions not being implemented
 };
 

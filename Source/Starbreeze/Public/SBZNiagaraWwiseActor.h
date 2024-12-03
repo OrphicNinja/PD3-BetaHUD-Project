@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZNiagaraWwiseActor.generated.h"
 
 class UAkAudioEvent;
@@ -54,7 +54,8 @@ protected:
     float RtpcInterpolationTimerMS;
     
 public:
-    ASBZNiagaraWwiseActor();
+    ASBZNiagaraWwiseActor(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void UpdateRtpc(float RtpcValue, float RtpcInterpolationValue);
     

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAttributeData -FallbackName=GameplayAttributeData
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "AttributeSet.h"
+#include "GameplayTagContainer.h"
 #include "SBZAICharacterAttributeSet.h"
 #include "SBZTankAttributeSet.generated.h"
 
@@ -29,8 +29,9 @@ protected:
     
 public:
     USBZTankAttributeSet();
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_VisorArmor(const FGameplayAttributeData& OldValue);

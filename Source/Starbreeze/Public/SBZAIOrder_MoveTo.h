@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
+#include "UObject/NoExportTypes.h"
 #include "SBZAIOrder.h"
 #include "SBZAIOrder_MoveTo.generated.h"
 
@@ -17,6 +17,7 @@ protected:
     
 public:
     USBZAIOrder_MoveTo();
+
     UFUNCTION(BlueprintCallable)
     void SetMoveToLocation(const FVector& Location);
     

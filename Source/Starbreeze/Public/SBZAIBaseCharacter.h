@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatRange -FallbackName=FloatRange
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Transform -FallbackName=Transform
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ComponentReference -FallbackName=ComponentReference
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagContainer.h"
 #include "ESBZAgilityType.h"
 #include "ESBZEvadeType.h"
 #include "SBZAIUtilityControlled.h"
@@ -22,7 +22,6 @@ class ASBZAIBaseCharacter;
 class ASBZRappellingRope;
 class ASBZWheeledVehicle;
 class UAnimMontage;
-class UGameplayEffect;
 class UNavigationQueryFilter;
 class USBZAICharacterAttributeSet;
 class USBZAICharacterMovementComponent;
@@ -32,6 +31,7 @@ class USBZAIUtilityData;
 class USBZAbilitySystemComponent;
 class USBZAgentManager;
 class USBZAgilityQueryParams;
+class USBZLifeActionSlot;
 class USBZNavLinkAgilityComponent;
 class USBZPathFocusSettings;
 class USBZStanceTransitionDataAsset;
@@ -74,6 +74,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     AActor* CurrentTarget;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    USBZLifeActionSlot* CurrentLifeActionSlot;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USBZAgilityQueryParams* AgilityQueryParam;
@@ -120,6 +123,15 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USBZPathFocusSettings* PathFocusSettings;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ThrowableNearRange;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    uint8 bWantsCoverPose: 1;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    uint8 bIsInCover: 1;
+    
 private:
     UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_AgentId, meta=(AllowPrivateAccess=true))
     uint32 AgentId;
@@ -152,15 +164,19 @@ private:
     bool bCanDoEvades;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSubclassOf<UGameplayEffect> MarkedGameplayEffectClass;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AdditiveBaseEyeHeightTickRate;
     
-public:
-    ASBZAIBaseCharacter();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CivilianNearRange;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsSlowedAllowed;
+    
+public:
+    ASBZAIBaseCharacter(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnRep_AgentId();
@@ -181,9 +197,15 @@ public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_StopAgilityMontage(UAnimMontage* Montage);
     
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetInCover(bool bInIsInCover);
+    
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetCurrentTarget(AActor* NewTarget);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetCurrentLifeActionSlot(USBZLifeActionSlot* LifeActionSlot);
     
 public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
@@ -201,7 +223,10 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetTimeSinceLastAgility() const;
     
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void BP_OnTagReactionPlayed();
     
+
     // Fix for true pure virtual functions not being implemented
 };
 

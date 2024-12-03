@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Volume -FallbackName=Volume
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GameFramework/Volume.h"
+#include "GameplayTagContainer.h"
 #include "SBZRoomVolumeInterface.h"
 #include "SBZDespawnVolume.generated.h"
 
@@ -19,8 +19,9 @@ protected:
     ASBZRoomVolume* Room;
     
 public:
-    ASBZDespawnVolume();
-    
+    ASBZDespawnVolume(const FObjectInitializer& ObjectInitializer);
+
+
     // Fix for true pure virtual functions not being implemented
 };
 

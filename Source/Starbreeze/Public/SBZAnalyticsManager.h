@@ -1,10 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=DateTime -FallbackName=DateTime
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/NoExportTypes.h"
+#include "UObject/Object.h"
 #include "ESBZCheaterPolicyType.h"
 #include "ESBZNotOwningHeistPolicyType.h"
 #include "SBZChallengeData.h"
+#include "SBZEntitlementsTelemetryPayload.h"
 #include "SBZAnalyticsManager.generated.h"
 
 class USBZAnalyticsProvider;
@@ -29,14 +30,21 @@ private:
     
 public:
     USBZAnalyticsManager();
+
     UFUNCTION(BlueprintCallable)
     void SendSyncDLC(const bool bIsSyncDLCSuccessful, const FString& SyncDLCFailureMessage);
     
     UFUNCTION(BlueprintCallable)
-    void SendNotOwningHeistDetected(const ESBZNotOwningHeistPolicyType NotOwningHeistAction, const bool bIsActionSuccessful, const FString& Description, const FString& AdditionalInformation);
+    void SendStayAsPartySelected(const bool bIsPartyLeader);
+    
+    UFUNCTION(BlueprintCallable)
+    void SendNotOwningHeistDetected(const FString& AccelByteUserId, const ESBZNotOwningHeistPolicyType NotOwningHeistAction, const bool bIsActionSuccessful, const FString& Description, const FString& AdditionalInformation);
     
     UFUNCTION(BlueprintCallable)
     void SendInfamyChanged(USBZInfamyManager* InfamyManager, int32 NewInfamyExperience, int32 PreviousInfamyExperience);
+    
+    UFUNCTION(BlueprintCallable)
+    void SendEntitlementsLoadedEvent(const FSBZEntitlementsTelemetryPayload& Payload);
     
     UFUNCTION(BlueprintCallable)
     void SendCheaterDetected(const ESBZCheaterPolicyType AntiCheatAction, const bool bIsCheatActionSuccessful, const FString& CheatTypeString, const FString& AdditionalInformation);

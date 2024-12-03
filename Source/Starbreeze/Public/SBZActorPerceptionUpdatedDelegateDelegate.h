@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIStimulus -FallbackName=AIStimulus
+#include "Perception/AIPerceptionTypes.h"
 #include "SBZActorPerceptionUpdatedDelegateDelegate.generated.h"
 
 class AActor;

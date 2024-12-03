@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "SBZLifeActionAffinityList.h"
 #include "SBZLifeActionAffinitytData.generated.h"
 
@@ -12,5 +12,6 @@ public:
     FSBZLifeActionAffinityList AllowedActions;
     
     USBZLifeActionAffinitytData();
+
 };
 

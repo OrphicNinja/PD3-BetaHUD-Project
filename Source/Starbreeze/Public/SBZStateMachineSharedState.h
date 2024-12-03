@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "ESBZOnlineSessionPhase.h"
 #include "SBZStateMachineSharedState.generated.h"
 
@@ -13,9 +13,10 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     ESBZOnlineSessionPhase OnlineSessionPhase;
     
-    USBZStateMachineSharedState();
+    USBZStateMachineSharedState(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void NotifyServerInActionPhase();
     

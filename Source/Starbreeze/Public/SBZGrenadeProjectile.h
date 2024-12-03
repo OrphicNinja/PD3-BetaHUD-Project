@@ -1,11 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EEndPlayReason -FallbackName=EEndPlayReason
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Vector_NetQuantizeNormal -FallbackName=Vector_NetQuantizeNormal
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
+#include "Engine/EngineTypes.h"
+#include "Engine/EngineTypes.h"
+#include "Curves/CurveFloat.h"
+#include "Engine/NetSerialization.h"
+#include "Engine/NetSerialization.h"
 #include "SBZExplosionResult.h"
 #include "SBZExplosive.h"
 #include "SBZExplosivePhysicsEffectData.h"
@@ -78,7 +79,10 @@ protected:
     TSubclassOf<USBZDamageType> DamageTypeClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSubclassOf<USBZLocalPlayerFeedback> LocalplayerFeedback;
+    TSubclassOf<USBZLocalPlayerFeedback> LocalPlayerFeedback;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZLocalPlayerFeedback> LocalPlayerInstigatorFeedback;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRuntimeFloatCurve PlayerFeedbackCurve;
@@ -112,9 +116,10 @@ private:
     FSBZExplosivePhysicsEffectData PostDamagePhysicsEffectData;
     
 public:
-    ASBZGrenadeProjectile();
+    ASBZGrenadeProjectile(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_EquippableIndex();
@@ -149,9 +154,12 @@ protected:
     void Multicast_ReplicateExplosion(const FSBZExplosionResult& Result);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_OnServerCollision(const FVector_NetQuantize& InLocation);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_DestroyBreakable(const FHitResult& InBreakableHitResult);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

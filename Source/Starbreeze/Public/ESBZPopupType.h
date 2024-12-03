@@ -24,5 +24,7 @@ enum class ESBZPopupType : uint8 {
     SuitInventory,
     GloveInventory,
     LoadoutMenu,
+    SoloMode,
+    SeverBrowserLongIntro,
 };
 

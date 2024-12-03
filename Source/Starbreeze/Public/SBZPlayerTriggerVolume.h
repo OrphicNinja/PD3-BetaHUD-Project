@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=TriggerVolume -FallbackName=TriggerVolume
+#include "Engine/TriggerVolume.h"
 #include "SBZBooleanStateDynamicDelegateDelegate.h"
 #include "SBZPawnDynamicDelegateDelegate.h"
 #include "Templates/SubclassOf.h"
@@ -35,7 +35,8 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSBZBooleanStateDynamicDelegate OverlappingAllPlayerPawnsChanged;
     
-    ASBZPlayerTriggerVolume();
+    ASBZPlayerTriggerVolume(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetVolumeEnabled(bool bEnabled);
     

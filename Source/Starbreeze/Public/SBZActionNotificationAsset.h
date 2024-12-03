@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "EPD3HeistState.h"
 #include "ESBZVoicePriority.h"
 #include "SBZActionNotificationAsset.generated.h"
@@ -31,5 +31,6 @@ public:
     ESBZVoicePriority VoicePriority;
     
     USBZActionNotificationAsset();
+
 };
 

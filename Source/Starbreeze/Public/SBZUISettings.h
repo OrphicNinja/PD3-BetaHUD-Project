@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=LinearColor -FallbackName=LinearColor
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=SlateFontInfo -FallbackName=SlateFontInfo
+#include "UObject/NoExportTypes.h"
+#include "Fonts/SlateFontInfo.h"
 #include "SBZDeveloperSettings.h"
 #include "SBZUIDefaultSoundEvents.h"
 #include "SBZUISettings.generated.h"
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class USBZUISettings : public USBZDeveloperSettings {
     GENERATED_BODY()
 public:
@@ -25,6 +25,13 @@ public:
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FName, int32> ShowActionInputGamepadMap;
     
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString ServersStatusMessageURL_Development;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString ServersStatusMessageURL_Live;
+    
     USBZUISettings();
+
 };
 

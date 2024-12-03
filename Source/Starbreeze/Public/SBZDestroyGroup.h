@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Int32Interval -FallbackName=Int32Interval
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "SBZOnDestroyActorsDoneDynamicDelegateDelegate.h"
 #include "SBZDestroyGroup.generated.h"
 
@@ -29,9 +29,10 @@ protected:
     int32 Seed;
     
 public:
-    ASBZDestroyGroup();
+    ASBZDestroyGroup(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_HasDestroyedActors(bool OldValue);

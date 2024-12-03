@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EEndPlayReason -FallbackName=EEndPlayReason
+#include "Engine/EngineTypes.h"
 #include "ESBZDisplayCaseState.h"
 #include "ESBZGateState.h"
 #include "SBZGameplayAbility.h"
@@ -38,6 +38,7 @@ private:
     
 public:
     USBZCuttingToolAbility();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnGateStateChanged(ASBZGate* Gate, ESBZGateState OldState, ESBZGateState NewState);

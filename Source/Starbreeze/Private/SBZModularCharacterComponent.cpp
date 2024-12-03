@@ -1,6 +1,15 @@
 #include "SBZModularCharacterComponent.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SkeletalMeshComponent -FallbackName=SkeletalMeshComponent
+#include "Components/SkinnedMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "SBZCustomizableSuitMeshComponent.h"
+
+USBZModularCharacterComponent::USBZModularCharacterComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::OnlyTickMontagesWhenNotRendered;
+    this->SuitCapsuleShadowingData = NULL;
+    this->SuitMeshComponent = CreateDefaultSubobject<USBZCustomizableSuitMeshComponent>(TEXT("SuitSkeletalMesh"));
+    this->GlovesMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("GlovesSkeletalMesh"));
+    this->BodyMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("BodySkeletalMesh"));
+}
 
 void USBZModularCharacterComponent::SetSuitMesh(USkeletalMesh* SuitSkeletalMesh) {
 }
@@ -26,10 +35,4 @@ USkeletalMeshComponent* USBZModularCharacterComponent::GetBodyMeshComponent() co
 void USBZModularCharacterComponent::AddToOutline(USBZOutlineComponent* OutlineComponent) {
 }
 
-USBZModularCharacterComponent::USBZModularCharacterComponent() {
-    this->SuitCapsuleShadowingData = NULL;
-    this->SuitMeshComponent = CreateDefaultSubobject<USBZCustomizableSuitMeshComponent>(TEXT("SuitSkeletalMesh"));
-    this->GlovesMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("GlovesSkeletalMesh"));
-    this->BodyMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("BodySkeletalMesh"));
-}
 

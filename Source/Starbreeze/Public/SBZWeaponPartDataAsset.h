@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GameplayTagContainer.h"
 #include "SBZEquippablePartDataAsset.h"
 #include "SBZModularMeshContainer.h"
 #include "SBZModularMeshData.h"
@@ -22,7 +22,8 @@ public:
     TArray<USBZModularPartSlotBase*> UseDefaultPartsFromSlotsAndBlock;
     
     USBZWeaponPartDataAsset();
-    
+
+
     // Fix for true pure virtual functions not being implemented
 };
 

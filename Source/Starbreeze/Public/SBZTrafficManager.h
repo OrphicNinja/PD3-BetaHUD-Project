@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "EPD3HeistState.h"
 #include "SBZTrafficDestinationNode.h"
 #include "SBZTrafficGridlockInfo.h"
@@ -89,6 +89,7 @@ private:
     
 public:
     USBZTrafficManager();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnExitedActionPhase();

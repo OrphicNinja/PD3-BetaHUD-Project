@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintAsyncActionBase -FallbackName=BlueprintAsyncActionBase
+#include "Kismet/BlueprintAsyncActionBase.h"
 #include "SBZOnlineShowLoginUIResultDelegate.h"
 #include "SBZShowLoginUICallbackProxy.generated.h"
 
@@ -24,6 +24,7 @@ private:
     
 public:
     USBZShowLoginUICallbackProxy();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static USBZShowLoginUICallbackProxy* SBZShowExternalLoginUI(UObject* NewWorldContextObject, APlayerController* InPlayerController);
     

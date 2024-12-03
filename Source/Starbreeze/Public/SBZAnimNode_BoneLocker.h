@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AnimGraphRuntime -ObjectName=AnimNode_SkeletalControlBase -FallbackName=AnimNode_SkeletalControlBase
+#include "BoneControllers/AnimNode_SkeletalControlBase.h"
 #include "SBZBoneLocker.h"
 #include "SBZAnimNode_BoneLocker.generated.h"
 

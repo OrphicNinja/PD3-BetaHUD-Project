@@ -4,9 +4,10 @@
 #include "SBZPlayerFireRangedWeaponAbility.generated.h"
 
 UCLASS(Blueprintable)
-class USBZPlayerFireRangedWeaponAbility : public USBZFireRangedWeaponAbility {
+class STARBREEZE_API USBZPlayerFireRangedWeaponAbility : public USBZFireRangedWeaponAbility {
     GENERATED_BODY()
 public:
     USBZPlayerFireRangedWeaponAbility();
+
 };
 

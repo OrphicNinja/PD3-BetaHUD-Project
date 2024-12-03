@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GameplayTagContainer.h"
 #include "SBZAttractorPredicate.h"
 #include "SBZAttractorPredicate_HasTag.generated.h"
 
@@ -12,5 +12,6 @@ public:
     FGameplayTagContainer AttractorTags;
     
     USBZAttractorPredicate_HasTag();
+
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Slate -ObjectName=InputChord -FallbackName=InputChord
+#include "Framework/Commands/InputChord.h"
 #include "SBZSettingsFunctions.h"
 #include "SBZSettingsFunctionsGamepad.generated.h"
 
@@ -11,6 +11,7 @@ class USBZSettingsFunctionsGamepad : public USBZSettingsFunctions {
     GENERATED_BODY()
 public:
     USBZSettingsFunctionsGamepad();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void SetGamepadBindingsPreset(UObject* WorldContextObject, int32 Preset);
     

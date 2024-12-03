@@ -1,10 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "EBlackScreenTransitionType.h"
 #include "ESBZDifficulty.h"
 #include "ESBZGameMachineStateError.h"
 #include "ESBZOnlineSessionPhase.h"
+#include "ESBZOnlineTacticType.h"
 #include "ESBZReturnToIISReason.h"
 #include "ESBZReturnToLoginReason.h"
 #include "ESBZReturnToMainMenuReason.h"
@@ -80,6 +81,10 @@ private:
     
 public:
     USBZGameStateMachine();
+
+    UFUNCTION(BlueprintCallable)
+    void SetMatchmakingTacticType(ESBZOnlineTacticType InTacticType);
+    
     UFUNCTION(BlueprintCallable)
     void SetMatchmakingSecurityCompanies(const TArray<ESBZSecurityCompany>& InSecurityCompanies);
     
@@ -96,13 +101,16 @@ public:
     void SetMatchmakingDifficultyIdx(uint8 InDifficultyIdx);
     
     UFUNCTION(BlueprintCallable)
-    void SetMatchmakingDifficulty(ESBZDifficulty InDifficulty);
+    void SetMatchmakingDifficulty(ESBZDifficulty InDifficulty, bool bIsSaved);
     
     UFUNCTION(BlueprintCallable)
     void SetIsMatchmakingQuickMatch(bool bInIsQuickMatch);
     
     UFUNCTION(BlueprintCallable)
-    void RequestSoloGame(int32 LevelIdx, int32 DifficultyIdx);
+    void SetIsMatchmakingHost(bool bIsHost);
+    
+    UFUNCTION(BlueprintCallable)
+    void RequestSoloGame(int32 LevelIdx, int32 DifficultyIdx, bool bSkipPreMatch);
     
     UFUNCTION(BlueprintCallable)
     void RequestReturnToMainMenu(ESBZReturnToMainMenuReason Reason);
@@ -199,6 +207,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Exec)
     void DebugOnlineTravel(const FString& LevelUrl, bool bIsAbsolute);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool CanRequestSoloGame() const;
     
     UFUNCTION(BlueprintCallable)
     void AddMatchmakingSecurityCompany(ESBZSecurityCompany InSecurityCompany);

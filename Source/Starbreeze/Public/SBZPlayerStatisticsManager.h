@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=SoftObjectPath -FallbackName=SoftObjectPath
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "UObject/Object.h"
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "SBZLevelTimesStruct.h"
 #include "SBZPlayerStatisticsManagerInterface.h"
 #include "SBZPlayerStatisticsManager.generated.h"
@@ -27,13 +27,14 @@ private:
     
 public:
     USBZPlayerStatisticsManager();
+
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static USBZPlayerStatisticsManager* GetPlayerStatisticsManager(const UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<FSBZLevelTimesStruct> GetHeistBestTimes(FSoftObjectPath LevelPath);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

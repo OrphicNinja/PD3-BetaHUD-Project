@@ -1,7 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
+#include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
+#include "Engine/NetSerialization.h"
 #include "SBZAIVisibilityLeafNode.h"
 #include "SBZExplosionResult.h"
 #include "SBZExplosive.h"
@@ -31,8 +32,12 @@ protected:
     UNiagaraComponent* DetonationEffect;
     
 public:
-    ASBZGrenade();
+    ASBZGrenade(const FObjectInitializer& ObjectInitializer);
+
 protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnExplosion();
+    
     UFUNCTION(BlueprintCallable)
     void OnCollisionComponentHit(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
     
@@ -42,7 +47,13 @@ protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_ReplicateExplosion(const FSBZExplosionResult& Result);
     
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_OnServerCollision(const FVector_NetQuantize& InLocation);
     
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_ExplosionInHand();
+    
+
     // Fix for true pure virtual functions not being implemented
 };
 

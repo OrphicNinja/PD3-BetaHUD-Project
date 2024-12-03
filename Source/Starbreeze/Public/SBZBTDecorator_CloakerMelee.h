@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTDecorator -FallbackName=BTDecorator
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
+#include "BehaviorTree/BTDecorator.h"
+#include "UObject/NoExportTypes.h"
 #include "Templates/SubclassOf.h"
 #include "SBZBTDecorator_CloakerMelee.generated.h"
 
@@ -29,5 +29,6 @@ protected:
     
 public:
     USBZBTDecorator_CloakerMelee();
+
 };
 

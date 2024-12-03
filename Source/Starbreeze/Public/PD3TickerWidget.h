@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=LinearColor -FallbackName=LinearColor
+#include "UObject/NoExportTypes.h"
 #include "EPD3HeistState.h"
 #include "PD3TickerSettings.h"
 #include "SBZPawnWidget.h"
@@ -30,6 +30,7 @@ protected:
     
 public:
     UPD3TickerWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintCosmetic, BlueprintImplementableEvent)
     void OnTickerModeChanged(const FText& Text, const FLinearColor& TextColor, const FLinearColor& BackgroundColor);

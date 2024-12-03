@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EnvQueryTest -FallbackName=EnvQueryTest
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagQuery -FallbackName=GameplayTagQuery
+#include "EnvironmentQuery/EnvQueryTest.h"
+#include "GameplayTagContainer.h"
 #include "SBZEnvQueryTest_PawnType.generated.h"
 
 UCLASS(Blueprintable)
@@ -14,5 +14,6 @@ private:
     
 public:
     USBZEnvQueryTest_PawnType();
+
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
+#include "UObject/NoExportTypes.h"
 #include "SBZBagHandle.h"
 #include "SBZBreachingEquipmentDelegateDelegate.h"
 #include "SBZComponentSelector.h"
@@ -75,7 +75,8 @@ private:
     UAkAudioEvent* AddCannisterEvent;
     
 public:
-    ASBZThermalLance();
+    ASBZThermalLance(const FObjectInitializer& ObjectInitializer);
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnServerRemovedCanister(USBZBaseInteractableComponent* Interactable, USBZInteractorComponent* Interactor, bool bInIsLocallyControlled);

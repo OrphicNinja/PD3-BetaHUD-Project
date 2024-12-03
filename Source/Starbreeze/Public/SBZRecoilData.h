@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "SBZWeaponGunKickBackData.h"
 #include "SBZWeaponGunKickData.h"
 #include "SBZWeaponViewKickBackData.h"
@@ -8,7 +8,7 @@
 #include "SBZRecoilData.generated.h"
 
 UCLASS(Blueprintable, Const)
-class USBZRecoilData : public UDataAsset {
+class STARBREEZE_API USBZRecoilData : public UDataAsset {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -36,6 +36,7 @@ public:
     FSBZWeaponGunKickBackData GunKickBackTargeting;
     
     USBZRecoilData();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetGunKickVerticalTop(float& OutMin, float& OutMax) const;
     

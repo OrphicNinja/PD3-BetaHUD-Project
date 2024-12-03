@@ -1,12 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=LocalPlayer -FallbackName=LocalPlayer
+#include "Engine/LocalPlayer.h"
 #include "SBZLocalPlayer.generated.h"
 
-UCLASS(Blueprintable, Config=Engine, DefaultConfig, NonTransient)
+UCLASS(Blueprintable, DefaultConfig, NonTransient, Config=Engine)
 class USBZLocalPlayer : public ULocalPlayer {
     GENERATED_BODY()
 public:
     USBZLocalPlayer();
+
 };
 

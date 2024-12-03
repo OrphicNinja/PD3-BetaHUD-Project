@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "GameplayTagContainer.h"
 #include "SBZAIOrder.h"
 #include "Templates/SubclassOf.h"
 #include "SBZAIOrder_FreeHostage.generated.h"
@@ -25,6 +25,7 @@ private:
     
 public:
     USBZAIOrder_FreeHostage();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnCharacterAnimEventActive(const FGameplayTag& EventTag, bool bActive);

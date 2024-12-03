@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=StaticMeshActor -FallbackName=StaticMeshActor
+#include "Engine/StaticMeshActor.h"
 #include "SBZExplosionResult.h"
 #include "SBZExplosive.h"
 #include "SBZHurtReactionData.h"
@@ -67,7 +67,8 @@ private:
     ASBZSmallCosmeticDestruction* Spawned;
     
 public:
-    ASBZAITaserMine();
+    ASBZAITaserMine(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_ReplicateExplosion(const FSBZExplosionResult& Result);
@@ -81,7 +82,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void DamageRejected();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

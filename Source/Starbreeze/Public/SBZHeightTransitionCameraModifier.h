@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AlphaBlend -FallbackName=AlphaBlend
+#include "AlphaBlend.h"
 #include "SBZHeightTransitionCameraSettings.h"
 #include "SBZPlayerCameraModifier.h"
 #include "SBZHeightTransitionCameraModifier.generated.h"
@@ -24,5 +24,6 @@ private:
     
 public:
     USBZHeightTransitionCameraModifier();
+
 };
 

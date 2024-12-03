@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GameplayTagContainer.h"
 #include "SBZAIAction.h"
 #include "SBZAIAction_GetDownOnGround.generated.h"
 
@@ -19,5 +19,6 @@ protected:
     
 public:
     USBZAIAction_GetDownOnGround();
+
 };
 

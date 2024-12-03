@@ -26,6 +26,7 @@ private:
     
 public:
     UPD3ThrowableStatusWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintCosmetic, BlueprintImplementableEvent)
     void OnIconChanged(const TSoftObjectPtr<UPaperSprite>& InIcon);

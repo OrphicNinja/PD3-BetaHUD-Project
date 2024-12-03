@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Guid -FallbackName=Guid
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "UObject/NoExportTypes.h"
+#include "UObject/Object.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "SBZCosmeticsInventoryItem.h"
 #include "SBZItemEntitlementArray.h"
 #include "SBZItemRewardRequestEntry.h"
@@ -43,6 +43,7 @@ private:
     
 public:
     USBZInventoryManager();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetCosmeticsInventoryItemsForType(const USBZCosmeticsPartSlot* CosmeticsPartSlot, TArray<FSBZCosmeticsInventoryItem>& CosmeticsInventoryItemArrayOut);
     

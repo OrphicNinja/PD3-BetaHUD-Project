@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=FilePath -FallbackName=FilePath
+#include "Engine/EngineTypes.h"
 #include "SBZStorymodeStruct.generated.h"
 
 class UPaperSprite;

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "ESBZCurrencyCode.h"
 #include "SBZPlayerCurrencyBalanceData.h"
 #include "SBZCurrencyManager.generated.h"
@@ -22,23 +22,24 @@ private:
     
 public:
     USBZCurrencyManager();
+
     UFUNCTION(BlueprintCallable)
-    void SubtractCurrency(ASBZPlayerState* SBZPlayerState, ESBZCurrencyCode Type, int32 Amount);
+    void SubtractCurrency(ASBZPlayerState* SBZPlayerState, ESBZCurrencyCode Type, int64 Amount);
     
     UFUNCTION(BlueprintCallable)
-    void SetCurrency(ESBZCurrencyCode Type, int32 Cost);
+    void SetCurrency(ESBZCurrencyCode Type, int64 Cost);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    int32 GetCurrentAmount(ESBZCurrencyCode Type) const;
+    UFUNCTION(BlueprintPure)
+    int64 GetCurrentAmount(ESBZCurrencyCode Type) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static USBZCurrencyManager* GetCurrencyManager(const UObject* WorldContextObject);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool CanAfford(ESBZCurrencyCode Type, int32 Cost) const;
+    UFUNCTION(BlueprintPure)
+    bool CanAfford(ESBZCurrencyCode Type, int64 Cost) const;
     
     UFUNCTION(BlueprintCallable)
-    void AddCurrency(ASBZPlayerState* SBZPlayerState, ESBZCurrencyCode Type, int32 Amount);
+    void AddCurrency(ASBZPlayerState* SBZPlayerState, ESBZCurrencyCode Type, int64 Amount);
     
 };
 

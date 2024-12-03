@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EEndPlayReason -FallbackName=EEndPlayReason
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagAssetInterface -FallbackName=GameplayTagAssetInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
-//CROSS-MODULE INCLUDE V2: -ModuleName=InputCore -ObjectName=Key -FallbackName=Key
-//CROSS-MODULE INCLUDE V2: -ModuleName=UMG -ObjectName=ESlateVisibility -FallbackName=ESlateVisibility
+#include "UObject/Object.h"
+#include "Engine/EngineTypes.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
+#include "GameplayTagContainer.h"
+#include "InputCoreTypes.h"
+#include "Components/SlateWrapperTypes.h"
 #include "ESBZInputState.h"
 #include "ESBZMetaRequestResult.h"
 #include "ESBZPlatform.h"
@@ -17,9 +17,11 @@
 #include "SBZHUDNotificationData.h"
 #include "SBZInfoPopupText.h"
 #include "SBZMetaNotification.h"
+#include "SBZOnCultureChangedDelegateDelegate.h"
 #include "SBZOnDisplayHUDNotificationDelegate.h"
 #include "SBZOnHUDContextChangedDelegate.h"
 #include "SBZOnInstallStateChangedDelegate.h"
+#include "SBZOnLanguageChangedDelegateDelegate.h"
 #include "SBZOnPopUpWidgetClosedDelegate.h"
 #include "SBZOnUIStackLockChangedDelegate.h"
 #include "SBZOnUIStackStateChangedDelegate.h"
@@ -37,6 +39,7 @@ class USBZDebugWidget;
 class USBZFullScreenNotification;
 class USBZLoginScreenBaseWidget;
 class USBZLoginScreenInfoPopupWidget;
+class USBZPSOCompilationScreen;
 class USBZPopupWidget;
 class USBZSideBarNotifications;
 class USBZSubtitleWidget;
@@ -108,6 +111,12 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer UIGameplayTags;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FSBZOnLanguageChangedDelegate OnLanguageChangedDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FSBZOnCultureChangedDelegate OnCultureChangedDelegate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<USBZSubtitleWidget> SubtitleWidgetClass;
@@ -193,6 +202,9 @@ private:
     USBZLoginScreenBaseWidget* ActiveLoginScreenWidget;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    USBZPSOCompilationScreen* ActivePSOCompilationScreenWidget;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     USBZWidgetBase* LastFocusedWidget;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -200,6 +212,9 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bSetFocusOnUnlock;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bSavePushedUIStackValues;
     
 public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -211,6 +226,7 @@ protected:
     
 public:
     USBZUIManager();
+
     UFUNCTION(BlueprintCallable)
     bool TryRemoveFromStack(const FName& StackValue);
     
@@ -227,10 +243,10 @@ public:
     void ShowSidebarNotification(FSBZSideBarNotificationData InSideBarNotificationData);
     
     UFUNCTION(BlueprintCallable)
-    void ShowPopUpWithCallback(FSBZUIPopupData InPopupData, FSBZOnPopUpWidgetClosed InPopUpActionInputDelegate, int32 InAutomaticClosingCountdownTime, FName InAutomaticClosingActionName, bool bReturnFocusWhenClosed);
+    void ShowPopUpWithCallback(FSBZUIPopupData InPopupData, FSBZOnPopUpWidgetClosed InPopUpActionInputDelegate, int32 InAutomaticClosingCountdownTime, FName InAutomaticClosingActionName, bool bReturnFocusWhenClosed, bool bDeferUIStackEvents);
     
     UFUNCTION(BlueprintCallable)
-    void ShowPopUp(FSBZUIPopupData InPopupData, bool bReturnFocusWhenClosed);
+    void ShowPopUp(FSBZUIPopupData InPopupData, bool bReturnFocusWhenClosed, bool bDeferUIStackEvents);
     
     UFUNCTION(BlueprintCallable)
     void ShowMetaNotification(FSBZMetaNotification InMetaNotification);
@@ -249,6 +265,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetStartInHeistSelection();
+    
+    UFUNCTION(BlueprintCallable)
+    void SetOnePlayerMatchHook();
     
     UFUNCTION(BlueprintCallable)
     void SetLogoP3Visibility(ESlateVisibility InVisibility);
@@ -302,6 +321,9 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnPopupControllerEndPlay(AActor* Actor, TEnumAsByte<EEndPlayReason::Type> EndPlayReason);
     
+    UFUNCTION(BlueprintCallable)
+    void OnOptForSoloModePopupClosed(FName ClosingActionName);
+    
 public:
     UFUNCTION(BlueprintCallable)
     void OnHeistSelectionMenuSet();
@@ -342,10 +364,10 @@ public:
     static USBZUIData* GetUIData(UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    UPaperSprite* GetSpriteForPlatform(ESBZPlatform InPlatform, bool bUseCurrentPlatformIconIfUnknown);
+    UPaperSprite* GetSpriteForPlatform(ESBZPlatform InPlatform, bool bUseCurrentPlatformIconIfUnknown) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    UPaperSprite* GetSpriteForNebula();
+    UPaperSprite* GetSpriteForNebula() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     USBZPopupWidget* GetPopUpWidget() const;
@@ -354,7 +376,7 @@ public:
     static USBZBaseMenuWidget* GetMenuWidget(const UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    FText GetLocalizedPlayerNoName();
+    FText GetLocalizedPlayerNoName() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     USBZWidgetBase* GetLastFocusedWidget() const;
@@ -398,7 +420,7 @@ public:
     UFUNCTION(BlueprintCallable)
     int32 AddControlsReference(const FSBZControlsReference& InControlsReference);
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     bool HasMatchingGameplayTag(FGameplayTag TagToCheck) const override PURE_VIRTUAL(HasMatchingGameplayTag, return false;);

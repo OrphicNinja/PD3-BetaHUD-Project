@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EBTNodeResult -FallbackName=EBTNodeResult
+#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "SBZSpecialAIComponent.h"
 #include "Templates/SubclassOf.h"
 #include "SBZAITowerSpecialComponent.generated.h"
@@ -31,9 +31,10 @@ private:
     bool bIsGlitchEffectActive;
     
 public:
-    USBZAITowerSpecialComponent();
+    USBZAITowerSpecialComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnRep_RefractorShield(ASBZAIRefractorShield* OldRefractorShield);
@@ -46,10 +47,6 @@ private:
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_RetractShield();
-    
-public:
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void Multicast_ActivateGlitchEffect(bool bIsEffectActive);
     
 };
 

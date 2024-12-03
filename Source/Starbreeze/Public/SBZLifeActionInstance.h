@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SceneComponent -FallbackName=SceneComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "Components/SceneComponent.h"
+#include "GameplayTagContainer.h"
 #include "ESBZLifeActionState.h"
 #include "SBZLifeActionInstance.generated.h"
 
@@ -28,7 +28,8 @@ protected:
     TArray<USBZLifeActionSlot*> Slots;
     
 public:
-    USBZLifeActionInstance();
+    USBZLifeActionInstance(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void StopDialog(bool bReset);
     

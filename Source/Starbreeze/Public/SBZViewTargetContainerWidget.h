@@ -50,6 +50,7 @@ private:
     
 public:
     USBZViewTargetContainerWidget();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnViewTargetChanged(ASBZPlayerController* InPlayerController, const TScriptInterface<ISBZViewTargetCollectionInterface>& InViewTargetCollection);

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector2D -FallbackName=Vector2D
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "SBZActorSpawnBase.h"
 #include "SBZActorSpawnRegionBase.generated.h"
 
@@ -39,6 +39,7 @@ public:
     UPROPERTY(AdvancedDisplay, BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bDrawSpawnLocationGenerationDebugShapes;
     
-    ASBZActorSpawnRegionBase();
+    ASBZActorSpawnRegionBase(const FObjectInitializer& ObjectInitializer);
+
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZAnimationSpawnedActorCPD.h"
 #include "SBZPoolableActorInterface.h"
 #include "SBZCosmeticProp.generated.h"
@@ -16,14 +16,15 @@ protected:
     TArray<UMeshComponent*> MeshArray;
     
 public:
-    ASBZCosmeticProp();
+    ASBZCosmeticProp(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnReceiveCPDs(const TArray<FSBZAnimationSpawnedActorCPD>& CPDs);
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnDropped();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

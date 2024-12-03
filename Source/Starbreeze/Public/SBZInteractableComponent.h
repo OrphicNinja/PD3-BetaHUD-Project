@@ -1,9 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GameplayTagContainer.h"
 #include "SBZAnimatedInteractionInterface.h"
 #include "SBZBaseInteractableComponent.h"
 #include "SBZInteractableAudioData.h"
+#include "SBZInteractableLocalizedAnimatedInteractionData.h"
 #include "SBZOnInteractableStateChangedDelegateDelegate.h"
 #include "SBZOnInteractionDelegate.h"
 #include "SBZSharedKeyItemTagChangedEvent.h"
@@ -85,15 +86,15 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     uint8 bLocalEnabled: 1;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FSBZInteractableLocalizedAnimatedInteractionData> LocalizedAnimatedInteractionDatas;
+    
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     uint8 bPredictLocalEnd: 1;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     uint8 bSyncInteracting: 1;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    uint8 bSyncAbortEvent: 1;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     uint8 bRepeatable: 1;
@@ -110,9 +111,10 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer SharedKeyItemTags;
     
-    USBZInteractableComponent();
+    USBZInteractableComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void Stop3DSound(UAkAudioEvent* AudioEvent);
     
@@ -141,7 +143,7 @@ protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetInteractionEnabled(bool bEnabled);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

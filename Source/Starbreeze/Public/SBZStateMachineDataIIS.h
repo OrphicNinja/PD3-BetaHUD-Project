@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=SBZStateMachineBase -ObjectName=SBZStateMachineData -FallbackName=SBZStateMachineData
+#include "SBZStateMachineData.h"
 #include "ESBZReturnToIISReason.h"
 #include "SBZStateMachineDataIIS.generated.h"
 
@@ -12,5 +12,6 @@ public:
     ESBZReturnToIISReason ReturnReason;
     
     USBZStateMachineDataIIS();
+
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "SBZExplosiveLevelProp.h"
 #include "SBZExplosiveTrap.generated.h"
 
@@ -45,7 +45,8 @@ protected:
     int32 MarkerId;
     
 public:
-    ASBZExplosiveTrap();
+    ASBZExplosiveTrap(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_CriticalDamageNoParams();

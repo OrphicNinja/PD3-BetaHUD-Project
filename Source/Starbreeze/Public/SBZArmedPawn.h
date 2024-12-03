@@ -1,26 +1,29 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=GenericTeamAgentInterface -FallbackName=GenericTeamAgentInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=GenericTeamId -FallbackName=GenericTeamId
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Pawn -FallbackName=Pawn
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=AbilitySystemInterface -FallbackName=AbilitySystemInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagAssetInterface -FallbackName=GameplayTagAssetInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GenericTeamAgentInterface.h"
+#include "GenericTeamAgentInterface.h"
+#include "GameFramework/Pawn.h"
+#include "AbilitySystemInterface.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
+#include "GameplayTagContainer.h"
 #include "ESBZAIVisibilityNodeComputationFrequency.h"
 #include "SBZAIVisibilityRelevant.h"
 #include "SBZEquippableConfig.h"
 #include "SBZPawnInterface.h"
 #include "SBZPawnLifetime.h"
 #include "SBZProjectileInterface.h"
+#include "SBZReplicatedEquippableState.h"
 #include "SBZRoomVolumeInterface.h"
 #include "SBZTypeInterface.h"
+#include "Templates/SubclassOf.h"
 #include "SBZArmedPawn.generated.h"
 
 class ASBZEquippable;
 class ASBZRangedWeapon;
 class ASBZRoomVolume;
 class UAIPerceptionStimuliSourceComponent;
+class UGameplayEffect;
 class USBZAICharacterAbilityData;
 class USBZAbilitySystemComponent;
 class USBZOutlineComponent;
@@ -63,15 +66,30 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName RangedWeaponAttachmentSocket;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UGameplayEffect> MarkedGameplayEffectClass;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<ASBZRoomVolume*> RoomVolumes;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint8 bIsDeathAllowed: 1;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FSBZReplicatedEquippableState ReplicatedEquippableState;
+    
 public:
-    ASBZArmedPawn();
+    ASBZArmedPawn(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+protected:
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_PredictedRagdollDenied(int32 HurtReactionIndex);
     
-    
+
     // Fix for true pure virtual functions not being implemented
+public:
     UFUNCTION(BlueprintCallable)
     bool HasMatchingGameplayTag(FGameplayTag TagToCheck) const override PURE_VIRTUAL(HasMatchingGameplayTag, return false;);
     
@@ -84,5 +102,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const override PURE_VIRTUAL(GetOwnedGameplayTags,);
     
+    UFUNCTION(BlueprintCallable)
+    UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 };
 

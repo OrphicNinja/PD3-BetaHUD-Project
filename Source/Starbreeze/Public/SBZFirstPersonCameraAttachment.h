@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SceneComponent -FallbackName=SceneComponent
+#include "Components/SceneComponent.h"
 #include "SBZFirstPersonCameraAttachment.generated.h"
 
 class ASBZPlayerCharacter;
@@ -44,6 +44,7 @@ private:
     TArray<UMeshComponent*> TargetingHideMeshArray;
     
 public:
-    USBZFirstPersonCameraAttachment();
+    USBZFirstPersonCameraAttachment(const FObjectInitializer& ObjectInitializer);
+
 };
 

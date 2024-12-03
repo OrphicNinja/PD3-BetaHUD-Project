@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=InputCore -ObjectName=Key -FallbackName=Key
+#include "InputCoreTypes.h"
 #include "OnMenuButtonSelectedDelegate.h"
 #include "OnMenuButtonStateChangedDelegate.h"
 #include "SBZWidgetBase.h"
@@ -19,6 +19,9 @@ protected:
 public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnMenuButtonStateChanged OnButtonFocusedChanged;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnMenuButtonStateChanged OnButtonFocusChanging;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnMenuButtonStateChanged OnButtonHoveredChanged;
@@ -60,11 +63,12 @@ public:
     bool bShouldTriggerLastFocused;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsDisabled;
     
 public:
     USBZMenuButton();
+
     UFUNCTION(BlueprintCallable)
     void SetButtonDisabled(bool bInIsDisabled);
     
@@ -78,6 +82,11 @@ protected:
     UFUNCTION(BlueprintCallable)
     void NativeOnAlternativeSelectionInputPressed();
     
+public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsButtonDisabled() const;
+    
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void DisabledButtonSelected();
     
@@ -92,6 +101,9 @@ protected:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ButtonFocusedChanged(bool bInHasFocus);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void ButtonFocusChanging(bool bInHasFocus);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ButtonDisabledChanged(bool bInIsDisabled);

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
+#include "Engine/DataAsset.h"
 #include "SBZUIWeaponStatWeightContainer.h"
 #include "Templates/SubclassOf.h"
 #include "SBZUIWeaponStatsAsset.generated.h"
@@ -20,5 +20,6 @@ private:
     
 public:
     USBZUIWeaponStatsAsset();
+
 };
 

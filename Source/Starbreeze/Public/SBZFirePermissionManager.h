@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "ESBZFireTokenType.h"
 #include "SBZFirePermissionManager.generated.h"
 
@@ -13,7 +13,8 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<ESBZFireTokenType, int32> TokenLimits;
     
-    UDEPRECATED_SBZFirePermissionManager();
+    UDEPRECATED_SBZFirePermissionManager(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnTargetRemoved(UObject* Obj);

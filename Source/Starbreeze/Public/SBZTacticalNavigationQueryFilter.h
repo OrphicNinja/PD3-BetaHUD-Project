@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=NavigationSystem -ObjectName=NavigationQueryFilter -FallbackName=NavigationQueryFilter
+#include "NavFilters/NavigationQueryFilter.h"
 #include "SBZTacticalNavigationQueryFilter.generated.h"
 
 UCLASS(Abstract, Blueprintable)
@@ -46,5 +46,6 @@ protected:
     
 public:
     USBZTacticalNavigationQueryFilter();
+
 };
 

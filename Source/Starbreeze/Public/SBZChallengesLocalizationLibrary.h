@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=BlueprintFunctionLibrary -FallbackName=BlueprintFunctionLibrary
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "ChallengeLocalizationEntry.h"
 #include "StatLocalizationEntry.h"
 #include "SBZChallengesLocalizationLibrary.generated.h"
@@ -10,6 +10,7 @@ class STARBREEZE_API USBZChallengesLocalizationLibrary : public UBlueprintFuncti
     GENERATED_BODY()
 public:
     USBZChallengesLocalizationLibrary();
+
     UFUNCTION(BlueprintCallable)
     static void WriteEntriesToStringTablesCSVs(const TArray<FChallengeLocalizationEntry>& ChallengeEntries, const TArray<FStatLocalizationEntry>& StatEntries, const FString& OutputCSVPathChallenges, const FString& OutputCSVPathChallengeStats);
     

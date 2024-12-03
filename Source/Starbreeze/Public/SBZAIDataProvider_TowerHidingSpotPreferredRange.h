@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIDataProvider -FallbackName=AIDataProvider
+#include "DataProviders/AIDataProvider.h"
 #include "SBZAIDataProvider_TowerHidingSpotPreferredRange.generated.h"
 
 UCLASS(Blueprintable, CollapseCategories, EditInlineNew)
@@ -10,6 +10,12 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FloatValue;
     
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float AdditionalDistance;
+    
+public:
     USBZAIDataProvider_TowerHidingSpotPreferredRange();
+
 };
 

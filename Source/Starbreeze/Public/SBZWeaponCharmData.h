@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Transform -FallbackName=Transform
+#include "UObject/NoExportTypes.h"
 #include "SBZCosmeticsDataAsset.h"
 #include "SBZModularMeshContainer.h"
 #include "SBZModularMeshData.h"
@@ -9,7 +9,7 @@
 class ASBZWeaponCharm;
 
 UCLASS(Blueprintable)
-class USBZWeaponCharmData : public USBZCosmeticsDataAsset, public ISBZModularMeshContainer {
+class STARBREEZE_API USBZWeaponCharmData : public USBZCosmeticsDataAsset, public ISBZModularMeshContainer {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -25,7 +25,8 @@ public:
     FTransform AttachmentOffset;
     
     USBZWeaponCharmData();
-    
+
+
     // Fix for true pure virtual functions not being implemented
 };
 

@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=RuntimeFloatCurve -FallbackName=RuntimeFloatCurve
+#include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
+#include "Curves/CurveFloat.h"
 #include "SBZComponentSelector.h"
 #include "SBZAlertnessDataComponent.generated.h"
 
@@ -32,9 +32,10 @@ private:
     FRuntimeFloatCurve SightDetectionCurve;
     
 public:
-    UDEPRECATED_SBZAlertnessDataComponent();
+    UDEPRECATED_SBZAlertnessDataComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnRep_AlertState();

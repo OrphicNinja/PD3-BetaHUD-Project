@@ -1,12 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIStimulus -FallbackName=AIStimulus
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Rotator -FallbackName=Rotator
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Pawn -FallbackName=Pawn
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "Perception/AIPerceptionTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Pawn.h"
+#include "GameFramework/OnlineReplStructs.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagContainer.h"
+#include "EPD3DispatchCallerReason.h"
 #include "EPD3HeistState.h"
 #include "ESBZCameraColorState.h"
 #include "ESBZCameraOptions.h"
@@ -71,7 +73,7 @@ protected:
     TMap<FGameplayTag, USBZActionNotificationAsset*> Escalations;
     
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
-    USBZActionNotificationAsset* ActionNotificationAssetArray[13];
+    USBZActionNotificationAsset* ActionNotificationAssetArray[16];
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USBZHackableInteractableComponent* HackableInteractable;
@@ -116,10 +118,13 @@ protected:
     float PeripheralVisionAngleDegrees;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    USBZActionNotificationAsset* InvestigateEscalation;
+    EPD3DispatchCallerReason InvestigateEscalation;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_RuntimeState, meta=(AllowPrivateAccess=true))
     uint8 RuntimeState;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_IsShielded, meta=(AllowPrivateAccess=true))
+    bool bIsShielded;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_CameraState, meta=(AllowPrivateAccess=true))
     ESBZCameraState CameraState;
@@ -277,6 +282,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float CurrentDetection;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    bool bIsECMDisabled;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ESBZCameraSoundState SoundState;
     
@@ -305,10 +313,17 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ASBZRoomVolume* CurrentRoom;
     
-public:
-    ASBZSecurityCamera();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<AActor*> CurrentlyMarkedActorsArray;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FUniqueNetIdRepl> HackedByPlayerArray;
+    
+public:
+    ASBZSecurityCamera(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 private:
     UFUNCTION(BlueprintCallable)
     void PlaySoundEvent(UAkAudioEvent* AudioEvent);
@@ -316,6 +331,14 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnVisualDetection(USBZAIVisualDetectionComponent* DetectionComponent, bool bWasDetected, AActor* DetectedTarget);
     
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnShieldRemoved();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnShieldApplied();
+    
+private:
     UFUNCTION(BlueprintCallable)
     void OnServerAbortInteraction(USBZBaseInteractableComponent* InInteractable, USBZInteractorComponent* Interactor, bool bIsLocallyControlledInteractor);
     
@@ -338,6 +361,9 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnRep_RoughDetection();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_IsShielded();
     
     UFUNCTION(BlueprintCallable)
     void OnRep_CurrentCamRotation();
@@ -376,10 +402,16 @@ private:
     
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetShielded(bool bInShielded);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetRuntimeExplosionInstigator(AActor* InExplosionInstigator);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetRuntimed(ESBZRuntimeState InRuntimeState);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetECMDisabled(bool bInIsDisabled);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_RuntimeExpired(ESBZRuntimeState InRuntimeState);
@@ -405,6 +437,9 @@ private:
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    uint8 GetRuntimeState() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     ESBZCameraState GetCameraState() const;
     
 private:
@@ -424,7 +459,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnCameraColorStateChanged(ESBZCameraColorState NewCameraColorState);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)

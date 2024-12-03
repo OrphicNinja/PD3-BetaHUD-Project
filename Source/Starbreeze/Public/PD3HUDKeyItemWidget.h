@@ -22,6 +22,7 @@ protected:
     
 public:
     UPD3HUDKeyItemWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnKeyItemPickedUp(USBZKeyItemData* InKeyItemData, int32 InitialCount);

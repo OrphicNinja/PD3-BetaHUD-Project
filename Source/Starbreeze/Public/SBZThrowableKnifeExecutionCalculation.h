@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayEffectExecutionCalculation -FallbackName=GameplayEffectExecutionCalculation
+#include "GameplayEffectExecutionCalculation.h"
 #include "SBZThrowableKnifeExecutionCalculation.generated.h"
 
 UCLASS(Blueprintable)
@@ -8,5 +8,6 @@ class USBZThrowableKnifeExecutionCalculation : public UGameplayEffectExecutionCa
     GENERATED_BODY()
 public:
     USBZThrowableKnifeExecutionCalculation();
+
 };
 

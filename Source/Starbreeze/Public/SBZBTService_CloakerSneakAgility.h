@@ -1,10 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTService -FallbackName=BTService
+#include "BehaviorTree/BTService.h"
 #include "SBZBTService_CloakerSneakAgility.generated.h"
-
-class ASBZAIController;
-class UAnimMontage;
 
 UCLASS(Blueprintable)
 class USBZBTService_CloakerSneakAgility : public UBTService {
@@ -22,9 +19,6 @@ private:
     
 public:
     USBZBTService_CloakerSneakAgility();
-private:
-    UFUNCTION(BlueprintCallable)
-    void OnMontageEnded(UAnimMontage* Montage, bool bIsInterrupted, ASBZAIController* AIController);
-    
+
 };
 

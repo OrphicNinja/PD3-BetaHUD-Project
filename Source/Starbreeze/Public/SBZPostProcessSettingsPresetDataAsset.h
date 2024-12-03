@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=DataAsset -FallbackName=DataAsset
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=PostProcessSettings -FallbackName=PostProcessSettings
+#include "Engine/DataAsset.h"
+#include "Engine/Scene.h"
 #include "SBZPostProcessSettingsPresetDataAsset.generated.h"
 
 UCLASS(Blueprintable, Const)
@@ -12,5 +12,6 @@ public:
     FPostProcessSettings Settings;
     
     USBZPostProcessSettingsPresetDataAsset();
+
 };
 

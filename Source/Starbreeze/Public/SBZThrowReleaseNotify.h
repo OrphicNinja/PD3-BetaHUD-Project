@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Transform -FallbackName=Transform
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=AnimNotify -FallbackName=AnimNotify
+#include "UObject/NoExportTypes.h"
+#include "Animation/AnimNotifies/AnimNotify.h"
 #include "SBZThrowReleaseNotify.generated.h"
 
 UCLASS(Blueprintable, CollapseCategories)
@@ -15,5 +15,6 @@ public:
     FTransform ThrowBoneComponentTransform;
     
     USBZThrowReleaseNotify();
+
 };
 

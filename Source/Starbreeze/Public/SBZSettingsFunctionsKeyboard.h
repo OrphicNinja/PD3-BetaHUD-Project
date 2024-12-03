@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Slate -ObjectName=InputChord -FallbackName=InputChord
+#include "Framework/Commands/InputChord.h"
 #include "SBZSettingsFunctions.h"
 #include "SBZSettingsFunctionsKeyboard.generated.h"
 
@@ -11,6 +11,7 @@ class USBZSettingsFunctionsKeyboard : public USBZSettingsFunctions {
     GENERATED_BODY()
 public:
     USBZSettingsFunctionsKeyboard();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void SetSecondaryKeyboardBinding(UObject* WorldContextObject, FName AxisOrActionName, float Scale, FInputChord Binding);
     

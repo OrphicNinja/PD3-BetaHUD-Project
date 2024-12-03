@@ -6,6 +6,7 @@
 #include "SBZLootValueArray.h"
 #include "SBZPerformanceBonusArray.h"
 #include "SBZPlayerStatisticArray.h"
+#include "SBZTickingLootValues.h"
 #include "MapConfigurationData.generated.h"
 
 USTRUCT(BlueprintType)
@@ -19,7 +20,22 @@ public:
     int32 StealthBaseExperience;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 LoudBaseInfamyPointsOnFail;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 StealthBaseInfamyPointsOnFail;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<int32> LoudInfamyPointsOnSurvivingOneAssultDifficultyArray;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<int32> LoudInfamyPointsOnSurvivingFinalAssultDifficultyArray;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<float> DifficultyExperienceModifierArray;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<float> DifficultyInfamyPointsOnFailModifierArray;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FSBZCashRewardModifier> StealthDifficultyCashRewardModifierArray;
@@ -37,6 +53,9 @@ public:
     FSBZInstantLootValues InstantLootValues;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FSBZTickingLootValues TickingLootValues;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FString, float> ObjectivesToExperienceRewardMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -44,6 +63,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FString, float> StealthMilestoneToExperienceRewardMap;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<FString, float> LoudMilestoneToInfamyPointsOnFailRewardMap;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<FString, float> StealthMilestoneToInfamyPointsOnFailRewardMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FString, FSBZPerformanceBonusArray> PerformanceBonusMap;

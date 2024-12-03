@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
+#include "UObject/NoExportTypes.h"
 #include "SBZBTService_PlaceActor.h"
 #include "Templates/SubclassOf.h"
 #include "SBZBTService_PlaceMines.generated.h"
@@ -29,5 +29,6 @@ private:
     
 public:
     USBZBTService_PlaceMines();
+
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Info -FallbackName=Info
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "GameFramework/Info.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "ESBZKickingError.h"
 #include "ESBZKickingMode.h"
 #include "SBZKickingInfo.h"
@@ -11,7 +11,8 @@ UCLASS(Blueprintable)
 class STARBREEZE_API ASBZKickingReplicatedProxy : public AInfo {
     GENERATED_BODY()
 public:
-    ASBZKickingReplicatedProxy();
+    ASBZKickingReplicatedProxy(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void VoteToKick(FUniqueNetIdRepl PlayerIdToKick, FUniqueNetIdRepl PlayerProposingKick, ESBZKickingMode ModeKick);
     

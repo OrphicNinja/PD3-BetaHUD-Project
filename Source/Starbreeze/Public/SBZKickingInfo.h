@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=DateTime -FallbackName=DateTime
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "ESBZKickingMode.h"
 #include "SBZKickingInfo.generated.h"
 

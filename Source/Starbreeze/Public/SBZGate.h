@@ -1,17 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AISightTargetInterface -FallbackName=AISightTargetInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Box -FallbackName=Box
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=NavRelevantInterface -FallbackName=NavRelevantInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
-//CROSS-MODULE INCLUDE V2: -ModuleName=NavigationSystem -ObjectName=NavLinkHostInterface -FallbackName=NavLinkHostInterface
+#include "Perception/AISightTargetInterface.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
+#include "AI/Navigation/NavRelevantInterface.h"
+#include "GameplayTagContainer.h"
+#include "NavLinkHostInterface.h"
 #include "ESBZGateSoundReduction.h"
 #include "ESBZGateState.h"
 #include "SBZAIActionInteractableInterface.h"
 #include "SBZAIAttractorInterface.h"
 #include "SBZAgilityObstacleInterface.h"
+#include "SBZBreakableInterface.h"
 #include "SBZExplosionResult.h"
 #include "SBZExplosive.h"
 #include "SBZGateExplosionData.h"
@@ -24,17 +25,17 @@
 
 class APawn;
 class ASBZAIBaseCharacter;
-class ASBZAkAcousticPortal;
 class UAkAudioEvent;
 class UNavArea;
 class USBZAIAttractorComponent;
+class USBZAcousticPortalConnectorComponent;
 class USBZGateNavLinkAgilityComponent;
 class USBZGateNavLinkComponent;
 class USBZToolSnapData;
 class USceneComponent;
 
 UCLASS(Abstract, Blueprintable)
-class STARBREEZE_API ASBZGate : public AActor, public ISBZExplosive, public INavRelevantInterface, public INavLinkHostInterface, public ISBZAIActionInteractableInterface, public IAISightTargetInterface, public ISBZToolSnapInterface, public ISBZAgilityObstacleInterface, public ISBZHurtReactionDataInterface, public ISBZAIAttractorInterface {
+class STARBREEZE_API ASBZGate : public AActor, public ISBZExplosive, public INavRelevantInterface, public INavLinkHostInterface, public ISBZAIActionInteractableInterface, public IAISightTargetInterface, public ISBZToolSnapInterface, public ISBZAgilityObstacleInterface, public ISBZHurtReactionDataInterface, public ISBZAIAttractorInterface, public ISBZBreakableInterface {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -135,9 +136,6 @@ protected:
     UAkAudioEvent* UnlockSound;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    ASBZAkAcousticPortal* PortalObject;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bUseBreachPOIandSound;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -157,6 +155,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USBZAIAttractorComponent* AttractorComponent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    USBZAcousticPortalConnectorComponent* AcousticPortalConnector;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LeftNavlinkOffset;
@@ -181,9 +182,10 @@ private:
     uint8 bIsNavigationLinksEnabled: 1;
     
 public:
-    ASBZGate();
+    ASBZGate(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SetYaw(USceneComponent* Mesh, float InYaw);
@@ -196,11 +198,6 @@ protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetAttractorInstigator(APawn* InInstigator);
     
-public:
-    UFUNCTION(BlueprintCallable)
-    void SetAllowPortalStateChange(bool bValue);
-    
-protected:
     UFUNCTION(BlueprintCallable)
     void OnStateDone();
     
@@ -227,7 +224,7 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void Multicast_HandleAgilityTagEvent(const FGameplayTag& TagEvent, ASBZAIBaseCharacter* AICharacterInstigator);
+    void Multicast_HandleAgilityTagEvent(const FGameplayTag& TagEvent, ASBZAIBaseCharacter* AICharacterInstigator, const FVector& InstigatorLocation);
     
 protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure)
@@ -237,13 +234,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure)
     bool IsOpenForwardFromDirection(const FVector& Direction) const;
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    ASBZAkAcousticPortal* GetPortalObject() const;
-    
-    UFUNCTION(BlueprintCallable)
-    bool GetAllowPortalStateChange();
-    
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     bool SetEnabled(bool bEnabled) override PURE_VIRTUAL(SetEnabled, return false;);

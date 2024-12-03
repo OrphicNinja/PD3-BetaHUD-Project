@@ -20,6 +20,7 @@ protected:
     
 public:
     USBZSelectorWidget();
+
     UFUNCTION(BlueprintCallable)
     void SetSelectionCount(int32 NewSelectionCount);
     

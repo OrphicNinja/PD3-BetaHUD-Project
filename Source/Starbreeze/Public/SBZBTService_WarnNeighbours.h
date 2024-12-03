@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTService -FallbackName=BTService
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatRange -FallbackName=FloatRange
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "BehaviorTree/BTService.h"
+#include "UObject/NoExportTypes.h"
+#include "GameplayTagContainer.h"
 #include "ESBZVoicePriority.h"
 #include "SBZBTService_WarnNeighbours.generated.h"
 
@@ -30,5 +30,6 @@ protected:
     
 public:
     USBZBTService_WarnNeighbours();
+
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "ESBZOnlineCode.h"
 #include "SBZOnlineEventDelegateDelegate.h"
 #include "SBZOnlineSessionParams.h"
@@ -10,7 +10,7 @@
 class USBZPartyClient;
 class USBZPartyHost;
 
-UCLASS(Blueprintable, Config=Engine, DefaultConfig, NotPlaceable, Transient, Config=Starbreeze)
+UCLASS(Blueprintable, DefaultConfig, NotPlaceable, Transient, Config=Starbreeze)
 class STARBREEZE_API USBZParty : public UObject {
     GENERATED_BODY()
 public:
@@ -41,6 +41,7 @@ protected:
     
 public:
     USBZParty();
+
     UFUNCTION(BlueprintCallable)
     void UpdatePartyState(const FSBZPartyData& InPartyState);
     

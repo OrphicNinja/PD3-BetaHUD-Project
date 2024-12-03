@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
+#include "UObject/NoExportTypes.h"
 #include "SBZAIActionData.h"
 #include "SBZAIActionData_LookAndComment.generated.h"
 
@@ -17,5 +17,6 @@ public:
     USBZVoiceCommentDataAsset* VoiceComment;
     
     USBZAIActionData_LookAndComment();
+
 };
 

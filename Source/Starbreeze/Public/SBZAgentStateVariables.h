@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=IntVector -FallbackName=IntVector
+#include "UObject/NoExportTypes.h"
 #include "ESBZCharacterMovementState.h"
 #include "ESBZMovementMode.h"
 #include "ESBZTurnDirection.h"

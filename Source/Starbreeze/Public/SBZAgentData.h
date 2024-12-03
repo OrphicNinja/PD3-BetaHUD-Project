@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Quat -FallbackName=Quat
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Vector -FallbackName=Vector
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "ESBZCharacterMovementState.h"
 #include "ESBZMovementMode.h"
 #include "ESBZTurnDirection.h"
@@ -19,8 +19,8 @@ USTRUCT(BlueprintType)
 struct FSBZAgentData {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<uint8> Id;
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<uint32> Id;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<APawn*> Pawn;

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AIDataProvider -FallbackName=AIDataProvider
+#include "DataProviders/AIDataProvider.h"
 #include "SBZAIDataProvider_PreferredCoverDistance.generated.h"
 
 UCLASS(Blueprintable, CollapseCategories, EditInlineNew)
@@ -11,5 +11,6 @@ public:
     float FloatValue;
     
     USBZAIDataProvider_PreferredCoverDistance();
+
 };
 

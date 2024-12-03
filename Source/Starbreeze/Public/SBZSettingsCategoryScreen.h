@@ -8,13 +8,17 @@ class UPanelWidget;
 class USBZMenuButton;
 class USBZSettingHelperPanel;
 class USBZSettingsButton;
-class USBZSettingsButtonDLSSSRModeChoice;
+class USBZSettingsButtonActionClick;
+class USBZSettingsButtonAntiAliasingModeChoice;
+class USBZSettingsButtonFrameInterpolatorChoice;
 class USBZSettingsButtonGamepadBinding;
 class USBZSettingsButtonKeyboardBinding;
 class USBZSettingsButtonMultipleChoice;
 class USBZSettingsButtonResolutionChoice;
 class USBZSettingsButtonSlider;
 class USBZSettingsButtonTwoChoice;
+class USBZSettingsButtonUpscalerChoice;
+class USBZSettingsButtonUpscalingModeChoice;
 class UTextBlock;
 
 UCLASS(Blueprintable, EditInlineNew)
@@ -32,6 +36,9 @@ protected:
     TSubclassOf<UTextBlock> SettingsGroupTitleClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZSettingsButtonActionClick> SettingsButtonClassActionClick;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<USBZSettingsButtonTwoChoice> SettingsButtonClassTwoChoice;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -41,7 +48,13 @@ protected:
     TSubclassOf<USBZSettingsButtonResolutionChoice> SettingsButtonClassResolutionChoice;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSubclassOf<USBZSettingsButtonDLSSSRModeChoice> SettingsButtonClassDLSSSRModeChoice;
+    TSubclassOf<USBZSettingsButtonAntiAliasingModeChoice> SettingsButtonClassAntiAliasingModeChoice;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZSettingsButtonUpscalerChoice> SettingsButtonClassUpscalerChoice;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZSettingsButtonUpscalingModeChoice> SettingsButtonClassUpscalingModeChoice;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<USBZSettingsButtonSlider> SettingsButtonClassSlider;
@@ -52,8 +65,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<USBZSettingsButtonGamepadBinding> SettingsButtonClassGamepadBinding;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<USBZSettingsButtonFrameInterpolatorChoice> SettingsButtonClassFrameInterpolatorChoice;
+    
 public:
     USBZSettingsCategoryScreen();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SettingsCategoryInitialized();

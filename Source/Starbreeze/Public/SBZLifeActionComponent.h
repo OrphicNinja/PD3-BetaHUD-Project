@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Transform -FallbackName=Transform
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTag -FallbackName=GameplayTag
+#include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
+#include "GameplayTagContainer.h"
 #include "ESBZLifeActionStopReason.h"
 #include "SBZLifeActionEventDelegateDelegate.h"
 #include "SBZLifeActionStopEventDelegateDelegate.h"
@@ -43,7 +43,8 @@ protected:
     TArray<ASkeletalMeshActor*> PreviewSkeletals;
     
 public:
-    USBZLifeActionComponent();
+    USBZLifeActionComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnSlotStart(ASBZCharacter* Character, USBZLifeActionInstance* ActionInstance, USBZLifeActionSlot* ActionSlot);

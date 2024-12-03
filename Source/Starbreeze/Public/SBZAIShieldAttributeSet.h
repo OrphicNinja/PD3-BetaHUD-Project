@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAttributeData -FallbackName=GameplayAttributeData
+#include "AttributeSet.h"
 #include "SBZAICharacterAttributeSet.h"
 #include "SBZAIShieldAttributeSet.generated.h"
 
@@ -29,8 +29,9 @@ private:
     
 public:
     USBZAIShieldAttributeSet();
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnRep_VisorArmor(const FGameplayAttributeData& OldValue);

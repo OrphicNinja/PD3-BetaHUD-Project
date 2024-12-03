@@ -15,6 +15,7 @@ protected:
     
 public:
     USBZDebugWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnWatermarkMode();

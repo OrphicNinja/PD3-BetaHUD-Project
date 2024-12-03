@@ -57,6 +57,7 @@ protected:
     
 public:
     USBZMainMenuWeaponProgressionDisplayWidget();
+
     UFUNCTION(BlueprintCallable)
     void UpdateWeaponVisuals(ESBZEquippableLoadoutSlot InEquippableSlot, int32 InWeaponSlotIndex);
     

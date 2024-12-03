@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Object -FallbackName=Object
+#include "UObject/Object.h"
 #include "SBZBuiltInAnimMontageInstance.h"
 #include "SBZBuiltInAnimMontagesHandler.generated.h"
 
@@ -16,6 +16,7 @@ protected:
     
 public:
     USBZBuiltInAnimMontagesHandler();
+
     UFUNCTION(BlueprintCallable)
     void Update(float DeltaSeconds);
     

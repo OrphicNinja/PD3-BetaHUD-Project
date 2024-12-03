@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Guid -FallbackName=Guid
+#include "UObject/NoExportTypes.h"
 #include "SBZDeveloperSettings.h"
 #include "SBTutorialCharacterSetting.generated.h"
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class USBTutorialCharacterSetting : public USBZDeveloperSettings {
     GENERATED_BODY()
 public:
@@ -15,6 +15,7 @@ public:
     FString CharacterSku;
     
     USBTutorialCharacterSetting();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FString GetTutorialPlayerSku();
     

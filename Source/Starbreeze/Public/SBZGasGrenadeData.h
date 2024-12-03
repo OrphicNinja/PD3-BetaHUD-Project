@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "GameplayTagContainer.h"
 #include "ESBZDifficulty.h"
 #include "SBZFragGrenadeData.h"
 #include "SBZGasGrenadeData.generated.h"
@@ -20,6 +20,10 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCurveFloat* DropDamageModifierCurve;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsDroppedConvertedToFragGrenade;
+    
     USBZGasGrenadeData();
+
 };
 

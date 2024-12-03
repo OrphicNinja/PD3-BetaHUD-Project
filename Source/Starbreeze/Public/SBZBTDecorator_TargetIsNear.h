@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BTDecorator_BlackboardBase -FallbackName=BTDecorator_BlackboardBase
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=BlackboardKeySelector -FallbackName=BlackboardKeySelector
+#include "BehaviorTree/Decorators/BTDecorator_BlackboardBase.h"
+#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "ESBZMarkerState.h"
 #include "SBZBTDecorator_TargetIsNear.generated.h"
 
@@ -21,5 +21,6 @@ private:
     
 public:
     USBZBTDecorator_TargetIsNear();
+
 };
 

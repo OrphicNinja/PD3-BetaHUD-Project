@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=EBTNodeResult -FallbackName=EBTNodeResult
+#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "SBZAIAction.h"
 #include "SBZAIAction_Order.generated.h"
 
@@ -20,6 +20,7 @@ protected:
     
 public:
     USBZAIAction_Order();
+
     UFUNCTION(BlueprintCallable)
     void OnOrderStopped(USBZAIOrder* Order, APawn* OrderPawn, TEnumAsByte<EBTNodeResult::Type> Result);
     

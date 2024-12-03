@@ -1,7 +1,5 @@
 #include "PD3HUDPlayerStatusWidget.h"
 
-
-
 UPD3HUDPlayerStatusWidget::UPD3HUDPlayerStatusWidget() {
     this->Widget_CombinedHealthBar = NULL;
     this->Widget_DownedCounter = NULL;
@@ -19,10 +17,18 @@ UPD3HUDPlayerStatusWidget::UPD3HUDPlayerStatusWidget() {
     this->Widget_RequestOverkillWeapon = NULL;
     this->Widget_Placeable = NULL;
     this->Widget_ToolStatus = NULL;
+    this->Widget_ConsumableStatus = NULL;
     this->Widget_RoomStatus = NULL;
     this->Widget_Interaction = NULL;
     this->Widget_DetectionMeterContainer = NULL;
     this->Widget_KeyItemContainer = NULL;
     this->Widget_CharacterEffectsContainer = NULL;
 }
+
+
+
+FString UPD3HUDPlayerStatusWidget::GetUserId() const {
+    return TEXT("");
+}
+
 

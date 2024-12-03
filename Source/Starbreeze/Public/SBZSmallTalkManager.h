@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
+#include "GameplayTagContainer.h"
 #include "EPD3HeistState.h"
 #include "SBZSmallTalkManager.generated.h"
 
@@ -67,7 +67,8 @@ private:
     TMap<AActor*, USBZDialogDataAsset*> SoloCullingMap;
     
 public:
-    USBZSmallTalkManager();
+    USBZSmallTalkManager(const FObjectInitializer& ObjectInitializer);
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnHeistStateChanged(EPD3HeistState OldState, EPD3HeistState NewState);

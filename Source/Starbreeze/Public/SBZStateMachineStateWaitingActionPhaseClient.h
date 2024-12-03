@@ -10,6 +10,7 @@ class STARBREEZE_API USBZStateMachineStateWaitingActionPhaseClient : public USBZ
     GENERATED_BODY()
 public:
     USBZStateMachineStateWaitingActionPhaseClient();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void ReceivedHostUpdate();

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=SBZWorldRuntime -ObjectName=SBZWorldRuntimeBase -FallbackName=SBZWorldRuntimeBase
+#include "SBZWorldRuntimeBase.h"
 #include "SBZActiveGlobalCommentPermissionArray.h"
 #include "SBZWorldRuntime.generated.h"
 
@@ -23,6 +23,9 @@ public:
     USBZActorContainer* AllPawns;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    USBZActorContainer* AllAlivePawns;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     USBZObservableActorContainer* AllPlayerCharacters;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
@@ -36,6 +39,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     USBZActorContainer* AllAliveAIGuards;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    USBZActorContainer* AllAliveAIStreetCops;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     USBZActorContainer* AllAliveAIDrones;
@@ -59,7 +65,7 @@ public:
     USBZActorContainer* AllDespawnVolumes;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
-    USBZActorContainer* AllArmedGrenades;
+    USBZActorContainer* AllArmedPlayerGrenades;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     USBZActorContainer* AllRoomVolumes;
@@ -109,6 +115,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     USBZObjectContainer* AllAIObjectives;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    USBZActorContainer* AllBrainslugs;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USBZImpactManager* ImpactManager;
     
@@ -145,6 +154,7 @@ private:
     
 public:
     USBZWorldRuntime();
+
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static USBZWorldRuntime* Get(const UObject* WorldContextObject);
     

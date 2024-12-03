@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Info -FallbackName=Info
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "GameFramework/Info.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "SBZSlotData.h"
 #include "SBZOnlineSlotsSync.generated.h"
 
@@ -21,10 +21,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USBZOnlineSession* OnlineSession;
     
-public:
-    ASBZOnlineSlotsSync();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FString VoiceSessionId;
     
+public:
+    ASBZOnlineSlotsSync(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 private:
     UFUNCTION(BlueprintCallable)
     void UpdatePlayerName(ASBZPlayerState* InPlayerState);
@@ -34,6 +38,9 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void UpdateInfamyLevel(ASBZPlayerState* InPlayerState);
+    
+    UFUNCTION(BlueprintCallable)
+    void UpdateEOSProductUserId(ASBZPlayerState* InPlayerState);
     
     UFUNCTION(BlueprintCallable)
     void UniqueIdUpdated(ASBZPlayerState* InPlayerState);

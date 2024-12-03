@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=SceneComponent -FallbackName=SceneComponent
+#include "Components/SceneComponent.h"
 #include "SBZNiagaraWwiseComponent.generated.h"
 
 class UAkAudioEvent;
@@ -54,7 +54,8 @@ protected:
     float RtpcInterpolationTimerMS;
     
 public:
-    USBZNiagaraWwiseComponent();
+    USBZNiagaraWwiseComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void UpdateRtpc(float RtpcValue, float RtpcInterpolationValue);
     

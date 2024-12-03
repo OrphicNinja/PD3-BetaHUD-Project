@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=AIModule -ObjectName=AISightTargetInterface -FallbackName=AISightTargetInterface
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=FloatInterval -FallbackName=FloatInterval
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "Perception/AISightTargetInterface.h"
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "ESBZHackableActorInterruptReason.h"
 #include "ESBZHackableActorState.h"
 #include "ESBZHackableActorUnlockMode.h"
@@ -89,7 +89,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bStartActive;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_UnlockMode, meta=(AllowPrivateAccess=true))
     ESBZHackableActorUnlockMode UnlockMode;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -123,7 +123,16 @@ protected:
     TArray<ASBZRoomVolume*> RoomVolumes;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<FSBZHackableDisplayText> DisplayTexts;
+    TArray<FSBZHackableDisplayText> DisplayTextArray;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FSBZHackableDisplayText AdditionalDisplayText;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 AdditionalDisplayTextIndex;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsOverwritingIndex;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 NumberOfCodesToView;
@@ -134,13 +143,17 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_DisplayTextIndex, meta=(AllowPrivateAccess=true))
     uint8 CurrentDisplayTextIndex;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_IsDisplayTextAdded, meta=(AllowPrivateAccess=true))
+    bool bIsDisplayTextAdded;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FText ObjectiveInfo;
     
 public:
-    ASBZHackableActor();
+    ASBZHackableActor(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     bool VisionPredicate(const AActor* Viewer) const;
@@ -150,6 +163,9 @@ public:
     void UpdateDisplayTextImportantInformation(const int32 IndexToUpdate, const FText& InText);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void SetUnlockMode(ESBZHackableActorUnlockMode InUnlockMode);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetInteractionEnabled(bool bEnabled);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
@@ -157,7 +173,13 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable)
+    void OnRep_UnlockMode();
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_ProgressData();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_IsDisplayTextAdded();
     
     UFUNCTION(BlueprintCallable)
     void OnRep_DisplayTextIndex();
@@ -175,10 +197,16 @@ protected:
     void Multicast_SetUpdateFrequency(float NewUpdateFrequency);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_SetUnlockMode(ESBZHackableActorUnlockMode InUnlockMode);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_SetState(ESBZHackableActorState NewState);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_ResetHackableActor(bool bKeepCustomMessage);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_AddDisplayText();
     
 public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
@@ -208,9 +236,12 @@ protected:
     
 public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void AddDisplayText();
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ActivateHackableActor();
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     bool SetEnabled(bool bEnabled) override PURE_VIRTUAL(SetEnabled, return false;);

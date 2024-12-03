@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=EMovementMode -FallbackName=EMovementMode
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=AbilitySystemComponent -FallbackName=AbilitySystemComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayEffectSpec -FallbackName=GameplayEffectSpec
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=PredictionKey -FallbackName=PredictionKey
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayTags -ObjectName=GameplayTagContainer -FallbackName=GameplayTagContainer
+#include "Engine/EngineTypes.h"
+#include "AbilitySystemComponent.h"
+#include "GameplayEffect.h"
+#include "GameplayPrediction.h"
+#include "GameplayTagContainer.h"
 #include "SBZActorMultiHitResult.h"
 #include "SBZExplosionResult.h"
 #include "SBZFallDamageTargetData.h"
@@ -18,6 +18,7 @@
 #include "SBZAbilitySystemComponent.generated.h"
 
 class ACharacter;
+class APawn;
 class ASBZCharacter;
 class UGameplayEffect;
 class UObject;
@@ -54,11 +55,15 @@ private:
     TMap<TSubclassOf<USBZDamageType>, float> LastVolumeDamageTypeUpdateTimeMap;
     
 public:
-    USBZAbilitySystemComponent();
+    USBZAbilitySystemComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+    UFUNCTION(Reliable, Server)
+    void Server_ReplicateExplosion(UObject* ExplosiveObject, const FSBZExplosionResult& Result, FPredictionKey PredictionKey);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_ReplicateExplosion(UObject* ExplosiveObject, const FSBZExplosionResult& Result, FPredictionKey PredictionKey);
+    void Server_ReplicateCosmeticExplosion(UObject* ExplosiveObject);
     
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
@@ -84,6 +89,12 @@ private:
 public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_Landed(const FSBZFallDamageTargetData& TargetData);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_FireWeaponBuildupEnded();
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_FireWeaponBuildup();
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_FireProjectileSentry(const FSBZProjectileTargetData& TargetData);
@@ -118,7 +129,7 @@ public:
     void Client_RevertDamageAttributeSet(const FSBZRevertDamageAttributeSetData& AttributeSetData);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
-    void Client_PredictedRagdollDenied(ASBZCharacter* InCharacter, int32 HurtReactionIndex);
+    void Client_PredictedRagdollDenied(APawn* InPawn, int32 HurtReactionIndex);
     
 };
 

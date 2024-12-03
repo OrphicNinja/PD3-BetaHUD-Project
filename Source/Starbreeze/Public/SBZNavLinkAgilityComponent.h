@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "ESBZAgilityType.h"
 #include "SBZAgilityTrajectory.h"
 #include "SBZNavLinkAgilityComponent.generated.h"
@@ -66,7 +66,8 @@ protected:
     UObject* InterfaceObject;
     
 public:
-    USBZNavLinkAgilityComponent();
+    USBZNavLinkAgilityComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void ComputeTrajectories();
     

@@ -1,5 +1,14 @@
 #include "SBZActionPhaseBaseWidget.h"
 
+USBZActionPhaseBaseWidget::USBZActionPhaseBaseWidget() {
+    this->Widget_Playing = NULL;
+    this->Widget_Spectating = NULL;
+    this->Widget_Shared = NULL;
+    this->Widget_ControlsReference = NULL;
+    this->Widget_Chat = NULL;
+    this->bIsChatDisabled = false;
+}
+
 void USBZActionPhaseBaseWidget::OnStackStateChanged(FSBZUIStackChangedEvent UIStackStateChangedEvent) {
 }
 
@@ -15,10 +24,6 @@ void USBZActionPhaseBaseWidget::OnActiveControlsReferenceChanged(const FSBZContr
 void USBZActionPhaseBaseWidget::HideControlsReference() {
 }
 
-USBZActionPhaseBaseWidget::USBZActionPhaseBaseWidget() {
-    this->Widget_Playing = NULL;
-    this->Widget_Spectating = NULL;
-    this->Widget_Shared = NULL;
-    this->Widget_ControlsReference = NULL;
-}
+
+
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
+#include "Components/ActorComponent.h"
 #include "SBZVehicleInfo.h"
 #include "SBZVehicleManager.generated.h"
 
@@ -19,7 +19,8 @@ private:
     TArray<FSBZVehicleInfo> VehicleInfos;
     
 public:
-    USBZVehicleManager();
+    USBZVehicleManager(const FObjectInitializer& ObjectInitializer);
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnExitedActionPhase();

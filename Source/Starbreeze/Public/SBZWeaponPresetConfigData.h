@@ -24,6 +24,7 @@ protected:
     
 public:
     USBZWeaponPresetConfigData();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FSBZEquippableConfig GetEquippableConfig() const;
     

@@ -13,7 +13,7 @@ class USBZOutlineComponent;
 class USBZVoiceCommentDataAsset;
 
 UCLASS(Abstract, Blueprintable)
-class ASBZPlaceableBase : public ASBZEquippable, public ISBZAIAttractorInterface, public ISBZAIActionInteractableInterface {
+class STARBREEZE_API ASBZPlaceableBase : public ASBZEquippable, public ISBZAIAttractorInterface, public ISBZAIActionInteractableInterface {
     GENERATED_BODY()
 public:
 protected:
@@ -33,8 +33,9 @@ protected:
     USBZAIAttractorComponent* AttractorComponent;
     
 public:
-    ASBZPlaceableBase();
-    
+    ASBZPlaceableBase(const FObjectInitializer& ObjectInitializer);
+
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     bool SetEnabled(bool bEnabled) override PURE_VIRTUAL(SetEnabled, return false;);

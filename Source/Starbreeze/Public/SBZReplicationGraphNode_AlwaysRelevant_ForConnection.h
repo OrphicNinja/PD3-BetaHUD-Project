@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=ReplicationGraph -ObjectName=ReplicationGraphNode -FallbackName=ReplicationGraphNode
+#include "ReplicationGraph.h"
 #include "SBZReplicationGraphNode_AlwaysRelevant_ForConnection.generated.h"
 
 class AActor;
@@ -15,5 +15,6 @@ private:
     
 public:
     USBZReplicationGraphNode_AlwaysRelevant_ForConnection();
+
 };
 

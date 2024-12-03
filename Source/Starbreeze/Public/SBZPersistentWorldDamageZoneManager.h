@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "GameFramework/Actor.h"
 #include "SBZMeshZones.h"
 #include "SBZPersistentWorldDamageZoneManager.generated.h"
 
@@ -13,6 +13,7 @@ private:
     TArray<FSBZMeshZones> MeshZonesMap;
     
 public:
-    ASBZPersistentWorldDamageZoneManager();
+    ASBZPersistentWorldDamageZoneManager(const FObjectInitializer& ObjectInitializer);
+
 };
 

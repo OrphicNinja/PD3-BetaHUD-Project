@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Guid -FallbackName=Guid
+#include "UObject/NoExportTypes.h"
 #include "ESBZEquippableLoadoutSlot.h"
 #include "ESBZMetaRequestResult.h"
 #include "SBZMenuStackWidget.h"
@@ -25,6 +25,7 @@ private:
     
 public:
     USBZMainMenuWeaponVendorWidget();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void TryBuyWeaponPreset(const FSBZWeaponPresetStoreItem& WeaponPresetStoreItem);

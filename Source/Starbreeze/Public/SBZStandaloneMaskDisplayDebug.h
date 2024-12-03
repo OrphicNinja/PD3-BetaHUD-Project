@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=Transform -FallbackName=Transform
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "SBZMaskPartConfigGroup.h"
 #include "SBZStandaloneMaskDisplayDebug.generated.h"
 
@@ -33,7 +33,8 @@ protected:
     ASBZMask* SpawnedMask;
     
 public:
-    ASBZStandaloneMaskDisplayDebug();
+    ASBZStandaloneMaskDisplayDebug(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void UpdateSprayCanTextureSizePlus();
     

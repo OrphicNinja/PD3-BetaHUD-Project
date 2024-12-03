@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=SlateCore -ObjectName=Margin -FallbackName=Margin
+#include "Layout/Margin.h"
 #include "EBSZPatternMenuMode.h"
 #include "SBZMaskCustomizationSlotScreenBase.h"
 #include "Templates/SubclassOf.h"
@@ -62,6 +62,7 @@ protected:
     
 public:
     USBZMaskCustomizationPattern();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SprayCanSelectorButtonSelected(USBZMenuButton* SelectedButton);

@@ -12,6 +12,7 @@ class USBZAIOrder_FollowTarget : public USBZAIOrder {
     GENERATED_BODY()
 public:
     USBZAIOrder_FollowTarget();
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnOwnerOrderPushed(ASBZAIController* AIController, USBZAIOrder* AIOrder);

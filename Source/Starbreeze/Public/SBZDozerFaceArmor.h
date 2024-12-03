@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=StaticMeshComponent -FallbackName=StaticMeshComponent
+#include "Components/StaticMeshComponent.h"
 #include "ESBZDifficulty.h"
 #include "SBZDozerFaceArmor.generated.h"
 
@@ -32,6 +32,7 @@ protected:
     bool bCarryOnBreak;
     
 public:
-    USBZDozerFaceArmor();
+    USBZDozerFaceArmor(const FObjectInitializer& ObjectInitializer);
+
 };
 

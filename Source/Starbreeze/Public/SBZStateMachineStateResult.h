@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=UniqueNetIdRepl -FallbackName=UniqueNetIdRepl
+#include "GameFramework/OnlineReplStructs.h"
 #include "SBZClientStateMachineState.h"
 #include "SBZStateMachineStateResult.generated.h"
 
@@ -19,7 +19,11 @@ protected:
     
 public:
     USBZStateMachineStateResult();
+
 private:
+    UFUNCTION(BlueprintCallable)
+    void SetupMergePartyDone();
+    
     UFUNCTION(BlueprintCallable)
     void OnRestartTimeExpired();
     

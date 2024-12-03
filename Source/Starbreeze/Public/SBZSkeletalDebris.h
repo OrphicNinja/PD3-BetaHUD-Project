@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Actor -FallbackName=Actor
+#include "SBZBaseDebris.h"
 #include "SBZSkeletalDebris.generated.h"
 
 class USkeletalMeshComponent;
 
 UCLASS(Blueprintable)
-class ASBZSkeletalDebris : public AActor {
+class ASBZSkeletalDebris : public ASBZBaseDebris {
     GENERATED_BODY()
 public:
 protected:
@@ -14,6 +14,7 @@ protected:
     USkeletalMeshComponent* SkeletalMeshComponent;
     
 public:
-    ASBZSkeletalDebris();
+    ASBZSkeletalDebris(const FObjectInitializer& ObjectInitializer);
+
 };
 

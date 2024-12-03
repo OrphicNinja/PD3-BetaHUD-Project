@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=ActorComponent -FallbackName=ActorComponent
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=HitResult -FallbackName=HitResult
+#include "Components/ActorComponent.h"
+#include "Engine/EngineTypes.h"
 #include "SBZReplicatedInteractionData.h"
 #include "SBZInteractorComponent.generated.h"
 
@@ -45,6 +45,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bIsInteractionSignalRequired;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bIsScreenInteraction;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ScreenInteractDistance;
     
@@ -58,9 +61,10 @@ protected:
     bool bIsLocallyControlled;
     
 public:
-    USBZInteractorComponent();
+    USBZInteractorComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_StopInteraction(USBZBaseInteractableComponent* Interaction);

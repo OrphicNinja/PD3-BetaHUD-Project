@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=GameplayAbilities -ObjectName=GameplayAbilityActorInfo -FallbackName=GameplayAbilityActorInfo
+#include "Abilities/GameplayAbilityTypes.h"
 #include "SBZGameplayAbilityActorInfo.generated.h"
 
 USTRUCT(BlueprintType)

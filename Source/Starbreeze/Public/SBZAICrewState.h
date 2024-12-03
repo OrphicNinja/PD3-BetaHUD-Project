@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-//CROSS-MODULE INCLUDE V2: -ModuleName=CoreUObject -ObjectName=LinearColor -FallbackName=LinearColor
-//CROSS-MODULE INCLUDE V2: -ModuleName=Engine -ObjectName=Info -FallbackName=Info
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Info.h"
 #include "EPD3DefeatState.h"
 #include "SBZCrewStateInterface.h"
 #include "Templates/SubclassOf.h"
@@ -37,9 +37,10 @@ private:
     FLinearColor CachedCrewAIColor;
     
 public:
-    ASBZAICrewState();
+    ASBZAICrewState(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnRep_IsMaskOn();
@@ -63,7 +64,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPaperSprite* GetCharacterIcon() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 
